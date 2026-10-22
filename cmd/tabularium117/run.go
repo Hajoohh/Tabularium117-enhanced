@@ -72,8 +72,18 @@ func run(ctx context.Context, cfg config, stdout, stderr io.Writer) (err error) 
 		DeficitSamples:       cfg.alertDeficitSamples,
 		DropPercentagePoints: cfg.alertDropPP,
 	})
+	initialConfig := engine.Config()
+	alertPreferences, err := alerts.OpenPreferences(filepath.Join(dataDir, "alert-settings.json"), alerts.Preferences{
+		DeficitThreshold:     initialConfig.DeficitThreshold,
+		DropPercentagePoints: initialConfig.DropPercentagePoints,
+		Suppressions:         []alerts.Suppression{},
+	}, engine)
+	if err != nil {
+		return err
+	}
 	logger.Info("watching for warnings",
 		"deficit_samples", engine.Config().DeficitSamples,
+		"deficit_threshold", engine.Config().DeficitThreshold,
 		"drop_percentage_points", engine.Config().DropPercentagePoints)
 
 	if cfg.recordPath != "" {
@@ -109,7 +119,7 @@ func run(ctx context.Context, cfg config, stdout, stderr io.Writer) (err error) 
 
 	// The UI comes up before the source: when the game is not running yet,
 	// the page is what tells the user so (KONZEPT.md section 8).
-	web, err := startServer(cfg, st, hist, engine, logger)
+	web, err := startServer(cfg, st, hist, engine, alertPreferences, logger)
 	if err != nil {
 		return err
 	}

@@ -15,6 +15,15 @@ export function alertKey(alert) {
   return `${alert.islandId}|${alert.productGuid}|${alert.rule}`;
 }
 
+// isSuppressed reports whether the server settings disable this exact rule
+// on this island and product.
+export function isSuppressed(settings, islandId, productGuid, rule) {
+  return !!settings?.suppressions?.some((item) =>
+    item.islandId === islandId
+      && String(item.productGuid) === String(productGuid)
+      && item.rule === rule);
+}
+
 // ruleLabel translates a rule name. An unknown rule is shown as it came -
 // the same principle as an unresolved GUID: never swallow it.
 export function ruleLabel(rule) {

@@ -45,6 +45,14 @@ type AlertSource interface {
 	Active() []alerts.Alert
 }
 
+// AlertPreferenceManager is the persistent settings surface for the live
+// alert engine.
+type AlertPreferenceManager interface {
+	Current() alerts.Preferences
+	SetThresholds(deficit, drop float64) error
+	SetSuppression(suppression alerts.Suppression, disabled bool) error
+}
+
 // Options configures a Server. Only State is required.
 type Options struct {
 	// State is the live view the API reads. Required.
@@ -56,6 +64,9 @@ type Options struct {
 	// this run, and the active list is empty rather than an error: the UI is
 	// built against the endpoint either way.
 	Alerts AlertSource
+	// AlertPreferences persists user-adjustable rule thresholds and
+	// suppressions. nil leaves the endpoint read-only with defaults.
+	AlertPreferences AlertPreferenceManager
 	// Catalog resolves GUIDs to names. nil uses catalog.Default().
 	Catalog *catalog.Catalog
 	// Log receives serving problems. nil discards them.
@@ -105,18 +116,19 @@ type LANOptions struct {
 // trusted, needs no credential, and is the only side that may switch LAN
 // mode. The optional LAN listener is a second listener on one private IPv4
 // address, behind the RFC 1918 client filter and the access token
-// (KONZEPT.md section 6). /api/v1/lan is the only endpoint that writes
-// anything, and it writes nothing but that switch.
+// (KONZEPT.md section 6). The LAN switch and alert preferences are the only
+// write paths, and both change Tabularium 117 settings, never game data.
 type Server struct {
-	state     *state.State
-	store     *store.Store
-	alerts    AlertSource
-	catalog   *catalog.Catalog
-	log       *slog.Logger
-	version   string
-	heartbeat time.Duration
-	now       func() time.Time
-	onReady   func(net.Addr)
+	state            *state.State
+	store            *store.Store
+	alerts           AlertSource
+	alertPreferences AlertPreferenceManager
+	catalog          *catalog.Catalog
+	log              *slog.Logger
+	version          string
+	heartbeat        time.Duration
+	now              func() time.Time
+	onReady          func(net.Addr)
 
 	// site is the routed handler; handler is site behind the host check and
 	// is what Handler() returns.
@@ -143,15 +155,16 @@ func New(opts Options) *Server {
 		panic("server: Options.State is required")
 	}
 	s := &Server{
-		state:     opts.State,
-		store:     opts.Store,
-		alerts:    opts.Alerts,
-		catalog:   opts.Catalog,
-		log:       opts.Log,
-		version:   opts.Version,
-		heartbeat: opts.Heartbeat,
-		now:       opts.Now,
-		onReady:   opts.OnReady,
+		state:            opts.State,
+		store:            opts.Store,
+		alerts:           opts.Alerts,
+		alertPreferences: opts.AlertPreferences,
+		catalog:          opts.Catalog,
+		log:              opts.Log,
+		version:          opts.Version,
+		heartbeat:        opts.Heartbeat,
+		now:              opts.Now,
+		onReady:          opts.OnReady,
 	}
 	if s.catalog == nil {
 		s.catalog = catalog.Default()
@@ -355,6 +368,7 @@ func (s *Server) routes() http.Handler {
 	api.HandleFunc("/api/v1/islands/{id}/products/{guid}/sources", s.handleSources)
 	api.HandleFunc("/api/v1/islands/{id}/efficiency", s.handleEfficiency)
 	api.HandleFunc("/api/v1/alerts", s.handleAlerts)
+	api.HandleFunc(alertPreferencesPath, s.handleAlertPreferences)
 	api.HandleFunc("/api/v1/events", s.handleEvents)
 	api.HandleFunc(lanPath, s.handleLAN)
 	api.HandleFunc(lanQRPath, s.handleLANQR)
@@ -512,9 +526,9 @@ func boundAddr(addr net.Addr) (netip.Addr, bool) {
 }
 
 // readOnly is the one place that enforces "no write path": whatever is
-// registered below it, only GET and HEAD reach it - with the single, named
-// exception of the LAN switch, which is a setting of Tabularium 117 itself and
-// still changes nothing in the game or the history (KONZEPT.md section 6).
+// registered below it, only GET and HEAD reach it - with named exceptions for
+// user alert settings and the LAN switch. They change only Tabularium 117
+// settings, never the game or its data.
 //
 // It also marks every response uncacheable - the data is live, and the UI is
 // replaced by the next version of the executable - and suppresses the
@@ -526,8 +540,13 @@ func readOnly(next http.Handler) http.Handler {
 		switch {
 		case r.Method == http.MethodGet || r.Method == http.MethodHead:
 		case r.Method == http.MethodPost && r.URL.Path == lanPath:
+		case r.Method == http.MethodPost && r.URL.Path == alertPreferencesPath:
 		default:
-			w.Header().Set("Allow", "GET, HEAD")
+			allow := "GET, HEAD"
+			if r.URL.Path == alertPreferencesPath {
+				allow += ", POST"
+			}
+			w.Header().Set("Allow", allow)
 			writeError(w, http.StatusMethodNotAllowed, "this API is read-only; use GET")
 			return
 		}

@@ -71,6 +71,9 @@ class Element extends EventTarget {
   set title(value) {
     this.setAttribute("title", value);
   }
+  get valueAsNumber() {
+    return Number(this.value);
+  }
   querySelector(selector) {
     return this.querySelectorAll(selector)[0] ?? null;
   }
@@ -124,10 +127,29 @@ const { api } = await import("../web/js/api.js");
 const { renderIslandDetail } = await import("../web/js/views/islands.js");
 const { renderEfficiency } = await import("../web/js/views/efficiency.js");
 const { renderAlerts } = await import("../web/js/views/alerts.js");
+const { renderCompare } = await import("../web/js/views/compare.js");
 
 // --- fixtures --------------------------------------------------------------
 
+let fakeAlertSettings = { deficitThreshold: 0, dropPercentagePoints: 20, suppressions: [] };
+api.alertSettings = async () => ({
+  ...fakeAlertSettings,
+  suppressions: [...fakeAlertSettings.suppressions],
+});
+api.setAlertThresholds = async (deficitThreshold, dropPercentagePoints) => {
+  fakeAlertSettings = { ...fakeAlertSettings, deficitThreshold, dropPercentagePoints };
+  return api.alertSettings();
+};
+api.setAlertSuppression = async (islandId, productGuid, rule, disabled) => {
+  const suppressions = fakeAlertSettings.suppressions.filter((entry) =>
+    !(entry.islandId === islandId && String(entry.productGuid) === String(productGuid) && entry.rule === rule));
+  if (disabled) suppressions.push({ islandId, islandName: island.name, productGuid, productName: "Bread", rule });
+  fakeAlertSettings = { ...fakeAlertSettings, suppressions };
+  return api.alertSettings();
+};
+
 const island = { id: "3245-1", name: "Juliana", sessionName: "Latium", products: 3, deficits: 1 };
+const secondIsland = { id: "6627-2", name: "Argantum", sessionName: "Albion", products: 3, deficits: 1 };
 
 const products = [
   { guid: 1, name: "Bread", generation: 5, consumption: 3, delta: 2, buildings: 2 },
@@ -183,17 +205,36 @@ test("sorting says which way it sorted and keeps the keyboard focus", async () =
 
   // The default is the deficit first: that is what the table is for.
   assert.match(nodes(root, "tbody")[0].children[0].textContent, /Wheat/);
-  assert.equal(nodes(root, "th")[3].getAttribute("aria-sort"), "ascending");
+  assert.equal(nodes(root, "th")[4].getAttribute("aria-sort"), "ascending");
 
   const deltaHeader = nodes(root, "thead")[0].querySelectorAll("button")[3];
   deltaHeader.click();
   assert.match(nodes(root, "tbody")[0].children[0].textContent, /Bread/, "a second click reverses the order");
-  assert.equal(nodes(root, "th")[3].getAttribute("aria-sort"), "descending");
+  assert.equal(nodes(root, "th")[4].getAttribute("aria-sort"), "descending");
   assert.equal(
     document.activeElement,
     nodes(root, "thead")[0].querySelectorAll("button")[3],
     "sorting replaces the header row, and the focus has to survive it",
   );
+  cleanup();
+});
+
+test("the goods table disables a deficit warning for its island-product pair", async () => {
+  i18n.lang = "en";
+  fakeAlertSettings = { deficitThreshold: 0, dropPercentagePoints: 20, suppressions: [] };
+  api.products = async () => ({ island, products });
+  const root = new Element();
+  const cleanup = await renderIslandDetail(root, island.id, storeWith());
+
+  assert.match(nodes(root, "thead")[0].textContent, /^Warning deactivated/);
+  const checkbox = nodes(root, "tbody")[0].children[0].querySelector("input");
+  checkbox.checked = true;
+  checkbox.dispatchEvent(new Event("change"));
+  await settle();
+  assert.equal(fakeAlertSettings.suppressions.length, 1);
+  assert.equal(fakeAlertSettings.suppressions[0].rule, "deficit");
+  assert.equal(fakeAlertSettings.suppressions[0].islandId, island.id);
+  assert.equal(nodes(root, "tbody")[0].children[0].querySelector("input").checked, true);
   cleanup();
 });
 
@@ -272,6 +313,55 @@ test("the efficiency view separates the two ways of producing nothing", async ()
   assert.match(explainer, /the data does not say which/,
     "the expanded explanation names candidates but does not pretend to know which one it is");
   assert.match(rowText(root), /220%/, "productivity above 100 % is shown as it is");
+  cleanup();
+});
+
+test("the efficiency table sorts every column and keeps efficiency-without-potential last", async () => {
+  i18n.lang = "en";
+  api.efficiency = async () => ({
+    island,
+    products: [
+      { guid: 1, name: "Timber", generation: 0, perfectGeneration: 10, buildings: 2, efficiency: 0, wasted: 10, avgProductivity: 0 },
+      { guid: 2, name: "Amphorae", generation: 0, perfectGeneration: 0, buildings: 0, efficiency: null, wasted: 0, avgProductivity: 0 },
+      { guid: 4, name: "Sheep", generation: 13.7, perfectGeneration: 28.1, buildings: 4, efficiency: 0.49, wasted: 14.4, avgProductivity: 220 },
+    ],
+  });
+  const root = new Element();
+  const cleanup = await renderEfficiency(root, island.id, { islands: [island], alerts: [], status: {} });
+  const headerButtons = nodes(root, "thead")[0].querySelectorAll("button");
+
+  assert.equal(headerButtons.length, 6, "all efficiency columns have sorting controls");
+  assert.match(nodes(root, "tbody")[0].children[0].textContent, /Sheep/, "largest unused potential stays first by default");
+  headerButtons[0].click();
+  assert.match(nodes(root, "tbody")[0].children[0].textContent, /Amphorae/, "the name column sorts alphabetically");
+  assert.equal(document.activeElement, nodes(root, "thead")[0].querySelectorAll("button")[0],
+    "sorting keeps keyboard focus on the selected column");
+
+  nodes(root, "thead")[0].querySelectorAll("button")[3].click();
+  const efficiencyRows = nodes(root, "tbody")[0].children;
+  assert.match(efficiencyRows[efficiencyRows.length - 1].textContent, /Amphorae/,
+    "goods without a comparable efficiency remain at the bottom");
+  cleanup();
+});
+
+test("the efficiency table disables productivity-drop warnings separately", async () => {
+  i18n.lang = "en";
+  fakeAlertSettings = { deficitThreshold: 0, dropPercentagePoints: 20, suppressions: [] };
+  api.efficiency = async () => ({
+    island,
+    products: [{ guid: 1, name: "Timber", generation: 0, perfectGeneration: 10,
+      buildings: 2, efficiency: 0, wasted: 10, avgProductivity: 0 }],
+  });
+  const root = new Element();
+  const cleanup = await renderEfficiency(root, island.id, { islands: [island], alerts: [], status: {} });
+
+  assert.match(nodes(root, "thead")[0].textContent, /^Warning deactivated/);
+  const checkbox = nodes(root, "tbody")[0].children[0].querySelector("input");
+  checkbox.checked = true;
+  checkbox.dispatchEvent(new Event("change"));
+  await settle();
+  assert.equal(fakeAlertSettings.suppressions.length, 1);
+  assert.equal(fakeAlertSettings.suppressions[0].rule, "productivity_drop");
   cleanup();
 });
 
@@ -391,7 +481,7 @@ test("possible production sources open under the row, grouped by province", asyn
   const wheat = rows.findIndex((row) => row.textContent.includes("Wheat"));
   assert.equal(rows[wheat + 1].className, "sources-row", "the sources sit directly under their good");
   const detail = rows[wheat + 1].children[0];
-  assert.equal(detail.colSpan, 5, "one cell across the whole table, which the phone layout leaves unpinned");
+  assert.equal(detail.colSpan, 6, "one cell across the whole table, which the phone layout leaves unpinned");
 
   const text = detail.textContent;
   assert.match(text, /Possible production sources/);
@@ -538,9 +628,174 @@ test("the warnings page opens the same sources for each import needed entry", as
   await settle();
   assert.deepEqual(asked, [`${island.id}/2`]);
   const detail = nodes(root, ".sources-row")[0].children[0];
-  assert.equal(detail.colSpan, 5);
+  assert.equal(detail.colSpan, 6);
   assert.match(detail.textContent, /Possible production sources.*Megaron.*Local balance \+3\.5\/min/);
   assert.match(detail.textContent, /Possible sources only/);
+  cleanup();
+});
+
+test("the warnings page filters warnings to multiple selected islands", async () => {
+  i18n.lang = "en";
+  const store = {
+    islands: [island, secondIsland],
+    alerts: [
+      { islandId: island.id, islandName: island.name, productGuid: 1, productName: "Bread", rule: "deficit", severity: "warning", detail: "first", raisedAt: new Date().toISOString() },
+      { islandId: secondIsland.id, islandName: secondIsland.name, productGuid: 2, productName: "Wheat", rule: "deficit", severity: "warning", detail: "second", raisedAt: new Date().toISOString() },
+    ],
+    status: {},
+  };
+  const root = new Element();
+  const cleanup = await renderAlerts(root, store, false);
+  assert.equal(nodes(root, "tbody")[0].children.length, 2);
+
+  const boxes = nodes(root, "input");
+  boxes[1].checked = false;
+  boxes[1].dispatchEvent(new Event("change"));
+  assert.equal(nodes(root, "tbody")[0].children.length, 1);
+  assert.match(nodes(root, "tbody")[0].textContent, /Bread/);
+  assert.doesNotMatch(nodes(root, "tbody")[0].textContent, /Wheat/);
+
+  boxes[0].checked = false;
+  boxes[0].dispatchEvent(new Event("change"));
+  assert.match(nodes(root, "p")[1].textContent, /Select at least one island/);
+  cleanup();
+});
+
+test("warning settings save thresholds and let import suppressions be reactivated", async () => {
+  i18n.lang = "en";
+  fakeAlertSettings = { deficitThreshold: 0, dropPercentagePoints: 20, suppressions: [] };
+  const store = {
+    islands: [island],
+    alerts: [
+      { islandId: island.id, islandName: island.name, productGuid: 2, productName: "Wheat",
+        rule: "no_local_production", severity: "info", detail: "x", raisedAt: new Date().toISOString() },
+      { islandId: island.id, islandName: island.name, productGuid: 1, productName: "Bread",
+        rule: "deficit", severity: "warning", detail: "y", raisedAt: new Date().toISOString() },
+    ],
+    status: {},
+  };
+  const root = new Element();
+  const cleanup = await renderAlerts(root, store, false);
+  const numberInputs = nodes(root, "input").filter((input) => input.type === "number");
+  assert.equal(numberInputs.length, 2);
+  assert.equal(numberInputs[0].value, "0", "the deficit default preserves the previous any-negative rule");
+  assert.equal(numberInputs[1].value, "20");
+
+  numberInputs[0].value = "-1.5";
+  numberInputs[1].value = "25";
+  nodes(root, "form")[0].dispatchEvent(new Event("submit", { cancelable: true }));
+  await settle();
+  assert.equal(fakeAlertSettings.deficitThreshold, -1.5);
+  assert.equal(fakeAlertSettings.dropPercentagePoints, 25);
+
+  const importCheckbox = nodes(root, "tbody")[1].children[0].querySelector("input");
+  importCheckbox.checked = true;
+  importCheckbox.dispatchEvent(new Event("change"));
+  await settle();
+  assert.equal(fakeAlertSettings.suppressions[0].rule, "no_local_production");
+  assert.match(root.textContent, /Deactivated warnings/);
+  assert.equal(nodes(root, "tbody")[2].children.length, 1);
+  const restore = nodes(root, "tbody")[2].children[0].querySelector("input");
+  assert.equal(restore.checked, true);
+  restore.checked = false;
+  restore.dispatchEvent(new Event("change"));
+  await settle();
+  assert.equal(fakeAlertSettings.suppressions.length, 0);
+  assert.equal(nodes(root, "tbody")[2].children.length, 0);
+  cleanup();
+
+  fakeAlertSettings = {
+    deficitThreshold: 0,
+    dropPercentagePoints: 20,
+    suppressions: [{
+      islandId: island.id,
+      islandName: island.name,
+      productGuid: 2,
+      productName: "Wheat",
+      rule: "no_local_production",
+    }],
+  };
+  const disabledRoot = new Element();
+  const cleanupDisabled = await renderAlerts(disabledRoot, {
+    islands: [island],
+    alerts: [],
+    status: {},
+  }, false);
+  assert.equal(nodes(disabledRoot, "section")[1].hidden, false,
+    "disabled rules stay visible when there are no active imports");
+  assert.equal(nodes(disabledRoot, "tbody")[2].children.length, 1);
+  cleanupDisabled();
+});
+
+test("the warnings table sorts every column", async () => {
+  i18n.lang = "en";
+  const store = {
+    islands: [island],
+    alerts: [
+      { islandId: island.id, islandName: island.name, productGuid: 2, productName: "Wheat", rule: "deficit", severity: "warning", detail: "second", raisedAt: "2026-10-22T13:00:00Z" },
+      { islandId: island.id, islandName: island.name, productGuid: 1, productName: "Bread", rule: "productivity_drop", severity: "warning", detail: "first", raisedAt: "2026-10-22T12:00:00Z" },
+    ],
+    status: {},
+  };
+  const root = new Element();
+  const cleanup = await renderAlerts(root, store, false);
+  const headerButtons = nodes(root, "thead")[0].querySelectorAll("button");
+
+  assert.equal(headerButtons.length, 5, "every active-warning column has a sorting control");
+  assert.match(nodes(root, "tbody")[0].children[0].textContent, /Wheat/, "newest warning is first by default");
+  headerButtons[1].click();
+  assert.match(nodes(root, "tbody")[0].children[0].textContent, /Bread/, "products sort alphabetically");
+  assert.equal(nodes(root, "thead")[0].querySelectorAll("th")[1].getAttribute("aria-sort"), "ascending");
+  assert.equal(document.activeElement, nodes(root, "thead")[0].querySelectorAll("button")[1],
+    "sorting keeps keyboard focus on the selected column");
+  cleanup();
+});
+
+test("the comparison view loads goods for multiple selected islands", async () => {
+  i18n.lang = "en";
+  const store = { islands: [island, secondIsland] };
+  const requested = [];
+  const efficiencyRequested = [];
+  api.products = async (islandId) => {
+    requested.push(islandId);
+    return {
+      island: islandId === island.id ? island : secondIsland,
+      products: [{ guid: islandId === island.id ? 1 : 2, name: islandId === island.id ? "Bread" : "Wheat",
+        generation: 5, consumption: 3, delta: 2, buildings: 2 }],
+    };
+  };
+  api.efficiency = async (islandId) => {
+    efficiencyRequested.push(islandId);
+    return {
+      island: islandId === island.id ? island : secondIsland,
+      products: [{ guid: islandId === island.id ? 1 : 2, name: islandId === island.id ? "Bread" : "Wheat",
+        generation: 5, perfectGeneration: 10, efficiency: 0.5, avgProductivity: 100, wasted: 5 }],
+    };
+  };
+  const root = new Element();
+  const cleanup = renderCompare(root, store);
+  const boxes = nodes(root, "input");
+  boxes[0].checked = true;
+  boxes[0].dispatchEvent(new Event("change"));
+  const updatedBoxes = nodes(root, "input");
+  updatedBoxes[1].checked = true;
+  updatedBoxes[1].dispatchEvent(new Event("change"));
+  await settle();
+
+  assert.deepEqual(requested, [island.id, secondIsland.id]);
+  assert.deepEqual(efficiencyRequested, [island.id, secondIsland.id]);
+  assert.equal(nodes(root, "tbody")[0].children.length, 2);
+  assert.match(nodes(root, "tbody")[0].textContent, /Juliana.*Bread/);
+  assert.match(nodes(root, "tbody")[0].textContent, /Argantum.*Wheat/);
+  assert.equal(nodes(root, "tbody")[1].children.length, 2, "comparison also shows the efficiency rows");
+  assert.match(nodes(root, "tbody")[1].textContent, /Juliana.*Bread/);
+  assert.equal(nodes(root, "thead")[0].querySelectorAll("button").length, 6, "every goods column can be sorted");
+  assert.equal(nodes(root, "thead")[1].querySelectorAll("button").length, 7, "every efficiency column can be sorted");
+
+  nodes(root, "thead")[0].querySelectorAll("button")[4].click();
+  assert.match(nodes(root, "tbody")[0].children[0].textContent, /Juliana.*Bread/);
+  nodes(root, "thead")[1].querySelectorAll("button")[6].click();
+  assert.equal(nodes(root, "thead")[1].querySelectorAll("th")[6].getAttribute("aria-sort"), "ascending");
   cleanup();
 });
 

@@ -53,11 +53,13 @@ make build                            # dist/tabularium117.exe (windows/amd64); 
 go run ./cmd/tabularium117 --replay testdata/live-2026-09-22.jsonl --serve-after-replay
 ```
 
-Any Go from 1.21 on will do: `go.mod` pins the toolchain (`toolchain
-go1.25.14`), and the `go` command fetches it by itself (`GOTOOLCHAIN=auto`).
-Keep that pin on the newest 1.25 patch release - it is what the release is
-built with, and nearly every patch release closes security holes in the
-standard library. CI's `govulncheck` job fails when it falls behind.
+A Go command from 1.21 on can be used with `GOTOOLCHAIN=auto`: the `go`
+directive in `go.mod` requires Go 1.25.0 to build the project, and the
+`toolchain go1.25.14` line pins the toolchain used for releases. The `go`
+command fetches that toolchain when needed. Keep the pin on the newest 1.25
+patch release - it is what the release is built with, and nearly every patch
+release closes security holes in the standard library. CI's `govulncheck` job
+fails when it falls behind.
 
 `.github/workflows/ci.yml` runs the same `check.sh` on Linux **and** Windows
 for every push and pull request, plus a `go mod tidy` diff and the

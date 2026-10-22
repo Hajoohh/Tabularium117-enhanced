@@ -31,7 +31,9 @@ gegenüber dem Spiel.
 ### Was es kann
 
 1. **Live-Übersicht pro Insel** – alle Waren mit Produktion, Verbrauch und
-   Delta; Defizite stehen oben und sind rot markiert.
+   Delta; Defizite stehen oben und sind rot markiert. In der Vergleichsansicht
+   lassen sich mehrere Inseln gleichzeitig auswählen; Waren- und Effizienzwerte
+   lassen sich dort wie in den Einzelansichten nach jeder Spalte sortieren.
 2. **Verlauf pro Ware** – Diagramm der letzten 1 h, 4 h, 24 h, 7 Tage oder der
    ganzen Session für Produktion, Verbrauch und Delta.
 3. **Effizienz-Ansicht** – Ist-Produktion gegen die theoretisch perfekte
@@ -39,7 +41,8 @@ gegenüber dem Spiel.
    sehen, welche Kette unter ihrem Potenzial läuft.
 4. **Warnungen** – regelbasiert: ein anhaltendes Defizit oder ein Einbruch der
    Gebäude-Produktivität wird in der UI angezeigt (optional mit
-   Browser-Benachrichtigung oder Ton, standardmäßig aus). Waren, für die eine
+   Browser-Benachrichtigung oder Ton, standardmäßig aus). Die Warnungsliste
+   lässt sich auf mehrere ausgewählte Inseln eingrenzen. Waren, für die eine
    Insel gar kein Gebäude hat, lösen keine Defizit-Warnung aus, sondern werden
    leise als **Importbedarf** markiert – in der Warentabelle zählen sie
    weiterhin als Defizit. Ob die Ware tatsächlich geliefert wird, kann
@@ -52,6 +55,12 @@ gegenüber dem Spiel.
    Lagerbestände stehen nicht in den Daten des Spiels, welche Insel eine
    andere wirklich beliefert, kann Tabularium also nicht bestimmen – und
    eine positive Bilanz kann schon anderswohin verschifft werden.
+   Auf der Warnungsseite lassen sich die Defizitgrenze (Standard `0` pro
+   Minute: jedes negative Delta) und der Produktivitätseinbruch (Standard
+   `20` Prozentpunkte) einstellen. Checkboxen deaktivieren Regeln für einzelne
+   Insel-Waren-Paare; deaktivierte Regeln erscheinen nur in der Gesamtübersicht
+   und lassen sich dort wieder aktivieren. Einstellungen werden im Datenordner
+   in `alert-settings.json` gespeichert und gelten nur auf diesem PC.
 5. **Handy-Modus** – per Schalter im UI einschaltbar, zeigt einen QR-Code mit
    der Adresse im eigenen Netzwerk.
 
@@ -122,8 +131,9 @@ Netzwerk kommunizieren darf: dort **„Private Netzwerke“** wählen, nicht
 
 Alles bleibt auf dem eigenen PC (und, im Handy-Modus, im eigenen LAN). Die
 Verlaufsdatenbank liegt standardmäßig unter
-`%LOCALAPPDATA%\Tabularium117\tabularium117.db`; mit `--data-dir <pfad>` lässt sich ein
-anderer Ort wählen. Sie hält 7 Tage in voller Auflösung, verdichtet danach auf
+`%LOCALAPPDATA%\Tabularium117\tabularium117.db`; die Warnungseinstellungen
+stehen im selben Datenordner unter `alert-settings.json`. Mit `--data-dir <pfad>`
+lässt sich ein anderer Ort wählen. Die Datenbank hält 7 Tage in voller Auflösung, verdichtet danach auf
 10-Minuten-Mittel und löscht nach 90 Tagen. Es gibt keine Telemetrie, keine
 Update-Prüfung und keine Konten. Tabularium 117 liest die Pipe nur – es schreibt nie
 etwas ins Spiel.
@@ -294,7 +304,9 @@ step, no Docker, no mod, strictly read-only towards the game.
 ### What it does
 
 1. **Live overview per island** – every good with production, consumption,
-   and delta; deficits sort to the top and are marked in red.
+   and delta; deficits sort to the top and are marked in red. A comparison
+   view lets you select multiple islands and compare goods and efficiency;
+   both tables can be sorted by every column.
 2. **History per good** – a chart of the last 1 h, 4 h, 24 h, 7 days, or the
    whole session for production, consumption, and delta.
 3. **Efficiency view** – actual production against the theoretical perfect
@@ -302,7 +314,8 @@ step, no Docker, no mod, strictly read-only towards the game.
    to spot which chain runs below its potential.
 4. **Alerts** – rule-based: a lasting deficit or a drop in building
    productivity shows up in the UI (optionally with a browser notification or
-   sound, off by default). Goods an island has no building for do not raise
+   sound, off by default). Filter the list to multiple selected islands.
+   Goods an island has no building for do not raise
    a deficit warning; they are quietly marked as **import needed** - the goods
    table still counts them as deficits. Whether they are actually delivered is
    not something Tabularium can see.
@@ -314,6 +327,12 @@ step, no Docker, no mod, strictly read-only towards the game.
    are not in the game's data, so Tabularium cannot tell which island really
    supplies another - and a positive balance may already be shipped
    elsewhere.
+   On the alerts page, you can set the deficit threshold (default `0` per
+   minute: any negative delta) and the productivity-drop threshold (default
+   `20` percentage points). Checkboxes disable a rule for a specific
+   island-good pair; disabled rules appear only in the overall alerts view,
+   where they can be re-enabled. Settings are saved as `alert-settings.json`
+   in the data directory and apply only on this PC.
 5. **Phone mode** – a switch in the UI shows a QR code with the address on
    your own network.
 
@@ -380,7 +399,8 @@ network.
 
 Everything stays on your PC (and, in phone mode, on your own LAN). The
 history database lives at `%LOCALAPPDATA%\Tabularium117\tabularium117.db` by default;
-use `--data-dir <path>` to pick another location. It keeps 7 days at full
+warning settings live in the same data directory in `alert-settings.json`.
+Use `--data-dir <path>` to pick another location. The database keeps 7 days at full
 resolution, then 10-minute means, and deletes them after 90 days. There is no
 telemetry, no update check, and no accounts. Tabularium 117 only reads the pipe – it
 never writes anything into the game.
@@ -538,7 +558,9 @@ community-made fan tool.*
 
 ## Entwicklung / Development
 
-Requires Go 1.25+ (`go.mod`; an older `go` downloads it via `GOTOOLCHAIN=auto`). Code, comments, and commit messages are English; user-facing
+A Go command from 1.21 on works with `GOTOOLCHAIN=auto`; the project requires
+Go 1.25.0 and pins Go 1.25.14 for releases (`go.mod`). Code, comments, and
+commit messages are English; user-facing
 documentation is German and English.
 
 ```sh

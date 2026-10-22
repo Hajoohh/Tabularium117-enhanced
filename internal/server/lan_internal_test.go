@@ -6,9 +6,11 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/netip"
+	"path/filepath"
 	"strings"
 	"testing"
 
+	"github.com/Dealwatch/Tabularium117/internal/alerts"
 	"github.com/Dealwatch/Tabularium117/internal/lan"
 	"github.com/Dealwatch/Tabularium117/internal/state"
 )
@@ -154,6 +156,36 @@ func TestLANTokenIsRequired(t *testing.T) {
 	rec = serveLAN(s, lanRequest(http.MethodGet, "/?token="+s.token[:len(s.token)-1], "192.168.1.10:4444"))
 	if rec.Code != http.StatusUnauthorized {
 		t.Errorf("a truncated token = %d, want 401", rec.Code)
+	}
+}
+
+func TestAlertPreferencesCannotBeChangedFromLAN(t *testing.T) {
+	engine := alerts.New(alerts.DefaultConfig())
+	preferences, err := alerts.OpenPreferences(
+		filepath.Join(t.TempDir(), "alert-settings.json"),
+		alerts.DefaultPreferences(),
+		engine,
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	s := New(Options{
+		State:            state.New(),
+		AlertPreferences: preferences,
+		LAN:              LANOptions{IP: "192.168.1.5", Interfaces: fakeInterfaces},
+	})
+
+	req := lanRequest(http.MethodPost, alertPreferencesPath, "192.168.1.10:4444")
+	req.AddCookie(&http.Cookie{Name: tokenCookie, Value: s.token})
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Origin", "http://192.168.1.5:53118")
+	rec := serveLAN(s, req)
+	if rec.Code != http.StatusForbidden {
+		t.Fatalf("LAN alert-settings write = %d, want %d: %s", rec.Code, http.StatusForbidden, rec.Body.String())
+	}
+	if got := preferences.Current(); got.DeficitThreshold != 0 ||
+		got.DropPercentagePoints != 20 || len(got.Suppressions) != 0 {
+		t.Errorf("rejected LAN write changed settings: %+v", got)
 	}
 }
 

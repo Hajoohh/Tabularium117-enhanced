@@ -32,9 +32,8 @@ async function get(path) {
   return res.json();
 }
 
-// post sends the one write this API has: the LAN switch. It is same-origin,
-// so the browser attaches the Origin header the server checks (KONZEPT.md
-// section 6).
+// post sends a same-origin settings change. The browser attaches the Origin
+// header, which the server checks before accepting it.
 async function post(path, body) {
   const res = await fetch(path, {
     method: "POST",
@@ -59,9 +58,14 @@ export const api = {
   // lan: the LAN state. The answer only carries the URL with the access
   // token when it is served to the PC itself.
   lan: () => get("/api/v1/lan"),
-  // setLan is the only call in this file that changes anything. The server
-  // accepts it from the loopback address alone.
+  // The server accepts the LAN switch and alert settings from the loopback
+  // listener only.
   setLan: (enabled) => post("/api/v1/lan", { enabled: !!enabled }),
+  alertSettings: () => get("/api/v1/alert-settings"),
+  setAlertThresholds: (deficitThreshold, dropPercentagePoints) =>
+    post("/api/v1/alert-settings", { deficitThreshold, dropPercentagePoints }),
+  setAlertSuppression: (islandId, productGuid, rule, disabled) =>
+    post("/api/v1/alert-settings", { islandId, productGuid, rule, disabled: !!disabled }),
   // alerts: active=true is the live picture from the rule engine, false the
   // recorded history (which needs the database and answers 503 without it).
   // withInfo=false leaves the info alerts (no local production) out.

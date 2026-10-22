@@ -10,6 +10,7 @@ import { renderEfficiency } from "./views/efficiency.js";
 import { renderHelp } from "./views/help.js";
 import { renderPhone } from "./views/phone.js";
 import { renderAlerts } from "./views/alerts.js";
+import { renderCompare } from "./views/compare.js";
 import { buildPipeHelp } from "./pipe-help.js";
 import { alertKey, announce, countByIsland, isWarning } from "./alerts.js";
 import { formatAge } from "./format.js";
@@ -227,9 +228,13 @@ async function refreshAlerts() {
 // "that island is gone" - removals arrive through resyncIslands.
 function upsertIsland(island) {
   const idx = store.islands.findIndex((i) => i.id === island.id);
+  const changed = idx < 0
+    || store.islands[idx].name !== island.name
+    || store.islands[idx].sessionName !== island.sessionName;
   if (idx >= 0) store.islands[idx] = island;
   else store.islands.push(island);
   store.islands.sort((a, b) => (a.sessionGuid - b.sessionGuid) || (a.islandId - b.islandId));
+  if (changed) document.dispatchEvent(new CustomEvent("tabularium-islands-changed"));
 }
 
 function renderIslandList() {
@@ -328,6 +333,7 @@ function resyncIslands() {
       } while (resyncAgain);
       renderIslandList();
       renderHomeIfShown();
+      document.dispatchEvent(new CustomEvent("tabularium-islands-changed"));
       dropSelectionIfGone();
     } catch (err) {
       console.error("tabularium117: cannot load islands", err);
@@ -374,6 +380,7 @@ function parseHash() {
   if (parts[0] === "help") return { route: "help" };
   if (parts[0] === "phone") return { route: "phone" };
   if (parts[0] === "alerts") return { route: "alerts", all: query.get("all") === "1" };
+  if (parts[0] === "compare") return { route: "compare" };
   if (parts[0] === "island" && parts[1]) {
     const islandId = decodeURIComponent(parts[1]);
     if (parts[2] === "efficiency") return { route: "efficiency", islandId };
@@ -428,6 +435,9 @@ async function route() {
         break;
       case "alerts":
         unmount = await renderAlerts(els.view, store, r.all);
+        break;
+      case "compare":
+        unmount = renderCompare(els.view, store);
         break;
       case "island":
         unmount = await renderIslandDetail(els.view, r.islandId, store);

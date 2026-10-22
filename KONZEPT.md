@@ -30,6 +30,7 @@ die Wirtschaftsdaten live, mit Verlauf und handyfreundlich anzeigt.
 ## 2. Kernfunktionen (MVP)
 
 1. **Live-Übersicht pro Insel** – alle Waren mit Produktion, Verbrauch, Delta; Defizite oben, rot markiert.
+   Eine Vergleichsansicht zeigt die Waren mehrerer ausgewählter Inseln gemeinsam.
 2. **Verlauf pro Ware** – Diagramm der letzten 1 h / 4 h / 24 h / 7 d / Session für Produktion,
    Verbrauch, Delta. Die langen Bereiche sind erst mit dem 2-Minuten-Takt sinnvoll: 24 h sind nur
    rund 720 Rohpunkte je Insel und Ware (§12).
@@ -41,9 +42,10 @@ die Wirtschaftsdaten live, mit Verlauf und handyfreundlich anzeigt.
    zeigt ihn deshalb als zweite Spalte **„Produktivität“** neben der Effizienz. Beide bleiben
    getrennt: Effizienz misst den Ausstoß gegen das Optimum, Produktivität den Laufgrad der
    Gebäude – Boosts heben beide über 100 %.
-4. **Warnungen** – regelbasiert, umgesetzt in `internal/alerts`:
-   - `deficit` (Warnung): Delta < 0 in 3 aufeinanderfolgenden Messungen auf einer Insel, die
-     **eigene Gebäude** für die Ware hat; klärt sich nach 3 Messungen mit Delta ≥ 0.
+4. **Warnungen** – regelbasiert, umgesetzt in `internal/alerts`; die Warnungsseite kann auf mehrere
+   ausgewählte Inseln gefiltert werden:
+   - `deficit` (Warnung): Delta < konfigurierbare Grenze (Standard 0 pro Minute) in 3 aufeinanderfolgenden Messungen auf einer Insel, die
+     **eigene Gebäude** für die Ware hat; klärt sich nach 3 Messungen, in denen Delta die Grenze nicht unterschreitet.
    - `no_local_production` (Stufe `info`, leise, in der UI „Importbedarf“): dieselbe Serie auf
      einer Insel **ohne** Gebäude für die Ware. Die Insel braucht die Ware von anderswo – so
      erreichen die meisten Waren die meisten Inseln. **Ob** sie tatsächlich geliefert wird, weiß
@@ -55,10 +57,11 @@ die Wirtschaftsdaten live, mit Verlauf und handyfreundlich anzeigt.
      von dieser Art. Baut der Spieler das erste Gebäude, endet der Eintrag und – bei weiter
      negativem Delta – beginnt im selben Tick ein `deficit` (und umgekehrt).
    - `productivity_drop` (Warnung): die **Produktivität** der Gebäude (`AverageProductivity`,
-     §12, bei 100 % gekappt) fällt um mehr als 20 Prozentpunkte unter ihr eigenes
+     §12, bei 100 % gekappt) fällt um mehr als die konfigurierbare Schwelle (Standard
+     20 Prozentpunkte) unter ihr eigenes
      15-Minuten-Mittel, **während** die lokale Bilanz der Ware negativ ist (Delta < 0 in
      2 aufeinanderfolgenden Messungen). Klärt sich, sobald die Produktivität wieder innerhalb
-     von 10 Prozentpunkten liegt, die Bilanz 3 Messungen lang nicht negativ war oder die
+     der halben Schwelle (Standard 10 Prozentpunkte) liegt, die Bilanz 3 Messungen lang nicht negativ war oder die
      Gebäude weg sind (auch wenn die Ware ganz aus der Statistik verschwindet).
 
    **Lokale Bilanz** heißt dabei nur, was die Pipe meldet: Produktion auf dieser Insel minus
@@ -93,6 +96,12 @@ die Wirtschaftsdaten live, mit Verlauf und handyfreundlich anzeigt.
    fassen: mit den früheren 5 Minuten lagen höchstens zwei Ticks gleichzeitig im Fenster, die
    Mindestzahl von 3 Messwerten wurde nie erreicht und `productivity_drop` konnte gar nicht
    auslösen. Daher 15 Minuten (≈ 7 Ticks, mit Reserve für den schwankenden Takt von 115–138 s).
+   Insel- und Warenregeln lassen sich in den Einzelansichten getrennt deaktivieren;
+   Importbedarfe lassen sich zusätzlich je Insel-Ware-Paar auf der Warnungsseite deaktivieren.
+   Deaktivierte Regeln werden nicht als aktive Warnungen gezählt und sind nur dort zentral
+   wieder aktivierbar. Die Defizit- und Produktivitätsschwellen lassen sich auf der
+   Warnungsseite anpassen. Einstellungen liegen dauerhaft in `alert-settings.json` im
+   Datenverzeichnis; Änderungen sind auf dem Loopback-Listener möglich.
    Anzeige in der UI + optional Browser-Benachrichtigung/Ton (Opt-in, standardmäßig aus).
 
    **Mögliche Produktionsquellen** (Kontext zu `no_local_production`, keine Regel): Ein Eintrag
@@ -327,9 +336,11 @@ dieser Abschnitt ist die Referenz dafür.
 | GET | `/islands/{id}/products/{guid}/sources` | Mögliche Produktionsquellen der Ware für die Insel (§2.4): andere Inseln mit Gebäuden und positiver lokaler Bilanz aus allen Sessions, in `groups` je Session (`own` markiert die Session der Insel, sie steht zuerst) mit `sources` (`id`, `islandId`, `name`, `delta`) nach Bilanz absteigend. `tick` ist der vollständige Tick, aus dem alle Werte stammen, `receivedAt` der Empfangszeitpunkt seiner letzten Insel; `ready` ist `false`, solange keiner mit Waren bekannt ist – `groups` ist dann leer und heißt „noch unbekannt“, nicht „keine“ |
 | GET | `/islands/{id}/efficiency` | Waren mit `efficiency` (Generation / PerfectGeneration, `null` wenn Perfekt = 0), `wasted` (Perfekt − Ist), `avgProductivity` (mittlere Gebäude-Produktivität in Prozent, §2.3) und `buildings` (Anzahl Gebäude – trennt „keine Gebäude“ von „Gebäude, aber kein Potenzial“), sortiert nach `wasted` absteigend |
 | GET | `/alerts?active=true\|false&limit=&info=true\|false` | Warnungen und Hinweise (`severity` `warning` bzw. `info`), neueste zuerst; `info=false` lässt die Hinweise weg (der Warnungsverlauf der UI nutzt das). `active=true` (Standard) kommt aus der Regel-Engine, `active=false` aus der Datenbank (offene **und** beendete); ohne Datenbank 503 wie beim Verlauf |
+| GET | `/alert-settings` | Aktuelle Defizit- und Produktivitätsschwellen sowie deaktivierte Regeln (`suppressions`) |
+| POST | `/alert-settings` | `{"deficitThreshold":-1.5,"dropPercentagePoints":20}` aktualisiert beide Schwellen; `{"islandId":"3245-1","productGuid":123,"rule":"deficit","disabled":true}` deaktiviert eine Insel-Waren-Regel. Nur vom Loopback-Listener und mit eigener `Origin`; ungültige Werte → 400, fremde Origin oder LAN-Listener → 403, Speicherfehler → 500. Einstellungen werden atomar in `alert-settings.json` gespeichert |
 | GET | `/events` | SSE-Stream: `status`, `snapshot` (Inselübersicht wie in `/islands`) und `alert`; Heartbeat `: ping` alle 15 s |
 | GET | `/lan` | LAN-Zustand: `enabled`, `available` (eine private Adresse existiert), `ip`, `interface`, `port`, `reason` (wenn nicht möglich) und `url` – die Adresse **mit Token**, ausschließlich in Antworten an den Loopback-Listener |
-| POST | `/lan` | Der einzige schreibende Endpunkt: `{"enabled": true\|false}` schaltet den LAN-Listener an bzw. aus. Nur über den Loopback-Listener (ein LAN-Client bekommt 403, auch mit gültigem Token), nur mit `Content-Type: application/json`, nur von der eigenen Seite (fremder `Origin` → 403); belegter Port oder keine private Adresse → 409 mit Begründung |
+| POST | `/lan` | `{"enabled": true\|false}` schaltet den LAN-Listener an bzw. aus. Nur über den Loopback-Listener (ein LAN-Client bekommt 403, auch mit gültigem Token), nur mit `Content-Type: application/json`, nur von der eigenen Seite (fremder `Origin` → 403); belegter Port oder keine private Adresse → 409 mit Begründung |
 | GET | `/lan/qr.png` | QR-Code (256 px, PNG) der LAN-Adresse inklusive Token; nur über den Loopback-Listener **und** nur bei eingeschaltetem LAN-Modus, sonst 404 |
 
 Konventionen:
@@ -341,8 +352,10 @@ Konventionen:
   Katalog, unbekannte GUIDs erscheinen als `#123`.
 - **Fehler** sind `{"error":"…"}` mit passendem Status. Ohne Verlaufsdatenbank
   (`--no-db`) antwortet die Verlaufsabfrage mit 503.
-- **Nur lesend, mit genau einer Ausnahme:** andere Methoden als GET/HEAD → 405;
-  erlaubt ist allein `POST /lan` (der LAN-Schalter, Abschnitt 6). Jede Antwort
+- **Nur lesend, mit zwei eng begrenzten Ausnahmen:** andere Methoden als GET/HEAD → 405;
+  erlaubt sind `POST /lan` (der LAN-Schalter, Abschnitt 6) und `POST /alert-settings`
+  (nur lokale Anzeigeeinstellungen). Beide funktionieren nur über den Loopback-Listener.
+  Jede Antwort
   trägt `Cache-Control: no-store` und `Referrer-Policy: no-referrer` – damit
   eine URL mit Token nicht über den Referer abfließt –, CORS-Header gibt es
   nicht (gleiche Origin).

@@ -31,6 +31,7 @@ type Engine struct {
 
 	mu      sync.Mutex
 	islands map[model.IslandKey]*islandState
+	muted   map[suppressionKey]struct{}
 	// newest is the newest snapshot time Apply has seen. It is the clock
 	// Reset stamps its events with, so that replayed data is not marked with
 	// today's date (the same rule the history follows, see
@@ -50,9 +51,11 @@ type productState struct {
 	// no_local_production alert - the same streak, told apart by whether the
 	// island produces the product itself. The drop rule reads the streak as
 	// well: a drop only counts while the local balance is negative.
-	negative    int
-	nonNegative int
-	deficit     *Alert
+	negative     int
+	nonNegative  int
+	deficitBelow int
+	deficitAbove int
+	deficit      *Alert
 
 	// samples is the productivity history the drop rule averages over,
 	// oldest first, and drop is its alert. The history runs on its own
@@ -78,11 +81,36 @@ func New(cfg Config) *Engine {
 	return &Engine{
 		cfg:     cfg.withDefaults(),
 		islands: make(map[model.IslandKey]*islandState),
+		muted:   make(map[suppressionKey]struct{}),
 	}
 }
 
 // Config reports the thresholds in force, after the defaults were applied.
-func (e *Engine) Config() Config { return e.cfg }
+func (e *Engine) Config() Config {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	return e.cfg
+}
+
+// SetPreferences applies user-adjustable thresholds and per-rule
+// suppressions. Existing alerts are cleared on the next snapshot, keeping
+// changes in the same event order as normal rule evaluation.
+func (e *Engine) SetPreferences(value Preferences) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	e.cfg.DeficitThreshold = value.DeficitThreshold
+	e.cfg.DropPercentagePoints = value.DropPercentagePoints
+	e.cfg.DropClearPercentagePoints = value.DropPercentagePoints / 2
+	e.cfg = e.cfg.withDefaults()
+	e.muted = make(map[suppressionKey]struct{}, len(value.Suppressions))
+	for _, suppression := range value.Suppressions {
+		e.muted[suppressionKey{
+			island:      suppression.Island,
+			productGUID: suppression.ProductGUID,
+			rule:        suppression.Rule,
+		}] = struct{}{}
+	}
+}
 
 // Apply evaluates every product of snap and returns the alerts that were
 // raised or cleared by it, ordered by product GUID and then rule so that the
@@ -230,20 +258,37 @@ func (e *Engine) applyDeficit(events []Event, snap model.IslandSnapshot, name st
 	if p.Buildings == 0 {
 		rule, severity = RuleNoLocalProduction, SeverityInfo
 	}
+	belowThreshold := delta < e.cfg.DeficitThreshold
+	if belowThreshold {
+		ps.deficitBelow++
+		ps.deficitAbove = 0
+	} else {
+		ps.deficitAbove++
+		ps.deficitBelow = 0
+	}
+	_, muted := e.muted[suppressionKey{
+		island:      snap.Key,
+		productGUID: p.ProductGUID,
+		rule:        rule,
+	}]
 	// The island started producing the product itself, or stopped: the open
 	// alert describes the other situation and ends here. The streak carries
 	// on, so a negative balance that persists is raised again under the
 	// right rule in the same tick.
-	if ps.deficit != nil && ps.deficit.Rule != rule {
+	if ps.deficit != nil && (ps.deficit.Rule != rule || muted) {
 		a := *ps.deficit
 		ps.deficit = nil
 		a.ClearedAt = snap.ReceivedAt
 		a.Value = delta
 		events = append(events, Event{Kind: KindCleared, Alert: a})
 	}
+	if muted {
+		return events
+	}
 
 	switch {
-	case ps.deficit == nil && ps.negative >= e.cfg.DeficitSamples:
+	case ps.deficit == nil && ((rule == RuleDeficit && ps.deficitBelow >= e.cfg.DeficitSamples) ||
+		(rule == RuleNoLocalProduction && ps.negative >= e.cfg.DeficitSamples)):
 		a := Alert{
 			Island:      snap.Key,
 			IslandName:  name,
@@ -257,7 +302,8 @@ func (e *Engine) applyDeficit(events []Event, snap model.IslandSnapshot, name st
 		ps.deficit = &a
 		return append(events, Event{Kind: KindRaised, Alert: a})
 
-	case ps.deficit != nil && ps.nonNegative >= e.cfg.DeficitClearSamples:
+	case ps.deficit != nil && ((rule == RuleDeficit && ps.deficitAbove >= e.cfg.DeficitClearSamples) ||
+		(rule == RuleNoLocalProduction && ps.nonNegative >= e.cfg.DeficitClearSamples)):
 		a := *ps.deficit
 		ps.deficit = nil
 		a.ClearedAt = snap.ReceivedAt
@@ -345,6 +391,17 @@ func (e *Engine) applyDrop(events []Event, snap model.IslandSnapshot, name strin
 	}
 	drop := mean - prod
 	negative := ps.negative >= e.cfg.DropNegativeSamples
+	_, muted := e.muted[suppressionKey{
+		island:      snap.Key,
+		productGUID: p.ProductGUID,
+		rule:        RuleProductivityDrop,
+	}]
+	if muted {
+		if ps.drop != nil {
+			return e.clearDrop(events, ps, snap.ReceivedAt, prod, mean)
+		}
+		return events
+	}
 
 	switch {
 	case ps.drop == nil && drop > e.cfg.DropPercentagePoints && negative:

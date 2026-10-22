@@ -5,6 +5,40 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ## [Unreleased]
 
+### Added
+
+- **Island comparison:** compare the goods and efficiency tables for multiple
+  selected islands. Every column in the comparison tables, the single-island
+  efficiency table and the warnings table can be sorted.
+- **Configurable warning rules:** disable deficit and productivity-drop
+  warnings separately for each island-good pair using checkboxes in the
+  single-island goods and efficiency tables. Import-needed entries can also be
+  disabled for an individual island-good pair from the warnings page. Disabled
+  rules are excluded from active warning counts and island warnings, listed
+  centrally under import needed, and can be re-enabled there.
+- **Warning thresholds:** set the deficit threshold and productivity-drop
+  threshold on the warnings page. Defaults preserve the existing behavior:
+  any negative local balance and a 20-percentage-point productivity drop.
+  Settings are saved in `alert-settings.json` in the data directory and take
+  effect with the next measurement.
+
+### Changed
+
+- Added the loopback-only `/api/v1/alert-settings` endpoint to read and update
+  warning thresholds and per-rule suppressions. Writes validate their input,
+  check the request origin, persist settings atomically, and report persistence
+  failures.
+- Updated the README and concept documentation for island comparison,
+  sortable tables, configurable warning rules, and persistent warning settings.
+- Clarified in the contributor and development guides that a Go command from
+  1.21 can bootstrap the project-required Go 1.25.0 toolchain when
+  `GOTOOLCHAIN=auto` is enabled; releases use the pinned Go 1.25.14 toolchain.
+
+### Fixed
+
+- Keep the central list of disabled warnings visible even when there are no
+  active import-needed entries.
+
 ## [0.1.0-beta.4] - 2026-09-24
 
 Fourth beta: fewer and better warnings, and possible production sources for

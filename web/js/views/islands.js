@@ -2,7 +2,7 @@
 
 import { i18n } from "../i18n.js";
 import { api } from "../api.js";
-import { byProduct, isWarning, ruleLabel } from "../alerts.js";
+import { byProduct, isSuppressed, isWarning, ruleLabel } from "../alerts.js";
 import { renderIslandHeader } from "./island-header.js";
 import { createSources, detailRow, toggleButton } from "../sources.js";
 
@@ -40,6 +40,8 @@ export async function renderIslandDetail(container, islandId, store) {
   // answers out of order, and the older one would win by arriving last.
   let disposed = false;
   let request = 0;
+  let alertSettings = null;
+  let settingsError = "";
 
   // The island's name, the island switch and the tab to the efficiency view
   // all live in the shared header now, so this view only owns its table.
@@ -91,7 +93,10 @@ export async function renderIslandDetail(container, islandId, store) {
   const tableBox = document.createElement("div");
   tableBox.className = "table-scroll";
   tableBox.append(table);
-  wrapper.append(summaryLine, toolbar, tableBox);
+  const settingsMessage = document.createElement("p");
+  settingsMessage.className = "error-line";
+  settingsMessage.hidden = true;
+  wrapper.append(summaryLine, toolbar, settingsMessage, tableBox);
   container.append(wrapper);
 
   let productsDTO = null;
@@ -101,6 +106,10 @@ export async function renderIslandDetail(container, islandId, store) {
 
   function headerRow() {
     const tr = document.createElement("tr");
+    const suppressionHeader = document.createElement("th");
+    suppressionHeader.scope = "col";
+    suppressionHeader.textContent = i18n.t("warningDeactivated");
+    tr.append(suppressionHeader);
     for (const col of columns) {
       const th = document.createElement("th");
       if (col.numeric) th.className = "num";
@@ -140,6 +149,8 @@ export async function renderIslandDetail(container, islandId, store) {
     // The name and the session are in the header; repeating them here only
     // made the line long enough to be skipped. What is left are the counts.
     header.update(island);
+    settingsMessage.hidden = !settingsError;
+    settingsMessage.textContent = settingsError ? `${i18n.t("alertSettingsError")} ${settingsError}` : "";
     summaryLine.textContent = `${island.products} ${i18n.t("products")} · `
       + `${island.deficits} ${i18n.t("deficits")}`
       + (alertCount > 0 ? ` · ${alertCount} ${i18n.t("alertsHeading")}` : "");
@@ -175,7 +186,7 @@ export async function renderIslandDetail(container, islandId, store) {
     if (rows.length === 0) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
-      td.colSpan = columns.length;
+      td.colSpan = columns.length + 1;
       if (productsDTO.products.length === 0) {
         // An empty island right after a savegame is loaded is not an island
         // without production - it is one whose first statistics tick has not
@@ -198,6 +209,31 @@ export async function renderIslandDetail(container, islandId, store) {
     for (const p of rows) {
       const tr = document.createElement("tr");
       tr.className = "product-row";
+
+      const suppressionTd = document.createElement("td");
+      const suppression = document.createElement("input");
+      suppression.type = "checkbox";
+      suppression.checked = isSuppressed(alertSettings, islandId, p.guid, "deficit");
+      suppression.setAttribute("aria-label", i18n.t(
+        suppression.checked ? "warningEnableFor" : "warningDisableFor",
+        { product: p.name },
+      ));
+      suppression.addEventListener("change", async () => {
+        const disabled = suppression.checked;
+        suppression.disabled = true;
+        try {
+          alertSettings = await api.setAlertSuppression(islandId, p.guid, "deficit", disabled);
+          settingsError = "";
+          document.dispatchEvent(new CustomEvent("tabularium-alert-settings-changed", { detail: alertSettings }));
+          renderTable();
+        } catch (err) {
+          suppression.checked = !disabled;
+          settingsError = err instanceof Error ? err.message : String(err);
+          renderTable();
+        }
+      });
+      suppressionTd.append(suppression);
+      tr.append(suppressionTd);
 
       const nameTd = document.createElement("td");
       const warnings = alerted.get(String(p.guid));
@@ -256,7 +292,7 @@ export async function renderIslandDetail(container, islandId, store) {
       tr.append(nameTd, genTd, consTd, deltaTd, buildingsTd);
       tbody.append(tr);
       if (needed && sources.isOpen(islandId, p.guid)) {
-        tbody.append(detailRow(sources.panel(islandId, p.guid), columns.length));
+        tbody.append(detailRow(sources.panel(islandId, p.guid), columns.length + 1));
       }
     }
     // Without preventScroll the browser scrolls the rebuilt button into
@@ -274,9 +310,10 @@ export async function renderIslandDetail(container, islandId, store) {
 
   async function load() {
     const current = ++request;
-    const dto = await api.products(islandId);
+    const [dto, settings] = await Promise.all([api.products(islandId), api.alertSettings()]);
     if (disposed || current !== request) return;
     productsDTO = dto;
+    alertSettings = settings;
     renderTable();
   }
 
@@ -299,6 +336,11 @@ export async function renderIslandDetail(container, islandId, store) {
 
   const onAlerts = () => renderTable();
   document.addEventListener("tabularium-alerts-changed", onAlerts);
+  const onAlertSettings = (event) => {
+    alertSettings = event.detail;
+    renderTable();
+  };
+  document.addEventListener("tabularium-alert-settings-changed", onAlertSettings);
 
   return () => {
     disposed = true;
@@ -306,5 +348,6 @@ export async function renderIslandDetail(container, islandId, store) {
     document.removeEventListener("tabularium-snapshot", onSnapshot);
     document.removeEventListener("tabularium-lang-changed", onLang);
     document.removeEventListener("tabularium-alerts-changed", onAlerts);
+    document.removeEventListener("tabularium-alert-settings-changed", onAlertSettings);
   };
 }

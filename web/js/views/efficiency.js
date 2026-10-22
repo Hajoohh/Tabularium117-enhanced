@@ -2,6 +2,7 @@
 
 import { i18n } from "../i18n.js";
 import { api } from "../api.js";
+import { isSuppressed } from "../alerts.js";
 import { renderIslandHeader } from "./island-header.js";
 
 function locale() {
@@ -25,6 +26,10 @@ export async function renderEfficiency(container, islandId, store) {
   // not paint over the newer one.
   let disposed = false;
   let request = 0;
+  let alertSettings = null;
+  let settingsError = "";
+  let sortKey = "wasted";
+  let sortAscending = false;
 
   // The heading, the island switch and the way back to the goods table are
   // the shared header's job (views/island-header.js).
@@ -64,22 +69,47 @@ export async function renderEfficiency(container, islandId, store) {
   const tableBox = document.createElement("div");
   tableBox.className = "table-scroll";
   tableBox.append(table);
-  container.append(intro, details, tableBox);
+  const settingsMessage = document.createElement("p");
+  settingsMessage.className = "error-line";
+  settingsMessage.hidden = true;
+  container.append(intro, details, settingsMessage, tableBox);
+
+  const columns = [
+    ["name", "colName", false],
+    ["generation", "colGeneration", true],
+    ["perfectGeneration", "colPerfect", true],
+    ["efficiency", "colEfficiency", true],
+    ["avgProductivity", "colProductivity", true],
+    ["wasted", "colWasted", true],
+  ];
 
   function render(dto) {
     header.update(dto.island);
+    settingsMessage.hidden = !settingsError;
+    settingsMessage.textContent = settingsError ? `${i18n.t("alertSettingsError")} ${settingsError}` : "";
     const headRow = document.createElement("tr");
-    for (const [label, numeric] of [
-      [i18n.t("colName"), false],
-      [i18n.t("colGeneration"), true],
-      [i18n.t("colPerfect"), true],
-      [i18n.t("colEfficiency"), true],
-      [i18n.t("colProductivity"), true],
-      [i18n.t("colWasted"), true],
-    ]) {
+    const suppressionHeader = document.createElement("th");
+    suppressionHeader.scope = "col";
+    suppressionHeader.textContent = i18n.t("warningDeactivated");
+    headRow.append(suppressionHeader);
+    for (const [field, label, numeric] of columns) {
       const th = document.createElement("th");
       if (numeric) th.className = "num";
-      th.textContent = label;
+      th.scope = "col";
+      if (sortKey === field) th.setAttribute("aria-sort", sortAscending ? "ascending" : "descending");
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = i18n.t(label) + (sortKey === field ? (sortAscending ? " ↑" : " ↓") : "");
+      button.addEventListener("click", () => {
+        if (sortKey === field) sortAscending = !sortAscending;
+        else {
+          sortKey = field;
+          sortAscending = true;
+        }
+        render(dto);
+        thead.querySelectorAll("button")[columns.findIndex((column) => column[0] === field)]?.focus();
+      });
+      th.append(button);
       headRow.append(th);
     }
     thead.replaceChildren(headRow);
@@ -88,7 +118,7 @@ export async function renderEfficiency(container, islandId, store) {
     if (dto.products.length === 0) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
-      td.colSpan = 6;
+      td.colSpan = columns.length + 1;
       td.textContent = i18n.t("noEfficiencyData");
       tr.append(td);
       tbody.append(tr);
@@ -103,19 +133,47 @@ export async function renderEfficiency(container, islandId, store) {
     // table then disagreed with each other ("49%" beside "220 %").
     const percent = (valueInPercent) => pct.format(valueInPercent / 100);
 
-    // The server already sorts by wasted desc; products with efficiency ==
-    // null (perfectGeneration 0) have wasted 0 or negative and are moved to
-    // the very bottom regardless, since there is nothing to compare here.
     const sorted = [...dto.products].sort((a, b) => {
-      const aNull = a.efficiency === null;
-      const bNull = b.efficiency === null;
-      if (aNull !== bNull) return aNull ? 1 : -1;
-      return b.wasted - a.wasted;
+      const av = a[sortKey];
+      const bv = b[sortKey];
+      if (sortKey === "efficiency" && (av === null || bv === null)) {
+        if (av === bv) return 0;
+        return av === null ? 1 : -1;
+      }
+      const result = typeof av === "string"
+        ? av.localeCompare(bv, i18n.lang)
+        : av - bv;
+      return sortAscending ? result : -result;
     });
 
     for (const p of sorted) {
       const tr = document.createElement("tr");
       if (p.efficiency === null) tr.className = "no-data";
+
+      const suppressionTd = document.createElement("td");
+      const suppression = document.createElement("input");
+      suppression.type = "checkbox";
+      suppression.checked = isSuppressed(alertSettings, islandId, p.guid, "productivity_drop");
+      suppression.setAttribute("aria-label", i18n.t(
+        suppression.checked ? "warningEnableFor" : "warningDisableFor",
+        { product: p.name },
+      ));
+      suppression.addEventListener("change", async () => {
+        const disabled = suppression.checked;
+        suppression.disabled = true;
+        try {
+          alertSettings = await api.setAlertSuppression(islandId, p.guid, "productivity_drop", disabled);
+          settingsError = "";
+          document.dispatchEvent(new CustomEvent("tabularium-alert-settings-changed", { detail: alertSettings }));
+          render(dto);
+        } catch (err) {
+          suppression.checked = !disabled;
+          settingsError = err instanceof Error ? err.message : String(err);
+          render(dto);
+        }
+      });
+      suppressionTd.append(suppression);
+      tr.append(suppressionTd);
 
       const nameTd = document.createElement("td");
       nameTd.textContent = p.name;
@@ -178,8 +236,9 @@ export async function renderEfficiency(container, islandId, store) {
 
   async function load() {
     const current = ++request;
-    const dto = await api.efficiency(islandId);
+    const [dto, settings] = await Promise.all([api.efficiency(islandId), api.alertSettings()]);
     if (disposed || current !== request) return;
+    alertSettings = settings;
     render(dto);
   }
 
@@ -193,10 +252,16 @@ export async function renderEfficiency(container, islandId, store) {
   document.addEventListener("tabularium-snapshot", onSnapshot);
   const onLang = () => load();
   document.addEventListener("tabularium-lang-changed", onLang);
+  const onAlertSettings = (event) => {
+    alertSettings = event.detail;
+    load().catch((err) => console.error("tabularium117: cannot refresh efficiency", err));
+  };
+  document.addEventListener("tabularium-alert-settings-changed", onAlertSettings);
 
   return () => {
     disposed = true;
     document.removeEventListener("tabularium-snapshot", onSnapshot);
     document.removeEventListener("tabularium-lang-changed", onLang);
+    document.removeEventListener("tabularium-alert-settings-changed", onAlertSettings);
   };
 }

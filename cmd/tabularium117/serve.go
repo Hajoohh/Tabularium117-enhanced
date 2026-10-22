@@ -32,7 +32,7 @@ type httpServer struct {
 // is a clear failure here rather than a UI that never appears, and the caller
 // can hand out a URL that really works - including the real port behind
 // --port 0.
-func startServer(cfg config, st *state.State, hist *history, engine server.AlertSource, log *slog.Logger) (*httpServer, error) {
+func startServer(cfg config, st *state.State, hist *history, engine server.AlertSource, preferences server.AlertPreferenceManager, log *slog.Logger) (*httpServer, error) {
 	var db *store.Store
 	if hist != nil {
 		db = hist.store
@@ -40,12 +40,13 @@ func startServer(cfg config, st *state.State, hist *history, engine server.Alert
 
 	ready := make(chan net.Addr, 1)
 	srv := server.New(server.Options{
-		State:   st,
-		Store:   db,
-		Alerts:  engine,
-		Log:     log,
-		Version: version,
-		OnReady: func(addr net.Addr) { ready <- addr },
+		State:            st,
+		Store:            db,
+		Alerts:           engine,
+		AlertPreferences: preferences,
+		Log:              log,
+		Version:          version,
+		OnReady:          func(addr net.Addr) { ready <- addr },
 		LAN: server.LANOptions{
 			IP:            cfg.lanIP,
 			AllowLoopback: cfg.lanAllowLoopback,

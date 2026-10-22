@@ -10,6 +10,10 @@ import "time"
 // not usable with the default, so a caller can set one field and get sensible
 // behaviour for the rest.
 type Config struct {
+	// DeficitThreshold is the delta below which a locally produced product is
+	// considered in deficit. Zero preserves the original "any negative
+	// balance" behavior. Default 0.
+	DeficitThreshold float64
 	// DeficitSamples is how many consecutive samples with Delta < 0 raise a
 	// deficit alert, or a no_local_production alert on an island without
 	// buildings of its own for the product. Default 3.
@@ -62,6 +66,7 @@ type Config struct {
 // DefaultConfig returns the default thresholds.
 func DefaultConfig() Config {
 	return Config{
+		DeficitThreshold:          0,
 		DeficitSamples:            3,
 		DeficitClearSamples:       3,
 		DropPercentagePoints:      20,
@@ -78,6 +83,9 @@ func DefaultConfig() Config {
 // value is exactly the flicker this package exists to prevent.
 func (c Config) withDefaults() Config {
 	d := DefaultConfig()
+	if c.DeficitThreshold > 0 {
+		c.DeficitThreshold = d.DeficitThreshold
+	}
 	if c.DeficitSamples < 1 {
 		c.DeficitSamples = d.DeficitSamples
 	}
