@@ -21,6 +21,9 @@ All notable changes to Tabularium 117 are documented here, in the
   any negative local balance and a 20-percentage-point productivity drop.
   Settings are saved in `alert-settings.json` in the data directory and take
   effect with the next measurement.
+- The warnings page can be opened from the sidebar before any islands load, so
+  global thresholds can be configured in advance. Per-island and per-good
+  warning switches become available when the game reports the relevant data.
 
 ### Changed
 

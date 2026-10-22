@@ -12,6 +12,7 @@
 // `docs/beta.md` is still what covers the looking.
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
 // --- the smallest DOM these modules need -----------------------------------
 
@@ -128,6 +129,11 @@ const { renderIslandDetail } = await import("../web/js/views/islands.js");
 const { renderEfficiency } = await import("../web/js/views/efficiency.js");
 const { renderAlerts } = await import("../web/js/views/alerts.js");
 const { renderCompare } = await import("../web/js/views/compare.js");
+
+test("the sidebar always links to warnings, even before islands load", async () => {
+  const html = await readFile(new URL("../web/index.html", import.meta.url), "utf8");
+  assert.match(html, /<a href="#\/alerts" data-i18n="alertsHeading">Warnings<\/a>/);
+});
 
 // --- fixtures --------------------------------------------------------------
 
@@ -725,6 +731,28 @@ test("warning settings save thresholds and let import suppressions be reactivate
     "disabled rules stay visible when there are no active imports");
   assert.equal(nodes(disabledRoot, "tbody")[2].children.length, 1);
   cleanupDisabled();
+});
+
+test("warning settings are available before any islands or warnings are loaded", async () => {
+  i18n.lang = "en";
+  fakeAlertSettings = { deficitThreshold: 0, dropPercentagePoints: 20, suppressions: [] };
+  const root = new Element();
+  const cleanup = await renderAlerts(root, {
+    islands: [],
+    alerts: [],
+    status: {},
+  }, false);
+
+  assert.match(root.textContent, /No islands have been loaded yet/);
+  const numberInputs = nodes(root, "input").filter((input) => input.type === "number");
+  assert.equal(numberInputs.length, 2);
+  numberInputs[0].value = "-2";
+  numberInputs[1].value = "30";
+  nodes(root, "form")[0].dispatchEvent(new Event("submit", { cancelable: true }));
+  await settle();
+  assert.equal(fakeAlertSettings.deficitThreshold, -2);
+  assert.equal(fakeAlertSettings.dropPercentagePoints, 30);
+  cleanup();
 });
 
 test("the warnings table sorts every column", async () => {

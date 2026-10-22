@@ -389,6 +389,9 @@ export async function renderAlerts(container, store, showHistory) {
     if (historyError) {
       message.textContent = `${i18n.t("errorPrefix")} ${historyError}`;
       message.className = "error-line";
+    } else if (!showHistory && store.islands.length === 0) {
+      message.textContent = i18n.t("alertsNoIslands");
+      message.className = "muted";
     } else if (selectedIslands.size === 0) {
       message.textContent = i18n.t("noIslandsSelected");
       message.className = "muted";

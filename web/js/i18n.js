@@ -101,6 +101,8 @@ const dictionaries = {
     openHistory: "Open history",
     noEfficiencyData: "No production data yet.",
     alertsHeading: "Warnings",
+    alertsNoIslands: "No islands have been loaded yet. You can set warning thresholds now; "
+      + "per-island warning switches become available as soon as the game reports islands and goods.",
     alertsBadge: "{count} active warnings",
     alertsNone: "No active warnings.",
     alertsHistoryHeading: "Warning history",
@@ -292,6 +294,9 @@ const dictionaries = {
     openHistory: "Verlauf öffnen",
     noEfficiencyData: "Noch keine Produktionsdaten.",
     alertsHeading: "Warnungen",
+    alertsNoIslands: "Es wurden noch keine Inseln geladen. Du kannst die Warnschwellen schon jetzt "
+      + "einstellen; insel- und warenspezifische Warnungen lassen sich deaktivieren, sobald das Spiel "
+      + "Inseln und Waren meldet.",
     alertsBadge: "{count} aktive Warnungen",
     alertsNone: "Keine aktiven Warnungen.",
     alertsHistoryHeading: "Warnungsverlauf",

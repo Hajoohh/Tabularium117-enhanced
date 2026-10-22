@@ -102,6 +102,9 @@ die Wirtschaftsdaten live, mit Verlauf und handyfreundlich anzeigt.
    wieder aktivierbar. Die Defizit- und Produktivitätsschwellen lassen sich auf der
    Warnungsseite anpassen. Einstellungen liegen dauerhaft in `alert-settings.json` im
    Datenverzeichnis; Änderungen sind auf dem Loopback-Listener möglich.
+   Der Einstieg zur Warnungsseite bleibt auch ohne geladene Inseln sichtbar. Globale
+   Schwellen lassen sich vorher einstellen; einzelne Insel-Waren-Regeln erst, sobald
+   die entsprechenden Spieldaten verfügbar sind.
    Anzeige in der UI + optional Browser-Benachrichtigung/Ton (Opt-in, standardmäßig aus).
 
    **Mögliche Produktionsquellen** (Kontext zu `no_local_production`, keine Regel): Ein Eintrag

@@ -61,6 +61,9 @@ gegenüber dem Spiel.
    Insel-Waren-Paare; deaktivierte Regeln erscheinen nur in der Gesamtübersicht
    und lassen sich dort wieder aktivieren. Einstellungen werden im Datenordner
    in `alert-settings.json` gespeichert und gelten nur auf diesem PC.
+   Der Warnungszugang bleibt auch ohne geladene Inseln sichtbar. Schwellen
+   lassen sich sofort konfigurieren; einzelne Insel-Waren-Regeln, sobald das
+   Spiel die entsprechenden Daten meldet.
 5. **Handy-Modus** – per Schalter im UI einschaltbar, zeigt einen QR-Code mit
    der Adresse im eigenen Netzwerk.
 
@@ -333,6 +336,9 @@ step, no Docker, no mod, strictly read-only towards the game.
    island-good pair; disabled rules appear only in the overall alerts view,
    where they can be re-enabled. Settings are saved as `alert-settings.json`
    in the data directory and apply only on this PC.
+   The alerts link is available even before any islands load, so you can set
+   thresholds in advance. Per-island and per-good switches become available
+   once the game reports the corresponding data.
 5. **Phone mode** – a switch in the UI shows a QR code with the address on
    your own network.
 
