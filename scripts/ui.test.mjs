@@ -129,10 +129,34 @@ const { renderIslandDetail } = await import("../web/js/views/islands.js");
 const { renderEfficiency } = await import("../web/js/views/efficiency.js");
 const { renderAlerts } = await import("../web/js/views/alerts.js");
 const { renderCompare } = await import("../web/js/views/compare.js");
+const { renderAggregate } = await import("../web/js/views/aggregate.js");
+const { createRegionGroup } = await import("../web/js/region-group.js");
 
 test("the sidebar always links to warnings, even before islands load", async () => {
   const html = await readFile(new URL("../web/index.html", import.meta.url), "utf8");
   assert.match(html, /<a href="#\/alerts" data-i18n="alertsHeading">Warnings<\/a>/);
+  assert.match(html, /<a href="#\/total" data-i18n="totalHeading">Total<\/a>/);
+});
+
+test("region island lists can be collapsed and expanded accessibly", () => {
+  i18n.lang = "en";
+  const changes = [];
+  const group = createRegionGroup(3245, "Latium", false, (collapsed) => changes.push(collapsed));
+  const islandRow = new Element("li");
+  group.islands.append(islandRow);
+  const toggle = nodes(group.item, ".region-toggle")[0];
+  const link = nodes(group.item, "a")[0];
+
+  assert.equal(group.islands.hidden, false);
+  assert.equal(toggle.getAttribute("aria-expanded"), "true");
+  assert.equal(link.href, "#/region/3245");
+  toggle.click();
+  assert.equal(group.islands.hidden, true);
+  assert.equal(toggle.getAttribute("aria-expanded"), "false");
+  assert.equal(toggle.getAttribute("aria-label"), "Expand Latium islands");
+  toggle.click();
+  assert.equal(group.islands.hidden, false);
+  assert.deepEqual(changes, [true, false]);
 });
 
 // --- fixtures --------------------------------------------------------------
@@ -158,9 +182,9 @@ const island = { id: "3245-1", name: "Juliana", sessionName: "Latium", products:
 const secondIsland = { id: "6627-2", name: "Argantum", sessionName: "Albion", products: 3, deficits: 1 };
 
 const products = [
-  { guid: 1, name: "Bread", generation: 5, consumption: 3, delta: 2, buildings: 2 },
-  { guid: 2, name: "Wheat", generation: 3, consumption: 7, delta: -4, buildings: 3 },
-  { guid: 3, name: "Fish", generation: 1, consumption: 1, delta: 0, buildings: 1 },
+  { guid: 1, name: "Bread", generation: 5, perfectGeneration: 8, consumption: 3, delta: 2, buildings: 2 },
+  { guid: 2, name: "Wheat", generation: 3, perfectGeneration: 6, consumption: 7, delta: -4, buildings: 3 },
+  { guid: 3, name: "Fish", generation: 1, perfectGeneration: 2, consumption: 1, delta: 0, buildings: 1 },
 ];
 
 // One warning, on Bread, so that "warnings" and "deficits" select different
@@ -185,6 +209,8 @@ test("the filters intersect with the search, and an empty result says why", asyn
   const cleanup = await renderIslandDetail(root, island.id, store);
 
   assert.match(rowText(root), /Bread/);
+  assert.match(nodes(root, "thead")[0].textContent, /Potential \(100%\)\/min/);
+  assert.match(rowText(root), /Bread.*5\.0.*8\.0/);
   button(root, "Deficits").click();
   assert.match(rowText(root), /Wheat/);
   assert.doesNotMatch(rowText(root), /Bread/);
@@ -211,15 +237,15 @@ test("sorting says which way it sorted and keeps the keyboard focus", async () =
 
   // The default is the deficit first: that is what the table is for.
   assert.match(nodes(root, "tbody")[0].children[0].textContent, /Wheat/);
-  assert.equal(nodes(root, "th")[4].getAttribute("aria-sort"), "ascending");
+  assert.equal(nodes(root, "th")[5].getAttribute("aria-sort"), "ascending");
 
-  const deltaHeader = nodes(root, "thead")[0].querySelectorAll("button")[3];
+  const deltaHeader = nodes(root, "thead")[0].querySelectorAll("button")[4];
   deltaHeader.click();
   assert.match(nodes(root, "tbody")[0].children[0].textContent, /Bread/, "a second click reverses the order");
-  assert.equal(nodes(root, "th")[4].getAttribute("aria-sort"), "descending");
+  assert.equal(nodes(root, "th")[5].getAttribute("aria-sort"), "descending");
   assert.equal(
     document.activeElement,
-    nodes(root, "thead")[0].querySelectorAll("button")[3],
+    nodes(root, "thead")[0].querySelectorAll("button")[4],
     "sorting replaces the header row, and the focus has to survive it",
   );
   cleanup();
@@ -264,7 +290,9 @@ test("a surplus carries its sign, and the name is a link into the history", asyn
 test("an answer that was overtaken does not paint over the newer one", async () => {
   i18n.lang = "en";
   const tick = () => new Promise((resolve) => setImmediate(resolve));
-  const row = (name) => ({ guid: 9, name, generation: 0, consumption: 0, delta: 0, buildings: 0 });
+  const row = (name) => ({
+    guid: 9, name, generation: 0, perfectGeneration: 0, consumption: 0, delta: 0, buildings: 0,
+  });
 
   api.products = async () => ({ island, products });
   const root = new Element();
@@ -487,7 +515,7 @@ test("possible production sources open under the row, grouped by province", asyn
   const wheat = rows.findIndex((row) => row.textContent.includes("Wheat"));
   assert.equal(rows[wheat + 1].className, "sources-row", "the sources sit directly under their good");
   const detail = rows[wheat + 1].children[0];
-  assert.equal(detail.colSpan, 6, "one cell across the whole table, which the phone layout leaves unpinned");
+  assert.equal(detail.colSpan, 7, "one cell across the whole table, which the phone layout leaves unpinned");
 
   const text = detail.textContent;
   assert.match(text, /Possible production sources/);
@@ -789,7 +817,7 @@ test("the comparison view loads goods for multiple selected islands", async () =
     return {
       island: islandId === island.id ? island : secondIsland,
       products: [{ guid: islandId === island.id ? 1 : 2, name: islandId === island.id ? "Bread" : "Wheat",
-        generation: 5, consumption: 3, delta: 2, buildings: 2 }],
+        generation: 5, perfectGeneration: 10, consumption: 3, delta: 2, buildings: 2 }],
     };
   };
   api.efficiency = async (islandId) => {
@@ -817,14 +845,67 @@ test("the comparison view loads goods for multiple selected islands", async () =
   assert.match(nodes(root, "tbody")[0].textContent, /Argantum.*Wheat/);
   assert.equal(nodes(root, "tbody")[1].children.length, 2, "comparison also shows the efficiency rows");
   assert.match(nodes(root, "tbody")[1].textContent, /Juliana.*Bread/);
-  assert.equal(nodes(root, "thead")[0].querySelectorAll("button").length, 6, "every goods column can be sorted");
+  assert.equal(nodes(root, "thead")[0].querySelectorAll("button").length, 7, "every goods column can be sorted");
+  assert.match(nodes(root, "tbody")[0].textContent, /Juliana.*Bread.*5\.0.*10\.0/);
   assert.equal(nodes(root, "thead")[1].querySelectorAll("button").length, 7, "every efficiency column can be sorted");
 
-  nodes(root, "thead")[0].querySelectorAll("button")[4].click();
+  nodes(root, "thead")[0].querySelectorAll("button")[5].click();
   assert.match(nodes(root, "tbody")[0].children[0].textContent, /Juliana.*Bread/);
   nodes(root, "thead")[1].querySelectorAll("button")[6].click();
   assert.equal(nodes(root, "thead")[1].querySelectorAll("th")[6].getAttribute("aria-sort"), "ascending");
   cleanup();
+});
+
+test("region and total views sum each good into one row", async () => {
+  i18n.lang = "en";
+  const regionIsland = { ...island, sessionGuid: 3245 };
+  const sameRegionIsland = { ...secondIsland, sessionGuid: 3245, sessionName: "Latium" };
+  const otherRegionIsland = { id: "7777-3", name: "North", sessionGuid: 7777, sessionName: "Albion" };
+  const store = { islands: [regionIsland, sameRegionIsland, otherRegionIsland], status: {} };
+  const fixtures = new Map([
+    [regionIsland.id, [
+      { guid: 1, name: "Bread", generation: 5, perfectGeneration: 8, consumption: 2, delta: 3, buildings: 2 },
+      { guid: 2, name: "Wheat", generation: 1, perfectGeneration: 2, consumption: 4, delta: -3, buildings: 1 },
+    ]],
+    [sameRegionIsland.id, [
+      { guid: 1, name: "Bread", generation: 7, perfectGeneration: 10, consumption: 3, delta: 4, buildings: 3 },
+    ]],
+    [otherRegionIsland.id, [
+      { guid: 1, name: "Bread", generation: 100, perfectGeneration: 120, consumption: 20, delta: 80, buildings: 9 },
+      { guid: 3, name: "Fish", generation: 2, perfectGeneration: 3, consumption: 1, delta: 1, buildings: 1 },
+    ]],
+  ]);
+  api.products = async (islandId) => ({ island: store.islands.find((entry) => entry.id === islandId), products: fixtures.get(islandId) });
+
+  const regionRoot = new Element();
+  const cleanupRegion = renderAggregate(regionRoot, store, { sessionGuid: 3245 });
+  await settle();
+  assert.equal(nodes(regionRoot, "tbody")[0].children.length, 2, "shared goods have one row, and unshared goods remain one row");
+  assert.match(nodes(regionRoot, "tbody")[0].textContent, /Bread.*12\.0.*18\.0.*5\.0.*\+7\.0.*5/);
+  assert.match(nodes(regionRoot, "tbody")[0].textContent, /Wheat.*1\.0.*2\.0.*4\.0.*-3\.0.*1/);
+  assert.doesNotMatch(nodes(regionRoot, "tbody")[0].textContent, /Fish|100\.0/);
+  const regionSearch = nodes(regionRoot, "input")[0];
+  assert.equal(regionSearch.type, "search");
+  regionSearch.value = "wHeAt";
+  regionSearch.dispatchEvent(new Event("input"));
+  assert.equal(nodes(regionRoot, "tbody")[0].children.length, 1);
+  assert.match(nodes(regionRoot, "tbody")[0].textContent, /Wheat/);
+  regionSearch.value = "missing good";
+  regionSearch.dispatchEvent(new Event("input"));
+  assert.match(nodes(regionRoot, "tbody")[0].textContent, /No matching goods/);
+  cleanupRegion();
+
+  const totalRoot = new Element();
+  const cleanupTotal = renderAggregate(totalRoot, store, { total: true });
+  await settle();
+  assert.equal(nodes(totalRoot, "tbody")[0].children.length, 3);
+  assert.match(nodes(totalRoot, "tbody")[0].textContent, /Bread.*112\.0.*138\.0.*25\.0.*\+87\.0.*14/);
+  const totalSearch = nodes(totalRoot, "input")[0];
+  totalSearch.value = "fish";
+  totalSearch.dispatchEvent(new Event("input"));
+  assert.equal(nodes(totalRoot, "tbody")[0].children.length, 1);
+  assert.match(nodes(totalRoot, "tbody")[0].textContent, /Fish/);
+  cleanupTotal();
 });
 
 test("a slow answer is not asked for again ten times a tick", async () => {

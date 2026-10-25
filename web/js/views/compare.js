@@ -56,6 +56,7 @@ export function renderCompare(container, store) {
     ["island", "colIsland", false],
     ["name", "colProduct", false],
     ["generation", "colGeneration", true],
+    ["perfectGeneration", "colMaxProduction", true],
     ["consumption", "colConsumption", true],
     ["delta", "colDelta", true],
     ["buildings", "colBuildings", true],
@@ -143,7 +144,11 @@ export function renderCompare(container, store) {
       link.textContent = product.name;
       productCell.append(link);
       tr.append(islandCell, productCell);
-      for (const value of [fmt1.format(product.generation), fmt1.format(product.consumption)]) {
+      for (const value of [
+        fmt1.format(product.generation),
+        fmt1.format(product.perfectGeneration),
+        fmt1.format(product.consumption),
+      ]) {
         const td = document.createElement("td");
         td.className = "num";
         td.textContent = value;

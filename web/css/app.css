@@ -182,8 +182,41 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   text-transform: uppercase;
 }
 #sidebar h2 { color: var(--fg-muted); margin: .25rem 0 .6rem; }
-.session-group h3 { color: var(--accent); margin: .9rem 0 .35rem; }
+.session-group h3 {
+  color: var(--accent);
+  margin: .9rem 0 .35rem;
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
 .session-group:first-child h3 { margin-top: 0; }
+.region-toggle {
+  min-height: 1.2rem;
+  padding: 0 .15rem;
+  border: 0;
+  color: var(--fg-muted);
+  background: transparent;
+}
+.region-toggle:hover { border-color: transparent; background: transparent; }
+.region-toggle::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: .28rem solid transparent;
+  border-left-color: currentColor;
+  transform: rotate(90deg);
+}
+.region-toggle[aria-expanded="false"]::before { transform: none; }
+.region-islands {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+.region-islands[hidden] { display: none; }
 
 #island-list {
   list-style: none;

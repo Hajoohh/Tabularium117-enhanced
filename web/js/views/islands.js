@@ -23,6 +23,7 @@ function numberFormat(fractionDigits) {
 const columns = [
   { key: "name", label: "colName", numeric: false },
   { key: "generation", label: "colGeneration", numeric: true },
+  { key: "perfectGeneration", label: "colMaxProduction", numeric: true },
   { key: "consumption", label: "colConsumption", numeric: true },
   { key: "delta", label: "colDelta", numeric: true },
   { key: "buildings", label: "colBuildings", numeric: true },
@@ -277,6 +278,9 @@ export async function renderIslandDetail(container, islandId, store) {
       const genTd = document.createElement("td");
       genTd.className = "num";
       genTd.textContent = fmt1.format(p.generation);
+      const maxProductionTd = document.createElement("td");
+      maxProductionTd.className = "num";
+      maxProductionTd.textContent = fmt1.format(p.perfectGeneration);
       const consTd = document.createElement("td");
       consTd.className = "num";
       consTd.textContent = fmt1.format(p.consumption);
@@ -289,7 +293,7 @@ export async function renderIslandDetail(container, islandId, store) {
       buildingsTd.className = "num";
       buildingsTd.textContent = fmt0.format(p.buildings);
 
-      tr.append(nameTd, genTd, consTd, deltaTd, buildingsTd);
+      tr.append(nameTd, genTd, maxProductionTd, consTd, deltaTd, buildingsTd);
       tbody.append(tr);
       if (needed && sources.isOpen(islandId, p.guid)) {
         tbody.append(detailRow(sources.panel(islandId, p.guid), columns.length + 1));

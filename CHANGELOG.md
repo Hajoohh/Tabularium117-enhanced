@@ -7,6 +7,13 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ### Added
 
+- **Maximum production column:** the goods lists show each good's potential
+  production at 100% productivity alongside its current production.
+- **Goods search in region and total summaries:** filter the aggregated rows by
+  good name, as in the single-island view.
+- **Region and total summaries:** click a region name in the island list or
+  choose “Total” to see production, consumption, balance and building counts
+  summed per good, with one row per good rather than separate island rows.
 - **Island comparison:** compare the goods and efficiency tables for multiple
   selected islands. Every column in the comparison tables, the single-island
   efficiency table and the warnings table can be sorted.
@@ -31,8 +38,9 @@ All notable changes to Tabularium 117 are documented here, in the
   warning thresholds and per-rule suppressions. Writes validate their input,
   check the request origin, persist settings atomically, and report persistence
   failures.
-- Updated the README and concept documentation for island comparison,
-  sortable tables, configurable warning rules, and persistent warning settings.
+- Updated the README and concept documentation for region and total summaries,
+  island comparison, sortable tables, configurable warning rules, and
+  persistent warning settings.
 - Clarified in the contributor and development guides that a Go command from
   1.21 can bootstrap the project-required Go 1.25.0 toolchain when
   `GOTOOLCHAIN=auto` is enabled; releases use the pinned Go 1.25.14 toolchain.

@@ -30,10 +30,16 @@ gegenüber dem Spiel.
 
 ### Was es kann
 
-1. **Live-Übersicht pro Insel** – alle Waren mit Produktion, Verbrauch und
-   Delta; Defizite stehen oben und sind rot markiert. In der Vergleichsansicht
-   lassen sich mehrere Inseln gleichzeitig auswählen; Waren- und Effizienzwerte
+1. **Live-Übersicht von Waren und Effizienzwerten** – Anzeige aller Waren mit Produktion,
+   maximaler Produktion bei 100 % Produktivität, Verbrauch und Delta; Defizite
+   stehen oben und sind rot markiert.
+   Jede Insel kann einzeln betrachtet werden.
+   In der Vergleichsansicht lassen sich mehrere Inseln gleichzeitig auswählen; Waren- und Effizienzwerte
    lassen sich dort wie in den Einzelansichten nach jeder Spalte sortieren.
+   Die Insellisten lassen sich je Region ein- und ausklappen. Ein Klick auf
+   den Regionsnamen oder „Gesamt“ zeigt außerdem die aufsummierten Werte je
+   Ware, jeweils mit genau einer Zeile pro Ware. Auch diese Summenansichten
+   haben ein Waren-Suchfeld.
 2. **Verlauf pro Ware** – Diagramm der letzten 1 h, 4 h, 24 h, 7 Tage oder der
    ganzen Session für Produktion, Verbrauch und Delta.
 3. **Effizienz-Ansicht** – Ist-Produktion gegen die theoretisch perfekte

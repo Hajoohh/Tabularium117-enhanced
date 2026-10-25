@@ -11,6 +11,8 @@ import { renderHelp } from "./views/help.js";
 import { renderPhone } from "./views/phone.js";
 import { renderAlerts } from "./views/alerts.js";
 import { renderCompare } from "./views/compare.js";
+import { renderAggregate } from "./views/aggregate.js";
+import { createRegionGroup } from "./region-group.js";
 import { buildPipeHelp } from "./pipe-help.js";
 import { alertKey, announce, countByIsland, isWarning } from "./alerts.js";
 import { formatAge } from "./format.js";
@@ -29,6 +31,7 @@ export const store = {
 // catch-up, not news, so it must not set off a notification or a sound on
 // every reload (see applyAlertEvent).
 const pageStart = Date.now();
+const collapsedRegions = new Set();
 
 const els = {
   connState: document.getElementById("conn-state"),
@@ -246,16 +249,23 @@ function renderIslandList() {
   // wherever the session changes. The headings are what makes a list of
   // fourteen islands readable: they group Latium and Albion instead of
   // repeating the session's name on every single row.
-  let lastSession = null;
+  let lastSessionGuid = null;
+  let regionIslands = null;
   for (const island of store.islands) {
-    if (island.sessionName !== lastSession) {
-      lastSession = island.sessionName;
-      const groupLi = document.createElement("li");
-      groupLi.className = "session-group";
-      const heading = document.createElement("h3");
-      heading.textContent = lastSession;
-      groupLi.append(heading);
-      els.islandList.append(groupLi);
+    if (island.sessionGuid !== lastSessionGuid) {
+      lastSessionGuid = island.sessionGuid;
+      const regionKey = String(island.sessionGuid);
+      const group = createRegionGroup(
+        island.sessionGuid,
+        island.sessionName,
+        collapsedRegions.has(regionKey),
+        (collapsed) => {
+          if (collapsed) collapsedRegions.add(regionKey);
+          else collapsedRegions.delete(regionKey);
+        },
+      );
+      els.islandList.append(group.item);
+      regionIslands = group.islands;
     }
     const li = document.createElement("li");
     li.className = warming ? "island-item warming" : "island-item";
@@ -304,7 +314,7 @@ function renderIslandList() {
       window.location.hash = `#/island/${encodeURIComponent(island.id)}`;
     });
     li.append(btn);
-    els.islandList.append(li);
+    regionIslands.append(li);
   }
 }
 
@@ -381,6 +391,10 @@ function parseHash() {
   if (parts[0] === "phone") return { route: "phone" };
   if (parts[0] === "alerts") return { route: "alerts", all: query.get("all") === "1" };
   if (parts[0] === "compare") return { route: "compare" };
+  if (parts[0] === "region" && parts[1]) {
+    return { route: "aggregate", sessionGuid: decodeURIComponent(parts[1]) };
+  }
+  if (parts[0] === "total") return { route: "aggregate", total: true };
   if (parts[0] === "island" && parts[1]) {
     const islandId = decodeURIComponent(parts[1]);
     if (parts[2] === "efficiency") return { route: "efficiency", islandId };
@@ -438,6 +452,9 @@ async function route() {
         break;
       case "compare":
         unmount = renderCompare(els.view, store);
+        break;
+      case "aggregate":
+        unmount = renderAggregate(els.view, store, r);
         break;
       case "island":
         unmount = await renderIslandDetail(els.view, r.islandId, store);

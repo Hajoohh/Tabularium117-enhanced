@@ -29,8 +29,10 @@ die Wirtschaftsdaten live, mit Verlauf und handyfreundlich anzeigt.
 
 ## 2. Kernfunktionen (MVP)
 
-1. **Live-Übersicht pro Insel** – alle Waren mit Produktion, Verbrauch, Delta; Defizite oben, rot markiert.
-   Eine Vergleichsansicht zeigt die Waren mehrerer ausgewählter Inseln gemeinsam.
+1. **Live-Übersicht pro Insel** – alle Waren mit Ist-Produktion, maximaler Produktion bei 100 % Produktivität,
+   Verbrauch und Delta; Defizite oben, rot markiert.
+   Eine Vergleichsansicht zeigt die Waren mehrerer ausgewählter Inseln gemeinsam. Region und Gesamt
+   summieren Produktion, Verbrauch, Delta und Gebäude je Ware zu genau einer Zeile.
 2. **Verlauf pro Ware** – Diagramm der letzten 1 h / 4 h / 24 h / 7 d / Session für Produktion,
    Verbrauch, Delta. Die langen Bereiche sind erst mit dem 2-Minuten-Takt sinnvoll: 24 h sind nur
    rund 720 Rohpunkte je Insel und Ware (§12).
