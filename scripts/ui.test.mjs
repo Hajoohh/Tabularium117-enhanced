@@ -132,6 +132,7 @@ const { renderCompare } = await import("../web/js/views/compare.js");
 const { renderAggregate } = await import("../web/js/views/aggregate.js");
 const { createRegionGroup } = await import("../web/js/region-group.js");
 const {
+  createGoodsChainsLoader,
   filterGoodsByCategories,
   goodsCategoriesForRegions,
 } = await import("../web/js/goods-chain-view.js");
@@ -406,6 +407,32 @@ test("goods categories are exclusive, and no category selection keeps every prod
   assert.deepEqual(filterGoodsByCategories(goods, new Set(), categories), goods);
   assert.deepEqual(filterGoodsByCategories(goods, new Set(["raw"]), categories), [goods[0], goods[3]]);
   assert.deepEqual(filterGoodsByCategories(goods, new Set(["intermediate", "end"]), categories), [goods[1], goods[2]]);
+});
+
+test("goods-chain loader shares concurrent requests, validates config, and retries failures", async () => {
+  let requests = 0;
+  const config = { regions: {} };
+  const loader = createGoodsChainsLoader(async () => {
+    requests++;
+    return config;
+  });
+
+  const [first, second] = await Promise.all([loader.load(), loader.load()]);
+  assert.equal(first, config);
+  assert.equal(second, config);
+  assert.equal(requests, 1, "concurrent callers share one validated request");
+  assert.equal(await loader.load(), config);
+  assert.equal(requests, 1, "a successful configuration is cached");
+
+  let attempts = 0;
+  const retryingLoader = createGoodsChainsLoader(async () => {
+    attempts++;
+    if (attempts === 1) throw new Error("temporary failure");
+    return config;
+  });
+  await assert.rejects(retryingLoader.load(), /temporary failure/);
+  assert.equal(await retryingLoader.load(), config, "failed requests can be retried");
+  assert.equal(attempts, 2);
 });
 
 test("island goods categories filter rows and leave all visible when unchecked", async () => {

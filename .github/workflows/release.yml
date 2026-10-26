@@ -1,6 +1,6 @@
 name: Release
 
-# Builds tabularium117.exe (windows/amd64) and attaches it, with a SHA-256 checksum,
+# Builds tabularium117-enhanced.exe (windows/amd64) and attaches it, with a SHA-256 checksum,
 # to a GitHub release when a tag v* is pushed. Also runnable by hand.
 #
 # Every-push verification lives in ci.yml; this workflow is only about turning
@@ -32,17 +32,17 @@ jobs:
       - name: Run the full verification
         run: ./scripts/check.sh
 
-      - name: Build tabularium117.exe
+      - name: Build tabularium117-enhanced.exe
         run: |
           make build
-          cd dist && sha256sum tabularium117.exe > SHA256SUMS && cat SHA256SUMS
+          cd dist && sha256sum tabularium117-enhanced.exe > SHA256SUMS && cat SHA256SUMS
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: tabularium117-windows-amd64
+          name: tabularium117-enhanced-windows-amd64
           path: |
-            dist/tabularium117.exe
+            dist/tabularium117-enhanced.exe
             dist/SHA256SUMS
 
       - name: Publish release
@@ -62,5 +62,5 @@ jobs:
           # distributions in binary form. Someone who downloads the .exe and
           # nothing else has them here.
           gh release create "${GITHUB_REF_NAME}" \
-            dist/tabularium117.exe dist/SHA256SUMS LICENSE THIRD_PARTY_NOTICES.md \
-            --title "Tabularium 117 ${GITHUB_REF_NAME}" --generate-notes ${prerelease}
+            dist/tabularium117-enhanced.exe dist/SHA256SUMS LICENSE THIRD_PARTY_NOTICES.md \
+            --title "Tabularium 117 - enhanced ${GITHUB_REF_NAME}" --generate-notes ${prerelease}

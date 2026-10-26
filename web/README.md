@@ -1,6 +1,6 @@
 # Tabularium 117 web UI
 
-Static frontend embedded into `tabularium117.exe` via `embed` (see `embed.go`) and
+Static frontend embedded into `tabularium117-enhanced.exe` via `embed` (see `embed.go`) and
 served at `/`. No build step: HTML, CSS, and JavaScript ES modules only; uPlot
 is vendored under `vendor/uplot/`.
 

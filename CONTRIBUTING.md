@@ -39,7 +39,7 @@ ingest, state, catalog, store, alerts, server, lan}`, `web/` (UI),
 
 ## Environments
 
-- Target: Windows/amd64, one static `tabularium117.exe`.
+- Target: Windows/amd64, one static `tabularium117-enhanced.exe`.
 - Development works on Linux and macOS too: only `internal/pipe` depends on
   Windows; everything else builds and tests everywhere using the recordings
   in `testdata/`. A test against the real game needs Windows and Anno 117.
@@ -49,7 +49,7 @@ ingest, state, catalog, store, alerts, server, lan}`, `web/` (UI),
 ```sh
 ./scripts/check.sh                    # gofmt, go vet, go test, the UI tests — the definition of "verified"
 git config core.hooksPath .githooks   # once per clone: runs check.sh before every push
-make build                            # dist/tabularium117.exe (windows/amd64); build.ps1 on Windows
+make build                            # dist/tabularium117-enhanced.exe (windows/amd64); build.ps1 on Windows
 go run ./cmd/tabularium117 --replay testdata/live-2026-09-22.jsonl --serve-after-replay
 ```
 

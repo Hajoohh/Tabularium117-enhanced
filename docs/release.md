@@ -8,7 +8,7 @@ This is the maintainer's checklist for cutting a Tabularium 117 release.
 2. Update `CHANGELOG.md`: move the `[Unreleased]` (or beta) section's
    entries under a new `## [X.Y.Z] - YYYY-MM-DD` heading with the actual
    release date. In the release notes, tell existing testers plainly to
-   download the new `tabularium117.exe`; the app has no automatic updater.
+   download the new `tabularium117-enhanced.exe`; the app has no automatic updater.
 3. Commit the changelog update.
 4. Tag the release:
    ```sh
@@ -22,23 +22,24 @@ This is the maintainer's checklist for cutting a Tabularium 117 release.
 
    **Normally:** pushing the tag triggers
    `.github/workflows/release.yml`, which runs
-   `./scripts/check.sh`, builds `dist/tabularium117.exe`, computes
+   `./scripts/check.sh`, builds `dist/tabularium117-enhanced.exe`, computes
    `dist/SHA256SUMS`, and publishes a GitHub release with those two files
    plus `LICENSE` and `THIRD_PARTY_NOTICES.md` attached - the licence texts
-   have to travel with the binary (the workflow is also runnable by hand
-   via `workflow_dispatch`).
+   have to travel with the binary. The release title is
+   `Tabularium 117 - enhanced vX.Y.Z` (using the pushed tag); the workflow is
+   also runnable by hand via `workflow_dispatch`.
 
    **If Actions are unavailable (manual path)**, from a checkout of the
    pushed tag:
    ```sh
    make build                    # or: VERSION=vX.Y.Z make build
-   cd dist && sha256sum tabularium117.exe > SHA256SUMS
+   cd dist && sha256sum tabularium117-enhanced.exe > SHA256SUMS
    ```
    Then create the GitHub release by hand for the `vX.Y.Z` tag and attach
-   the same four files as the workflow: `dist/tabularium117.exe`,
+   the same four files as the workflow: `dist/tabularium117-enhanced.exe`,
    `dist/SHA256SUMS`, `LICENSE` and `THIRD_PARTY_NOTICES.md`.
 
-6. Verify the published download: fetch `tabularium117.exe` and
+6. Verify the published download: fetch `tabularium117-enhanced.exe` and
    `SHA256SUMS` from the release page and confirm the hash matches before
    announcing.
 

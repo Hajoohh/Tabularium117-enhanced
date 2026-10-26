@@ -140,7 +140,7 @@ die Wirtschaftsdaten live, mit Verlauf und handyfreundlich anzeigt.
 ## 3. Architektur
 
 ```
-┌──────────────┐  Named Pipe   ┌─────────────────────────── tabularium117.exe ───────────────────────────┐
+┌──────────────┐  Named Pipe   ┌──────────────────── tabularium117-enhanced.exe ─────────────────────────┐
 │  Anno 117    │ ────────────▶ │ pipe reader → decoder → normalizer ─┬─▶ state (in-memory, aktuell) │
 │  (/pipe)     │               │                                     ├─▶ store (SQLite, Verlauf)    │
 └──────────────┘               │                                     └─▶ alerts (Regel-Engine)      │
@@ -610,7 +610,7 @@ beschreibt, was der Code tut.
 
 ## 9. Verteilung
 
-- GitHub Actions baut bei Tag `v*` die `tabularium117.exe` (windows/amd64) und hängt sie ans Release.
+- GitHub Actions baut bei Tag `v*` die `tabularium117-enhanced.exe` (windows/amd64) und hängt sie ans Release.
 - SHA-256-Prüfsumme im Release. SmartScreen-Warnung im README erklären.
 - README auf Deutsch und Englisch, mit Screenshots und GIF.
 - Ankündigung: anno-mods-Discord, r/anno, Anno-Union-Community.
@@ -630,7 +630,7 @@ beschreibt, was der Code tut.
 
 Erreicht mit v0.1.0-beta.1 (2026-09-22).
 
-- [x] `tabularium117.exe` startet ohne Installation, öffnet Browser automatisch
+- [x] `tabularium117-enhanced.exe` startet ohne Installation, öffnet Browser automatisch
 - [x] Erkennt laufendes Anno 117 mit `/pipe`, verbindet automatisch neu
 - [x] Zeigt alle Inseln und Waren mit Namen (DE/EN) – alle Inseln, die die Pipe
   liefert; im getesteten Spielstand waren das die eigenen, nicht die der KI

@@ -12,13 +12,13 @@
 > gerade in den Test mit den ersten Spielern. Es kann also noch rumpeln –
 > Fehlerberichte sind ausdrücklich erwünscht (siehe `docs/beta.md`). Die
 > aktuelle Beta gibt es auf der
-> [Release-Seite](https://github.com/Dealwatch/Tabularium117/releases).
+> [Release-Seite](https://github.com/Hajoohh/Tabularium117-enhanced/releases).
 > Konzept: `KONZEPT.md`, Pipe-Protokoll: `docs/protocol.md`.
 >
 > **Status: beta.** Tabularium 117 runs against the real game and is going
 > into testing with its first players, so expect rough edges – bug reports
 > are explicitly welcome (see `docs/beta.md`). The current beta is available
-> on the [releases page](https://github.com/Dealwatch/Tabularium117/releases).
+> on the [releases page](https://github.com/Hajoohh/Tabularium117-enhanced/releases).
 
 ---
 
@@ -91,22 +91,22 @@ Entwicklungsstand.*
 
 ### Schnellstart
 
-1. `tabularium117.exe` vom [GitHub-Release](https://github.com/Dealwatch/Tabularium117/releases)
+1. `tabularium117-enhanced.exe` vom [GitHub-Release](https://github.com/Hajoohh/Tabularium117-enhanced/releases)
    herunterladen.
 2. Prüfsumme kontrollieren: Im Release liegt eine `SHA256SUMS`-Datei. In
    PowerShell:
    ```powershell
-   Get-FileHash .\tabularium117.exe -Algorithm SHA256
+   Get-FileHash .\tabularium117-enhanced.exe -Algorithm SHA256
    ```
-   Der Wert muss mit der Zeile zu `tabularium117.exe` in `SHA256SUMS` übereinstimmen.
-3. `tabularium117.exe` starten. Der Browser öffnet automatisch
+   Der Wert muss mit der Zeile zu `tabularium117-enhanced.exe` in `SHA256SUMS` übereinstimmen.
+3. `tabularium117-enhanced.exe` starten. Der Browser öffnet automatisch
    `http://127.0.0.1:53118/`.
 
 **Beta-Tester:** siehe `docs/beta.md` für eine ausführliche Anleitung und
 Test-Checkliste.
 
 **SmartScreen-Warnung:** Windows zeigt beim ersten Start „Windows hat den
-Start dieser App verhindert“ – das liegt daran, dass `tabularium117.exe` ein
+Start dieser App verhindert“ – das liegt daran, dass `tabularium117-enhanced.exe` ein
 unsigniertes Open-Source-Binary ist, keine kommerzielle Codesignatur besitzt
 und Windows sie deshalb noch nicht kennt. Auf **„Weitere Informationen“** und
 dann **„Trotzdem ausführen“** klicken. Der Quellcode liegt hier im Repository,
@@ -164,7 +164,7 @@ Ryzen 7 9800X3D:
 - **CPU:** im Schnitt 0,003 %, in der Spitze 0,098 %
 - **Arbeitsspeicher:** 16,4 MB, im Schnitt wie in der Spitze
 
-Gemessen wurde nur `tabularium117.exe`, nicht der Browser, der die Oberfläche
+Gemessen wurde nur `tabularium117-enhanced.exe`, nicht der Browser, der die Oberfläche
 anzeigt – dessen Bedarf hängt vom Browser ab und davon, was sonst noch offen
 ist. Auf anderer Hardware fallen die Werte anders aus. Dass sie so niedrig
 sind, liegt an der Arbeitsweise: Das Spiel liefert etwa alle zwei Minuten
@@ -370,20 +370,20 @@ version.*
 
 ### Quick start
 
-1. Download `tabularium117.exe` from the [GitHub release](https://github.com/Dealwatch/Tabularium117/releases).
+1. Download `tabularium117-enhanced.exe` from the [GitHub release](https://github.com/Hajoohh/Tabularium117-enhanced/releases).
 2. Verify the checksum: the release includes a `SHA256SUMS` file. In
    PowerShell:
    ```powershell
-   Get-FileHash .\tabularium117.exe -Algorithm SHA256
+   Get-FileHash .\tabularium117-enhanced.exe -Algorithm SHA256
    ```
-   The value must match the `tabularium117.exe` line in `SHA256SUMS`.
-3. Start `tabularium117.exe`. Your browser opens automatically at
+   The value must match the `tabularium117-enhanced.exe` line in `SHA256SUMS`.
+3. Start `tabularium117-enhanced.exe`. Your browser opens automatically at
    `http://127.0.0.1:53118/`.
 
 **Beta testers:** see `docs/beta.md` for a full guide and test checklist.
 
 **SmartScreen warning:** on first run, Windows shows "Windows protected your
-PC" because `tabularium117.exe` is an unsigned open-source binary without a
+PC" because `tabularium117-enhanced.exe` is an unsigned open-source binary without a
 commercial code-signing certificate, so Windows does not yet recognize it.
 Click **"More info"**, then **"Run anyway"**. The source is right here in
 this repository, and the build is reproducible with `make build`, so anyone
@@ -437,7 +437,7 @@ connected to a running Anno 117 session, on a Ryzen 7 9800X3D:
 - **CPU:** 0.003 % on average, 0.098 % at peak
 - **Memory:** 16.4 MB, both on average and at peak
 
-This measures `tabularium117.exe` only, not the browser that shows the UI –
+This measures `tabularium117-enhanced.exe` only, not the browser that shows the UI –
 that depends on which browser you use and what else is open. Other hardware
 gives other numbers. They are this low because of how the work arrives: the
 game sends new statistics about every two minutes, and in between there is
@@ -589,11 +589,11 @@ documentation is German and English.
 
 ```sh
 ./scripts/check.sh   # gofmt, go vet, go test
-make build           # cross-compiles dist/tabularium117.exe (windows/amd64)
+make build           # cross-compiles dist/tabularium117-enhanced.exe (windows/amd64)
 make build-host      # binary for the current platform
 ```
 
-On Windows without `make`, `build.ps1` produces the same `dist/tabularium117.exe`.
+On Windows without `make`, `build.ps1` produces the same `dist/tabularium117-enhanced.exe`.
 
 Ohne laufendes Spiel (und auf Linux) arbeitet Tabularium 117 aus einem Mitschnitt; der
 Befehl gibt die Inseln und ihre Warenzahl aus. / Without a running game (and on

@@ -9,10 +9,10 @@ import {
   activeGoodsChainsForIsland,
   appendGoodsChainCards,
   createGoodsCategoryFilters,
+  createGoodsChainsLoader,
   filterGoodsByCategories,
   goodsCategoriesForRegions,
   matchingGoodsChains,
-  validateGoodsChains,
   validateGoodsIcons,
 } from "../goods-chain-view.js";
 
@@ -133,7 +133,7 @@ export async function renderIslandDetail(container, islandId, store) {
   let productsDTO = null;
   let goodsChains = null;
   let goodsIcons = null;
-  let chainLoadPromise = null;
+  const goodsChainsLoader = createGoodsChainsLoader(() => api.goodsChains());
   let iconLoadPromise = null;
   let showGoodsChains = false;
   let selectedChainGuid = null;
@@ -156,11 +156,9 @@ export async function renderIslandDetail(container, islandId, store) {
     if (categories.size > 0 && !goodsChains) {
       chainsLoading = true;
       renderTable();
-      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
       try {
-        goodsChains = validateGoodsChains(await chainLoadPromise);
+        goodsChains = await goodsChainsLoader.load();
       } catch (err) {
-        chainLoadPromise = null;
         selectedCategories = new Set();
         categoryFilters.reset();
         chainError = err instanceof Error ? err.message : String(err);
@@ -484,11 +482,9 @@ export async function renderIslandDetail(container, islandId, store) {
       chainToggle.disabled = true;
       localChainToggle.disabled = true;
       renderTable();
-      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
       try {
-        goodsChains = validateGoodsChains(await chainLoadPromise);
+        goodsChains = await goodsChainsLoader.load();
       } catch (err) {
-        chainLoadPromise = null;
         showGoodsChains = false;
         chainToggle.checked = false;
         chainError = err instanceof Error ? err.message : String(err);
@@ -508,11 +504,9 @@ export async function renderIslandDetail(container, islandId, store) {
       chainToggle.disabled = true;
       localChainToggle.disabled = true;
       renderTable();
-      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
       try {
-        goodsChains = validateGoodsChains(await chainLoadPromise);
+        goodsChains = await goodsChainsLoader.load();
       } catch (err) {
-        chainLoadPromise = null;
         showLocalGoodsChains = false;
         localChainToggle.checked = false;
         chainError = err instanceof Error ? err.message : String(err);

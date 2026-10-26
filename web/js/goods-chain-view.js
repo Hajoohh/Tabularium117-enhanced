@@ -40,6 +40,32 @@ export function validateGoodsChains(config) {
   return config;
 }
 
+export function createGoodsChainsLoader(fetchConfig) {
+  let config = null;
+  let pending = null;
+
+  return {
+    load() {
+      if (config) return Promise.resolve(config);
+      if (!pending) {
+        // Share concurrent reads, but only cache validated data so a failed
+        // request can be retried by the next caller.
+        pending = Promise.resolve()
+          .then(fetchConfig)
+          .then(validateGoodsChains)
+          .then((validated) => {
+            config = validated;
+            return config;
+          })
+          .finally(() => {
+            pending = null;
+          });
+      }
+      return pending;
+    },
+  };
+}
+
 export function validateGoodsIcons(config) {
   if (!config || typeof config !== "object" || !config.icons || typeof config.icons !== "object"
       || Array.isArray(config.icons)) {
@@ -73,6 +99,8 @@ export function goodsChainsForRegions(config, regions) {
 export function activeGoodsChainsForIsland(config, region, products) {
   const productsByGuid = new Map(products.map((product) => [String(product.guid), product]));
   return goodsChainsForRegions(config, [region]).filter(({ chain }) => {
+    // A chain is active on this island only when it has buildings for the
+    // chain's declared end product, not merely one of its intermediate goods.
     const endProduct = chain.product || chain.stages[chain.stages.length - 1].output;
     return productsByGuid.get(String(endProduct.guid))?.buildings > 0;
   });
@@ -85,6 +113,8 @@ export function goodsCategoriesForRegions(config, regions) {
     const finalGood = chain.product || chain.stages[chain.stages.length - 1].output;
     endProducts.add(String(finalGood.guid));
     produced.add(String(finalGood.guid));
+    // Stage outputs are produced goods; chain inputs without any production
+    // stage remain raw materials when categories are assigned below.
     for (const stage of chain.stages) {
       for (const good of [stage.output]) produced.add(String(good.guid));
     }
@@ -98,6 +128,7 @@ export function goodsCategoriesForRegions(config, regions) {
 }
 
 export function filterGoodsByCategories(goods, selectedCategories, categories) {
+  // An empty selection intentionally means no category filtering.
   if (selectedCategories.size === 0) return goods;
   return goods.filter((good) => selectedCategories.has(categories.get(String(good.guid)) || "raw"));
 }

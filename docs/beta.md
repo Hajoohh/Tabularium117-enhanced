@@ -13,16 +13,16 @@ live im Browser, auf dem PC oder auf dem Handy im selben Netzwerk.
 
 ### Installation
 
-1. `tabularium117.exe` und `SHA256SUMS` von der
-   [Release-Seite](https://github.com/Dealwatch/Tabularium117/releases)
+1. `tabularium117-enhanced.exe` und `SHA256SUMS` von der
+   [Release-Seite](https://github.com/Hajoohh/Tabularium117-enhanced/releases)
    herunterladen.
 2. Prüfsumme kontrollieren (PowerShell):
    ```powershell
-   Get-FileHash .\tabularium117.exe -Algorithm SHA256
+   Get-FileHash .\tabularium117-enhanced.exe -Algorithm SHA256
    ```
-   Der Wert muss mit der Zeile zu `tabularium117.exe` in `SHA256SUMS`
+   Der Wert muss mit der Zeile zu `tabularium117-enhanced.exe` in `SHA256SUMS`
    übereinstimmen.
-3. `tabularium117.exe` starten. Windows zeigt beim ersten Start
+3. `tabularium117-enhanced.exe` starten. Windows zeigt beim ersten Start
    „Windows hat den Start dieser App verhindert" (SmartScreen) – auf
    **„Weitere Informationen"** und dann **„Trotzdem ausführen"** klicken.
    Diese Warnung ist bei einem unsignierten Build zu erwarten und bedeutet
@@ -91,7 +91,7 @@ Ersetzen im Texteditor findet sie deshalb nicht. Wer den Profilnamen nicht
 mitschicken möchte, lässt Tabularium 117 den Mitschnitt anonymisieren:
 
 ```powershell
-.\tabularium117.exe --anonymize-recording mitschnitt.jsonl
+.\tabularium117-enhanced.exe --anonymize-recording mitschnitt.jsonl
 ```
 
 Das schreibt `mitschnitt.jsonl.anon.jsonl` (ein anderer Pfad geht mit
@@ -117,14 +117,14 @@ your phone in the same network.
 
 ### Install
 
-1. Download `tabularium117.exe` and `SHA256SUMS` from the
-   [release page](https://github.com/Dealwatch/Tabularium117/releases).
+1. Download `tabularium117-enhanced.exe` and `SHA256SUMS` from the
+   [release page](https://github.com/Hajoohh/Tabularium117-enhanced/releases).
 2. Verify the checksum (PowerShell):
    ```powershell
-   Get-FileHash .\tabularium117.exe -Algorithm SHA256
+   Get-FileHash .\tabularium117-enhanced.exe -Algorithm SHA256
    ```
-   It must match the `tabularium117.exe` line in `SHA256SUMS`.
-3. Start `tabularium117.exe`. Windows shows "Windows protected your PC"
+   It must match the `tabularium117-enhanced.exe` line in `SHA256SUMS`.
+3. Start `tabularium117-enhanced.exe`. Windows shows "Windows protected your PC"
    (SmartScreen) on first run – click **"More info"**, then **"Run
    anyway"**. This warning is expected for an unsigned build and does not by
    itself mean the file contains malware - what you can check is the checksum
@@ -189,7 +189,7 @@ not find them. If you would rather not share the profile name, let Tabularium
 117 anonymise the recording for you:
 
 ```powershell
-.\tabularium117.exe --anonymize-recording recording.jsonl
+.\tabularium117-enhanced.exe --anonymize-recording recording.jsonl
 ```
 
 That writes `recording.jsonl.anon.jsonl` (use `--out <file>` for a different

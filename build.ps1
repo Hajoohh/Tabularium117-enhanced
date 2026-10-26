@@ -1,4 +1,4 @@
-# Build tabularium117.exe on Windows. Equivalent to `make build`.
+# Build tabularium117-enhanced.exe on Windows. Equivalent to `make build`.
 $ErrorActionPreference = "Stop"
 
 $version = "dev"
