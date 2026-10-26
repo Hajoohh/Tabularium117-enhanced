@@ -1,8 +1,6 @@
 module github.com/Hajoohh/Tabularium117-enhanced
 
-go 1.26.0
-
-toolchain go1.26.9
+go 1.27
 
 require (
 	github.com/Microsoft/go-winio v0.6.2

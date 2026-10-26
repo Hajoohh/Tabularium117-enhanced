@@ -68,7 +68,7 @@ jobs:
       # network. Pinned to a govulncheck that runs on Go 1.26, so
       # that it analyses that toolchain rather than switching to a newer one.
       - name: govulncheck
-        run: go run golang.org/x/vuln/cmd/govulncheck@v1.7.0 ./...
+        run: go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 ./...
 
   tidy:
     name: go.mod is tidy
