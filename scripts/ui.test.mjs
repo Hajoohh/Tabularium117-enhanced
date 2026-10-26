@@ -270,12 +270,21 @@ test("the goods-chain toggle shows every matching multistage chain for this regi
       }],
     },
   });
-  api.goodsIcons = async () => ({ icons: { "2086": "https://anno.land/clay.webp" } });
+  let iconLoads = 0;
+  api.goodsIcons = async () => {
+    iconLoads++;
+    return { icons: { "2086": "https://anno.land/clay.webp" } };
+  };
   const root = new Element();
   const cleanup = await renderIslandDetail(root, island.id, storeWith());
+  await settle();
+  assert.equal(iconLoads, 1, "the icon map loads when the goods view opens");
   const search = nodes(root, "input").find((input) => input.type === "search");
   search.value = "Clay";
   search.dispatchEvent(new Event("input"));
+  assert.equal(nodes(root, ".goods-chain-icon").length, 1, "the matched good has an icon before chains are enabled");
+  assert.equal(nodes(root, ".product-link")[0].children[0].tagName, "img",
+    "the good icon appears before its name");
   const toggle = nodes(root, ".goods-chain-toggle")[0].querySelector("input");
   toggle.checked = true;
   toggle.dispatchEvent(new Event("change"));
@@ -288,6 +297,9 @@ test("the goods-chain toggle shows every matching multistage chain for this regi
   const icons = nodes(root, ".goods-chain-icon");
   assert.ok(icons.length >= 2, "an icon appears both beside the searched good and in the recipe");
   assert.equal(icons[0].src, "https://anno.land/clay.webp");
+  nodes(root, ".goods-chain-good").find((good) => good.textContent.includes("Metal")).click();
+  assert.match(nodes(root, ".goods-chain-overview")[0].textContent, /Goods chain for Tools/,
+    "clicking a good opens the overview of chains that include it");
 
   search.value = "Armour";
   search.dispatchEvent(new Event("input"));
@@ -960,6 +972,23 @@ test("region and total views sum each good into one row", async () => {
     ]],
   ]);
   api.products = async (islandId) => ({ island: store.islands.find((entry) => entry.id === islandId), products: fixtures.get(islandId) });
+  api.goodsIcons = async () => ({ icons: { "1": "https://anno.land/bread.webp" } });
+  api.goodsChains = async () => ({
+    regions: {
+      Latium: [{
+        product: { guid: 1, name: { en: "Bread", de: "Brot" } },
+        stages: [
+          { inputs: [{ guid: 2, name: { en: "Wheat", de: "Weizen" } }], output: { guid: 1, name: { en: "Bread", de: "Brot" } } },
+        ],
+      }],
+      Albion: [{
+        product: { guid: 1, name: { en: "Bread", de: "Brot" } },
+        stages: [
+          { inputs: [{ guid: 3, name: { en: "Fish", de: "Fisch" } }], output: { guid: 1, name: { en: "Bread", de: "Brot" } } },
+        ],
+      }],
+    },
+  });
 
   const regionRoot = new Element();
   const cleanupRegion = renderAggregate(regionRoot, store, { sessionGuid: 3245 });
@@ -968,11 +997,22 @@ test("region and total views sum each good into one row", async () => {
   assert.match(nodes(regionRoot, "tbody")[0].textContent, /Bread.*12\.0.*18\.0.*5\.0.*\+7\.0.*5/);
   assert.match(nodes(regionRoot, "tbody")[0].textContent, /Wheat.*1\.0.*2\.0.*4\.0.*-3\.0.*1/);
   assert.doesNotMatch(nodes(regionRoot, "tbody")[0].textContent, /Fish|100\.0/);
+  assert.equal(nodes(regionRoot, ".goods-chain-icon").length, 1, "aggregate goods use the eagerly loaded icons");
   const regionSearch = nodes(regionRoot, "input")[0];
   assert.equal(regionSearch.type, "search");
+  regionSearch.value = "Bread";
+  regionSearch.dispatchEvent(new Event("input"));
+  const regionChainToggle = nodes(regionRoot, ".goods-chain-toggle")[0].querySelector("input");
+  regionChainToggle.checked = true;
+  regionChainToggle.dispatchEvent(new Event("change"));
+  await settle();
+  assert.match(nodes(regionRoot, "tbody")[0].textContent, /Goods chain for Bread/);
+  nodes(regionRoot, ".goods-chain-good").find((good) => good.textContent.includes("Wheat")).click();
+  assert.match(nodes(regionRoot, ".goods-chain-overview")[0].textContent, /Goods chain for Bread/);
   regionSearch.value = "wHeAt";
   regionSearch.dispatchEvent(new Event("input"));
-  assert.equal(nodes(regionRoot, "tbody")[0].children.length, 1);
+  assert.equal(nodes(regionRoot, "tbody")[0].children.length, 2,
+    "the filtered good row is followed by its matching goods chain");
   assert.match(nodes(regionRoot, "tbody")[0].textContent, /Wheat/);
   regionSearch.value = "missing good";
   regionSearch.dispatchEvent(new Event("input"));
@@ -984,11 +1024,24 @@ test("region and total views sum each good into one row", async () => {
   await settle();
   assert.equal(nodes(totalRoot, "tbody")[0].children.length, 3);
   assert.match(nodes(totalRoot, "tbody")[0].textContent, /Bread.*112\.0.*138\.0.*25\.0.*\+87\.0.*14/);
+  const totalChainToggle = nodes(totalRoot, ".goods-chain-toggle")[0].querySelector("input");
+  totalChainToggle.checked = true;
+  totalChainToggle.dispatchEvent(new Event("change"));
+  await settle();
   const totalSearch = nodes(totalRoot, "input")[0];
   totalSearch.value = "fish";
   totalSearch.dispatchEvent(new Event("input"));
-  assert.equal(nodes(totalRoot, "tbody")[0].children.length, 1);
-  assert.match(nodes(totalRoot, "tbody")[0].textContent, /Fish/);
+  assert.equal(nodes(totalRoot, "tbody")[0].children.length, 2,
+    "the total view shows the matching regional chain under the good");
+  assert.match(nodes(totalRoot, "tbody")[0].textContent, /Fish.*Goods chain for Bread/);
+  totalSearch.value = "Bread";
+  totalSearch.dispatchEvent(new Event("input"));
+  assert.match(nodes(totalRoot, "tbody")[0].textContent, /Latium|Albion/,
+    "the total view includes chains from all regions");
+  nodes(totalRoot, ".goods-chain-good").find((good) => good.textContent.includes("Bread")).click();
+  const totalOverview = nodes(totalRoot, ".goods-chain-overview")[0].textContent;
+  assert.match(totalOverview, /Latium/);
+  assert.match(totalOverview, /Albion/, "clicking a good shows its chains across the total view");
   cleanupTotal();
 });
 

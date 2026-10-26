@@ -1,5 +1,11 @@
 import { i18n } from "../i18n.js";
 import { api } from "../api.js";
+import {
+  appendGoodsChainCards,
+  matchingGoodsChains,
+  validateGoodsChains,
+  validateGoodsIcons,
+} from "../goods-chain-view.js";
 
 const numberFormatCache = new Map();
 
@@ -28,7 +34,18 @@ export function renderAggregate(container, store, scope) {
   searchInput.placeholder = i18n.t("searchPlaceholder");
   searchInput.setAttribute("data-i18n-placeholder", "searchPlaceholder");
   searchInput.setAttribute("aria-label", i18n.t("searchPlaceholder"));
-  toolbar.append(searchInput);
+  const chainToggle = document.createElement("input");
+  chainToggle.type = "checkbox";
+  const chainLabel = document.createElement("label");
+  chainLabel.className = "goods-chain-toggle";
+  chainLabel.append(chainToggle, document.createTextNode(i18n.t("showGoodsChains")));
+  toolbar.append(searchInput, chainLabel);
+  const chainMessage = document.createElement("p");
+  chainMessage.className = "muted goods-chain-message";
+  chainMessage.hidden = true;
+  const chainOverview = document.createElement("div");
+  chainOverview.className = "goods-chain-overview";
+  chainOverview.hidden = true;
   const table = document.createElement("table");
   const thead = document.createElement("thead");
   const tbody = document.createElement("tbody");
@@ -36,7 +53,7 @@ export function renderAggregate(container, store, scope) {
   const tableBox = document.createElement("div");
   tableBox.className = "table-scroll";
   tableBox.append(table);
-  container.append(heading, explain, toolbar, message, tableBox);
+  container.append(heading, explain, toolbar, message, chainMessage, chainOverview, tableBox);
 
   const columns = [
     ["name", "colName", false],
@@ -55,6 +72,15 @@ export function renderAggregate(container, store, scope) {
   let products = [];
   let errors = [];
   let search = "";
+  let goodsChains = null;
+  let goodsIcons = null;
+  let chainLoadPromise = null;
+  let iconLoadPromise = null;
+  let showGoodsChains = false;
+  let chainsLoading = false;
+  let chainError = "";
+  let iconError = "";
+  let selectedChainGuid = null;
 
   function selectedIslands() {
     return scope.total
@@ -65,6 +91,31 @@ export function renderAggregate(container, store, scope) {
   function scopeName() {
     if (scope.total) return i18n.t("totalHeading");
     return selectedIslands()[0]?.sessionName || String(scope.sessionGuid);
+  }
+
+  function regionsInScope() {
+    return [...new Set(selectedIslands().map((island) => island.sessionName))];
+  }
+
+  function localizedName(good) {
+    return good.name[i18n.lang] || good.name.en || good.name.de;
+  }
+
+  function selectChainGood(good) {
+    selectedChainGuid = good.guid;
+    search = localizedName(good);
+    searchInput.value = search;
+    render();
+  }
+
+  function renderChainDetails(chains) {
+    const row = document.createElement("tr");
+    row.className = "goods-chain-row";
+    const cell = document.createElement("td");
+    cell.colSpan = columns.length;
+    appendGoodsChainCards(cell, chains, goodsIcons, selectedChainGuid, selectChainGood);
+    row.append(cell);
+    tbody.append(row);
   }
 
   function render() {
@@ -112,6 +163,33 @@ export function renderAggregate(container, store, scope) {
       message.className = "muted";
       message.textContent = "";
     }
+    chainMessage.hidden = true;
+    chainMessage.className = chainError || iconError ? "error-line goods-chain-message" : "muted goods-chain-message";
+    if (chainError) {
+      chainMessage.textContent = `${i18n.t("goodsChainsError")} ${chainError}`;
+      chainMessage.hidden = false;
+    } else if (iconError) {
+      chainMessage.textContent = `${i18n.t("goodsIconsError")} ${iconError}`;
+      chainMessage.hidden = false;
+    } else if (chainsLoading) {
+      chainMessage.textContent = i18n.t("goodsChainsLoading");
+      chainMessage.hidden = false;
+    } else if (showGoodsChains && !search.trim()) {
+      chainMessage.textContent = i18n.t("goodsChainsSearchFirst");
+      chainMessage.hidden = false;
+    }
+    chainOverview.hidden = true;
+    if (selectedChainGuid !== null && goodsChains) {
+      const entries = matchingGoodsChains(goodsChains, regionsInScope(), selectedChainGuid);
+      if (entries.length > 0) {
+        appendGoodsChainCards(chainOverview, entries, goodsIcons, selectedChainGuid, selectChainGood);
+      } else {
+        chainOverview.replaceChildren();
+      }
+      chainOverview.hidden = entries.length === 0;
+    } else {
+      chainOverview.replaceChildren();
+    }
 
     let visibleProducts = products;
     if (search.trim()) {
@@ -139,7 +217,17 @@ export function renderAggregate(container, store, scope) {
     for (const product of sorted) {
       const row = document.createElement("tr");
       const name = document.createElement("td");
-      name.textContent = product.name;
+      const iconUrl = goodsIcons?.[String(product.guid)];
+      if (iconUrl) {
+        const icon = document.createElement("img");
+        icon.className = "goods-chain-icon";
+        icon.src = iconUrl;
+        icon.alt = "";
+        icon.setAttribute("aria-hidden", "true");
+        icon.loading = "lazy";
+        name.append(icon, document.createTextNode(" "));
+      }
+      name.append(document.createTextNode(product.name));
       row.append(name);
       for (const value of [
         fmt1.format(product.generation),
@@ -159,6 +247,10 @@ export function renderAggregate(container, store, scope) {
       buildings.textContent = fmt0.format(product.buildings);
       row.append(delta, buildings);
       tbody.append(row);
+      if (showGoodsChains && search.trim() && goodsChains) {
+        const chains = matchingGoodsChains(goodsChains, regionsInScope(), product.guid);
+        if (chains.length > 0) renderChainDetails(chains);
+      }
     }
   }
 
@@ -191,8 +283,43 @@ export function renderAggregate(container, store, scope) {
 
   searchInput.addEventListener("input", () => {
     search = searchInput.value;
+    selectedChainGuid = null;
     render();
   });
+
+  chainToggle.addEventListener("change", async () => {
+    showGoodsChains = chainToggle.checked;
+    chainError = "";
+    if (showGoodsChains && !goodsChains) {
+      chainsLoading = true;
+      chainToggle.disabled = true;
+      render();
+      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
+      try {
+        goodsChains = validateGoodsChains(await chainLoadPromise);
+      } catch (err) {
+        chainLoadPromise = null;
+        showGoodsChains = false;
+        chainToggle.checked = false;
+        chainError = err instanceof Error ? err.message : String(err);
+      }
+    }
+    chainsLoading = false;
+    chainToggle.disabled = false;
+    render();
+  });
+
+  async function loadGoodsIcons() {
+    if (goodsIcons) return;
+    try {
+      if (!iconLoadPromise) iconLoadPromise = api.goodsIcons();
+      goodsIcons = validateGoodsIcons(await iconLoadPromise);
+    } catch (err) {
+      iconLoadPromise = null;
+      iconError = err instanceof Error ? err.message : String(err);
+    }
+    if (!disposed) render();
+  }
 
   async function loadOnce() {
     const islands = selectedIslands();
@@ -247,6 +374,7 @@ export function renderAggregate(container, store, scope) {
   document.addEventListener("tabularium-islands-changed", onIslandsChanged);
   document.addEventListener("tabularium-lang-changed", onLang);
   render();
+  void loadGoodsIcons();
   reload();
 
   return () => {

@@ -17,11 +17,12 @@ goods search. Each chain has ordered stages, each with one or more input goods
 and an output; goods are matched by catalog GUID and have German and English
 display names. The optional `product` identifies the intended end product
 independently of the listed stages, so incomplete recipe data can be entered
-without inventing missing steps. The chain checkbox on an island's goods table
-shows all chains that contain the searched good in any stage or as their
-`product`. `js/goods-icons.json` separately maps catalog GUIDs to HTTPS icon
-URLs; those images load from their source website only when the goods-chain
-view is enabled.
+without inventing missing steps. Chain options are available in island, region,
+and total goods views. Region views show the selected region's chains; the
+total view can show chains from all regions. Clicking any good in a chain opens
+an overview of all chains containing that good. `js/goods-icons.json`
+separately maps catalog GUIDs to HTTPS icon URLs; those images load from their
+source website when a goods view opens.
 New top-level directories must be added to the `//go:embed` pattern in
 `embed.go` to reach the executable. To look at the UI without the game:
 `go run ./cmd/tabularium117 --replay testdata/connector-reencoded.jsonl --serve-after-replay`.

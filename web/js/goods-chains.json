@@ -28,7 +28,8 @@
       {
         "product": { "guid": 2152, "name": { "de": "Mosaike", "en": "Mosaics" } },
         "stages": [
-          { "inputs": [{ "guid": 2086, "name": { "de": "Lehm", "en": "Clay" } }, { "guid": 8563, "name": { "de": "Mineralien", "en": "Minerals" } }], "output": { "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } } }
+          { "inputs": [{ "guid": 8563, "name": { "de": "Mineralien", "en": "Minerals" } }], "output": { "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } } },
+          { "inputs": [{ "guid": 2086, "name": { "de": "Lehm", "en": "Clay" } }, { "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } }], "output": { "guid": 2152, "name": { "de": "Mosaike", "en": "Mosaics" } } }
         ]
       },
       {
@@ -92,7 +93,8 @@
       {
         "product": { "guid": 2143, "name": { "de": "Seife", "en": "Soap" } },
         "stages": [
-          { "inputs": [{ "guid": 2071, "name": { "de": "Lavandula", "en": "Lavender" } }, { "guid": 2074, "name": { "de": "Schweine", "en": "Pigs" } }], "output": { "guid": 2132, "name": { "de": "Schmalz", "en": "Lard" } } }
+          { "inputs": [{ "guid": 2074, "name": { "de": "Schweine", "en": "Pigs" } }], "output": { "guid": 2132, "name": { "de": "Schmalz", "en": "Lard" } } },
+          { "inputs": [{ "guid": 2071, "name": { "de": "Lavandula", "en": "Lavender" } }, { "guid": 2132, "name": { "de": "Schmalz", "en": "Lard" } }], "output": { "guid": 2143, "name": { "de": "Seife", "en": "Soap" } } }
         ]
       },
       {
@@ -129,13 +131,17 @@
       {
         "product": { "guid": 2145, "name": { "de": "Togen", "en": "Togas" } },
         "stages": [
-          { "inputs": [{ "guid": 2063, "name": { "de": "Flachs", "en": "Flax" } }], "output": { "guid": 2121, "name": { "de": "Stoffe", "en": "Cloth" } } }
+          { "inputs": [{ "guid": 2063, "name": { "de": "Flachs", "en": "Flax" } }], "output": { "guid": 2121, "name": { "de": "Stoffe", "en": "Cloth" } } },
+          { "inputs": [{ "guid": 3158, "name": { "de": "Purpurschnecken", "en": "Murex Snails" } }], "output": { "guid": 2180, "name": { "de": "Tyrischer Purpur", "en": "Tyrian Purple" } } },
+          { "inputs": [{ "guid": 2121, "name": { "de": "Stoffe", "en": "Cloth" } }, { "guid": 2180, "name": { "de": "Tyrischer Purpur", "en": "Tyrian Purple" } }], "output": { "guid": 2145, "name": { "de": "Togen", "en": "Togas" } } }
         ]
       },
       {
         "product": { "guid": 2151, "name": { "de": "Feines Glas", "en": "Fine Glass" } },
         "stages": [
-          { "inputs": [{ "guid": 8563, "name": { "de": "Mineralien", "en": "Minerals" } }], "output": { "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } } }
+          { "inputs": [{ "guid": 8563, "name": { "de": "Mineralien", "en": "Minerals" } }], "output": { "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } } },
+          { "inputs": [{ "guid": 2091, "name": { "de": "Quarzsand", "en": "Silica" } }], "output": { "guid": 2117, "name": { "de": "Glas", "en": "Glass" } } },
+          { "inputs": [{ "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } }, { "guid": 2117, "name": { "de": "Glas", "en": "Glass" } }], "output": { "guid": 2151, "name": { "de": "Feines Glas", "en": "Fine Glass" } } }
         ]
       },
       {
@@ -147,7 +153,8 @@
       {
         "product": { "guid": 2140, "name": { "de": "Austern mit Kaviar", "en": "Oysters with Caviar" } },
         "stages": [
-          { "inputs": [{ "guid": 2112, "name": { "de": "Austern", "en": "Oysters" } }, { "guid": 2087, "name": { "de": "Störe", "en": "Sturgeon" } }], "output": { "guid": 8558, "name": { "de": "Kaviar", "en": "Caviar" } } }
+          { "inputs": [{ "guid": 2087, "name": { "de": "Störe", "en": "Sturgeon" } }], "output": { "guid": 8558, "name": { "de": "Kaviar", "en": "Caviar" } } },
+          { "inputs": [{ "guid": 2112, "name": { "de": "Austern", "en": "Oysters" } }, { "guid": 8558, "name": { "de": "Kaviar", "en": "Caviar" } }], "output": { "guid": 2140, "name": { "de": "Austern mit Kaviar", "en": "Oysters with Caviar" } } }
         ]
       },
       {
