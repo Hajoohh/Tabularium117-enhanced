@@ -21,8 +21,9 @@ without inventing missing steps. Chain options are available in island, region,
 and total goods views. Region views show the selected region's chains; the
 total view can show chains from all regions. Clicking any good in a chain opens
 an overview of all chains containing that good. `js/goods-icons.json`
-separately maps catalog GUIDs to HTTPS icon URLs; those images load from their
-source website when a goods view opens.
-New top-level directories must be added to the `//go:embed` pattern in
+separately maps catalog GUIDs to local image files under `production_goods`;
+those assets are embedded and served by the application without contacting
+third-party image hosts. New top-level directories must be added to the
+`//go:embed` pattern in
 `embed.go` to reach the executable. To look at the UI without the game:
 `go run ./cmd/tabularium117 --replay testdata/connector-reencoded.jsonl --serve-after-replay`.

@@ -43,9 +43,9 @@ gegenüber dem Spiel.
    auch mehrstufigen Warenketten. In der Regionsansicht erscheinen die Ketten
    der jeweiligen Region, in der Gesamtansicht die Ketten aller Regionen
    (`web/js/goods-chains.json`). Einzelne Waren in einer Kette sind anklickbar,
-   um alle Ketten mit dieser Ware anzuzeigen. Icon-URLs sind getrennt in
-   `web/js/goods-icons.json` hinterlegt; die Icons werden beim Öffnen einer
-   Warenansicht geladen.
+   um alle Ketten mit dieser Ware anzuzeigen. Die Waren-Icons liegen lokal
+   unter `web/production_goods` und werden in
+   `web/js/goods-icons.json` den Waren zugeordnet.
 2. **Verlauf pro Ware** – Diagramm der letzten 1 h, 4 h, 24 h, 7 Tage oder der
    ganzen Session für Produktion, Verbrauch und Delta.
 3. **Effizienz-Ansicht** – Ist-Produktion gegen die theoretisch perfekte
@@ -324,9 +324,8 @@ step, no Docker, no mod, strictly read-only towards the game.
    both tables can be sorted by every column. Island, region, and total goods
    views can show configured multi-stage chains containing a searched good
    (`web/js/goods-chains.json`). In chain cards, clicking a good shows all
-   chains containing it. Icon URLs are kept separately in
-   `web/js/goods-icons.json`; the browser loads those images when a goods view
-   opens.
+   chains containing it. Goods icons are stored locally under
+   `web/production_goods` and mapped to goods in `web/js/goods-icons.json`.
 2. **History per good** – a chart of the last 1 h, 4 h, 24 h, 7 days, or the
    whole session for production, consumption, and delta.
 3. **Efficiency view** – actual production against the theoretical perfect

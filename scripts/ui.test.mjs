@@ -138,15 +138,21 @@ test("the sidebar always links to warnings, even before islands load", async () 
   assert.match(html, /<a href="#\/total" data-i18n="totalHeading">Total<\/a>/);
 });
 
-test("the separate goods-icon map contains catalog GUIDs and HTTPS URLs", async () => {
+test("the separate goods-icon map points to existing local files and catalog GUIDs", async () => {
   const config = JSON.parse(await readFile(new URL("../web/js/goods-icons.json", import.meta.url), "utf8"));
+  const catalog = JSON.parse(await readFile(new URL("../internal/catalog/catalog.json", import.meta.url), "utf8"));
+  const knownGuids = new Set(catalog.products.map((product) => String(product.guid)));
   assert.ok(Object.keys(config.icons).length > 50);
   for (const [guid, url] of Object.entries(config.icons)) {
     assert.match(guid, /^\d+$/);
-    assert.equal(new URL(url).protocol, "https:");
+    assert.ok(knownGuids.has(guid), `icon GUID ${guid} exists in catalog`);
+    assert.match(url, /^\/production_goods\/[\w().-]+\.(?:png|webp)$/i);
+    await readFile(new URL(`../web${url}`, import.meta.url));
   }
-  assert.match(config.icons["2086"], /Anno-117-Icon-Lehm\.webp$/);
-  assert.match(config.icons["2069"], /Anno-117-Icon-Weizen\.webp$/);
+  assert.ok(!Object.values(config.icons).some((url) => /^https?:/i.test(url)));
+  assert.match(config.icons["2086"], /icon_clay_0\.png$/);
+  assert.match(config.icons["2069"], /icon_3d_wheat_goods_0\.png$/);
+  assert.ok(!Object.values(config.icons).some((url) => /^https?:/i.test(url)));
 });
 
 test("region island lists can be collapsed and expanded accessibly", () => {
@@ -273,7 +279,7 @@ test("the goods-chain toggle shows every matching multistage chain for this regi
   let iconLoads = 0;
   api.goodsIcons = async () => {
     iconLoads++;
-    return { icons: { "2086": "https://anno.land/clay.webp" } };
+    return { icons: { "2086": "/production_goods/icon_clay_0.png" } };
   };
   const root = new Element();
   const cleanup = await renderIslandDetail(root, island.id, storeWith());
@@ -296,7 +302,7 @@ test("the goods-chain toggle shows every matching multistage chain for this regi
   assert.doesNotMatch(text, /Bread/, "chains for a different region are not shown");
   const icons = nodes(root, ".goods-chain-icon");
   assert.ok(icons.length >= 2, "an icon appears both beside the searched good and in the recipe");
-  assert.equal(icons[0].src, "https://anno.land/clay.webp");
+  assert.equal(icons[0].src, "/production_goods/icon_clay_0.png");
   nodes(root, ".goods-chain-good").find((good) => good.textContent.includes("Metal")).click();
   assert.match(nodes(root, ".goods-chain-overview")[0].textContent, /Goods chain for Tools/,
     "clicking a good opens the overview of chains that include it");
@@ -972,7 +978,7 @@ test("region and total views sum each good into one row", async () => {
     ]],
   ]);
   api.products = async (islandId) => ({ island: store.islands.find((entry) => entry.id === islandId), products: fixtures.get(islandId) });
-  api.goodsIcons = async () => ({ icons: { "1": "https://anno.land/bread.webp" } });
+  api.goodsIcons = async () => ({ icons: { "1": "/production_goods/icon_3d_bread_goods_0.png" } });
   api.goodsChains = async () => ({
     regions: {
       Latium: [{

@@ -46,7 +46,8 @@ export function validateGoodsIcons(config) {
     throw new Error("Invalid goods-icon configuration at icons");
   }
   for (const [guid, url] of Object.entries(config.icons)) {
-    if (!/^\d+$/.test(guid) || typeof url !== "string" || new URL(url).protocol !== "https:") {
+    if (!/^\d+$/.test(guid) || typeof url !== "string"
+        || !/^\/production_goods\/[A-Za-z0-9._()-]+\.(?:png|webp)$/i.test(url)) {
       throw new Error(`Invalid goods-icon configuration for ${guid}`);
     }
   }
