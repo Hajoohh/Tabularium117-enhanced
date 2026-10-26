@@ -131,6 +131,10 @@ const { renderAlerts } = await import("../web/js/views/alerts.js");
 const { renderCompare } = await import("../web/js/views/compare.js");
 const { renderAggregate } = await import("../web/js/views/aggregate.js");
 const { createRegionGroup } = await import("../web/js/region-group.js");
+const {
+  filterGoodsByCategories,
+  goodsCategoriesForRegions,
+} = await import("../web/js/goods-chain-view.js");
 
 test("the sidebar always links to warnings, even before islands load", async () => {
   const html = await readFile(new URL("../web/index.html", import.meta.url), "utf8");
@@ -331,6 +335,121 @@ test("the goods-chain toggle reports a missing configuration", async () => {
   cleanup();
 });
 
+test("the local goods-chain toggle shows chains with end-product buildings on the selected island", async () => {
+  i18n.lang = "de";
+  api.products = async () => ({
+    island,
+    products: [
+      { guid: 1, name: "Timber", generation: 2, perfectGeneration: 2, consumption: 0, delta: 2, buildings: 1 },
+      { guid: 3, name: "Tiles", generation: 0, perfectGeneration: 0, consumption: 0, delta: 0, buildings: 0 },
+      { guid: 4, name: "Clay Products", generation: 1, perfectGeneration: 1, consumption: 0, delta: 1, buildings: 1 },
+    ],
+  });
+  api.goodsChains = async () => ({
+    regions: {
+      Latium: [{
+        product: { guid: 1, name: { en: "Timber", de: "Bretter" } },
+        stages: [{ inputs: [{ guid: 2, name: { en: "Wood", de: "Holz" } }], output: { guid: 1, name: { en: "Timber", de: "Bretter" } } }],
+      }, {
+        product: { guid: 3, name: { en: "Tiles", de: "Ziegel" } },
+        stages: [
+          { inputs: [{ guid: 5, name: { en: "Raw Clay", de: "Rohlehm" } }], output: { guid: 4, name: { en: "Clay Products", de: "Lehmprodukte" } } },
+          { inputs: [{ guid: 4, name: { en: "Clay Products", de: "Lehmprodukte" } }], output: { guid: 3, name: { en: "Tiles", de: "Ziegel" } } },
+        ],
+      }],
+      Albion: [{
+        product: { guid: 5, name: { en: "Bread", de: "Brot" } },
+        stages: [{ inputs: [{ guid: 6, name: { en: "Wheat", de: "Weizen" } }], output: { guid: 5, name: { en: "Bread", de: "Brot" } } }],
+      }],
+    },
+  });
+  api.goodsIcons = async () => ({ icons: {} });
+  const root = new Element();
+  const cleanup = await renderIslandDetail(root, island.id, storeWith());
+  const labels = nodes(root, ".goods-chain-toggle");
+  assert.equal(labels[0].textContent, "Warenketten zur gesuchten Ware anzeigen");
+  assert.equal(labels[1].textContent, "Lokale Warenketten anzeigen");
+
+  const localToggle = labels[1].querySelector("input");
+  localToggle.checked = true;
+  localToggle.dispatchEvent(new Event("change"));
+  await settle();
+
+  const localChains = nodes(root, ".goods-chain-overview").find((overview) => overview.textContent.includes("Bretter"));
+  assert.match(localChains.textContent, /Bretter/);
+  assert.doesNotMatch(localChains.textContent, /Ziegel/,
+    "a configured regional chain is omitted unless its end-product buildings exist on this island");
+  assert.doesNotMatch(localChains.textContent, /Lehmprodukte/,
+    "buildings for an intermediate product do not activate the end-product chain");
+  assert.doesNotMatch(localChains.textContent, /Brot/, "chains from other regions must not appear");
+  cleanup();
+});
+
+test("goods categories are exclusive, and no category selection keeps every product", () => {
+  const config = {
+    regions: {
+      Latium: [{
+        product: { guid: 3 },
+        stages: [
+          { inputs: [{ guid: 1 }], output: { guid: 2 } },
+          { inputs: [{ guid: 2 }], output: { guid: 3 } },
+        ],
+      }],
+    },
+  };
+  const categories = goodsCategoriesForRegions(config, ["Latium"]);
+  const goods = [{ guid: 1 }, { guid: 2 }, { guid: 3 }, { guid: 4 }];
+
+  assert.equal(categories.get("1"), undefined, "unproduced goods are raw materials");
+  assert.equal(categories.get("2"), "intermediate");
+  assert.equal(categories.get("3"), "end");
+  assert.deepEqual(filterGoodsByCategories(goods, new Set(), categories), goods);
+  assert.deepEqual(filterGoodsByCategories(goods, new Set(["raw"]), categories), [goods[0], goods[3]]);
+  assert.deepEqual(filterGoodsByCategories(goods, new Set(["intermediate", "end"]), categories), [goods[1], goods[2]]);
+});
+
+test("island goods categories filter rows and leave all visible when unchecked", async () => {
+  i18n.lang = "de";
+  api.products = async () => ({
+    island,
+    products: [
+      { guid: 1, name: "Holz", generation: 1, perfectGeneration: 1, consumption: 0, delta: 1, buildings: 1 },
+      { guid: 2, name: "Bretter", generation: 1, perfectGeneration: 1, consumption: 0, delta: 1, buildings: 1 },
+      { guid: 3, name: "Mosaike", generation: 1, perfectGeneration: 1, consumption: 0, delta: 1, buildings: 1 },
+    ],
+  });
+  api.goodsChains = async () => ({
+    regions: {
+      Latium: [{
+        product: { guid: 3, name: { de: "Mosaike", en: "Mosaics" } },
+        stages: [
+          { inputs: [{ guid: 1, name: { de: "Holz", en: "Wood" } }], output: { guid: 2, name: { de: "Bretter", en: "Timber" } } },
+          { inputs: [{ guid: 2, name: { de: "Bretter", en: "Timber" } }], output: { guid: 3, name: { de: "Mosaike", en: "Mosaics" } } },
+        ],
+      }],
+    },
+  });
+  api.goodsIcons = async () => ({ icons: {} });
+  const root = new Element();
+  const cleanup = await renderIslandDetail(root, island.id, storeWith());
+  const toggles = nodes(root, ".goods-category-toggle").map((label) => label.querySelector("input"));
+  assert.match(rowText(root), /Holz.*Bretter.*Mosaike/);
+
+  toggles[0].checked = true;
+  toggles[0].dispatchEvent(new Event("change"));
+  await settle();
+  assert.match(rowText(root), /Holz/);
+  assert.doesNotMatch(rowText(root), /Bretter|Mosaike/);
+
+  toggles[0].checked = false;
+  toggles[0].dispatchEvent(new Event("change"));
+  toggles[1].checked = true;
+  toggles[1].dispatchEvent(new Event("change"));
+  assert.match(rowText(root), /Bretter/);
+  assert.doesNotMatch(rowText(root), /Holz|Mosaike/);
+  cleanup();
+});
+
 test("sorting says which way it sorted and keeps the keyboard focus", async () => {
   i18n.lang = "en";
   api.products = async () => ({ island, products });
@@ -477,6 +596,44 @@ test("the efficiency table sorts every column and keeps efficiency-without-poten
   const efficiencyRows = nodes(root, "tbody")[0].children;
   assert.match(efficiencyRows[efficiencyRows.length - 1].textContent, /Amphorae/,
     "goods without a comparable efficiency remain at the bottom");
+  cleanup();
+});
+
+test("the efficiency table supports the same region-specific goods categories", async () => {
+  i18n.lang = "en";
+  api.efficiency = async () => ({
+    island,
+    products: [10, 11, 12].map((guid) => ({
+      guid,
+      name: `Good ${guid}`,
+      generation: 1,
+      perfectGeneration: 2,
+      buildings: 1,
+      efficiency: 0.5,
+      wasted: 1,
+      avgProductivity: 100,
+    })),
+  });
+  api.goodsChains = async () => ({
+    regions: {
+      Latium: [{
+        product: { guid: 12, name: { en: "Good 12", de: "Ware 12" } },
+        stages: [
+          { inputs: [{ guid: 10, name: { en: "Good 10", de: "Ware 10" } }], output: { guid: 11, name: { en: "Good 11", de: "Ware 11" } } },
+          { inputs: [{ guid: 11, name: { en: "Good 11", de: "Ware 11" } }], output: { guid: 12, name: { en: "Good 12", de: "Ware 12" } } },
+        ],
+      }],
+    },
+  });
+  const root = new Element();
+  const cleanup = await renderEfficiency(root, island.id, { islands: [island], alerts: [], status: {} });
+  const endFilter = nodes(root, ".goods-category-toggle")[2].querySelector("input");
+  endFilter.checked = true;
+  endFilter.dispatchEvent(new Event("change"));
+  await settle();
+
+  assert.match(rowText(root), /Good 12/);
+  assert.doesNotMatch(rowText(root), /Good 10|Good 11/);
   cleanup();
 });
 
@@ -930,6 +1087,18 @@ test("the comparison view loads goods for multiple selected islands", async () =
         generation: 5, perfectGeneration: 10, efficiency: 0.5, avgProductivity: 100, wasted: 5 }],
     };
   };
+  api.goodsChains = async () => ({
+    regions: {
+      Latium: [{
+        product: { guid: 1, name: { en: "Bread", de: "Brot" } },
+        stages: [{ inputs: [{ guid: 2, name: { en: "Wheat", de: "Weizen" } }], output: { guid: 1, name: { en: "Bread", de: "Brot" } } }],
+      }],
+      Albion: [{
+        product: { guid: 1, name: { en: "Bread", de: "Brot" } },
+        stages: [{ inputs: [{ guid: 2, name: { en: "Wheat", de: "Weizen" } }], output: { guid: 1, name: { en: "Bread", de: "Brot" } } }],
+      }],
+    },
+  });
   const root = new Element();
   const cleanup = renderCompare(root, store);
   const boxes = nodes(root, "input");
@@ -947,6 +1116,24 @@ test("the comparison view loads goods for multiple selected islands", async () =
   assert.match(nodes(root, "tbody")[0].textContent, /Argantum.*Wheat/);
   assert.equal(nodes(root, "tbody")[1].children.length, 2, "comparison also shows the efficiency rows");
   assert.match(nodes(root, "tbody")[1].textContent, /Juliana.*Bread/);
+  const search = nodes(root, "input").find((input) => input.type === "search");
+  search.value = "bread";
+  search.dispatchEvent(new Event("input"));
+  assert.match(nodes(root, "tbody")[0].textContent, /Juliana.*Bread/);
+  assert.doesNotMatch(nodes(root, "tbody")[0].textContent, /Argantum.*Wheat/);
+  assert.match(nodes(root, "tbody")[1].textContent, /Juliana.*Bread/);
+  search.value = "";
+  search.dispatchEvent(new Event("input"));
+  const categoryEnd = nodes(root, ".goods-category-toggle")[2].querySelector("input");
+  categoryEnd.checked = true;
+  categoryEnd.dispatchEvent(new Event("change"));
+  await settle();
+  assert.match(nodes(root, "tbody")[0].textContent, /Juliana.*Bread/);
+  assert.doesNotMatch(nodes(root, "tbody")[0].textContent, /Argantum.*Wheat/,
+    "each island uses the chain categories for its own region");
+  assert.match(nodes(root, "tbody")[1].textContent, /Juliana.*Bread/);
+  categoryEnd.checked = false;
+  categoryEnd.dispatchEvent(new Event("change"));
   assert.equal(nodes(root, "thead")[0].querySelectorAll("button").length, 7, "every goods column can be sorted");
   assert.match(nodes(root, "tbody")[0].textContent, /Juliana.*Bread.*5\.0.*10\.0/);
   assert.equal(nodes(root, "thead")[1].querySelectorAll("button").length, 7, "every efficiency column can be sorted");
@@ -955,6 +1142,33 @@ test("the comparison view loads goods for multiple selected islands", async () =
   assert.match(nodes(root, "tbody")[0].children[0].textContent, /Juliana.*Bread/);
   nodes(root, "thead")[1].querySelectorAll("button")[6].click();
   assert.equal(nodes(root, "thead")[1].querySelectorAll("th")[6].getAttribute("aria-sort"), "ascending");
+  cleanup();
+});
+
+test("comparison island picker selects and clears islands by region", async () => {
+  i18n.lang = "en";
+  const secondLatium = { ...secondIsland, id: "3245-2", sessionGuid: 3245, sessionName: "Latium", name: "Argantum" };
+  const store = { islands: [island, secondLatium, { ...island, id: "7777-3", sessionGuid: 7777, sessionName: "Albion", name: "North" }] };
+  const requests = [];
+  api.products = async (id) => {
+    requests.push(id);
+    return { island: store.islands.find((entry) => entry.id === id), products: products.slice(0, 1) };
+  };
+  api.efficiency = async (id) => ({
+    island: store.islands.find((entry) => entry.id === id),
+    products: [],
+  });
+  const root = new Element();
+  const cleanup = renderCompare(root, store);
+  const regionActions = nodes(root, ".island-picker-region-actions");
+  regionActions[0].querySelectorAll("button")[0].click();
+  await settle();
+  assert.deepEqual(requests, [island.id, secondLatium.id]);
+  const clearLatium = nodes(root, ".island-picker-region-actions")[0]
+    .querySelectorAll("button")[1];
+  clearLatium.click();
+  await settle();
+  assert.match(nodes(root, ".island-picker")[0].textContent, /Islands: 0 of 3/);
   cleanup();
 });
 
@@ -1023,6 +1237,14 @@ test("region and total views sum each good into one row", async () => {
   regionSearch.value = "missing good";
   regionSearch.dispatchEvent(new Event("input"));
   assert.match(nodes(regionRoot, "tbody")[0].textContent, /No matching goods/);
+  regionSearch.value = "";
+  regionSearch.dispatchEvent(new Event("input"));
+  const rawFilter = nodes(regionRoot, ".goods-category-toggle")[0].querySelector("input");
+  rawFilter.checked = true;
+  rawFilter.dispatchEvent(new Event("change"));
+  await settle();
+  assert.match(nodes(regionRoot, "tbody")[0].textContent, /Wheat/);
+  assert.doesNotMatch(nodes(regionRoot, "tbody")[0].textContent, /Bread/);
   cleanupRegion();
 
   const totalRoot = new Element();
