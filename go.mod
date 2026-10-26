@@ -1,8 +1,8 @@
-module github.com/Dealwatch/Tabularium117
+module github.com/Hajoohh/Tabularium117-enhanced
 
-go 1.25.0
+go 1.26.0
 
-toolchain go1.25.14
+toolchain go1.26.9
 
 require (
 	github.com/Microsoft/go-winio v0.6.2

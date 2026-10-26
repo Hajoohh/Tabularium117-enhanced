@@ -14,14 +14,14 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/alerts"
-	"github.com/Dealwatch/Tabularium117/internal/catalog"
-	"github.com/Dealwatch/Tabularium117/internal/ingest"
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/pipe"
-	"github.com/Dealwatch/Tabularium117/internal/replay"
-	"github.com/Dealwatch/Tabularium117/internal/source"
-	"github.com/Dealwatch/Tabularium117/internal/state"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/alerts"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/catalog"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/ingest"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/pipe"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/replay"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/source"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/state"
 )
 
 // startupErr holds run to its promise during start-up: once ctx is done, a

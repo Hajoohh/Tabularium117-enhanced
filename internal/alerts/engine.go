@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
 )
 
 // maxDropSamples bounds one product's productivity history. Pruning by time is

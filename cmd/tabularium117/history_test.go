@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/store"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/store"
 )
 
 // The history's workers must outlive the shutdown signal and stop only when

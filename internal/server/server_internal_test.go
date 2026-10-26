@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
 )
 
 // A client that stops reading must not be able to hold up the publisher: the

@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/state"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/state"
 )
 
 func snap(sessionGUID, islandID int32, name string, products int) model.IslandSnapshot {

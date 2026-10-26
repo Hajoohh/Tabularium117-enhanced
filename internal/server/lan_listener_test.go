@@ -17,8 +17,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/lan"
-	"github.com/Dealwatch/Tabularium117/internal/server"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/lan"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/server"
 )
 
 // lanJSON is GET/POST /api/v1/lan as the UI sees it.

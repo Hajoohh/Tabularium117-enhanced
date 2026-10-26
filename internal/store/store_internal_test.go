@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
 )
 
 // A caller's deadline has to bound the whole write, including the wait for the

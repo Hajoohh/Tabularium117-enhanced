@@ -10,9 +10,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Dealwatch/Tabularium117/internal/alerts"
-	"github.com/Dealwatch/Tabularium117/internal/server"
-	"github.com/Dealwatch/Tabularium117/internal/state"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/alerts"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/server"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/state"
 )
 
 type failingAlertPreferences struct{}

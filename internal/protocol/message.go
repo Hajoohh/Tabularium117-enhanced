@@ -3,7 +3,7 @@ package protocol
 import (
 	"fmt"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
 )
 
 // SupportedVersion is the pipe protocol version this decoder was written for.

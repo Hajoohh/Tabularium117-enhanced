@@ -3,7 +3,7 @@ package catalog_test
 import (
 	"testing"
 
-	"github.com/Dealwatch/Tabularium117/internal/catalog"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/catalog"
 )
 
 // Spot checks against facts verified directly in the calculator data.

@@ -39,6 +39,9 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ### Changed
 
+- **Go toolchain:** require Go 1.26.0 and pin Go 1.26.9 for builds and
+  releases to include fixes for standard-library vulnerabilities detected
+  by CI.
 - Added the loopback-only `/api/v1/alert-settings` endpoint to read and update
   warning thresholds and per-rule suppressions. Writes validate their input,
   check the request origin, persist settings atomically, and report persistence

@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/alerts"
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/server"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/alerts"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/server"
 )
 
 // alertJSON is the shape KONZEPT.md section 5 promises for one warning.

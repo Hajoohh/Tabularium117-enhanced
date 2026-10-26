@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/source"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/source"
 )
 
 // maxLineBytes bounds one JSONL line. A 1 MiB frame is about 1.4 MiB of

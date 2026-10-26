@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/alerts"
-	"github.com/Dealwatch/Tabularium117/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/alerts"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
 )
 
 // SQL for the alert table (migration 2).

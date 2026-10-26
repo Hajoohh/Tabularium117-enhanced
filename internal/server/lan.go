@@ -17,7 +17,7 @@ import (
 
 	qrcode "github.com/skip2/go-qrcode"
 
-	"github.com/Dealwatch/Tabularium117/internal/lan"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/lan"
 )
 
 // The LAN surface (KONZEPT.md section 6).
