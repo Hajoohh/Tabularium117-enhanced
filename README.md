@@ -1,6 +1,8 @@
-# Tabularium 117 - enhanced
+<img width="339" height="210" alt="image" src="https://github.com/user-attachments/assets/cac89e6d-d8f7-4a8d-994d-2fcf0d15750a" /># Tabularium 117 - enhanced
 
 ### Tabularium 117 - enhanced nutze [Tabularium 117](https://github.com/Dealwatch/Tabularium117) von Dealwatch als Grundlage. Es ist erweitert mit einigen Funktionen und grafischen Anpassungen. 
+
+**KI-Butzung** Bei der Entwicklung wurden KI-Tools unterstützend für Code, Tests und Dokumentation eingesetzt. Alles wurde nach bestem Wissen und Gewissen angeschaut und geprüft. Sollte dennoch fehlerhafter oder schädlicher Code gefunden werden, bitte sofort Bescheid geben.  
 
 [Deutsch](#deutsch) · [English](#english)
 
