@@ -91,7 +91,7 @@ jobs:
           git diff --exit-code go.mod go.sum
 
   build:
-    name: build tabularium117.exe
+    name: build tabularium117-enhanced.exe
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

@@ -6,7 +6,8 @@ LDFLAGS := -s -w -X main.version=$(VERSION)
 
 ## build: cross-compile the Windows release binary into dist/
 build:
-	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "$(LDFLAGS)" -o dist/tabularium117.exe ./cmd/tabularium117
+	mkdir -p dist
+	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "$(LDFLAGS)" -o dist/tabularium117-enhanced.exe ./cmd/tabularium117
 
 ## build-host: build for the current platform (development)
 build-host:

@@ -106,7 +106,7 @@ THE SOFTWARE.
 
 - **What we take:** the Go module, used unmodified by `internal/store` as the
   SQLite engine for the history database. It is a pure-Go translation of
-  SQLite, so the release stays one static `tabularium117.exe` built with
+  SQLite, so the release stays one static `tabularium117-enhanced.exe` built with
   `CGO_ENABLED=0`.
 - **License:** BSD-3-Clause.
 - **Transitive modules:** `modernc.org/libc`, `modernc.org/mathutil` and
