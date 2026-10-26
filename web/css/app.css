@@ -399,6 +399,45 @@ input[type="search"] {
   background: var(--bg-elevated);
 }
 
+.goods-chain-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 44px;
+  color: var(--fg-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.goods-chain-toggle input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  accent-color: var(--accent);
+}
+.goods-chain-message { margin: .35rem 0 .6rem; }
+.goods-chain-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.goods-chain {
+  min-width: min(20rem, 100%);
+  padding: .5rem .65rem;
+  border-left: 2px solid var(--accent);
+  background: var(--bg-elevated);
+}
+.goods-chain strong { display: block; margin-bottom: .25rem; }
+.goods-chain-step { color: var(--fg-muted); }
+.goods-chain-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  margin: 0 .15rem -.3rem 0;
+  object-fit: contain;
+  vertical-align: baseline;
+}
+.goods-chain-match { color: var(--fg); font-weight: 700; }
+.goods-chain-row td { padding-top: .25rem; }
+
 table { border-collapse: collapse; width: 100%; }
 th, td {
   text-align: left;

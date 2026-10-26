@@ -26,6 +26,8 @@ func TestStaticFilesServedWithContentType(t *testing.T) {
 		{"/css/app.css", "text/css"},
 		{"/js/app.js", "text/javascript"},
 		{"/js/api.js", "text/javascript"},
+		{"/js/goods-chains.json", "application/json"},
+		{"/js/goods-icons.json", "application/json"},
 		{"/js/live.js", "text/javascript"},
 		{"/js/i18n.js", "text/javascript"},
 		{"/js/views/islands.js", "text/javascript"},

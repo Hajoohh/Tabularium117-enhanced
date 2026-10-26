@@ -138,6 +138,17 @@ test("the sidebar always links to warnings, even before islands load", async () 
   assert.match(html, /<a href="#\/total" data-i18n="totalHeading">Total<\/a>/);
 });
 
+test("the separate goods-icon map contains catalog GUIDs and HTTPS URLs", async () => {
+  const config = JSON.parse(await readFile(new URL("../web/js/goods-icons.json", import.meta.url), "utf8"));
+  assert.ok(Object.keys(config.icons).length > 50);
+  for (const [guid, url] of Object.entries(config.icons)) {
+    assert.match(guid, /^\d+$/);
+    assert.equal(new URL(url).protocol, "https:");
+  }
+  assert.match(config.icons["2086"], /Anno-117-Icon-Lehm\.webp$/);
+  assert.match(config.icons["2069"], /Anno-117-Icon-Weizen\.webp$/);
+});
+
 test("region island lists can be collapsed and expanded accessibly", () => {
   i18n.lang = "en";
   const changes = [];
@@ -226,6 +237,79 @@ test("the filters intersect with the search, and an empty result says why", asyn
 
   button(root, "All").click();
   assert.match(rowText(root), /Wheat/);
+  cleanup();
+});
+
+test("the goods-chain toggle shows every matching multistage chain for this region", async () => {
+  i18n.lang = "en";
+  api.products = async () => ({
+    island,
+    products: [
+      { guid: 2086, name: "Clay", generation: 0, perfectGeneration: 0, consumption: 0, delta: 0, buildings: 0 },
+      { guid: 13810, name: "Armour", generation: 0, perfectGeneration: 0, consumption: 0, delta: 0, buildings: 0 },
+    ],
+  });
+  api.goodsChains = async () => ({
+    regions: {
+      Latium: [{
+        product: { guid: 12, name: { en: "Tools", de: "Werkzeuge" } },
+        stages: [
+          { inputs: [{ guid: 2086, name: { en: "Clay", de: "Lehm" } }], output: { guid: 11, name: { en: "Metal", de: "Metall" } } },
+          { inputs: [{ guid: 11, name: { en: "Metal", de: "Metall" } }, { guid: 2, name: { en: "Wheat", de: "Weizen" } }], output: { guid: 12, name: { en: "Tools", de: "Werkzeuge" } } },
+        ],
+      }, {
+        product: { guid: 13810, name: { en: "Armour", de: "Rüstung" } },
+        stages: [
+          { inputs: [{ guid: 2080, name: { en: "Iron Ore", de: "Eisenerz" } }], output: { guid: 2115, name: { en: "Iron", de: "Eisen" } } },
+        ],
+      }],
+      Albion: [{
+        stages: [
+          { inputs: [{ guid: 2, name: { en: "Wheat", de: "Weizen" } }], output: { guid: 13, name: { en: "Bread", de: "Brot" } } },
+        ],
+      }],
+    },
+  });
+  api.goodsIcons = async () => ({ icons: { "2086": "https://anno.land/clay.webp" } });
+  const root = new Element();
+  const cleanup = await renderIslandDetail(root, island.id, storeWith());
+  const search = nodes(root, "input").find((input) => input.type === "search");
+  search.value = "Clay";
+  search.dispatchEvent(new Event("input"));
+  const toggle = nodes(root, ".goods-chain-toggle")[0].querySelector("input");
+  toggle.checked = true;
+  toggle.dispatchEvent(new Event("change"));
+  await settle();
+
+  const text = rowText(root);
+  assert.match(text, /Goods chain for Tools/);
+  assert.match(text, /Clay.*Metal.*Metal \+ Wheat.*Tools/);
+  assert.doesNotMatch(text, /Bread/, "chains for a different region are not shown");
+  const icons = nodes(root, ".goods-chain-icon");
+  assert.ok(icons.length >= 2, "an icon appears both beside the searched good and in the recipe");
+  assert.equal(icons[0].src, "https://anno.land/clay.webp");
+
+  search.value = "Armour";
+  search.dispatchEvent(new Event("input"));
+  assert.match(rowText(root), /Goods chain for Armour/);
+  assert.match(rowText(root), /Iron Ore.*Iron/);
+  cleanup();
+});
+
+test("the goods-chain toggle reports a missing configuration", async () => {
+  i18n.lang = "en";
+  api.products = async () => ({ island, products });
+  api.goodsChains = async () => { throw new Error("configuration unavailable"); };
+  api.goodsIcons = async () => ({ icons: {} });
+  const root = new Element();
+  const cleanup = await renderIslandDetail(root, island.id, storeWith());
+  const toggle = nodes(root, ".goods-chain-toggle")[0].querySelector("input");
+  toggle.checked = true;
+  toggle.dispatchEvent(new Event("change"));
+  await settle();
+
+  assert.equal(toggle.checked, false, "the option is reset when loading fails");
+  assert.match(nodes(root, ".goods-chain-message")[0].textContent, /configuration unavailable/);
   cleanup();
 });
 

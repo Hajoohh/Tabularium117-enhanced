@@ -39,7 +39,11 @@ gegenüber dem Spiel.
    Die Insellisten lassen sich je Region ein- und ausklappen. Ein Klick auf
    den Regionsnamen oder „Gesamt“ zeigt außerdem die aufsummierten Werte je
    Ware, jeweils mit genau einer Zeile pro Ware. Auch diese Summenansichten
-   haben ein Waren-Suchfeld.
+   haben ein Waren-Suchfeld. In der Einzelinsel-Suche lassen sich zu einer
+   gesuchten Ware außerdem alle konfigurierten, auch mehrstufigen Warenketten
+   ihrer Region einblenden (`web/js/goods-chains.json`). Icon-URLs sind
+   getrennt in `web/js/goods-icons.json` hinterlegt; beim Einblenden der
+   Warenketten lädt der Browser diese Bilder von anno.land.
 2. **Verlauf pro Ware** – Diagramm der letzten 1 h, 4 h, 24 h, 7 Tage oder der
    ganzen Session für Produktion, Verbrauch und Delta.
 3. **Effizienz-Ansicht** – Ist-Produktion gegen die theoretisch perfekte
@@ -315,7 +319,11 @@ step, no Docker, no mod, strictly read-only towards the game.
 1. **Live overview per island** – every good with production, consumption,
    and delta; deficits sort to the top and are marked in red. A comparison
    view lets you select multiple islands and compare goods and efficiency;
-   both tables can be sorted by every column.
+   both tables can be sorted by every column. The island goods search can also
+   show every configured production chain containing the searched good,
+   including multi-stage chains (`web/js/goods-chains.json`). Icon URLs are
+   kept separately in `web/js/goods-icons.json`; when goods chains are shown,
+   the browser loads those images from anno.land.
 2. **History per good** – a chart of the last 1 h, 4 h, 24 h, 7 days, or the
    whole session for production, consumption, and delta.
 3. **Efficiency view** – actual production against the theoretical perfect

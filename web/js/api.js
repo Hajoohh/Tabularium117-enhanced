@@ -62,6 +62,8 @@ export const api = {
   // listener only.
   setLan: (enabled) => post("/api/v1/lan", { enabled: !!enabled }),
   alertSettings: () => get("/api/v1/alert-settings"),
+  goodsChains: () => get("/js/goods-chains.json"),
+  goodsIcons: () => get("/js/goods-icons.json"),
   setAlertThresholds: (deficitThreshold, dropPercentagePoints) =>
     post("/api/v1/alert-settings", { deficitThreshold, dropPercentagePoints }),
   setAlertSuppression: (islandId, productGuid, rule, disabled) =>

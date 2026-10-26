@@ -8,6 +8,59 @@ import { createSources, detailRow, toggleButton } from "../sources.js";
 
 const numberFormatCache = new Map();
 
+function validateGoodsChains(config) {
+  const invalid = (path) => new Error(`Invalid goods-chain configuration at ${path}`);
+  if (!config || typeof config !== "object" || !config.regions || typeof config.regions !== "object"
+      || Array.isArray(config.regions)) {
+    throw invalid("regions");
+  }
+  for (const [region, chains] of Object.entries(config.regions)) {
+    if (!Array.isArray(chains)) throw invalid(`regions.${region}`);
+    for (const [chainIndex, chain] of chains.entries()) {
+      const path = `regions.${region}[${chainIndex}]`;
+      if (!chain || typeof chain !== "object" || !Array.isArray(chain.stages) || chain.stages.length === 0) {
+        throw invalid(`${path}.stages`);
+      }
+      if (chain.product) {
+        const good = chain.product;
+        if (!good || typeof good !== "object" || !Number.isInteger(good.guid)
+            || !good.name || typeof good.name !== "object"
+            || !(good.name.en || good.name.de)) {
+          throw invalid(`${path}.product`);
+        }
+      }
+      for (const [stageIndex, stage] of chain.stages.entries()) {
+        const stagePath = `${path}.stages[${stageIndex}]`;
+        if (!stage || typeof stage !== "object" || !Array.isArray(stage.inputs)
+            || stage.inputs.length === 0 || !stage.output) {
+          throw invalid(stagePath);
+        }
+        for (const good of [...stage.inputs, stage.output]) {
+          if (!good || typeof good !== "object" || !Number.isInteger(good.guid)
+              || !good.name || typeof good.name !== "object"
+              || !(good.name.en || good.name.de)) {
+            throw invalid(`${stagePath}.goods`);
+          }
+        }
+      }
+    }
+  }
+  return config;
+}
+
+function validateGoodsIcons(config) {
+  if (!config || typeof config !== "object" || !config.icons || typeof config.icons !== "object"
+      || Array.isArray(config.icons)) {
+    throw new Error("Invalid goods-icon configuration at icons");
+  }
+  for (const [guid, url] of Object.entries(config.icons)) {
+    if (!/^\d+$/.test(guid) || typeof url !== "string" || new URL(url).protocol !== "https:") {
+      throw new Error(`Invalid goods-icon configuration for ${guid}`);
+    }
+  }
+  return config.icons;
+}
+
 function numberFormat(fractionDigits) {
   const locale = i18n.lang === "de" ? "de-DE" : "en-US";
   const key = `${locale}:${fractionDigits}`;
@@ -60,6 +113,12 @@ export async function renderIslandDetail(container, islandId, store) {
   search_input.setAttribute("data-i18n-placeholder", "searchPlaceholder");
   search_input.setAttribute("aria-label", i18n.t("searchPlaceholder"));
 
+  const chainToggle = document.createElement("input");
+  chainToggle.type = "checkbox";
+  const chainLabel = document.createElement("label");
+  chainLabel.className = "goods-chain-toggle";
+  chainLabel.append(chainToggle, document.createTextNode(i18n.t("showGoodsChains")));
+
   // Search answers "where is X"; the filters answer "what needs me now",
   // which is the question a deficit or a warning raises. They intersect.
   const filters = document.createElement("div");
@@ -82,7 +141,7 @@ export async function renderIslandDetail(container, islandId, store) {
     filterButtons.push([button, value]);
     filters.append(button);
   }
-  toolbar.append(search_input, filters);
+  toolbar.append(search_input, chainLabel, filters);
 
   const table = document.createElement("table");
   const thead = document.createElement("thead");
@@ -97,10 +156,21 @@ export async function renderIslandDetail(container, islandId, store) {
   const settingsMessage = document.createElement("p");
   settingsMessage.className = "error-line";
   settingsMessage.hidden = true;
-  wrapper.append(summaryLine, toolbar, settingsMessage, tableBox);
+  const chainMessage = document.createElement("p");
+  chainMessage.className = "muted goods-chain-message";
+  chainMessage.hidden = true;
+  wrapper.append(summaryLine, toolbar, settingsMessage, chainMessage, tableBox);
   container.append(wrapper);
 
   let productsDTO = null;
+  let goodsChains = null;
+  let goodsIcons = null;
+  let chainLoadPromise = null;
+  let iconLoadPromise = null;
+  let showGoodsChains = false;
+  let chainError = "";
+  let iconError = "";
+  let chainsLoading = false;
   // The possible production sources of the "import needed" rows, each opened
   // under its own row.
   const sources = createSources(() => renderTable());
@@ -152,6 +222,21 @@ export async function renderIslandDetail(container, islandId, store) {
     header.update(island);
     settingsMessage.hidden = !settingsError;
     settingsMessage.textContent = settingsError ? `${i18n.t("alertSettingsError")} ${settingsError}` : "";
+    chainMessage.hidden = true;
+    chainMessage.className = chainError ? "error-line goods-chain-message" : "muted goods-chain-message";
+    if (chainError) {
+      chainMessage.textContent = `${i18n.t("goodsChainsError")} ${chainError}`;
+      chainMessage.hidden = false;
+    } else if (iconError) {
+      chainMessage.textContent = `${i18n.t("goodsIconsError")} ${iconError}`;
+      chainMessage.hidden = false;
+    } else if (chainsLoading) {
+      chainMessage.textContent = i18n.t("goodsChainsLoading");
+      chainMessage.hidden = false;
+    } else if (showGoodsChains && !search.trim()) {
+      chainMessage.textContent = i18n.t("goodsChainsSearchFirst");
+      chainMessage.hidden = false;
+    }
     summaryLine.textContent = `${island.products} ${i18n.t("products")} · `
       + `${island.deficits} ${i18n.t("deficits")}`
       + (alertCount > 0 ? ` · ${alertCount} ${i18n.t("alertsHeading")}` : "");
@@ -163,6 +248,68 @@ export async function renderIslandDetail(container, islandId, store) {
     const alerted = byProduct(store.alerts.filter(isWarning), islandId);
     const imports = byProduct(store.alerts.filter((a) => !isWarning(a)), islandId);
     sources.closeAllBut(new Set([...imports.keys()].map((guid) => sources.keyOf(islandId, guid))));
+    const localizedName = (good) => good.name[i18n.lang] || good.name.en || good.name.de;
+    const goodIcon = (guid) => {
+      const src = goodsIcons?.[String(guid)];
+      if (!src) return null;
+      const icon = document.createElement("img");
+      icon.className = "goods-chain-icon";
+      icon.src = src;
+      icon.alt = "";
+      icon.setAttribute("aria-hidden", "true");
+      icon.loading = "lazy";
+      return icon;
+    };
+    const appendGood = (parent, good, product) => {
+      const icon = goodIcon(good.guid);
+      if (icon) parent.append(icon, document.createTextNode(" "));
+      const name = document.createElement("span");
+      name.textContent = localizedName(good);
+      if (String(good.guid) === String(product.guid)) name.className = "goods-chain-match";
+      parent.append(name);
+    };
+    const matchingChains = (guid) => {
+      if (!showGoodsChains || !search.trim() || !goodsChains) return [];
+      return (goodsChains.regions[island.sessionName] || []).filter((chain) =>
+        (chain.product && String(chain.product.guid) === String(guid))
+        || chain.stages.some((stage) => [
+          ...stage.inputs,
+          stage.output,
+        ].some((good) => String(good.guid) === String(guid))));
+    };
+
+    function appendChainDetails(product, chains) {
+      const tr = document.createElement("tr");
+      tr.className = "goods-chain-row";
+      const td = document.createElement("td");
+      td.colSpan = columns.length + 1;
+      const list = document.createElement("div");
+      list.className = "goods-chain-list";
+      for (const chain of chains) {
+        const section = document.createElement("section");
+        section.className = "goods-chain";
+        const title = document.createElement("strong");
+        title.textContent = i18n.t("goodsChainFor", {
+          product: localizedName(chain.product || chain.stages[chain.stages.length - 1].output),
+        });
+        section.append(title);
+        for (const stage of chain.stages) {
+          const step = document.createElement("div");
+          step.className = "goods-chain-step";
+          stage.inputs.forEach((good, index) => {
+            if (index > 0) step.append(document.createTextNode(" + "));
+            appendGood(step, good, product);
+          });
+          step.append(document.createTextNode(" \u2192 "));
+          appendGood(step, stage.output, product);
+          section.append(step);
+        }
+        list.append(section);
+      }
+      td.append(list);
+      tr.append(td);
+      tbody.append(tr);
+    }
 
     let rows = productsDTO.products;
     if (filter === "deficits") rows = rows.filter((p) => p.delta < 0);
@@ -258,6 +405,8 @@ export async function renderIslandDetail(container, islandId, store) {
       historyLink.title = i18n.t("openHistory");
       historyLink.setAttribute("aria-label", `${p.name}: ${i18n.t("openHistory")}`);
       while (nameTd.firstChild) historyLink.append(nameTd.firstChild);
+      const icon = goodIcon(p.guid);
+      if (icon) historyLink.append(document.createTextNode(" "), icon);
       const hint = document.createElement("span");
       hint.className = "history-hint";
       hint.textContent = "↗";
@@ -295,6 +444,18 @@ export async function renderIslandDetail(container, islandId, store) {
 
       tr.append(nameTd, genTd, maxProductionTd, consTd, deltaTd, buildingsTd);
       tbody.append(tr);
+      const chains = matchingChains(p.guid);
+      if (chains.length > 0) {
+        appendChainDetails(p, chains);
+      } else if (showGoodsChains && search.trim()) {
+        const noChain = document.createElement("tr");
+        noChain.className = "goods-chain-row";
+        const cell = document.createElement("td");
+        cell.colSpan = columns.length + 1;
+        cell.textContent = i18n.t("noGoodsChains", { product: p.name, region: island.sessionName });
+        noChain.append(cell);
+        tbody.append(noChain);
+      }
       if (needed && sources.isOpen(islandId, p.guid)) {
         tbody.append(detailRow(sources.panel(islandId, p.guid), columns.length + 1));
       }
@@ -309,6 +470,38 @@ export async function renderIslandDetail(container, islandId, store) {
 
   search_input.addEventListener("input", () => {
     search = search_input.value;
+    renderTable();
+  });
+
+  chainToggle.addEventListener("change", async () => {
+    showGoodsChains = chainToggle.checked;
+    chainError = "";
+    iconError = "";
+    if (showGoodsChains && !goodsChains) {
+      chainsLoading = true;
+      chainToggle.disabled = true;
+      renderTable();
+      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
+      try {
+        goodsChains = validateGoodsChains(await chainLoadPromise);
+      } catch (err) {
+        chainLoadPromise = null;
+        showGoodsChains = false;
+        chainToggle.checked = false;
+        chainError = err instanceof Error ? err.message : String(err);
+      }
+    }
+    if (showGoodsChains && !goodsIcons && !iconError) {
+      if (!iconLoadPromise) iconLoadPromise = api.goodsIcons();
+      try {
+        goodsIcons = validateGoodsIcons(await iconLoadPromise);
+      } catch (err) {
+        iconLoadPromise = null;
+        iconError = err instanceof Error ? err.message : String(err);
+      }
+    }
+    chainsLoading = false;
+    chainToggle.disabled = false;
     renderTable();
   });
 
@@ -333,6 +526,7 @@ export async function renderIslandDetail(container, islandId, store) {
   document.addEventListener("tabularium-snapshot", onSnapshot);
 
   const onLang = () => {
+    chainLabel.replaceChildren(chainToggle, document.createTextNode(i18n.t("showGoodsChains")));
     renderTable();
     sources.refresh();
   };

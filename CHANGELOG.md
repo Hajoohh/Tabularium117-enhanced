@@ -7,6 +7,11 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ### Added
 
+- **Configurable production chains:** the island goods search can show every
+  regional production chain containing the searched good, including
+  multi-stage recipes. Chains and their optional external icon URLs are
+  maintained separately in `web/js/goods-chains.json` and
+  `web/js/goods-icons.json`.
 - **Maximum production column:** the goods lists show each good's potential
   production at 100% productivity alongside its current production.
 - **Goods search in region and total summaries:** filter the aggregated rows by
