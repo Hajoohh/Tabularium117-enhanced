@@ -19,6 +19,8 @@ export function createIslandPicker(container, store, selected, onChange, allInit
     for (const id of selected) {
       if (!known.has(id)) selected.delete(id);
     }
+    // Keep newly discovered islands selected only while the user has the
+    // complete current selection; a partial selection stays explicit.
     if (includeNew) {
       for (const island of islands) selected.add(island.id);
     }

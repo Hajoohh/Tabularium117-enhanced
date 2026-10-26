@@ -6,9 +6,9 @@ import { isSuppressed } from "../alerts.js";
 import { renderIslandHeader } from "./island-header.js";
 import {
   createGoodsCategoryFilters,
+  createGoodsChainsLoader,
   filterGoodsByCategories,
   goodsCategoriesForRegions,
-  validateGoodsChains,
 } from "../goods-chain-view.js";
 
 function locale() {
@@ -38,7 +38,7 @@ export async function renderEfficiency(container, islandId, store) {
   let sortAscending = false;
   let currentDTO = null;
   let goodsChains = null;
-  let chainLoadPromise = null;
+  const goodsChainsLoader = createGoodsChainsLoader(() => api.goodsChains());
   let categoryLoading = false;
   let categoryError = "";
 
@@ -105,11 +105,9 @@ export async function renderEfficiency(container, islandId, store) {
     if (categories.size > 0 && !goodsChains) {
       categoryLoading = true;
       if (currentDTO) render(currentDTO);
-      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
       try {
-        goodsChains = validateGoodsChains(await chainLoadPromise);
+        goodsChains = await goodsChainsLoader.load();
       } catch (err) {
-        chainLoadPromise = null;
         categoryError = err instanceof Error ? err.message : String(err);
         categoryFilters.reset();
       }

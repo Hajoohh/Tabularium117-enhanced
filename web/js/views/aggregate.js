@@ -3,10 +3,10 @@ import { api } from "../api.js";
 import {
   appendGoodsChainCards,
   createGoodsCategoryFilters,
+  createGoodsChainsLoader,
   filterGoodsByCategories,
   goodsCategoriesForRegions,
   matchingGoodsChains,
-  validateGoodsChains,
   validateGoodsIcons,
 } from "../goods-chain-view.js";
 
@@ -77,7 +77,7 @@ export function renderAggregate(container, store, scope) {
   let search = "";
   let goodsChains = null;
   let goodsIcons = null;
-  let chainLoadPromise = null;
+  const goodsChainsLoader = createGoodsChainsLoader(() => api.goodsChains());
   let iconLoadPromise = null;
   let showGoodsChains = false;
   let chainsLoading = false;
@@ -111,11 +111,9 @@ export function renderAggregate(container, store, scope) {
     if (categories.size > 0 && !goodsChains) {
       chainsLoading = true;
       render();
-      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
       try {
-        goodsChains = validateGoodsChains(await chainLoadPromise);
+        goodsChains = await goodsChainsLoader.load();
       } catch (err) {
-        chainLoadPromise = null;
         selectedCategories = new Set();
         categoryFilters.reset();
         chainError = err instanceof Error ? err.message : String(err);
@@ -333,11 +331,9 @@ export function renderAggregate(container, store, scope) {
       chainsLoading = true;
       chainToggle.disabled = true;
       render();
-      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
       try {
-        goodsChains = validateGoodsChains(await chainLoadPromise);
+        goodsChains = await goodsChainsLoader.load();
       } catch (err) {
-        chainLoadPromise = null;
         showGoodsChains = false;
         chainToggle.checked = false;
         chainError = err instanceof Error ? err.message : String(err);

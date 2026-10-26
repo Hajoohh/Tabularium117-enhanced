@@ -5,6 +5,19 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ## [Unreleased]
 
+## [Tabularium 117 - enhanced 0.1.3]
+
+### Changed
+
+- **Enhanced release automation:** name the Windows executable
+  `tabularium117-enhanced.exe` and publish releases with titles such as
+  `Tabularium 117 - enhanced v0.1.3`. Update the build, CI artifact, checksum,
+  release attachments and download instructions to use the enhanced filename.
+- **Shared goods-chain loading:** centralize fetching, validation, request
+  sharing and caching for the goods-chain configuration used across views.
+
+## [Tabularium 117 - enhanced 0.1.2]
+
 ### Added
 
 - **Goods category filters:** filter goods and efficiency tables by raw
