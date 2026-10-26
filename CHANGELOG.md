@@ -7,11 +7,27 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ### Added
 
+- **Goods category filters:** filter goods and efficiency tables by raw
+  materials, intermediate products or end products. With no category selected,
+  all goods remain visible; selected categories are combined. Classification
+  follows each table's region-specific production chains.
+- **Comparison search and region selection:** search goods in the island
+  comparison tables and select or clear all islands in a region with one action.
+- **Island goods-chain view:** in an island's goods table, show configured
+  goods chains whose end-product buildings are present on that island,
+  independently of the searched good.
+- **Goods-chain search option:** label the existing chain search explicitly as
+  showing chains for the searched good.
 - **Configurable production chains:** the island goods search can show every
   regional production chain containing the searched good, including
   multi-stage recipes. Chains and their optional external icon URLs are
   maintained separately in `web/js/goods-chains.json` and
   `web/js/goods-icons.json`.
+
+## [Tabularium 117 - enhanced 0.1.1] - 2026-10-26
+
+### Added
+
 - **Maximum production column:** the goods lists show each good's potential
   production at 100% productivity alongside its current production.
 - **Goods search in region and total summaries:** filter the aggregated rows by
@@ -39,9 +55,9 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ### Changed
 
-- **Go toolchain:** require Go 1.26.0 and pin Go 1.26.9 for builds and
-  releases to include fixes for standard-library vulnerabilities detected
-  by CI.
+- **Go toolchain and vulnerability checks:** require Go 1.27 in `go.mod` and
+  remove the explicit toolchain pin. Update CI's `govulncheck` from v1.7.0 to
+  v1.9.0.
 - Added the loopback-only `/api/v1/alert-settings` endpoint to read and update
   warning thresholds and per-rule suppressions. Writes validate their input,
   check the request origin, persist settings atomically, and report persistence
@@ -49,9 +65,6 @@ All notable changes to Tabularium 117 are documented here, in the
 - Updated the README and concept documentation for region and total summaries,
   island comparison, sortable tables, configurable warning rules, and
   persistent warning settings.
-- Clarified in the contributor and development guides that a Go command from
-  1.21 can bootstrap the project-required Go 1.25.0 toolchain when
-  `GOTOOLCHAIN=auto` is enabled; releases use the pinned Go 1.25.14 toolchain.
 
 ### Fixed
 

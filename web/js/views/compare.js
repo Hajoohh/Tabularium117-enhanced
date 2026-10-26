@@ -1,6 +1,12 @@
 import { i18n } from "../i18n.js";
 import { api } from "../api.js";
 import { createIslandPicker } from "../island-picker.js";
+import {
+  createGoodsCategoryFilters,
+  filterGoodsByCategories,
+  goodsCategoriesForRegions,
+  validateGoodsChains,
+} from "../goods-chain-view.js";
 
 const numberFormatCache = new Map();
 
@@ -23,6 +29,17 @@ export function renderCompare(container, store) {
   const picker = document.createElement("div");
   const message = document.createElement("p");
   message.className = "muted";
+  const filtersToolbar = document.createElement("div");
+  filtersToolbar.className = "toolbar";
+  const searchInput = document.createElement("input");
+  searchInput.type = "search";
+  searchInput.placeholder = i18n.t("searchPlaceholder");
+  searchInput.setAttribute("data-i18n-placeholder", "searchPlaceholder");
+  searchInput.setAttribute("aria-label", i18n.t("searchPlaceholder"));
+  filtersToolbar.append(searchInput);
+  const categoryMessage = document.createElement("p");
+  categoryMessage.className = "muted goods-chain-message";
+  categoryMessage.hidden = true;
   const goodsHeading = document.createElement("h3");
   const goodsTable = document.createElement("table");
   const goodsThead = document.createElement("thead");
@@ -39,7 +56,6 @@ export function renderCompare(container, store) {
   const efficiencyBox = document.createElement("div");
   efficiencyBox.className = "table-scroll";
   efficiencyBox.append(efficiencyTable);
-  container.append(heading, explain, picker, message, goodsHeading, goodsBox, efficiencyHeading, efficiencyBox);
 
   const selected = new Set();
   const productsByIsland = new Map();
@@ -48,6 +64,11 @@ export function renderCompare(container, store) {
   const requests = new Map();
   const inFlight = new Set();
   let disposed = false;
+  let goodsChains = null;
+  let chainLoadPromise = null;
+  let categoryLoading = false;
+  let categoryError = "";
+  let search = "";
   const sorts = {
     goods: { key: "island", ascending: true },
     efficiency: { key: "island", ascending: true },
@@ -72,6 +93,31 @@ export function renderCompare(container, store) {
   ];
   const fmt0 = numberFormat(0);
   const fmt1 = numberFormat(1);
+  const categoryFilters = createGoodsCategoryFilters((categories) => {
+    void updateCategoryFilters(categories);
+  });
+  container.append(
+    heading, explain, picker, filtersToolbar, categoryFilters.element, message, categoryMessage,
+    goodsHeading, goodsBox, efficiencyHeading, efficiencyBox,
+  );
+
+  async function updateCategoryFilters(categories) {
+    categoryError = "";
+    if (categories.size > 0 && !goodsChains) {
+      categoryLoading = true;
+      render();
+      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
+      try {
+        goodsChains = validateGoodsChains(await chainLoadPromise);
+      } catch (err) {
+        chainLoadPromise = null;
+        categoryError = err instanceof Error ? err.message : String(err);
+        categoryFilters.reset();
+      }
+      categoryLoading = false;
+    }
+    render();
+  }
 
   function sortRows(rows, view) {
     const { key, ascending } = sorts[view];
@@ -118,6 +164,9 @@ export function renderCompare(container, store) {
   function render() {
     heading.textContent = i18n.t("compareHeading");
     explain.textContent = i18n.t("compareExplain");
+    searchInput.placeholder = i18n.t("searchPlaceholder");
+    searchInput.setAttribute("aria-label", i18n.t("searchPlaceholder"));
+    categoryFilters.updateLabels();
     goodsHeading.textContent = i18n.t("compareGoodsHeading");
     efficiencyHeading.textContent = i18n.t("compareEfficiencyHeading");
     headerRow(goodsThead, goodsColumns, "goods");
@@ -133,8 +182,23 @@ export function renderCompare(container, store) {
         efficiencyRows.push({ island: island.name, ...product, islandId: island.id });
       }
     }
+    const selectedCategories = categoryFilters.selected();
+    const regionByIsland = new Map(islands.map((island) => [island.id, island.sessionName]));
+    const categoriesByRegion = new Map();
+    const matches = (product) => {
+      if (search.trim() && !product.name.toLowerCase().includes(search.trim().toLowerCase())) return false;
+      if (selectedCategories.size === 0) return true;
+      if (!goodsChains) return false;
+      const region = regionByIsland.get(product.islandId);
+      if (!categoriesByRegion.has(region)) {
+        categoriesByRegion.set(region, goodsCategoriesForRegions(goodsChains, [region]));
+      }
+      return filterGoodsByCategories([product], selectedCategories, categoriesByRegion.get(region)).length > 0;
+    };
+    const visibleGoodsRows = goodsRows.filter(matches);
+    const visibleEfficiencyRows = efficiencyRows.filter(matches);
     goodsTbody.replaceChildren();
-    for (const product of sortRows(goodsRows, "goods")) {
+    for (const product of sortRows(visibleGoodsRows, "goods")) {
       const tr = document.createElement("tr");
       const islandCell = document.createElement("td");
       islandCell.textContent = product.island;
@@ -169,7 +233,7 @@ export function renderCompare(container, store) {
       style: "percent",
       maximumFractionDigits: 0,
     });
-    for (const product of sortRows(efficiencyRows, "efficiency")) {
+    for (const product of sortRows(visibleEfficiencyRows, "efficiency")) {
       const tr = document.createElement("tr");
       if (product.efficiency === null) tr.className = "no-data";
       const islandCell = document.createElement("td");
@@ -207,13 +271,18 @@ export function renderCompare(container, store) {
       message.textContent = i18n.t("compareLoading");
       message.className = "muted";
     } else {
-      message.textContent = `${goodsRows.length} ${i18n.t("compareRows")}`;
+      message.textContent = `${visibleGoodsRows.length} ${i18n.t("compareRows")}`;
       message.className = "muted";
     }
-    goodsHeading.hidden = goodsRows.length === 0;
-    goodsBox.hidden = goodsRows.length === 0;
-    efficiencyHeading.hidden = efficiencyRows.length === 0;
-    efficiencyBox.hidden = efficiencyRows.length === 0;
+    categoryMessage.hidden = !categoryLoading && !categoryError;
+    categoryMessage.className = categoryError ? "error-line goods-chain-message" : "muted goods-chain-message";
+    categoryMessage.textContent = categoryError
+      ? `${i18n.t("goodsChainsError")} ${categoryError}`
+      : i18n.t("loadingGoodsCategories");
+    goodsHeading.hidden = visibleGoodsRows.length === 0;
+    goodsBox.hidden = visibleGoodsRows.length === 0;
+    efficiencyHeading.hidden = visibleEfficiencyRows.length === 0;
+    efficiencyBox.hidden = visibleEfficiencyRows.length === 0;
   }
 
   async function loadIsland(islandId, type, refresh = false) {
@@ -260,7 +329,12 @@ export function renderCompare(container, store) {
     }
   }
 
-  const updatePicker = createIslandPicker(picker, store, selected, selectionChanged, false);
+  const updatePicker = createIslandPicker(picker, store, selected, selectionChanged, false, true);
+
+  searchInput.addEventListener("input", () => {
+    search = searchInput.value;
+    render();
+  });
 
   function onSnapshot(event) {
     if (event.detail?.id && selected.has(event.detail.id)) {

@@ -322,6 +322,19 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   padding: 0 .75rem .5rem;
 }
 .island-picker-actions button { min-height: 40px; }
+.island-picker-region-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem;
+  padding: .2rem .45rem;
+  border: 1px solid var(--border);
+  border-radius: .4rem;
+}
+.island-picker-region-actions span {
+  color: var(--fg-muted);
+  font-size: .9rem;
+}
 
 /* --- island header and tabs (views/island-header.js) --- */
 
@@ -409,6 +422,27 @@ input[type="search"] {
   white-space: nowrap;
 }
 .goods-chain-toggle input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  accent-color: var(--accent);
+}
+.goods-category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1rem;
+  margin: .35rem 0 .6rem;
+}
+.goods-category-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 44px;
+  color: var(--fg-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.goods-category-toggle input {
   width: 1.1rem;
   height: 1.1rem;
   margin: 0;

@@ -9,5 +9,5 @@ $env:GOOS = "windows"
 $env:GOARCH = "amd64"
 
 New-Item -ItemType Directory -Force -Path dist | Out-Null
-go build -trimpath -ldflags "-s -w -X main.version=$version" -o dist/tabularium117.exe ./cmd/tabularium117
-Write-Host "built dist/tabularium117.exe ($version)"
+go build -trimpath -ldflags "-s -w -X main.version=$version" -o dist/tabularium117-enhanced.exe ./cmd/tabularium117
+Write-Host "built dist/tabularium117-enhanced.exe ($version)"

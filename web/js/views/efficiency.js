@@ -4,6 +4,12 @@ import { i18n } from "../i18n.js";
 import { api } from "../api.js";
 import { isSuppressed } from "../alerts.js";
 import { renderIslandHeader } from "./island-header.js";
+import {
+  createGoodsCategoryFilters,
+  filterGoodsByCategories,
+  goodsCategoriesForRegions,
+  validateGoodsChains,
+} from "../goods-chain-view.js";
 
 function locale() {
   return i18n.lang === "de" ? "de-DE" : "en-US";
@@ -30,6 +36,11 @@ export async function renderEfficiency(container, islandId, store) {
   let settingsError = "";
   let sortKey = "wasted";
   let sortAscending = false;
+  let currentDTO = null;
+  let goodsChains = null;
+  let chainLoadPromise = null;
+  let categoryLoading = false;
+  let categoryError = "";
 
   // The heading, the island switch and the way back to the goods table are
   // the shared header's job (views/island-header.js).
@@ -72,7 +83,13 @@ export async function renderEfficiency(container, islandId, store) {
   const settingsMessage = document.createElement("p");
   settingsMessage.className = "error-line";
   settingsMessage.hidden = true;
-  container.append(intro, details, settingsMessage, tableBox);
+  const categoryMessage = document.createElement("p");
+  categoryMessage.className = "muted goods-chain-message";
+  categoryMessage.hidden = true;
+  const categoryFilters = createGoodsCategoryFilters((categories) => {
+    void updateCategoryFilters(categories);
+  });
+  container.append(intro, details, settingsMessage, categoryFilters.element, categoryMessage, tableBox);
 
   const columns = [
     ["name", "colName", false],
@@ -83,10 +100,35 @@ export async function renderEfficiency(container, islandId, store) {
     ["wasted", "colWasted", true],
   ];
 
+  async function updateCategoryFilters(categories) {
+    categoryError = "";
+    if (categories.size > 0 && !goodsChains) {
+      categoryLoading = true;
+      if (currentDTO) render(currentDTO);
+      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
+      try {
+        goodsChains = validateGoodsChains(await chainLoadPromise);
+      } catch (err) {
+        chainLoadPromise = null;
+        categoryError = err instanceof Error ? err.message : String(err);
+        categoryFilters.reset();
+      }
+      categoryLoading = false;
+    }
+    if (currentDTO) render(currentDTO);
+  }
+
   function render(dto) {
+    currentDTO = dto;
     header.update(dto.island);
+    categoryFilters.updateLabels();
     settingsMessage.hidden = !settingsError;
     settingsMessage.textContent = settingsError ? `${i18n.t("alertSettingsError")} ${settingsError}` : "";
+    categoryMessage.hidden = !categoryLoading && !categoryError;
+    categoryMessage.className = categoryError ? "error-line goods-chain-message" : "muted goods-chain-message";
+    categoryMessage.textContent = categoryError
+      ? `${i18n.t("goodsChainsError")} ${categoryError}`
+      : i18n.t("loadingGoodsCategories");
     const headRow = document.createElement("tr");
     const suppressionHeader = document.createElement("th");
     suppressionHeader.scope = "col";
@@ -115,11 +157,22 @@ export async function renderEfficiency(container, islandId, store) {
     thead.replaceChildren(headRow);
 
     tbody.replaceChildren();
-    if (dto.products.length === 0) {
+    let visibleProducts = dto.products;
+    const selectedCategories = categoryFilters.selected();
+    if (selectedCategories.size > 0) {
+      visibleProducts = goodsChains
+        ? filterGoodsByCategories(
+          visibleProducts,
+          selectedCategories,
+          goodsCategoriesForRegions(goodsChains, [dto.island.sessionName]),
+        )
+        : [];
+    }
+    if (visibleProducts.length === 0) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
       td.colSpan = columns.length + 1;
-      td.textContent = i18n.t("noEfficiencyData");
+      td.textContent = dto.products.length > 0 ? i18n.t("noMatches") : i18n.t("noEfficiencyData");
       tr.append(td);
       tbody.append(tr);
       return;
@@ -133,7 +186,7 @@ export async function renderEfficiency(container, islandId, store) {
     // table then disagreed with each other ("49%" beside "220 %").
     const percent = (valueInPercent) => pct.format(valueInPercent / 100);
 
-    const sorted = [...dto.products].sort((a, b) => {
+    const sorted = [...visibleProducts].sort((a, b) => {
       const av = a[sortKey];
       const bv = b[sortKey];
       if (sortKey === "efficiency" && (av === null || bv === null)) {

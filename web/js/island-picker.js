@@ -1,6 +1,6 @@
 import { i18n } from "./i18n.js";
 
-export function createIslandPicker(container, store, selected, onChange, allInitiallySelected = true) {
+export function createIslandPicker(container, store, selected, onChange, allInitiallySelected = true, showRegionActions = false) {
   const details = document.createElement("details");
   details.className = "island-picker";
   const summary = document.createElement("summary");
@@ -56,6 +56,35 @@ export function createIslandPicker(container, store, selected, onChange, allInit
         onChange();
       });
       actions.append(button);
+    }
+    if (showRegionActions) {
+      const regions = [...new Set(islands.map((island) => island.sessionName))];
+      for (const region of regions) {
+        const group = document.createElement("div");
+        group.className = "island-picker-region-actions";
+        const label = document.createElement("span");
+        label.textContent = region;
+        group.append(label);
+        for (const [key, labelKey, value] of [
+          ["selectRegionIslands", "selectRegionIslandsLabel", true],
+          ["clearRegionIslands", "clearRegionIslandsLabel", false],
+        ]) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = i18n.t(key);
+          button.setAttribute("aria-label", i18n.t(labelKey, { region }));
+          button.addEventListener("click", () => {
+            const regionIslands = islands.filter((island) => island.sessionName === region);
+            if (value) for (const island of regionIslands) selected.add(island.id);
+            else for (const island of regionIslands) selected.delete(island.id);
+            includeNew = selected.size === islands.length;
+            update();
+            onChange();
+          });
+          group.append(button);
+        }
+        actions.append(group);
+      }
     }
     if (!initialized) {
       details.open = selected.size < islands.length;

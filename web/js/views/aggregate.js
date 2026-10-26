@@ -2,6 +2,9 @@ import { i18n } from "../i18n.js";
 import { api } from "../api.js";
 import {
   appendGoodsChainCards,
+  createGoodsCategoryFilters,
+  filterGoodsByCategories,
+  goodsCategoriesForRegions,
   matchingGoodsChains,
   validateGoodsChains,
   validateGoodsIcons,
@@ -38,7 +41,7 @@ export function renderAggregate(container, store, scope) {
   chainToggle.type = "checkbox";
   const chainLabel = document.createElement("label");
   chainLabel.className = "goods-chain-toggle";
-  chainLabel.append(chainToggle, document.createTextNode(i18n.t("showGoodsChains")));
+  chainLabel.append(chainToggle, document.createTextNode(i18n.t("showGoodsChainsForSearch")));
   toolbar.append(searchInput, chainLabel);
   const chainMessage = document.createElement("p");
   chainMessage.className = "muted goods-chain-message";
@@ -81,6 +84,12 @@ export function renderAggregate(container, store, scope) {
   let chainError = "";
   let iconError = "";
   let selectedChainGuid = null;
+  let selectedCategories = new Set();
+  const categoryFilters = createGoodsCategoryFilters((categories) => {
+    selectedCategories = categories;
+    void updateCategoryFilters(categories);
+  });
+  toolbar.append(categoryFilters.element);
 
   function selectedIslands() {
     return scope.total
@@ -95,6 +104,25 @@ export function renderAggregate(container, store, scope) {
 
   function regionsInScope() {
     return [...new Set(selectedIslands().map((island) => island.sessionName))];
+  }
+
+  async function updateCategoryFilters(categories) {
+    chainError = "";
+    if (categories.size > 0 && !goodsChains) {
+      chainsLoading = true;
+      render();
+      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
+      try {
+        goodsChains = validateGoodsChains(await chainLoadPromise);
+      } catch (err) {
+        chainLoadPromise = null;
+        selectedCategories = new Set();
+        categoryFilters.reset();
+        chainError = err instanceof Error ? err.message : String(err);
+      }
+      chainsLoading = false;
+    }
+    render();
   }
 
   function localizedName(good) {
@@ -121,6 +149,8 @@ export function renderAggregate(container, store, scope) {
   function render() {
     heading.textContent = i18n.t("aggregateHeading", { scope: scopeName() });
     explain.textContent = i18n.t("aggregateExplain");
+    chainLabel.replaceChildren(chainToggle, document.createTextNode(i18n.t("showGoodsChainsForSearch")));
+    categoryFilters.updateLabels();
     const headers = document.createElement("tr");
     for (const [key, label, numeric] of columns) {
       const th = document.createElement("th");
@@ -195,6 +225,15 @@ export function renderAggregate(container, store, scope) {
     if (search.trim()) {
       const needle = search.trim().toLowerCase();
       visibleProducts = visibleProducts.filter((product) => product.name.toLowerCase().includes(needle));
+    }
+    if (selectedCategories.size > 0) {
+      visibleProducts = goodsChains
+        ? filterGoodsByCategories(
+          visibleProducts,
+          selectedCategories,
+          goodsCategoriesForRegions(goodsChains, regionsInScope()),
+        )
+        : [];
     }
     const sorted = [...visibleProducts].sort((a, b) => {
       const result = sortKey === "name"

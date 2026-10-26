@@ -6,7 +6,11 @@ import { byProduct, isSuppressed, isWarning, ruleLabel } from "../alerts.js";
 import { renderIslandHeader } from "./island-header.js";
 import { createSources, detailRow, toggleButton } from "../sources.js";
 import {
+  activeGoodsChainsForIsland,
   appendGoodsChainCards,
+  createGoodsCategoryFilters,
+  filterGoodsByCategories,
+  goodsCategoriesForRegions,
   matchingGoodsChains,
   validateGoodsChains,
   validateGoodsIcons,
@@ -70,7 +74,12 @@ export async function renderIslandDetail(container, islandId, store) {
   chainToggle.type = "checkbox";
   const chainLabel = document.createElement("label");
   chainLabel.className = "goods-chain-toggle";
-  chainLabel.append(chainToggle, document.createTextNode(i18n.t("showGoodsChains")));
+  chainLabel.append(chainToggle, document.createTextNode(i18n.t("showGoodsChainsForSearch")));
+  const localChainToggle = document.createElement("input");
+  localChainToggle.type = "checkbox";
+  const localChainLabel = document.createElement("label");
+  localChainLabel.className = "goods-chain-toggle";
+  localChainLabel.append(localChainToggle, document.createTextNode(i18n.t("showLocalGoodsChains")));
 
   // Search answers "where is X"; the filters answer "what needs me now",
   // which is the question a deficit or a warning raises. They intersect.
@@ -94,7 +103,7 @@ export async function renderIslandDetail(container, islandId, store) {
     filterButtons.push([button, value]);
     filters.append(button);
   }
-  toolbar.append(search_input, chainLabel, filters);
+  toolbar.append(search_input, chainLabel, localChainLabel, filters);
 
   const table = document.createElement("table");
   const thead = document.createElement("thead");
@@ -115,7 +124,10 @@ export async function renderIslandDetail(container, islandId, store) {
   const chainOverview = document.createElement("div");
   chainOverview.className = "goods-chain-overview";
   chainOverview.hidden = true;
-  wrapper.append(summaryLine, toolbar, settingsMessage, chainMessage, chainOverview, tableBox);
+  const localChainOverview = document.createElement("div");
+  localChainOverview.className = "goods-chain-overview";
+  localChainOverview.hidden = true;
+  wrapper.append(summaryLine, toolbar, settingsMessage, chainMessage, chainOverview, localChainOverview, tableBox);
   container.append(wrapper);
 
   let productsDTO = null;
@@ -128,9 +140,35 @@ export async function renderIslandDetail(container, islandId, store) {
   let chainError = "";
   let iconError = "";
   let chainsLoading = false;
+  let showLocalGoodsChains = false;
+  let selectedCategories = new Set();
+  const categoryFilters = createGoodsCategoryFilters((categories) => {
+    selectedCategories = categories;
+    void updateCategoryFilters(categories);
+  });
+  toolbar.append(categoryFilters.element);
   // The possible production sources of the "import needed" rows, each opened
   // under its own row.
   const sources = createSources(() => renderTable());
+
+  async function updateCategoryFilters(categories) {
+    chainError = "";
+    if (categories.size > 0 && !goodsChains) {
+      chainsLoading = true;
+      renderTable();
+      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
+      try {
+        goodsChains = validateGoodsChains(await chainLoadPromise);
+      } catch (err) {
+        chainLoadPromise = null;
+        selectedCategories = new Set();
+        categoryFilters.reset();
+        chainError = err instanceof Error ? err.message : String(err);
+      }
+      chainsLoading = false;
+    }
+    renderTable();
+  }
 
   function headerRow() {
     const tr = document.createElement("tr");
@@ -172,6 +210,7 @@ export async function renderIslandDetail(container, islandId, store) {
   function renderTable() {
     if (!productsDTO) return;
     headerRow();
+    categoryFilters.updateLabels();
     const island = productsDTO.island;
     const alertCount = store.alerts.filter((a) => a.islandId === islandId && isWarning(a)).length;
     // The name and the session are in the header; repeating them here only
@@ -193,6 +232,20 @@ export async function renderIslandDetail(container, islandId, store) {
     } else if (showGoodsChains && !search.trim()) {
       chainMessage.textContent = i18n.t("goodsChainsSearchFirst");
       chainMessage.hidden = false;
+    }
+    localChainOverview.hidden = true;
+    if (showLocalGoodsChains && goodsChains) {
+      const entries = activeGoodsChainsForIsland(goodsChains, island.sessionName, productsDTO.products);
+      if (entries.length > 0) {
+        appendGoodsChainCards(localChainOverview, entries, goodsIcons, selectedChainGuid, selectChainGood);
+        localChainOverview.hidden = false;
+      } else {
+        localChainOverview.replaceChildren();
+        chainMessage.textContent = i18n.t("noActiveLocalGoodsChains");
+        chainMessage.hidden = false;
+      }
+    } else {
+      localChainOverview.replaceChildren();
     }
     chainOverview.hidden = true;
     if (selectedChainGuid !== null && goodsChains) {
@@ -257,6 +310,15 @@ export async function renderIslandDetail(container, islandId, store) {
     if (search.trim()) {
       const needle = search.trim().toLowerCase();
       rows = rows.filter((p) => p.name.toLowerCase().includes(needle));
+    }
+    if (selectedCategories.size > 0) {
+      rows = goodsChains
+        ? filterGoodsByCategories(
+          rows,
+          selectedCategories,
+          goodsCategoriesForRegions(goodsChains, [island.sessionName]),
+        )
+        : [];
     }
     rows = [...rows].sort((a, b) => {
       let cmp;
@@ -420,6 +482,7 @@ export async function renderIslandDetail(container, islandId, store) {
     if (showGoodsChains && !goodsChains) {
       chainsLoading = true;
       chainToggle.disabled = true;
+      localChainToggle.disabled = true;
       renderTable();
       if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
       try {
@@ -433,6 +496,31 @@ export async function renderIslandDetail(container, islandId, store) {
     }
     chainsLoading = false;
     chainToggle.disabled = false;
+    localChainToggle.disabled = false;
+    renderTable();
+  });
+
+  localChainToggle.addEventListener("change", async () => {
+    showLocalGoodsChains = localChainToggle.checked;
+    chainError = "";
+    if (showLocalGoodsChains && !goodsChains) {
+      chainsLoading = true;
+      chainToggle.disabled = true;
+      localChainToggle.disabled = true;
+      renderTable();
+      if (!chainLoadPromise) chainLoadPromise = api.goodsChains();
+      try {
+        goodsChains = validateGoodsChains(await chainLoadPromise);
+      } catch (err) {
+        chainLoadPromise = null;
+        showLocalGoodsChains = false;
+        localChainToggle.checked = false;
+        chainError = err instanceof Error ? err.message : String(err);
+      }
+    }
+    chainsLoading = false;
+    chainToggle.disabled = false;
+    localChainToggle.disabled = false;
     renderTable();
   });
 
@@ -470,7 +558,9 @@ export async function renderIslandDetail(container, islandId, store) {
   document.addEventListener("tabularium-snapshot", onSnapshot);
 
   const onLang = () => {
-    chainLabel.replaceChildren(chainToggle, document.createTextNode(i18n.t("showGoodsChains")));
+    chainLabel.replaceChildren(chainToggle, document.createTextNode(i18n.t("showGoodsChainsForSearch")));
+    localChainLabel.replaceChildren(localChainToggle, document.createTextNode(i18n.t("showLocalGoodsChains")));
+    categoryFilters.updateLabels();
     renderTable();
     sources.refresh();
   };
