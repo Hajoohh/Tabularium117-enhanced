@@ -56,6 +56,8 @@ func (f *lanFixture) stop(t *testing.T) {
 		return
 	}
 	f.stopped = true
+	http.DefaultClient.CloseIdleConnections()
+	f.lanClient.CloseIdleConnections()
 	f.cancel()
 	select {
 	case err := <-f.done:
@@ -524,8 +526,6 @@ func TestForeignHostIsRefused(t *testing.T) {
 	}
 	t.Cleanup(func() {
 		client.CloseIdleConnections()
-		f.lanClient.CloseIdleConnections()
-		http.DefaultClient.CloseIdleConnections()
 	})
 	port := strconv.Itoa(f.port)
 
