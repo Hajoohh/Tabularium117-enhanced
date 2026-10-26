@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Dealwatch/Tabularium117/internal/pipe"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/pipe"
 )
 
 // Without --replay the source is the game's pipe, which this build cannot

@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/alerts"
-	"github.com/Dealwatch/Tabularium117/internal/ingest"
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/replay"
-	"github.com/Dealwatch/Tabularium117/internal/state"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/alerts"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/ingest"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/replay"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/state"
 )
 
 // The live recording of 2026-09-22 (docs/protocol.md, "Live capture") ends

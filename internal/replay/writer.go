@@ -7,7 +7,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/source"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/source"
 )
 
 // record is one line of the JSONL format.

@@ -17,8 +17,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/lan"
-	"github.com/Dealwatch/Tabularium117/internal/server"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/lan"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/server"
 )
 
 // lanJSON is GET/POST /api/v1/lan as the UI sees it.
@@ -56,6 +56,8 @@ func (f *lanFixture) stop(t *testing.T) {
 		return
 	}
 	f.stopped = true
+	http.DefaultClient.CloseIdleConnections()
+	f.lanClient.CloseIdleConnections()
 	f.cancel()
 	select {
 	case err := <-f.done:
@@ -522,10 +524,15 @@ func TestForeignHostIsRefused(t *testing.T) {
 		Timeout:       10 * time.Second,
 		CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse },
 	}
+	t.Cleanup(func() {
+		client.CloseIdleConnections()
+	})
 	port := strconv.Itoa(f.port)
 
 	// Switch LAN mode on, so the things worth stealing exist.
-	f.toggle(t, `{"enabled":true}`, nil).Body.Close()
+	enabled := f.toggle(t, `{"enabled":true}`, nil)
+	_, _ = io.Copy(io.Discard, enabled.Body)
+	enabled.Body.Close()
 
 	paths := []string{"/api/v1/lan", "/api/v1/lan/qr.png", "/api/v1/islands", "/api/v1/events",
 		"/api/v1/status", "/", "/js/app.js"}

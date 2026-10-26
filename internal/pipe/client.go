@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/protocol"
-	"github.com/Dealwatch/Tabularium117/internal/source"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/protocol"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/source"
 )
 
 // Retry timing.

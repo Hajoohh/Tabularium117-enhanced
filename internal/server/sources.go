@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
 )
 
 // Possible production sources (KONZEPT.md section 2.4): for a good an island

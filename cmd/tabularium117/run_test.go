@@ -12,11 +12,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/alerts"
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/replay"
-	"github.com/Dealwatch/Tabularium117/internal/source"
-	"github.com/Dealwatch/Tabularium117/internal/store"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/alerts"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/replay"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/source"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/store"
 )
 
 // fixturePath is the re-encoded connector capture (see testdata/README.md).

@@ -15,12 +15,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/alerts"
-	"github.com/Dealwatch/Tabularium117/internal/catalog"
-	"github.com/Dealwatch/Tabularium117/internal/lan"
-	"github.com/Dealwatch/Tabularium117/internal/state"
-	"github.com/Dealwatch/Tabularium117/internal/store"
-	"github.com/Dealwatch/Tabularium117/web"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/alerts"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/catalog"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/lan"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/state"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/store"
+	"github.com/Hajoohh/Tabularium117-enhanced/web"
 )
 
 const (

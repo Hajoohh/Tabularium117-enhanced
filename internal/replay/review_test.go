@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/protocol"
-	"github.com/Dealwatch/Tabularium117/internal/replay"
-	"github.com/Dealwatch/Tabularium117/internal/source"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/protocol"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/replay"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/source"
 )
 
 // collectFixture replays the re-encoded fixture as fast as possible.

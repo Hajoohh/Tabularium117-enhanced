@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/ingest"
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/pipe"
-	"github.com/Dealwatch/Tabularium117/internal/protocol"
-	"github.com/Dealwatch/Tabularium117/internal/source"
-	"github.com/Dealwatch/Tabularium117/internal/state"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/ingest"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/pipe"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/protocol"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/source"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/state"
 )
 
 // scriptedDialer hands out one canned connection per Dial call; once the

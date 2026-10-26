@@ -583,7 +583,7 @@ community-made fan tool.*
 ## Entwicklung / Development
 
 A Go command from 1.21 on works with `GOTOOLCHAIN=auto`; the project requires
-Go 1.25.0 and pins Go 1.25.14 for releases (`go.mod`). Code, comments, and
+Go 1.26.0 and pins Go 1.26.9 for releases (`go.mod`). Code, comments, and
 commit messages are English; user-facing
 documentation is German and English.
 

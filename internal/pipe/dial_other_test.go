@@ -7,7 +7,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/Dealwatch/Tabularium117/internal/pipe"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/pipe"
 )
 
 // On a non-Windows build the real dialer must fail with a clear, fatal error

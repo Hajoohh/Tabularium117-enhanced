@@ -65,10 +65,10 @@ jobs:
       # reach: the dependencies, and the standard library of the toolchain
       # pinned in go.mod - which is what the release binary is built with,
       # so a toolchain left behind shows up here instead of in a user's
-      # network. Pinned to the newest govulncheck that runs on Go 1.25, so
+      # network. Pinned to a govulncheck that runs on Go 1.26, so
       # that it analyses that toolchain rather than switching to a newer one.
       - name: govulncheck
-        run: go run golang.org/x/vuln/cmd/govulncheck@v1.7.0 ./...
+        run: go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 ./...
 
   tidy:
     name: go.mod is tidy

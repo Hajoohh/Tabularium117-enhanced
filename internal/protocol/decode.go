@@ -6,7 +6,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
 )
 
 // Wire sizes used to bound counted lists before allocating. See the layout in

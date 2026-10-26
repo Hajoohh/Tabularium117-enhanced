@@ -10,9 +10,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Dealwatch/Tabularium117/internal/alerts"
-	"github.com/Dealwatch/Tabularium117/internal/lan"
-	"github.com/Dealwatch/Tabularium117/internal/state"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/alerts"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/lan"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/state"
 )
 
 // lanRequest builds a request as it would arrive on the LAN listener: marked

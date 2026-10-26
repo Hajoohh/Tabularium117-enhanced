@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/server"
-	"github.com/Dealwatch/Tabularium117/internal/state"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/server"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/state"
 )
 
 // listen starts a real server on a free loopback port and returns it with its

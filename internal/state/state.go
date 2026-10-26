@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
 )
 
 // The values of Connection.Mode and Connection.State. They are strings

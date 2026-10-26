@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/model"
-	"github.com/Dealwatch/Tabularium117/internal/protocol"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/model"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/protocol"
 )
 
 var receivedAt = time.Date(2026, 9, 21, 12, 0, 0, 0, time.UTC)

@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Dealwatch/Tabularium117/internal/pipe"
-	"github.com/Dealwatch/Tabularium117/internal/protocol"
-	"github.com/Dealwatch/Tabularium117/internal/source"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/pipe"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/protocol"
+	"github.com/Hajoohh/Tabularium117-enhanced/internal/source"
 )
 
 // The tests drive the reconnect loop through a fake Dialer, so they run on
