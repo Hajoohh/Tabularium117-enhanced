@@ -1,4 +1,6 @@
-# Tabularium 117
+# Tabularium 117 - enhanced
+
+### Tabularium 117 - enhanced nutze [Tabularium 117](https://github.com/Dealwatch/Tabularium117) von Dealwatch als Grundlage. Es ist erweitert mit einigen Funktionen und grafischen Anpassungen. 
 
 [Deutsch](#deutsch) · [English](#english)
 
