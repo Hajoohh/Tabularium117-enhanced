@@ -522,10 +522,17 @@ func TestForeignHostIsRefused(t *testing.T) {
 		Timeout:       10 * time.Second,
 		CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse },
 	}
+	t.Cleanup(func() {
+		client.CloseIdleConnections()
+		f.lanClient.CloseIdleConnections()
+		http.DefaultClient.CloseIdleConnections()
+	})
 	port := strconv.Itoa(f.port)
 
 	// Switch LAN mode on, so the things worth stealing exist.
-	f.toggle(t, `{"enabled":true}`, nil).Body.Close()
+	enabled := f.toggle(t, `{"enabled":true}`, nil)
+	_, _ = io.Copy(io.Discard, enabled.Body)
+	enabled.Body.Close()
 
 	paths := []string{"/api/v1/lan", "/api/v1/lan/qr.png", "/api/v1/islands", "/api/v1/events",
 		"/api/v1/status", "/", "/js/app.js"}
