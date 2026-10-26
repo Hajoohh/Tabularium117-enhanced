@@ -1,4 +1,4 @@
-<img width="339" height="210" alt="image" src="https://github.com/user-attachments/assets/cac89e6d-d8f7-4a8d-994d-2fcf0d15750a" /># Tabularium 117 - enhanced
+# Tabularium 117 - enhanced
 
 ### Tabularium 117 - enhanced nutze [Tabularium 117](https://github.com/Dealwatch/Tabularium117) von Dealwatch als Grundlage. Es ist erweitert mit einigen Funktionen und grafischen Anpassungen. 
 
