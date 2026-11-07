@@ -15,9 +15,7 @@ export function validateGoodsChains(config) {
       }
       if (chain.product) {
         const good = chain.product;
-        if (!good || typeof good !== "object" || !Number.isInteger(good.guid)
-            || !good.name || typeof good.name !== "object"
-            || !(good.name.en || good.name.de)) {
+        if (!good || typeof good !== "object" || !Number.isInteger(good.guid)) {
           throw invalid(`${path}.product`);
         }
       }
@@ -28,9 +26,7 @@ export function validateGoodsChains(config) {
           throw invalid(stagePath);
         }
         for (const good of [...stage.inputs, stage.output]) {
-          if (!good || typeof good !== "object" || !Number.isInteger(good.guid)
-              || !good.name || typeof good.name !== "object"
-              || !(good.name.en || good.name.de)) {
+          if (!good || typeof good !== "object" || !Number.isInteger(good.guid)) {
             throw invalid(`${stagePath}.goods`);
           }
         }
@@ -40,7 +36,7 @@ export function validateGoodsChains(config) {
   return config;
 }
 
-export function createGoodsChainsLoader(fetchConfig) {
+export function createGoodsChainsLoader(fetchConfig, fetchNames) {
   let config = null;
   let pending = null;
 
@@ -53,6 +49,33 @@ export function createGoodsChainsLoader(fetchConfig) {
         pending = Promise.resolve()
           .then(fetchConfig)
           .then(validateGoodsChains)
+          .then(async (validated) => {
+            if (!fetchNames) return validated;
+            const goods = new Map();
+            for (const { chain } of goodsChainsForRegions(validated, Object.keys(validated.regions))) {
+              for (const good of [
+                ...(chain.product ? [chain.product] : []),
+                ...chain.stages.flatMap((stage) => [...stage.inputs, stage.output]),
+              ]) {
+                const guid = String(good.guid);
+                if (!goods.has(guid)) goods.set(guid, []);
+                goods.get(guid).push(good);
+              }
+            }
+            const names = await fetchNames([...goods.keys()], validated);
+            if (!names || typeof names !== "object" || Array.isArray(names)) {
+              throw new Error("Invalid product-name catalog response");
+            }
+            for (const [guid, occurrences] of goods) {
+              const localized = names[guid];
+              if (!localized || typeof localized !== "object" || Array.isArray(localized)
+                  || !Object.values(localized).some((name) => typeof name === "string" && name !== "")) {
+                throw new Error(`Product ${guid} is missing from the catalog response`);
+              }
+              for (const good of occurrences) good.name = localized;
+            }
+            return validated;
+          })
           .then((validated) => {
             config = validated;
             return config;
@@ -106,10 +129,10 @@ export function activeGoodsChainsForIsland(config, region, products) {
   });
 }
 
-export function goodsCategoriesForRegions(config, regions) {
+export function goodsCategories(config) {
   const produced = new Set();
   const endProducts = new Set();
-  for (const { chain } of goodsChainsForRegions(config, regions)) {
+  for (const { chain } of goodsChainsForRegions(config, Object.keys(config?.regions || {}))) {
     const finalGood = chain.product || chain.stages[chain.stages.length - 1].output;
     endProducts.add(String(finalGood.guid));
     produced.add(String(finalGood.guid));
@@ -125,6 +148,12 @@ export function goodsCategoriesForRegions(config, regions) {
     if (!categories.has(guid)) categories.set(guid, "intermediate");
   }
   return categories;
+}
+
+export function goodsName(good) {
+  const names = good.name || {};
+  return names[i18n.apiLang()] || names[i18n.lang] || names.english
+    || names.en || names.de || `#${good.guid}`;
 }
 
 export function filterGoodsByCategories(goods, selectedCategories, categories) {
@@ -175,7 +204,6 @@ export function createGoodsCategoryFilters(onChange) {
 }
 
 export function appendGoodsChainCards(container, entries, icons, selectedGuid, onSelect) {
-  const localizedName = (good) => good.name[i18n.lang] || good.name.en || good.name.de;
   const list = document.createElement("div");
   list.className = "goods-chain-list";
   for (const { region, chain } of entries) {
@@ -183,7 +211,7 @@ export function appendGoodsChainCards(container, entries, icons, selectedGuid, o
     section.className = "goods-chain";
     const title = document.createElement("strong");
     title.textContent = i18n.t("goodsChainFor", {
-      product: localizedName(chain.product || chain.stages[chain.stages.length - 1].output),
+      product: goodsName(chain.product || chain.stages[chain.stages.length - 1].output),
     });
     section.append(title);
     const regionLabel = document.createElement("span");
@@ -209,7 +237,7 @@ export function appendGoodsChainCards(container, entries, icons, selectedGuid, o
           button.append(icon);
         }
         const name = document.createElement("span");
-        name.textContent = localizedName(good);
+        name.textContent = goodsName(good);
         button.append(name);
         button.addEventListener("click", () => onSelect(good));
         step.append(button);

@@ -11,7 +11,8 @@ import {
   createGoodsCategoryFilters,
   createGoodsChainsLoader,
   filterGoodsByCategories,
-  goodsCategoriesForRegions,
+  goodsCategories,
+  goodsName,
   matchingGoodsChains,
   validateGoodsIcons,
 } from "../goods-chain-view.js";
@@ -133,7 +134,10 @@ export async function renderIslandDetail(container, islandId, store) {
   let productsDTO = null;
   let goodsChains = null;
   let goodsIcons = null;
-  const goodsChainsLoader = createGoodsChainsLoader(() => api.goodsChains());
+  const goodsChainsLoader = createGoodsChainsLoader(
+    () => api.goodsChains(),
+    (guids, config) => api.productNames(guids, config),
+  );
   let iconLoadPromise = null;
   let showGoodsChains = false;
   let selectedChainGuid = null;
@@ -268,7 +272,7 @@ export async function renderIslandDetail(container, islandId, store) {
     const alerted = byProduct(store.alerts.filter(isWarning), islandId);
     const imports = byProduct(store.alerts.filter((a) => !isWarning(a)), islandId);
     sources.closeAllBut(new Set([...imports.keys()].map((guid) => sources.keyOf(islandId, guid))));
-    const localizedName = (good) => good.name[i18n.lang] || good.name.en || good.name.de;
+    const localizedName = goodsName;
     const goodIcon = (guid) => {
       const src = goodsIcons?.[String(guid)];
       if (!src) return null;
@@ -314,7 +318,7 @@ export async function renderIslandDetail(container, islandId, store) {
         ? filterGoodsByCategories(
           rows,
           selectedCategories,
-          goodsCategoriesForRegions(goodsChains, [island.sessionName]),
+          goodsCategories(goodsChains),
         )
         : [];
     }

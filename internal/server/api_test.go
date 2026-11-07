@@ -85,6 +85,34 @@ type productsJSON struct {
 	Products []productJSON `json:"products"`
 }
 
+func TestProductNames(t *testing.T) {
+	_, url := newServer(t, loadFixture(t, true))
+	var got map[string]map[string]string
+	getJSON(t, url+"/api/v1/catalog/products?guid=151694&guid=151689&lang=de", http.StatusOK, &got)
+
+	if got["151694"]["german"] != "Kollurion" {
+		t.Errorf("Kollurion names = %v", got["151694"])
+	}
+	if got["151689"]["german"] != "Gänsebraten" {
+		t.Errorf("Gänsebraten names = %v", got["151689"])
+	}
+	if got["151689"]["english"] != "Stuffed Goose" {
+		t.Errorf("Gänsebraten English name = %q, want Stuffed Goose", got["151689"]["english"])
+	}
+}
+
+func TestProductNamesRejectInvalidGUIDs(t *testing.T) {
+	_, url := newServer(t, loadFixture(t, true))
+	for _, path := range []string{
+		"/api/v1/catalog/products",
+		"/api/v1/catalog/products?guid=invalid",
+	} {
+		if message := errorOf(t, url+path, http.StatusBadRequest); message == "" {
+			t.Errorf("GET %s: no error message", path)
+		}
+	}
+}
+
 type efficiencyJSON struct {
 	Island   islandJSON `json:"island"`
 	Products []struct {

@@ -20,6 +20,13 @@ func TestEmbeddedCatalogSpotChecks(t *testing.T) {
 		{2068, "klingon", "Oats"}, // unknown language falls back to English
 		{3245, "english", "Latium"},
 		{6627, "german", "Albion"},
+		{149679, "german", "Aegyptus"},
+		{151712, "german", "Nilgänse"},
+		{151694, "german", "Kollurion"},
+		{151680, "german", "Datteln"},
+		{151704, "german", "Lehmziegel"},
+		{151705, "german", "Kalksteinziegel"},
+		{151689, "german", "Gänsebraten"},
 		{2181, "english", "Libertus Workforce"},
 		{2955, "german", "Sardinenhütte"},
 		// GUID 0 is the pipe's "no product" - one building, no output. It is
@@ -40,6 +47,12 @@ func TestEmbeddedCatalogSpotChecks(t *testing.T) {
 	}
 	if e, ok := c.Session(3245); !ok || e.Region != 3225 {
 		t.Errorf("Session(3245) = %+v, %v; want region 3225", e, ok)
+	}
+	if e, ok := c.Session(149679); !ok || e.Region != 149678 {
+		t.Errorf("Session(149679) = %+v, %v; want region 149678", e, ok)
+	}
+	if e, ok := c.Region(149678); !ok || e.Category != "Egyptian" {
+		t.Errorf("Region(149678) = %+v, %v; want id Egyptian", e, ok)
 	}
 	if e, ok := c.Region(3225); !ok || e.Category != "Roman" {
 		t.Errorf("Region(3225) = %+v, %v; want id Roman", e, ok)
@@ -63,7 +76,7 @@ func TestEmbeddedCatalogSpotChecks(t *testing.T) {
 	if _, ok := c.Lookup(153793); ok {
 		t.Error("Lookup(153793) must be unknown")
 	}
-	if c.Revision() != "16ce9aa4e49c7baac45d8c3f75da6d2ba27ab564" {
+	if c.Revision() != "520ce4e36a4120c399f5a9dc55889e342369e07a" {
 		t.Errorf("Revision() = %q", c.Revision())
 	}
 }

@@ -5,7 +5,7 @@ import {
   createGoodsCategoryFilters,
   createGoodsChainsLoader,
   filterGoodsByCategories,
-  goodsCategoriesForRegions,
+  goodsCategories,
 } from "../goods-chain-view.js";
 
 const numberFormatCache = new Map();
@@ -65,7 +65,10 @@ export function renderCompare(container, store) {
   const inFlight = new Set();
   let disposed = false;
   let goodsChains = null;
-  const goodsChainsLoader = createGoodsChainsLoader(() => api.goodsChains());
+  const goodsChainsLoader = createGoodsChainsLoader(
+    () => api.goodsChains(),
+    (guids, config) => api.productNames(guids, config),
+  );
   let categoryLoading = false;
   let categoryError = "";
   let search = "";
@@ -181,19 +184,12 @@ export function renderCompare(container, store) {
       }
     }
     const selectedCategories = categoryFilters.selected();
-    const regionByIsland = new Map(islands.map((island) => [island.id, island.sessionName]));
-    const categoriesByRegion = new Map();
-    // A GUID can be an end product in one region and an input in another,
-    // so classify comparison rows against their own island's region.
+    const categories = goodsCategories(goodsChains);
     const matches = (product) => {
       if (search.trim() && !product.name.toLowerCase().includes(search.trim().toLowerCase())) return false;
       if (selectedCategories.size === 0) return true;
       if (!goodsChains) return false;
-      const region = regionByIsland.get(product.islandId);
-      if (!categoriesByRegion.has(region)) {
-        categoriesByRegion.set(region, goodsCategoriesForRegions(goodsChains, [region]));
-      }
-      return filterGoodsByCategories([product], selectedCategories, categoriesByRegion.get(region)).length > 0;
+      return filterGoodsByCategories([product], selectedCategories, categories).length > 0;
     };
     const visibleGoodsRows = goodsRows.filter(matches);
     const visibleEfficiencyRows = efficiencyRows.filter(matches);

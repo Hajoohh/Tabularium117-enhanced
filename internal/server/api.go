@@ -47,6 +47,37 @@ func (s *Server) handleIslands(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, out)
 }
 
+func (s *Server) handleProductNames(w http.ResponseWriter, r *http.Request) {
+	guids := r.URL.Query()["guid"]
+	if len(guids) == 0 || len(guids) > 1000 {
+		writeError(w, http.StatusBadRequest, "provide between 1 and 1000 product GUIDs")
+		return
+	}
+
+	lang := s.language(r)
+	names := make(map[string]map[string]string, len(guids))
+	for _, raw := range guids {
+		guid, err := strconv.ParseInt(raw, 10, 32)
+		if err != nil {
+			writeError(w, http.StatusBadRequest, fmt.Sprintf("product GUID %q must be numeric", raw))
+			return
+		}
+		key := strconv.FormatInt(guid, 10)
+		if _, exists := names[key]; exists {
+			continue
+		}
+		if entry, ok := s.catalog.Product(int32(guid)); ok {
+			names[key] = entry.Names
+			continue
+		}
+		names[key] = map[string]string{
+			"english": s.catalog.Name(int32(guid), "english"),
+			lang:      s.catalog.Name(int32(guid), lang),
+		}
+	}
+	writeJSON(w, http.StatusOK, names)
+}
+
 func (s *Server) handleProducts(w http.ResponseWriter, r *http.Request) {
 	snap, lang, ok := s.lookupIsland(w, r)
 	if !ok {

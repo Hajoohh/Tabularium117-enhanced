@@ -28,6 +28,11 @@ known about the game's pipe.
 - **Game names and GUIDs** come from a pinned revision of
   `anno-mods/anno-117-calculator`, recorded in `THIRD_PARTY_NOTICES.md`; no
   Ubisoft icons are shipped.
+- **Production chains** are generated from the local
+  `dist\support_files\params.js`; refresh the checked-in browser data with
+  `go run ./tools/gen-goods-chains --params dist\support_files\params.js`.
+  The generator follows recipe inputs recursively and preserves alternative
+  production paths.
 - **Language:** code, comments and commit messages in English; user-facing
   documentation in German and English. `KONZEPT.md` is German.
 
