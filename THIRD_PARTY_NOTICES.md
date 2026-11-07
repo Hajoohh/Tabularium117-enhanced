@@ -7,9 +7,12 @@ code from the third-party projects below.
 
 - **What we take:** GUID → name/category/region data baked into
   `internal/catalog/catalog.json` (products, buildings, workforce types,
-  regions, sessions, with names in all 12 languages the calculator ships).
-  Regenerated with `tools/gen-catalog` from the project's `js/params.js`.
-- **Revision:** `16ce9aa4e49c7baac45d8c3f75da6d2ba27ab564`, dated 2026-09-19.
+  regions, sessions, with names in all 12 languages the calculator ships),
+  and GUID-only production input/output relations in
+  `web/js/goods-chains.json`. The catalog is regenerated with
+  `tools/gen-catalog`; production chains are regenerated with
+  `tools/gen-goods-chains` from the calculator's `params.js`.
+- **Revision:** `520ce4e36a4120c399f5a9dc55889e342369e07a`, dated 2026-11-05.
 - **License:** MIT.
 
 ```
@@ -37,10 +40,10 @@ SOFTWARE.
 ```
 
 The calculator's own `LICENSE` file additionally notes that all game assets
-(icons, images, building/product names, game balance values) are © Ubisoft
-and not covered by its MIT license. Tabularium 117 takes only the GUID/name/
-category/region mapping, never icon paths, in line with that notice and with
-`KONZEPT.md` §7.
+(icons, images, building/product names, game balance values, including
+production recipes) are © Ubisoft and not covered by its MIT license.
+Tabularium 117 does not ship game icons or images; `goods-chains.json` stores
+only GUID relationships, without game names, quantities, or icon paths.
 
 ## github.com/Microsoft/go-winio v0.6.2
 

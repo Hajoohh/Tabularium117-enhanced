@@ -1,376 +1,3055 @@
 {
   "regions": {
-    "Latium": [
+    "Aegyptus": [
       {
-        "product": { "guid": 2174, "name": { "de": "Bretter", "en": "Timber" } },
+        "product": {
+          "guid": 2110
+        },
         "stages": [
-          { "inputs": [{ "guid": 2077, "name": { "de": "Holz", "en": "Wood" } }], "output": { "guid": 2174, "name": { "de": "Bretter", "en": "Timber" } } }
+          {
+            "inputs": [
+              {
+                "guid": 151683
+              },
+              {
+                "guid": 2077
+              }
+            ],
+            "output": {
+              "guid": 2110
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2176, "name": { "de": "Ziegel", "en": "Tiles" } },
+        "product": {
+          "guid": 2115
+        },
         "stages": [
-          { "inputs": [{ "guid": 2086, "name": { "de": "Lehm", "en": "Clay" } }], "output": { "guid": 2176, "name": { "de": "Ziegel", "en": "Tiles" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2178, "name": { "de": "Beton", "en": "Concrete" } },
+        "product": {
+          "guid": 2119
+        },
         "stages": [
-          { "inputs": [{ "guid": 2091, "name": { "de": "Quarzsand", "en": "Silica" } }, { "guid": 2078, "name": { "de": "Kalkstein", "en": "Limestone" } }], "output": { "guid": 2178, "name": { "de": "Beton", "en": "Concrete" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2069
+              }
+            ],
+            "output": {
+              "guid": 2119
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2179, "name": { "de": "Marmor", "en": "Marble" } },
+        "product": {
+          "guid": 2121
+        },
         "stages": [
-          { "inputs": [{ "guid": 2084, "name": { "de": "Rohmarmor", "en": "Uncut Marble" } }], "output": { "guid": 2179, "name": { "de": "Marmor", "en": "Marble" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              }
+            ],
+            "output": {
+              "guid": 2121
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2152, "name": { "de": "Mosaike", "en": "Mosaics" } },
+        "product": {
+          "guid": 2124
+        },
         "stages": [
-          { "inputs": [{ "guid": 8563, "name": { "de": "Mineralien", "en": "Minerals" } }], "output": { "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } } },
-          { "inputs": [{ "guid": 2086, "name": { "de": "Lehm", "en": "Clay" } }, { "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } }], "output": { "guid": 2152, "name": { "de": "Mosaike", "en": "Mosaics" } } }
+          {
+            "inputs": [
+              {
+                "guid": 8563
+              }
+            ],
+            "output": {
+              "guid": 2124
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2171, "name": { "de": "Seile", "en": "Rope" } },
+        "product": {
+          "guid": 2127
+        },
         "stages": [
-          { "inputs": [{ "guid": 31694, "name": { "de": "Hanf", "en": "Hemp" } }], "output": { "guid": 2171, "name": { "de": "Seile", "en": "Rope" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2100
+              },
+              {
+                "guid": 2099
+              }
+            ],
+            "output": {
+              "guid": 2127
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2172, "name": { "de": "Segel", "en": "Sails" } },
+        "product": {
+          "guid": 2131
+        },
         "stages": [
-          { "inputs": [{ "guid": 2073, "name": { "de": "Schafe", "en": "Sheep" } }], "output": { "guid": 2172, "name": { "de": "Segel", "en": "Sails" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2093
+              }
+            ],
+            "output": {
+              "guid": 2131
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2173, "name": { "de": "Waffen", "en": "Weapons" } },
+        "product": {
+          "guid": 2132
+        },
         "stages": [
-          { "inputs": [{ "guid": 2080, "name": { "de": "Eisenerz", "en": "Iron Ore" } }], "output": { "guid": 2115, "name": { "de": "Eisen", "en": "Iron" } } },
-          { "inputs": [{ "guid": 2115, "name": { "de": "Eisen", "en": "Iron" } }], "output": { "guid": 2173, "name": { "de": "Waffen", "en": "Weapons" } } }
+          {
+            "inputs": [
+              {
+                "guid": 151712
+              }
+            ],
+            "output": {
+              "guid": 2132
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 13810, "name": { "de": "Rüstung", "en": "Armour" } },
+        "product": {
+          "guid": 2136
+        },
         "stages": [
-          { "inputs": [{ "guid": 2080, "name": { "de": "Eisenerz", "en": "Iron Ore" } }], "output": { "guid": 2115, "name": { "de": "Eisen", "en": "Iron" } } },
-          { "inputs": [{ "guid": 2074, "name": { "de": "Schweine", "en": "Pigs" } }, { "guid": 2090, "name": { "de": "Salz", "en": "Salt" } }], "output": { "guid": 2110, "name": { "de": "Leder", "en": "Leather" } } },
-          { "inputs": [{ "guid": 2110, "name": { "de": "Leder", "en": "Leather" } }, { "guid": 2115, "name": { "de": "Eisen", "en": "Iron" } }], "output": { "guid": 13810, "name": { "de": "Rüstung", "en": "Armour" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2068
+              }
+            ],
+            "output": {
+              "guid": 2136
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2136, "name": { "de": "Haferbrei", "en": "Porridge" } },
+        "product": {
+          "guid": 2137
+        },
         "stages": [
-          { "inputs": [{ "guid": 2068, "name": { "de": "Hafer", "en": "Oats" } }], "output": { "guid": 2136, "name": { "de": "Haferbrei", "en": "Porridge" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2069
+              }
+            ],
+            "output": {
+              "guid": 2119
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2119
+              }
+            ],
+            "output": {
+              "guid": 2137
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2141, "name": { "de": "Tuniken", "en": "Tunics" } },
+        "product": {
+          "guid": 2138
+        },
         "stages": [
-          { "inputs": [{ "guid": 31694, "name": { "de": "Hanf", "en": "Hemp" } }], "output": { "guid": 2141, "name": { "de": "Tuniken", "en": "Tunics" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2070
+              },
+              {
+                "guid": 2076
+              }
+            ],
+            "output": {
+              "guid": 2138
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2142, "name": { "de": "Pilei", "en": "Pileus" } },
+        "product": {
+          "guid": 2141
+        },
         "stages": [
-          { "inputs": [{ "guid": 2073, "name": { "de": "Schafe", "en": "Sheep" } }], "output": { "guid": 2142, "name": { "de": "Pilei", "en": "Pileus" } } }
+          {
+            "inputs": [
+              {
+                "guid": 31694
+              }
+            ],
+            "output": {
+              "guid": 2141
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2137, "name": { "de": "Brot", "en": "Bread" } },
+        "product": {
+          "guid": 2143
+        },
         "stages": [
-          { "inputs": [{ "guid": 2069, "name": { "de": "Weizen", "en": "Wheat" } }], "output": { "guid": 2119, "name": { "de": "Mehl", "en": "Flour" } } },
-          { "inputs": [{ "guid": 2119, "name": { "de": "Mehl", "en": "Flour" } }], "output": { "guid": 2137, "name": { "de": "Brot", "en": "Bread" } } }
+          {
+            "inputs": [
+              {
+                "guid": 151712
+              }
+            ],
+            "output": {
+              "guid": 2132
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2071
+              },
+              {
+                "guid": 2132
+              }
+            ],
+            "output": {
+              "guid": 2143
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2139, "name": { "de": "Garum", "en": "Garum" } },
+        "product": {
+          "guid": 2144
+        },
         "stages": [
-          { "inputs": [{ "guid": 2089, "name": { "de": "Makrelen", "en": "Mackerel" } }, { "guid": 2090, "name": { "de": "Salz", "en": "Salt" } }], "output": { "guid": 2139, "name": { "de": "Garum", "en": "Garum" } } }
+          {
+            "inputs": [
+              {
+                "guid": 151683
+              },
+              {
+                "guid": 2077
+              }
+            ],
+            "output": {
+              "guid": 2110
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2110
+              }
+            ],
+            "output": {
+              "guid": 2144
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2143, "name": { "de": "Seife", "en": "Soap" } },
+        "product": {
+          "guid": 2146
+        },
         "stages": [
-          { "inputs": [{ "guid": 2074, "name": { "de": "Schweine", "en": "Pigs" } }], "output": { "guid": 2132, "name": { "de": "Schmalz", "en": "Lard" } } },
-          { "inputs": [{ "guid": 2071, "name": { "de": "Lavandula", "en": "Lavender" } }, { "guid": 2132, "name": { "de": "Schmalz", "en": "Lard" } }], "output": { "guid": 2143, "name": { "de": "Seife", "en": "Soap" } } }
+          {
+            "inputs": [
+              {
+                "guid": 31697
+              }
+            ],
+            "output": {
+              "guid": 31698
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 8563
+              },
+              {
+                "guid": 31698
+              }
+            ],
+            "output": {
+              "guid": 2146
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2144, "name": { "de": "Sandalen", "en": "Sandals" } },
+        "product": {
+          "guid": 2149
+        },
         "stages": [
-          { "inputs": [{ "guid": 2074, "name": { "de": "Schweine", "en": "Pigs" } }, { "guid": 2090, "name": { "de": "Salz", "en": "Salt" } }], "output": { "guid": 2110, "name": { "de": "Leder", "en": "Leather" } } },
-          { "inputs": [{ "guid": 2110, "name": { "de": "Leder", "en": "Leather" } }], "output": { "guid": 2144, "name": { "de": "Sandalen", "en": "Sandals" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2072
+              }
+            ],
+            "output": {
+              "guid": 2149
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 31700, "name": { "de": "Amphoren", "en": "Amphorae" } },
+        "product": {
+          "guid": 2152
+        },
         "stages": [
-          { "inputs": [{ "guid": 2086, "name": { "de": "Lehm", "en": "Clay" } }, { "guid": 31695, "name": { "de": "Harz", "en": "Resin" } }], "output": { "guid": 31700, "name": { "de": "Amphoren", "en": "Amphorae" } } }
+          {
+            "inputs": [
+              {
+                "guid": 8563
+              }
+            ],
+            "output": {
+              "guid": 2124
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2102
+              },
+              {
+                "guid": 2124
+              }
+            ],
+            "output": {
+              "guid": 2152
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2149, "name": { "de": "Olivenöl", "en": "Olive Oil" } },
+        "product": {
+          "guid": 2153
+        },
         "stages": [
-          { "inputs": [{ "guid": 2072, "name": { "de": "Oliven", "en": "Olives" } }], "output": { "guid": 2149, "name": { "de": "Olivenöl", "en": "Olive Oil" } } }
+          {
+            "inputs": [
+              {
+                "guid": 151683
+              }
+            ],
+            "output": {
+              "guid": 2153
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2138, "name": { "de": "Wein", "en": "Wine" } },
+        "product": {
+          "guid": 2154
+        },
         "stages": [
-          { "inputs": [{ "guid": 2070, "name": { "de": "Weintrauben", "en": "Grapes" } }, { "guid": 2076, "name": { "de": "Honigwaben", "en": "Honeycombs" } }], "output": { "guid": 2138, "name": { "de": "Wein", "en": "Wine" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2093
+              }
+            ],
+            "output": {
+              "guid": 2131
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2131
+              }
+            ],
+            "output": {
+              "guid": 2154
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2150, "name": { "de": "Schrifttafeln", "en": "Writing Tablets" } },
+        "product": {
+          "guid": 2171
+        },
         "stages": [
-          { "inputs": [{ "guid": 8561, "name": { "de": "Sandarakholz", "en": "Sandarac Wood" } }, { "guid": 2076, "name": { "de": "Honigwaben", "en": "Honeycombs" } }], "output": { "guid": 2150, "name": { "de": "Schrifttafeln", "en": "Writing Tablets" } } }
+          {
+            "inputs": [
+              {
+                "guid": 31694
+              }
+            ],
+            "output": {
+              "guid": 2171
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2145, "name": { "de": "Togen", "en": "Togas" } },
+        "product": {
+          "guid": 2172
+        },
         "stages": [
-          { "inputs": [{ "guid": 2063, "name": { "de": "Flachs", "en": "Flax" } }], "output": { "guid": 2121, "name": { "de": "Stoffe", "en": "Cloth" } } },
-          { "inputs": [{ "guid": 3158, "name": { "de": "Purpurschnecken", "en": "Murex Snails" } }], "output": { "guid": 2180, "name": { "de": "Tyrischer Purpur", "en": "Tyrian Purple" } } },
-          { "inputs": [{ "guid": 2121, "name": { "de": "Stoffe", "en": "Cloth" } }, { "guid": 2180, "name": { "de": "Tyrischer Purpur", "en": "Tyrian Purple" } }], "output": { "guid": 2145, "name": { "de": "Togen", "en": "Togas" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2073
+              }
+            ],
+            "output": {
+              "guid": 2172
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2151, "name": { "de": "Feines Glas", "en": "Fine Glass" } },
+        "product": {
+          "guid": 2173
+        },
         "stages": [
-          { "inputs": [{ "guid": 8563, "name": { "de": "Mineralien", "en": "Minerals" } }], "output": { "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } } },
-          { "inputs": [{ "guid": 2091, "name": { "de": "Quarzsand", "en": "Silica" } }], "output": { "guid": 2117, "name": { "de": "Glas", "en": "Glass" } } },
-          { "inputs": [{ "guid": 2124, "name": { "de": "Farbstoffe", "en": "Pigments" } }, { "guid": 2117, "name": { "de": "Glas", "en": "Glass" } }], "output": { "guid": 2151, "name": { "de": "Feines Glas", "en": "Fine Glass" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2115
+              }
+            ],
+            "output": {
+              "guid": 2173
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 145220, "name": { "de": "Figuren", "en": "Statuettes" } },
+        "product": {
+          "guid": 2174
+        },
         "stages": [
-          { "inputs": [{ "guid": 145102, "name": { "de": "Obsidian", "en": "Obsidian" } }, { "guid": 2084, "name": { "de": "Rohmarmor", "en": "Uncut Marble" } }], "output": { "guid": 145220, "name": { "de": "Figuren", "en": "Statuettes" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2077
+              }
+            ],
+            "output": {
+              "guid": 2174
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2140, "name": { "de": "Austern mit Kaviar", "en": "Oysters with Caviar" } },
+        "product": {
+          "guid": 2176
+        },
         "stages": [
-          { "inputs": [{ "guid": 2087, "name": { "de": "Störe", "en": "Sturgeon" } }], "output": { "guid": 8558, "name": { "de": "Kaviar", "en": "Caviar" } } },
-          { "inputs": [{ "guid": 2112, "name": { "de": "Austern", "en": "Oysters" } }, { "guid": 8558, "name": { "de": "Kaviar", "en": "Caviar" } }], "output": { "guid": 2140, "name": { "de": "Austern mit Kaviar", "en": "Oysters with Caviar" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2102
+              }
+            ],
+            "output": {
+              "guid": 2176
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2146, "name": { "de": "Halsketten", "en": "Necklaces" } },
+        "product": {
+          "guid": 2178
+        },
         "stages": [
-          { "inputs": [{ "guid": 31697, "name": { "de": "Golderz", "en": "Gold Ore" } }], "output": { "guid": 31698, "name": { "de": "Gold", "en": "Gold" } } },
-          { "inputs": [{ "guid": 31698, "name": { "de": "Gold", "en": "Gold" } }, { "guid": 8563, "name": { "de": "Mineralien", "en": "Minerals" } }], "output": { "guid": 2146, "name": { "de": "Halsketten", "en": "Necklaces" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2078
+              },
+              {
+                "guid": 2091
+              }
+            ],
+            "output": {
+              "guid": 2178
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 145221, "name": { "de": "Latrunculi-Sets", "en": "Latrunculi Sets" } },
+        "product": {
+          "guid": 13810
+        },
         "stages": [
-          { "inputs": [{ "guid": 31697, "name": { "de": "Golderz", "en": "Gold Ore" } }], "output": { "guid": 31698, "name": { "de": "Gold", "en": "Gold" } } },
-          { "inputs": [{ "guid": 8561, "name": { "de": "Sandarakholz", "en": "Sandarac Wood" } }, { "guid": 31698, "name": { "de": "Gold", "en": "Gold" } }], "output": { "guid": 2123, "name": { "de": "Verziertes Holz", "en": "Ornate Wood" } } },
-          { "inputs": [{ "guid": 145102, "name": { "de": "Obsidian", "en": "Obsidian" } }, { "guid": 2123, "name": { "de": "Verziertes Holz", "en": "Ornate Wood" } }], "output": { "guid": 145221, "name": { "de": "Latrunculi-Sets", "en": "Latrunculi Sets" } } }
+          {
+            "inputs": [
+              {
+                "guid": 151683
+              },
+              {
+                "guid": 2077
+              }
+            ],
+            "output": {
+              "guid": 2110
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2110
+              },
+              {
+                "guid": 2115
+              }
+            ],
+            "output": {
+              "guid": 13810
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2166, "name": { "de": "Lyren", "en": "Standing Lyres" } },
+        "product": {
+          "guid": 31698
+        },
         "stages": [
-          { "inputs": [{ "guid": 2073, "name": { "de": "Schafe", "en": "Sheep" } }], "output": { "guid": 2135, "name": { "de": "Saiten", "en": "String" } } },
-          { "inputs": [{ "guid": 31697, "name": { "de": "Golderz", "en": "Gold Ore" } }], "output": { "guid": 31698, "name": { "de": "Gold", "en": "Gold" } } },
-          { "inputs": [{ "guid": 31698, "name": { "de": "Gold", "en": "Gold" } }, { "guid": 8561, "name": { "de": "Sandarakholz", "en": "Sandarac Wood" } }], "output": { "guid": 2123, "name": { "de": "Verziertes Holz", "en": "Ornate Wood" } } },
-          { "inputs": [{ "guid": 2123, "name": { "de": "Verziertes Holz", "en": "Ornate Wood" } }, { "guid": 2135, "name": { "de": "Saiten", "en": "String" } }], "output": { "guid": 2166, "name": { "de": "Lyren", "en": "Standing Lyres" } } }
+          {
+            "inputs": [
+              {
+                "guid": 31697
+              }
+            ],
+            "output": {
+              "guid": 31698
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2147, "name": { "de": "Liegen", "en": "Loungers" } },
+        "product": {
+          "guid": 31709
+        },
         "stages": [
-          { "inputs": [{ "guid": 3158, "name": { "de": "Purpurschnecken", "en": "Murex Snails" } }], "output": { "guid": 2180, "name": { "de": "Tyrischer Purpur", "en": "Tyrian Purple" } } },
-          { "inputs": [{ "guid": 2180, "name": { "de": "Tyrischer Purpur", "en": "Tyrian Purple" } }, { "guid": 2063, "name": { "de": "Flachs", "en": "Flax" } }], "output": { "guid": 8562, "name": { "de": "Polster", "en": "Cushions" } } },
-          { "inputs": [{ "guid": 8561, "name": { "de": "Sandarakholz", "en": "Sandarac Wood" } }, { "guid": 8562, "name": { "de": "Polster", "en": "Cushions" } }], "output": { "guid": 2147, "name": { "de": "Liegen", "en": "Loungers" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2101
+              }
+            ],
+            "output": {
+              "guid": 31709
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151685
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2099
+              },
+              {
+                "guid": 2091
+              }
+            ],
+            "output": {
+              "guid": 151685
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151686
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2076
+              },
+              {
+                "guid": 151683
+              }
+            ],
+            "output": {
+              "guid": 151686
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151687
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 151678
+              }
+            ],
+            "output": {
+              "guid": 151687
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151688
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2103
+              }
+            ],
+            "output": {
+              "guid": 151688
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151689
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 151712
+              },
+              {
+                "guid": 2069
+              }
+            ],
+            "output": {
+              "guid": 151689
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151690
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 151713
+              },
+              {
+                "guid": 2076
+              }
+            ],
+            "output": {
+              "guid": 151690
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151691
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2069
+              }
+            ],
+            "output": {
+              "guid": 2119
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2076
+              },
+              {
+                "guid": 2119
+              }
+            ],
+            "output": {
+              "guid": 151691
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151692
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 151714
+              },
+              {
+                "guid": 151679
+              }
+            ],
+            "output": {
+              "guid": 151692
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151693
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 151706
+              }
+            ],
+            "output": {
+              "guid": 151693
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151694
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 151712
+              }
+            ],
+            "output": {
+              "guid": 2132
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2132
+              },
+              {
+                "guid": 2085
+              }
+            ],
+            "output": {
+              "guid": 151694
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151695
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              }
+            ],
+            "output": {
+              "guid": 2121
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2121
+              }
+            ],
+            "output": {
+              "guid": 151695
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151696
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              }
+            ],
+            "output": {
+              "guid": 2121
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2099
+              },
+              {
+                "guid": 2091
+              }
+            ],
+            "output": {
+              "guid": 151685
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2121
+              },
+              {
+                "guid": 151685
+              }
+            ],
+            "output": {
+              "guid": 151696
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151697
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 151678
+              }
+            ],
+            "output": {
+              "guid": 151687
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 151713
+              },
+              {
+                "guid": 151687
+              }
+            ],
+            "output": {
+              "guid": 151697
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151698
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2076
+              },
+              {
+                "guid": 151683
+              }
+            ],
+            "output": {
+              "guid": 151686
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 151679
+              },
+              {
+                "guid": 151686
+              }
+            ],
+            "output": {
+              "guid": 151698
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151699
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2099
+              },
+              {
+                "guid": 2091
+              }
+            ],
+            "output": {
+              "guid": 151685
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2102
+              },
+              {
+                "guid": 151685
+              }
+            ],
+            "output": {
+              "guid": 151699
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151700
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 151678
+              }
+            ],
+            "output": {
+              "guid": 151687
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2102
+              },
+              {
+                "guid": 151687
+              }
+            ],
+            "output": {
+              "guid": 151700
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151701
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2100
+              },
+              {
+                "guid": 2099
+              }
+            ],
+            "output": {
+              "guid": 2127
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 151706
+              },
+              {
+                "guid": 2127
+              }
+            ],
+            "output": {
+              "guid": 151701
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151702
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 8563
+              }
+            ],
+            "output": {
+              "guid": 2124
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2103
+              }
+            ],
+            "output": {
+              "guid": 151688
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2124
+              },
+              {
+                "guid": 151688
+              }
+            ],
+            "output": {
+              "guid": 151702
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151703
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 31697
+              }
+            ],
+            "output": {
+              "guid": 31698
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 31698
+              },
+              {
+                "guid": 151714
+              }
+            ],
+            "output": {
+              "guid": 151703
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151704
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2102
+              },
+              {
+                "guid": 2103
+              }
+            ],
+            "output": {
+              "guid": 151704
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 151705
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2078
+              }
+            ],
+            "output": {
+              "guid": 151705
+            }
+          }
         ]
       }
     ],
     "Albion": [
       {
-        "product": { "guid": 2174, "name": { "de": "Bretter", "en": "Timber" } },
+        "product": {
+          "guid": 2110
+        },
         "stages": [
-          { "inputs": [{ "guid": 2077, "name": { "de": "Holz", "en": "Wood" } }], "output": { "guid": 2174, "name": { "de": "Bretter", "en": "Timber" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              },
+              {
+                "guid": 2077
+              }
+            ],
+            "output": {
+              "guid": 2110
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2169, "name": { "de": "Flechtwerk", "en": "Wattle & Daub" } },
+        "product": {
+          "guid": 2115
+        },
         "stages": [
-          { "inputs": [{ "guid": 2103, "name": { "de": "Schilf", "en": "Reeds" } }, { "guid": 2102, "name": { "de": "Schlamm", "en": "Mud" } }], "output": { "guid": 2169, "name": { "de": "Flechtwerk", "en": "Wattle & Daub" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2176, "name": { "de": "Ziegel", "en": "Tiles" } },
+        "product": {
+          "guid": 2119
+        },
         "stages": [
-          { "inputs": [{ "guid": 2102, "name": { "de": "Schlamm", "en": "Mud" } }], "output": { "guid": 2176, "name": { "de": "Ziegel", "en": "Tiles" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2069
+              }
+            ],
+            "output": {
+              "guid": 2119
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2178, "name": { "de": "Beton", "en": "Concrete" } },
+        "product": {
+          "guid": 2126
+        },
         "stages": [
-          { "inputs": [{ "guid": 2091, "name": { "de": "Quarzsand", "en": "Silica" } }, { "guid": 2078, "name": { "de": "Kalkstein", "en": "Limestone" } }], "output": { "guid": 2178, "name": { "de": "Beton", "en": "Concrete" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2094
+              },
+              {
+                "guid": 2099
+              }
+            ],
+            "output": {
+              "guid": 2126
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 31709, "name": { "de": "Granit", "en": "Granite" } },
+        "product": {
+          "guid": 2127
+        },
         "stages": [
-          { "inputs": [{ "guid": 2101, "name": { "de": "Granitblöcke", "en": "Granite Block" } }], "output": { "guid": 31709, "name": { "de": "Granit", "en": "Granite" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2100
+              },
+              {
+                "guid": 2099
+              }
+            ],
+            "output": {
+              "guid": 2127
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2172, "name": { "de": "Segel", "en": "Sails" } },
+        "product": {
+          "guid": 2128
+        },
         "stages": [
-          { "inputs": [{ "guid": 2073, "name": { "de": "Schafe", "en": "Sheep" } }], "output": { "guid": 2172, "name": { "de": "Segel", "en": "Sails" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2077
+              },
+              {
+                "guid": 2103
+              }
+            ],
+            "output": {
+              "guid": 2128
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2171, "name": { "de": "Seile", "en": "Rope" } },
+        "product": {
+          "guid": 2129
+        },
         "stages": [
-          { "inputs": [{ "guid": 31694, "name": { "de": "Hanf", "en": "Hemp" } }], "output": { "guid": 2171, "name": { "de": "Seile", "en": "Rope" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2079
+              }
+            ],
+            "output": {
+              "guid": 2129
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2173, "name": { "de": "Waffen", "en": "Weapons" } },
+        "product": {
+          "guid": 2131
+        },
         "stages": [
-          { "inputs": [{ "guid": 2080, "name": { "de": "Eisenerz", "en": "Iron Ore" } }], "output": { "guid": 2115, "name": { "de": "Eisen", "en": "Iron" } } },
-          { "inputs": [{ "guid": 2115, "name": { "de": "Eisen", "en": "Iron" } }], "output": { "guid": 2173, "name": { "de": "Waffen", "en": "Weapons" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2093
+              }
+            ],
+            "output": {
+              "guid": 2131
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 13810, "name": { "de": "Rüstung", "en": "Armour" } },
+        "product": {
+          "guid": 2132
+        },
         "stages": [
-          { "inputs": [{ "guid": 2080, "name": { "de": "Eisenerz", "en": "Iron Ore" } }], "output": { "guid": 2115, "name": { "de": "Eisen", "en": "Iron" } } },
-          { "inputs": [{ "guid": 2074, "name": { "de": "Schweine", "en": "Pigs" } }, { "guid": 2077, "name": { "de": "Holz", "en": "Wood" } }], "output": { "guid": 2110, "name": { "de": "Leder", "en": "Leather" } } },
-          { "inputs": [{ "guid": 2110, "name": { "de": "Leder", "en": "Leather" } }, { "guid": 2115, "name": { "de": "Eisen", "en": "Iron" } }], "output": { "guid": 13810, "name": { "de": "Rüstung", "en": "Armour" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              }
+            ],
+            "output": {
+              "guid": 2132
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2159, "name": { "de": "Schilfschuhe", "en": "Reed Shoes" } },
+        "product": {
+          "guid": 2133
+        },
         "stages": [
-          { "inputs": [{ "guid": 2103, "name": { "de": "Schilf", "en": "Reeds" } }], "output": { "guid": 2159, "name": { "de": "Schilfschuhe", "en": "Reed Shoes" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2106
+              }
+            ],
+            "output": {
+              "guid": 2133
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2141, "name": { "de": "Tuniken", "en": "Tunics" } },
+        "product": {
+          "guid": 2137
+        },
         "stages": [
-          { "inputs": [{ "guid": 31694, "name": { "de": "Hanf", "en": "Hemp" } }], "output": { "guid": 2141, "name": { "de": "Tuniken", "en": "Tunics" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2069
+              }
+            ],
+            "output": {
+              "guid": 2119
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2119
+              }
+            ],
+            "output": {
+              "guid": 2137
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2153, "name": { "de": "Käse", "en": "Cheese" } },
+        "product": {
+          "guid": 2138
+        },
         "stages": [
-          { "inputs": [{ "guid": 2105, "name": { "de": "Auerochsen", "en": "Aurochs" } }], "output": { "guid": 2153, "name": { "de": "Käse", "en": "Cheese" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2070
+              },
+              {
+                "guid": 2076
+              }
+            ],
+            "output": {
+              "guid": 2138
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2154, "name": { "de": "Bier", "en": "Beer" } },
+        "product": {
+          "guid": 2141
+        },
         "stages": [
-          { "inputs": [{ "guid": 2093, "name": { "de": "Gerste", "en": "Barley" } }], "output": { "guid": 2131, "name": { "de": "Malz", "en": "Malt" } } },
-          { "inputs": [{ "guid": 2131, "name": { "de": "Malz", "en": "Malt" } }], "output": { "guid": 2154, "name": { "de": "Bier", "en": "Beer" } } }
+          {
+            "inputs": [
+              {
+                "guid": 31694
+              }
+            ],
+            "output": {
+              "guid": 2141
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2158, "name": { "de": "Hosen", "en": "Trousers" } },
+        "product": {
+          "guid": 2153
+        },
         "stages": [
-          { "inputs": [{ "guid": 2073, "name": { "de": "Schafe", "en": "Sheep" } }, { "guid": 2094, "name": { "de": "Färberpflanzen", "en": "Dye Plants" } }], "output": { "guid": 2158, "name": { "de": "Hosen", "en": "Trousers" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2105
+              }
+            ],
+            "output": {
+              "guid": 2153
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 55954, "name": { "de": "Trinkhörner", "en": "Drinking Horns" } },
+        "product": {
+          "guid": 2154
+        },
         "stages": [
-          { "inputs": [{ "guid": 2105, "name": { "de": "Auerochsen", "en": "Aurochs" } }, { "guid": 2100, "name": { "de": "Zinnerz", "en": "Tin Ore" } }], "output": { "guid": 55954, "name": { "de": "Trinkhörner", "en": "Drinking Horns" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2093
+              }
+            ],
+            "output": {
+              "guid": 2131
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2131
+              }
+            ],
+            "output": {
+              "guid": 2154
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2157, "name": { "de": "Torques", "en": "Torcs" } },
+        "product": {
+          "guid": 2155
+        },
         "stages": [
-          { "inputs": [{ "guid": 2099, "name": { "de": "Kupfererz", "en": "Copper Ore" } }], "output": { "guid": 2157, "name": { "de": "Torques", "en": "Torcs" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2106
+              }
+            ],
+            "output": {
+              "guid": 2133
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              }
+            ],
+            "output": {
+              "guid": 2132
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2133
+              },
+              {
+                "guid": 2132
+              }
+            ],
+            "output": {
+              "guid": 2155
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 31768, "name": { "de": "Rinderbraten", "en": "Roast Beef" } },
+        "product": {
+          "guid": 2156
+        },
         "stages": [
-          { "inputs": [{ "guid": 2105, "name": { "de": "Auerochsen", "en": "Aurochs" } }, { "guid": 7985, "name": { "de": "Salzkraut", "en": "Saltwort" } }], "output": { "guid": 31768, "name": { "de": "Rinderbraten", "en": "Roast Beef" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2079
+              }
+            ],
+            "output": {
+              "guid": 2129
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2129
+              }
+            ],
+            "output": {
+              "guid": 2156
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2137, "name": { "de": "Brot", "en": "Bread" } },
+        "product": {
+          "guid": 2157
+        },
         "stages": [
-          { "inputs": [{ "guid": 2069, "name": { "de": "Weizen", "en": "Wheat" } }], "output": { "guid": 2119, "name": { "de": "Mehl", "en": "Flour" } } },
-          { "inputs": [{ "guid": 2119, "name": { "de": "Mehl", "en": "Flour" } }], "output": { "guid": 2137, "name": { "de": "Brot", "en": "Bread" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2099
+              }
+            ],
+            "output": {
+              "guid": 2157
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 8405, "name": { "de": "Würste", "en": "Sausages" } },
+        "product": {
+          "guid": 2158
+        },
         "stages": [
-          { "inputs": [{ "guid": 2074, "name": { "de": "Schweine", "en": "Pigs" } }, { "guid": 31701, "name": { "de": "Kräuter", "en": "Herbs" } }], "output": { "guid": 8405, "name": { "de": "Würste", "en": "Sausages" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2073
+              },
+              {
+                "guid": 2094
+              }
+            ],
+            "output": {
+              "guid": 2158
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2156, "name": { "de": "Fibeln", "en": "Brooches" } },
+        "product": {
+          "guid": 2159
+        },
         "stages": [
-          { "inputs": [{ "guid": 2079, "name": { "de": "Silbererz", "en": "Silver Ore" } }], "output": { "guid": 2129, "name": { "de": "Silber", "en": "Silver" } } },
-          { "inputs": [{ "guid": 2129, "name": { "de": "Silber", "en": "Silver" } }], "output": { "guid": 2156, "name": { "de": "Fibeln", "en": "Brooches" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2103
+              }
+            ],
+            "output": {
+              "guid": 2159
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 31700, "name": { "de": "Amphoren", "en": "Amphorae" } },
+        "product": {
+          "guid": 2161
+        },
         "stages": [
-          { "inputs": [{ "guid": 2102, "name": { "de": "Schlamm", "en": "Mud" } }, { "guid": 31695, "name": { "de": "Harz", "en": "Resin" } }], "output": { "guid": 31700, "name": { "de": "Amphoren", "en": "Amphorae" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2094
+              },
+              {
+                "guid": 2099
+              }
+            ],
+            "output": {
+              "guid": 2126
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2073
+              },
+              {
+                "guid": 2126
+              }
+            ],
+            "output": {
+              "guid": 2161
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2155, "name": { "de": "Vogelzungen in Aspik", "en": "Bird Tongues in Aspic" } },
+        "product": {
+          "guid": 2162
+        },
         "stages": [
-          { "inputs": [{ "guid": 2106, "name": { "de": "Kleine Vögel", "en": "Small Birds" } }], "output": { "guid": 2133, "name": { "de": "Vogelzungen", "en": "Bird Tongues" } } },
-          { "inputs": [{ "guid": 2074, "name": { "de": "Schweine", "en": "Pigs" } }], "output": { "guid": 2132, "name": { "de": "Schmalz", "en": "Lard" } } },
-          { "inputs": [{ "guid": 2133, "name": { "de": "Vogelzungen", "en": "Bird Tongues" } }, { "guid": 2132, "name": { "de": "Schmalz", "en": "Lard" } }], "output": { "guid": 2155, "name": { "de": "Vogelzungen in Aspik", "en": "Bird Tongues in Aspic" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2079
+              }
+            ],
+            "output": {
+              "guid": 2129
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 8420
+              },
+              {
+                "guid": 2129
+              }
+            ],
+            "output": {
+              "guid": 2162
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2162, "name": { "de": "Handspiegel", "en": "Handmirrors" } },
+        "product": {
+          "guid": 2163
+        },
         "stages": [
-          { "inputs": [{ "guid": 2079, "name": { "de": "Silbererz", "en": "Silver Ore" } }], "output": { "guid": 2129, "name": { "de": "Silber", "en": "Silver" } } },
-          { "inputs": [{ "guid": 8420, "name": { "de": "Kammmuschelschalen", "en": "Seashells" } }, { "guid": 2129, "name": { "de": "Silber", "en": "Silver" } }], "output": { "guid": 2162, "name": { "de": "Handspiegel", "en": "Handmirrors" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2077
+              },
+              {
+                "guid": 2103
+              }
+            ],
+            "output": {
+              "guid": 2128
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 8404
+              },
+              {
+                "guid": 2128
+              }
+            ],
+            "output": {
+              "guid": 2163
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2161, "name": { "de": "Umhänge", "en": "Cloaks" } },
+        "product": {
+          "guid": 2169
+        },
         "stages": [
-          { "inputs": [{ "guid": 2094, "name": { "de": "Färberpflanzen", "en": "Dye Plants" } }, { "guid": 2099, "name": { "de": "Kupfererz", "en": "Copper Ore" } }], "output": { "guid": 2126, "name": { "de": "Keltischgrün", "en": "Celtic Green" } } },
-          { "inputs": [{ "guid": 2073, "name": { "de": "Schafe", "en": "Sheep" } }, { "guid": 2126, "name": { "de": "Keltischgrün", "en": "Celtic Green" } }], "output": { "guid": 2161, "name": { "de": "Umhänge", "en": "Cloaks" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2103
+              },
+              {
+                "guid": 2102
+              }
+            ],
+            "output": {
+              "guid": 2169
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 2163, "name": { "de": "Streitwagen", "en": "Chariots" } },
+        "product": {
+          "guid": 2171
+        },
         "stages": [
-          { "inputs": [{ "guid": 2077, "name": { "de": "Holz", "en": "Wood" } }, { "guid": 2103, "name": { "de": "Schilf", "en": "Reeds" } }], "output": { "guid": 2128, "name": { "de": "Unterbau", "en": "Chassis" } } },
-          { "inputs": [{ "guid": 8404, "name": { "de": "Ponys", "en": "Ponies" } }, { "guid": 2128, "name": { "de": "Unterbau", "en": "Chassis" } }], "output": { "guid": 2163, "name": { "de": "Streitwagen", "en": "Chariots" } } }
+          {
+            "inputs": [
+              {
+                "guid": 31694
+              }
+            ],
+            "output": {
+              "guid": 2171
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 31707, "name": { "de": "Fellmützen", "en": "Fur Hats" } },
+        "product": {
+          "guid": 2172
+        },
         "stages": [
-          { "inputs": [{ "guid": 7985, "name": { "de": "Salzkraut", "en": "Saltwort" } }], "output": { "guid": 31703, "name": { "de": "Salzlake", "en": "Saltwash" } } },
-          { "inputs": [{ "guid": 31702, "name": { "de": "Biber", "en": "Beavers" } }, { "guid": 31703, "name": { "de": "Salzlake", "en": "Saltwash" } }], "output": { "guid": 31707, "name": { "de": "Fellmützen", "en": "Fur Hats" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2073
+              }
+            ],
+            "output": {
+              "guid": 2172
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 31708, "name": { "de": "Perücken", "en": "Wigs" } },
+        "product": {
+          "guid": 2173
+        },
         "stages": [
-          { "inputs": [{ "guid": 2063, "name": { "de": "Flachs", "en": "Flax" } }, { "guid": 31695, "name": { "de": "Harz", "en": "Resin" } }], "output": { "guid": 31704, "name": { "de": "Haarnetz", "en": "Head Piece" } } },
-          { "inputs": [{ "guid": 31704, "name": { "de": "Haarnetz", "en": "Head Piece" } }, { "guid": 2075, "name": { "de": "Pferde", "en": "Horses" } }], "output": { "guid": 31708, "name": { "de": "Perücken", "en": "Wigs" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2115
+              }
+            ],
+            "output": {
+              "guid": 2173
+            }
+          }
         ]
       },
       {
-        "product": { "guid": 31706, "name": { "de": "Clanschilde", "en": "Clan Shields" } },
+        "product": {
+          "guid": 2174
+        },
         "stages": [
-          { "inputs": [{ "guid": 2100, "name": { "de": "Zinnerz", "en": "Tin Ore" } }, { "guid": 2099, "name": { "de": "Kupfererz", "en": "Copper Ore" } }], "output": { "guid": 2127, "name": { "de": "Bronze", "en": "Bronze" } } },
-          { "inputs": [{ "guid": 2094, "name": { "de": "Färberpflanzen", "en": "Dye Plants" } }, { "guid": 2127, "name": { "de": "Bronze", "en": "Bronze" } }], "output": { "guid": 31706, "name": { "de": "Clanschilde", "en": "Clan Shields" } } }
+          {
+            "inputs": [
+              {
+                "guid": 2077
+              }
+            ],
+            "output": {
+              "guid": 2174
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2176
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2102
+              }
+            ],
+            "output": {
+              "guid": 2176
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2178
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2078
+              },
+              {
+                "guid": 2091
+              }
+            ],
+            "output": {
+              "guid": 2178
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 8405
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              },
+              {
+                "guid": 31701
+              }
+            ],
+            "output": {
+              "guid": 8405
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 13810
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              },
+              {
+                "guid": 2077
+              }
+            ],
+            "output": {
+              "guid": 2110
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2110
+              },
+              {
+                "guid": 2115
+              }
+            ],
+            "output": {
+              "guid": 13810
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31700
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2102
+              },
+              {
+                "guid": 31695
+              }
+            ],
+            "output": {
+              "guid": 31700
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31703
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 7985
+              }
+            ],
+            "output": {
+              "guid": 31703
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31704
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              },
+              {
+                "guid": 31695
+              }
+            ],
+            "output": {
+              "guid": 31704
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31706
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2100
+              },
+              {
+                "guid": 2099
+              }
+            ],
+            "output": {
+              "guid": 2127
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2094
+              },
+              {
+                "guid": 2127
+              }
+            ],
+            "output": {
+              "guid": 31706
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31707
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 7985
+              }
+            ],
+            "output": {
+              "guid": 31703
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 31702
+              },
+              {
+                "guid": 31703
+              }
+            ],
+            "output": {
+              "guid": 31707
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31708
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              },
+              {
+                "guid": 31695
+              }
+            ],
+            "output": {
+              "guid": 31704
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2075
+              },
+              {
+                "guid": 31704
+              }
+            ],
+            "output": {
+              "guid": 31708
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31709
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2101
+              }
+            ],
+            "output": {
+              "guid": 31709
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31768
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 7985
+              },
+              {
+                "guid": 2105
+              }
+            ],
+            "output": {
+              "guid": 31768
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 55954
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2105
+              },
+              {
+                "guid": 2100
+              }
+            ],
+            "output": {
+              "guid": 55954
+            }
+          }
+        ]
+      }
+    ],
+    "Latium": [
+      {
+        "product": {
+          "guid": 2110
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              },
+              {
+                "guid": 2090
+              }
+            ],
+            "output": {
+              "guid": 2110
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2115
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2117
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2091
+              }
+            ],
+            "output": {
+              "guid": 2117
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2119
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2069
+              }
+            ],
+            "output": {
+              "guid": 2119
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2121
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              }
+            ],
+            "output": {
+              "guid": 2121
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2123
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 31697
+              }
+            ],
+            "output": {
+              "guid": 31698
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 8561
+              },
+              {
+                "guid": 31698
+              }
+            ],
+            "output": {
+              "guid": 2123
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2124
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 8563
+              }
+            ],
+            "output": {
+              "guid": 2124
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2132
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              }
+            ],
+            "output": {
+              "guid": 2132
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2135
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2073
+              }
+            ],
+            "output": {
+              "guid": 2135
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2136
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2068
+              }
+            ],
+            "output": {
+              "guid": 2136
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2137
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2069
+              }
+            ],
+            "output": {
+              "guid": 2119
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2119
+              }
+            ],
+            "output": {
+              "guid": 2137
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2138
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2070
+              },
+              {
+                "guid": 2076
+              }
+            ],
+            "output": {
+              "guid": 2138
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2139
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2089
+              },
+              {
+                "guid": 2090
+              }
+            ],
+            "output": {
+              "guid": 2139
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2140
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2087
+              }
+            ],
+            "output": {
+              "guid": 8558
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2112
+              },
+              {
+                "guid": 8558
+              }
+            ],
+            "output": {
+              "guid": 2140
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2141
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 31694
+              }
+            ],
+            "output": {
+              "guid": 2141
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2142
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2073
+              }
+            ],
+            "output": {
+              "guid": 2142
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2143
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              }
+            ],
+            "output": {
+              "guid": 2132
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2071
+              },
+              {
+                "guid": 2132
+              }
+            ],
+            "output": {
+              "guid": 2143
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2144
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              },
+              {
+                "guid": 2090
+              }
+            ],
+            "output": {
+              "guid": 2110
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2110
+              }
+            ],
+            "output": {
+              "guid": 2144
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2145
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              }
+            ],
+            "output": {
+              "guid": 2121
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 3158
+              }
+            ],
+            "output": {
+              "guid": 2180
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2121
+              },
+              {
+                "guid": 2180
+              }
+            ],
+            "output": {
+              "guid": 2145
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2146
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 31697
+              }
+            ],
+            "output": {
+              "guid": 31698
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 8563
+              },
+              {
+                "guid": 31698
+              }
+            ],
+            "output": {
+              "guid": 2146
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2147
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 3158
+              }
+            ],
+            "output": {
+              "guid": 2180
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              },
+              {
+                "guid": 2180
+              }
+            ],
+            "output": {
+              "guid": 8562
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 8561
+              },
+              {
+                "guid": 8562
+              }
+            ],
+            "output": {
+              "guid": 2147
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2149
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2072
+              }
+            ],
+            "output": {
+              "guid": 2149
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2150
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 8561
+              },
+              {
+                "guid": 2076
+              }
+            ],
+            "output": {
+              "guid": 2150
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2151
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 8563
+              }
+            ],
+            "output": {
+              "guid": 2124
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2091
+              }
+            ],
+            "output": {
+              "guid": 2117
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2124
+              },
+              {
+                "guid": 2117
+              }
+            ],
+            "output": {
+              "guid": 2151
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2152
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 8563
+              }
+            ],
+            "output": {
+              "guid": 2124
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2086
+              },
+              {
+                "guid": 2124
+              }
+            ],
+            "output": {
+              "guid": 2152
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2166
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2073
+              }
+            ],
+            "output": {
+              "guid": 2135
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 31697
+              }
+            ],
+            "output": {
+              "guid": 31698
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 8561
+              },
+              {
+                "guid": 31698
+              }
+            ],
+            "output": {
+              "guid": 2123
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2135
+              },
+              {
+                "guid": 2123
+              }
+            ],
+            "output": {
+              "guid": 2166
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2171
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 31694
+              }
+            ],
+            "output": {
+              "guid": 2171
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2172
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2073
+              }
+            ],
+            "output": {
+              "guid": 2172
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2173
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2115
+              }
+            ],
+            "output": {
+              "guid": 2173
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2174
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2077
+              }
+            ],
+            "output": {
+              "guid": 2174
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2176
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2086
+              }
+            ],
+            "output": {
+              "guid": 2176
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2178
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2078
+              },
+              {
+                "guid": 2091
+              }
+            ],
+            "output": {
+              "guid": 2178
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2179
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2084
+              }
+            ],
+            "output": {
+              "guid": 2179
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 2180
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 3158
+              }
+            ],
+            "output": {
+              "guid": 2180
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 8558
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2087
+              }
+            ],
+            "output": {
+              "guid": 8558
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 8562
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 3158
+              }
+            ],
+            "output": {
+              "guid": 2180
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2063
+              },
+              {
+                "guid": 2180
+              }
+            ],
+            "output": {
+              "guid": 8562
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 13810
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2074
+              },
+              {
+                "guid": 2090
+              }
+            ],
+            "output": {
+              "guid": 2110
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2080
+              }
+            ],
+            "output": {
+              "guid": 2115
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 2110
+              },
+              {
+                "guid": 2115
+              }
+            ],
+            "output": {
+              "guid": 13810
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31698
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 31697
+              }
+            ],
+            "output": {
+              "guid": 31698
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 31700
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 2086
+              },
+              {
+                "guid": 31695
+              }
+            ],
+            "output": {
+              "guid": 31700
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 145220
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 145102
+              },
+              {
+                "guid": 2084
+              }
+            ],
+            "output": {
+              "guid": 145220
+            }
+          }
+        ]
+      },
+      {
+        "product": {
+          "guid": 145221
+        },
+        "stages": [
+          {
+            "inputs": [
+              {
+                "guid": 31697
+              }
+            ],
+            "output": {
+              "guid": 31698
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 8561
+              },
+              {
+                "guid": 31698
+              }
+            ],
+            "output": {
+              "guid": 2123
+            }
+          },
+          {
+            "inputs": [
+              {
+                "guid": 145102
+              },
+              {
+                "guid": 2123
+              }
+            ],
+            "output": {
+              "guid": 145221
+            }
+          }
         ]
       }
     ]

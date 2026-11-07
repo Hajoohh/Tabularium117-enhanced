@@ -8,7 +8,7 @@ import {
   createGoodsCategoryFilters,
   createGoodsChainsLoader,
   filterGoodsByCategories,
-  goodsCategoriesForRegions,
+  goodsCategories,
 } from "../goods-chain-view.js";
 
 function locale() {
@@ -38,7 +38,10 @@ export async function renderEfficiency(container, islandId, store) {
   let sortAscending = false;
   let currentDTO = null;
   let goodsChains = null;
-  const goodsChainsLoader = createGoodsChainsLoader(() => api.goodsChains());
+  const goodsChainsLoader = createGoodsChainsLoader(
+    () => api.goodsChains(),
+    (guids, config) => api.productNames(guids, config),
+  );
   let categoryLoading = false;
   let categoryError = "";
 
@@ -162,7 +165,7 @@ export async function renderEfficiency(container, islandId, store) {
         ? filterGoodsByCategories(
           visibleProducts,
           selectedCategories,
-          goodsCategoriesForRegions(goodsChains, [dto.island.sessionName]),
+          goodsCategories(goodsChains),
         )
         : [];
     }

@@ -363,6 +363,7 @@ func (s *Server) routes() http.Handler {
 	api := http.NewServeMux()
 	api.HandleFunc("/api/v1/status", s.handleStatus)
 	api.HandleFunc("/api/v1/islands", s.handleIslands)
+	api.HandleFunc("/api/v1/catalog/products", s.handleProductNames)
 	api.HandleFunc("/api/v1/islands/{id}/products", s.handleProducts)
 	api.HandleFunc("/api/v1/islands/{id}/products/{guid}/history", s.handleHistory)
 	api.HandleFunc("/api/v1/islands/{id}/products/{guid}/sources", s.handleSources)

@@ -64,6 +64,11 @@ export const api = {
   alertSettings: () => get("/api/v1/alert-settings"),
   goodsChains: () => get("/js/goods-chains.json"),
   goodsIcons: () => get("/js/goods-icons.json"),
+  productNames: (guids) => {
+    const params = new URLSearchParams();
+    for (const guid of guids) params.append("guid", String(guid));
+    return get(`/api/v1/catalog/products?${params.toString()}`);
+  },
   setAlertThresholds: (deficitThreshold, dropPercentagePoints) =>
     post("/api/v1/alert-settings", { deficitThreshold, dropPercentagePoints }),
   setAlertSuppression: (islandId, productGuid, rule, disabled) =>

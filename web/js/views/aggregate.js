@@ -5,7 +5,8 @@ import {
   createGoodsCategoryFilters,
   createGoodsChainsLoader,
   filterGoodsByCategories,
-  goodsCategoriesForRegions,
+  goodsCategories,
+  goodsName,
   matchingGoodsChains,
   validateGoodsIcons,
 } from "../goods-chain-view.js";
@@ -77,7 +78,10 @@ export function renderAggregate(container, store, scope) {
   let search = "";
   let goodsChains = null;
   let goodsIcons = null;
-  const goodsChainsLoader = createGoodsChainsLoader(() => api.goodsChains());
+  const goodsChainsLoader = createGoodsChainsLoader(
+    () => api.goodsChains(),
+    (guids, config) => api.productNames(guids, config),
+  );
   let iconLoadPromise = null;
   let showGoodsChains = false;
   let chainsLoading = false;
@@ -124,7 +128,7 @@ export function renderAggregate(container, store, scope) {
   }
 
   function localizedName(good) {
-    return good.name[i18n.lang] || good.name.en || good.name.de;
+    return goodsName(good);
   }
 
   function selectChainGood(good) {
@@ -229,7 +233,7 @@ export function renderAggregate(container, store, scope) {
         ? filterGoodsByCategories(
           visibleProducts,
           selectedCategories,
-          goodsCategoriesForRegions(goodsChains, regionsInScope()),
+          goodsCategories(goodsChains),
         )
         : [];
     }

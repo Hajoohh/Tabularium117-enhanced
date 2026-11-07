@@ -5,6 +5,17 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ## [Unreleased]
 
+### Changed
+
+- **Goods categories across regions:** classify goods from all configured
+  regional production chains, so an imported good remains an end product when
+  it is consumed in another region.
+- **Aegyptus add-on data:** refresh the game catalog with the new region and
+  the add-on's product GUIDs and localized names.
+- **Catalog-backed goods-chain names:** use the catalog's localized product
+  names throughout the configured production-chain UI instead of its duplicate
+  German and English labels.
+
 ## [Tabularium 117 - enhanced 0.1.3]
 
 ### Changed
@@ -22,8 +33,7 @@ All notable changes to Tabularium 117 are documented here, in the
 
 - **Goods category filters:** filter goods and efficiency tables by raw
   materials, intermediate products or end products. With no category selected,
-  all goods remain visible; selected categories are combined. Classification
-  follows each table's region-specific production chains.
+  all goods remain visible; selected categories are combined.
 - **Comparison search and region selection:** search goods in the island
   comparison tables and select or clear all islands in a region with one action.
 - **Island goods-chain view:** in an island's goods table, show configured

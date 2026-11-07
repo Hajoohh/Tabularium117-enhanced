@@ -134,7 +134,8 @@ const { createRegionGroup } = await import("../web/js/region-group.js");
 const {
   createGoodsChainsLoader,
   filterGoodsByCategories,
-  goodsCategoriesForRegions,
+  goodsCategories,
+  goodsName,
 } = await import("../web/js/goods-chain-view.js");
 
 test("the sidebar always links to warnings, even before islands load", async () => {
@@ -198,6 +199,20 @@ api.setAlertSuppression = async (islandId, productGuid, rule, disabled) => {
   if (disabled) suppressions.push({ islandId, islandName: island.name, productGuid, productName: "Bread", rule });
   fakeAlertSettings = { ...fakeAlertSettings, suppressions };
   return api.alertSettings();
+};
+api.productNames = async (guids, config) => {
+  const names = new Map();
+  for (const chains of Object.values(config.regions)) {
+    for (const chain of chains) {
+      for (const good of [
+        ...(chain.product ? [chain.product] : []),
+        ...chain.stages.flatMap((stage) => [...stage.inputs, stage.output]),
+      ]) {
+        names.set(String(good.guid), good.name || { english: `#${good.guid}` });
+      }
+    }
+  }
+  return Object.fromEntries(guids.map((guid) => [guid, names.get(String(guid)) || { english: `#${guid}` }]));
 };
 
 const island = { id: "3245-1", name: "Juliana", sessionName: "Latium", products: 3, deficits: 1 };
@@ -386,7 +401,7 @@ test("the local goods-chain toggle shows chains with end-product buildings on th
   cleanup();
 });
 
-test("goods categories are exclusive, and no category selection keeps every product", () => {
+test("goods categories are global, exclusive, and unselected categories keep every product", () => {
   const config = {
     regions: {
       Latium: [{
@@ -396,17 +411,22 @@ test("goods categories are exclusive, and no category selection keeps every prod
           { inputs: [{ guid: 2 }], output: { guid: 3 } },
         ],
       }],
+      Albion: [{
+        product: { guid: 1 },
+        stages: [{ inputs: [{ guid: 4 }], output: { guid: 1 } }],
+      }],
     },
   };
-  const categories = goodsCategoriesForRegions(config, ["Latium"]);
+  const categories = goodsCategories(config);
   const goods = [{ guid: 1 }, { guid: 2 }, { guid: 3 }, { guid: 4 }];
 
-  assert.equal(categories.get("1"), undefined, "unproduced goods are raw materials");
+  assert.equal(categories.get("1"), "end", "an end product stays an end product when imported elsewhere");
   assert.equal(categories.get("2"), "intermediate");
   assert.equal(categories.get("3"), "end");
+  assert.equal(categories.get("4"), undefined, "unproduced goods are raw materials");
   assert.deepEqual(filterGoodsByCategories(goods, new Set(), categories), goods);
-  assert.deepEqual(filterGoodsByCategories(goods, new Set(["raw"]), categories), [goods[0], goods[3]]);
-  assert.deepEqual(filterGoodsByCategories(goods, new Set(["intermediate", "end"]), categories), [goods[1], goods[2]]);
+  assert.deepEqual(filterGoodsByCategories(goods, new Set(["raw"]), categories), [goods[3]]);
+  assert.deepEqual(filterGoodsByCategories(goods, new Set(["intermediate", "end"]), categories), [goods[0], goods[1], goods[2]]);
 });
 
 test("goods-chain loader shares concurrent requests, validates config, and retries failures", async () => {
@@ -433,6 +453,32 @@ test("goods-chain loader shares concurrent requests, validates config, and retri
   await assert.rejects(retryingLoader.load(), /temporary failure/);
   assert.equal(await retryingLoader.load(), config, "failed requests can be retried");
   assert.equal(attempts, 2);
+});
+
+test("goods-chain names come from the localized product catalog", async () => {
+  const config = {
+    regions: {
+      Latium: [{
+        product: { guid: 12, name: { de: "Old bread", en: "Old bread" } },
+        stages: [{ inputs: [{ guid: 11 }], output: { guid: 12 } }],
+      }],
+    },
+  };
+  const loader = createGoodsChainsLoader(
+    async () => config,
+    async (guids) => Object.fromEntries(guids.map((guid) => [
+      guid,
+      Number(guid) === 11
+        ? { german: "Weizen", english: "Wheat" }
+        : { german: "Brot", english: "Bread" },
+    ])),
+  );
+  const loaded = await loader.load();
+
+  i18n.lang = "de";
+  assert.equal(goodsName(loaded.regions.Latium[0].product), "Brot");
+  i18n.lang = "en";
+  assert.equal(goodsName(loaded.regions.Latium[0].product), "Bread");
 });
 
 test("island goods categories filter rows and leave all visible when unchecked", async () => {
@@ -626,7 +672,7 @@ test("the efficiency table sorts every column and keeps efficiency-without-poten
   cleanup();
 });
 
-test("the efficiency table supports the same region-specific goods categories", async () => {
+test("the efficiency table supports the same global goods categories", async () => {
   i18n.lang = "en";
   api.efficiency = async () => ({
     island,
@@ -1157,7 +1203,7 @@ test("the comparison view loads goods for multiple selected islands", async () =
   await settle();
   assert.match(nodes(root, "tbody")[0].textContent, /Juliana.*Bread/);
   assert.doesNotMatch(nodes(root, "tbody")[0].textContent, /Argantum.*Wheat/,
-    "each island uses the chain categories for its own region");
+    "an end product has the same category across regions");
   assert.match(nodes(root, "tbody")[1].textContent, /Juliana.*Bread/);
   categoryEnd.checked = false;
   categoryEnd.dispatchEvent(new Event("change"));

@@ -1,6 +1,6 @@
 {
   "source": "anno-mods/anno-117-calculator",
-  "revision": "16ce9aa4e49c7baac45d8c3f75da6d2ba27ab564",
+  "revision": "520ce4e36a4120c399f5a9dc55889e342369e07a",
   "license": "MIT",
   "languages": [
     "brazilian",
@@ -747,7 +747,7 @@
         "brazilian": "Pequenos pássaros",
         "english": "Small Birds",
         "french": "Petits oiseaux",
-        "german": "Kleine Vögel",
+        "german": "Kleinvögel",
         "italian": "Piccoli uccelli",
         "japanese": "​小鳥",
         "korean": "​작은 ​새",
@@ -930,7 +930,7 @@
         "brazilian": "Madeira ornamentada",
         "english": "Ornate Wood",
         "french": "Bois ouvragé",
-        "german": "Verziertes Holz",
+        "german": "Holzfurniere",
         "italian": "Legno decorato",
         "japanese": "​装飾​木材",
         "korean": "​장식된 ​목재",
@@ -1734,7 +1734,7 @@
         "brazilian": "Bigas",
         "english": "Chariots",
         "french": "Chars",
-        "german": "Streitwagen",
+        "german": "Streitwägen",
         "italian": "Carri",
         "japanese": "​戦車",
         "korean": "​전차",
@@ -2422,7 +2422,7 @@
         "spanish": "Conchas marinas",
         "traditional_chinese": "​貝殼"
       },
-      "category": "raw",
+      "category": "agricultural",
       "regions": [
         "Celtic"
       ],
@@ -2523,7 +2523,7 @@
         "brazilian": "Armadura",
         "english": "Armour",
         "french": "Armures",
-        "german": "Rüstung",
+        "german": "Rüstungen",
         "italian": "Armatura",
         "japanese": "​防具",
         "korean": "​갑옷",
@@ -2692,7 +2692,7 @@
         "spanish": "Resina",
         "traditional_chinese": "​樹脂"
       },
-      "category": "agricultural",
+      "category": "raw",
       "regions": [
         "Roman",
         "Celtic"
@@ -2840,7 +2840,7 @@
         "brazilian": "Adorno para cabeça",
         "english": "Head Piece",
         "french": "Couvre-chef",
-        "german": "Haarnetz",
+        "german": "Haarnetze",
         "italian": "Copricapo",
         "japanese": "​頭​飾り",
         "korean": "​머리 ​장식",
@@ -3274,7 +3274,7 @@
         "brazilian": "Conjuntos de Latrunculi",
         "english": "Latrunculi Sets",
         "french": "Plateaux de Latrunculi",
-        "german": "Latrunculi-Sets",
+        "german": "Latrunculispiele",
         "italian": "Componenti di Latrunculi",
         "japanese": "​ラ​トル​ン​クリ​一式",
         "korean": "​라트룬쿨리 ​세트",
@@ -3288,6 +3288,767 @@
       "regions": [
         "Roman",
         "Celtic",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151674,
+      "names": {
+        "brazilian": "Fogueira",
+        "english": "Firepit",
+        "french": "Foyer",
+        "german": "Feuerstelle",
+        "italian": "Focolare",
+        "japanese": "​焚き火",
+        "korean": "​화덕",
+        "polish": "Ognisko",
+        "russian": "Костровая яма",
+        "simplified_chinese": "​火坑",
+        "spanish": "Fogata",
+        "traditional_chinese": "​火坑"
+      },
+      "category": "",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": true
+    },
+    {
+      "guid": 151675,
+      "names": {
+        "brazilian": "Boticário",
+        "english": "Apothecary",
+        "french": "Apothicaire",
+        "german": "Apotheke",
+        "italian": "Speziale",
+        "japanese": "​薬屋",
+        "korean": "​약국",
+        "polish": "Aptekarz",
+        "russian": "Апотека",
+        "simplified_chinese": "​药剂​坊",
+        "spanish": "Apoteca",
+        "traditional_chinese": "​藥劑師"
+      },
+      "category": "",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": true
+    },
+    {
+      "guid": 151676,
+      "names": {
+        "brazilian": "Tumba de pedra",
+        "english": "Rock Tomb",
+        "french": "Tombeau rupestre",
+        "german": "Felsgrab",
+        "italian": "Tomba di roccia",
+        "japanese": "​岩窟​墓",
+        "korean": "​암굴 ​무덤",
+        "polish": "Grobowiec skalny",
+        "russian": "Гробница",
+        "simplified_chinese": "​岩石​陵墓",
+        "spanish": "Tumba rupestre",
+        "traditional_chinese": "​岩​墓"
+      },
+      "category": "",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": true
+    },
+    {
+      "guid": 151677,
+      "names": {
+        "brazilian": "Observatório",
+        "english": "Observatory",
+        "french": "Observatoire",
+        "german": "Observatorium",
+        "italian": "Osservatorio",
+        "japanese": "​天文台",
+        "korean": "​천문대",
+        "polish": "Obserwatorium",
+        "russian": "Обсерватория",
+        "simplified_chinese": "​观测​所",
+        "spanish": "Observatorio",
+        "traditional_chinese": "​觀測​所"
+      },
+      "category": "",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": true
+    },
+    {
+      "guid": 151678,
+      "names": {
+        "brazilian": "Vagens de gergelim",
+        "english": "Sesame Pods",
+        "french": "Gousses de sésame",
+        "german": "Sesamkapseln",
+        "italian": "Baccelli di sesamo",
+        "japanese": "​ゴマ​の​さや",
+        "korean": "​참깨 ​꼬투리",
+        "polish": "Strąki sezamu",
+        "russian": "Стручки кунжута",
+        "simplified_chinese": "​芝麻​荚",
+        "spanish": "Vainas de sésamo",
+        "traditional_chinese": "​芝麻​莢"
+      },
+      "category": "agricultural",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151679,
+      "names": {
+        "brazilian": "Romãs",
+        "english": "Pomegranates",
+        "french": "Grenades",
+        "german": "Granatäpfel",
+        "italian": "Melograni",
+        "japanese": "​ザクロ",
+        "korean": "​석류",
+        "polish": "Granaty",
+        "russian": "Гранаты",
+        "simplified_chinese": "​石榴",
+        "spanish": "Granadas",
+        "traditional_chinese": "​石榴"
+      },
+      "category": "agricultural",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151680,
+      "names": {
+        "brazilian": "Tâmaras",
+        "english": "Dates",
+        "french": "Dattes",
+        "german": "Datteln",
+        "italian": "Datteri",
+        "japanese": "​ナツメヤシ",
+        "korean": "​대추야자",
+        "polish": "Daktyle",
+        "russian": "Финики",
+        "simplified_chinese": "​椰​枣",
+        "spanish": "Dátiles",
+        "traditional_chinese": "​椰棗"
+      },
+      "category": "consumer",
+      "regions": [
+        "Roman",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151683,
+      "names": {
+        "brazilian": "Gado Sanga",
+        "english": "Sanga Cattle",
+        "french": "Bétail sanga",
+        "german": "Sangakühe",
+        "italian": "Bovini di Sanga",
+        "japanese": "​サンガ​牛",
+        "korean": "​상가 ​소",
+        "polish": "Bydło Sanga",
+        "russian": "Коровы санга",
+        "simplified_chinese": "​桑​加​牛",
+        "spanish": "Ganado sanga",
+        "traditional_chinese": "​桑​加​牛"
+      },
+      "category": "agricultural",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151684,
+      "names": {
+        "brazilian": "Camelo",
+        "english": "Kamel",
+        "french": "Chameau",
+        "german": "Kamele",
+        "italian": "Cammello",
+        "japanese": "​ラクダ",
+        "korean": "​낙타",
+        "polish": "Wielbłąd",
+        "russian": "Верблюд",
+        "simplified_chinese": "​骆驼",
+        "spanish": "Camello",
+        "traditional_chinese": "​駱駝"
+      },
+      "category": "agricultural",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151685,
+      "names": {
+        "brazilian": "Azul aegypcio",
+        "english": "Aegyptian Blue",
+        "french": "Bleu égyptien",
+        "german": "Aegyptisch Blau",
+        "italian": "Blu d'Aegyptus",
+        "japanese": "​アイギュプト​の​青",
+        "korean": "​아이깁투스 ​블루",
+        "polish": "Błękit egipski",
+        "russian": "Эгиптская синь",
+        "simplified_chinese": "​埃及​蓝",
+        "spanish": "Azul egipciano",
+        "traditional_chinese": "​埃及​藍"
+      },
+      "category": "intermediate",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151686,
+      "names": {
+        "brazilian": "Leite com mel",
+        "english": "Honeyed Milk",
+        "french": "Lait au miel",
+        "german": "Honigmilch",
+        "italian": "Latte e miele",
+        "japanese": "​蜂蜜​入り​ミルク",
+        "korean": "​꿀 ​우유",
+        "polish": "Mleko z miodem",
+        "russian": "Молоко с медом",
+        "simplified_chinese": "​蜂蜜​奶",
+        "spanish": "Leche con miel",
+        "traditional_chinese": "​蜂蜜​乳"
+      },
+      "category": "intermediate",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151687,
+      "names": {
+        "brazilian": "Óleo de gergelim",
+        "english": "Sesame Oil",
+        "french": "Huile de sésame",
+        "german": "Sesamöl",
+        "italian": "Olio di sesamo",
+        "japanese": "​ゴマ油",
+        "korean": "​참기름",
+        "polish": "Olej sezamowy",
+        "russian": "Кунжутное масло",
+        "simplified_chinese": "​芝麻油",
+        "spanish": "Aceite de sésamo",
+        "traditional_chinese": "​芝麻油"
+      },
+      "category": "intermediate",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151688,
+      "names": {
+        "brazilian": "Papiro",
+        "english": "Papyrus",
+        "french": "Papyrus",
+        "german": "Papyrus",
+        "italian": "Papiro",
+        "japanese": "​パピルス",
+        "korean": "​파피루스",
+        "polish": "Papirus",
+        "russian": "Папирус",
+        "simplified_chinese": "​莎草​纸",
+        "spanish": "Papiro",
+        "traditional_chinese": "​莎​草紙"
+      },
+      "category": "intermediate",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151689,
+      "names": {
+        "brazilian": "Ganso recheado",
+        "english": "Stuffed Goose",
+        "french": "Oie farcie",
+        "german": "Gänsebraten",
+        "italian": "Oca ripiena",
+        "japanese": "​詰め​物入り​ガチョウ",
+        "korean": "​속을 ​채운 ​거위",
+        "polish": "Faszerowana gęś",
+        "russian": "Нашпигованный гусь",
+        "simplified_chinese": "​填​鹅",
+        "spanish": "Oca rellena",
+        "traditional_chinese": "​填​餡​鵝"
+      },
+      "category": "consumer",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151690,
+      "names": {
+        "brazilian": "Chá de lótus azul",
+        "english": "Blue Lotus Tea",
+        "french": "Thé au lotus bleu",
+        "german": "Lotusblütentee",
+        "italian": "Tè di loto blu",
+        "japanese": "​青​スイレン​茶",
+        "korean": "​푸른 ​연꽃 ​차",
+        "polish": "Herbata z błękitnego lotosu",
+        "russian": "Чай из голубого лотоса",
+        "simplified_chinese": "​蓝​莲花​茶",
+        "spanish": "Té de loto azul",
+        "traditional_chinese": "​藍​蓮花​茶"
+      },
+      "category": "consumer",
+      "regions": [
+        "Celtic",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151691,
+      "names": {
+        "brazilian": "Kayk",
+        "english": "Kayk",
+        "french": "Kayk",
+        "german": "Kayk",
+        "italian": "Kayk",
+        "japanese": "​カフク",
+        "korean": "​카이크",
+        "polish": "Kahk",
+        "russian": "Каахк",
+        "simplified_chinese": "​糕点",
+        "spanish": "Kajta",
+        "traditional_chinese": "​凱​克​餅乾"
+      },
+      "category": "consumer",
+      "regions": [
+        "Roman",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151692,
+      "names": {
+        "brazilian": "Travessas de carne vermelha",
+        "english": "Rare Meat Platters",
+        "french": "Plateaux de viandes rares",
+        "german": "Exquisite Fleischplatten",
+        "italian": "Vassoi di carne al sangue",
+        "japanese": "​希少​な​肉​の​盛り合わせ",
+        "korean": "​희귀한 ​고기 ​요리",
+        "polish": "Półmiski rzadkich mięs",
+        "russian": "Мясные деликатесы",
+        "simplified_chinese": "​珍​稀​肉​碟",
+        "spanish": "Bandejas de carne singular",
+        "traditional_chinese": "​稀有​肉​盤"
+      },
+      "category": "consumer",
+      "regions": [
+        "Celtic",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151693,
+      "names": {
+        "brazilian": "Colares wesekh",
+        "english": "Wesekh Collars",
+        "french": "Colliers wesekh",
+        "german": "Zierkragen",
+        "italian": "Collari di Wesekh",
+        "japanese": "​ウェセク​の​首輪",
+        "korean": "​웨세크 ​목걸이",
+        "polish": "Kołnierze wesekh",
+        "russian": "Ожерелья-усехи",
+        "simplified_chinese": "​宽​项​饰",
+        "spanish": "Collar usej",
+        "traditional_chinese": "​寬​帶領​飾"
+      },
+      "category": "consumer",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151694,
+      "names": {
+        "brazilian": "Kollurion",
+        "english": "Kollurion",
+        "french": "Kollurion",
+        "german": "Kollurion",
+        "italian": "Kollurion",
+        "japanese": "​コール",
+        "korean": "​콜루리온",
+        "polish": "Kollurion",
+        "russian": "Коллурий",
+        "simplified_chinese": "​眼影​墨",
+        "spanish": "Colirio",
+        "traditional_chinese": "​眼​膏"
+      },
+      "category": "consumer",
+      "regions": [
+        "Roman",
+        "Celtic",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151695,
+      "names": {
+        "brazilian": "Shentis",
+        "english": "Shentis",
+        "french": "Shentis",
+        "german": "Schentis",
+        "italian": "Shenti",
+        "japanese": "​シェンティ",
+        "korean": "​쉔티",
+        "polish": "Shentis",
+        "russian": "Схенти",
+        "simplified_chinese": "​缠​腰布",
+        "spanish": "Shentis",
+        "traditional_chinese": "​腰布"
+      },
+      "category": "consumer",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151696,
+      "names": {
+        "brazilian": "Kalasirises",
+        "english": "Kalasirises",
+        "french": "Kalasiris",
+        "german": "Kalasiris",
+        "italian": "Kalasirises",
+        "japanese": "​カラシ​リス",
+        "korean": "​칼라시리스",
+        "polish": "Kalasiris",
+        "russian": "Калазирисы",
+        "simplified_chinese": "​卡拉​西​里斯​长​裙",
+        "spanish": "Kalasiris",
+        "traditional_chinese": "​卡拉​西​里斯"
+      },
+      "category": "consumer",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151697,
+      "names": {
+        "brazilian": "Óleos perfumados",
+        "english": "Perfumed Oils",
+        "french": "Huiles parfumées",
+        "german": "Duftöle",
+        "italian": "Oli profumati",
+        "japanese": "​香油",
+        "korean": "​향유",
+        "polish": "Pachnące olejki",
+        "russian": "Ароматные масла",
+        "simplified_chinese": "​芬芳​精油",
+        "spanish": "Aceites perfumados",
+        "traditional_chinese": "​芳香​油"
+      },
+      "category": "consumer",
+      "regions": [
+        "Celtic",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151698,
+      "names": {
+        "brazilian": "Leite de Poppea",
+        "english": "Milk of Poppea",
+        "french": "Lait de Poppée",
+        "german": "Bademilch",
+        "italian": "Latte di Poppea",
+        "japanese": "​ポッパエア​の​ミルク",
+        "korean": "​포페아의 ​목욕유",
+        "polish": "Mleko Poppei",
+        "russian": "Молоко для ванн",
+        "simplified_chinese": "​波​佩​娅​牛奶",
+        "spanish": "Leche de Popea",
+        "traditional_chinese": "​波​佩​亞​奶​浴"
+      },
+      "category": "consumer",
+      "regions": [
+        "Roman",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151699,
+      "names": {
+        "brazilian": "Talismãs apotropaicos",
+        "english": "Apotropaic Talismans",
+        "french": "Talismans apotropaïques",
+        "german": "Talismane",
+        "italian": "Talismani apotropaici",
+        "japanese": "​魔除​け​の​お守り",
+        "korean": "​액막이 ​부적",
+        "polish": "Amulety ochronne",
+        "russian": "Обереги",
+        "simplified_chinese": "​辟邪​护符",
+        "spanish": "Talismanes apotropaicos",
+        "traditional_chinese": "​辟邪​護身符"
+      },
+      "category": "consumer",
+      "regions": [
+        "Celtic",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151700,
+      "names": {
+        "brazilian": "Lâmpadas a óleo",
+        "english": "Oil Lamps",
+        "french": "Lampes à huile",
+        "german": "Öllampen",
+        "italian": "Lampade a olio",
+        "japanese": "​オイル​ランプ",
+        "korean": "​오일 ​램프",
+        "polish": "Lampy oliwne",
+        "russian": "Масляные лампы",
+        "simplified_chinese": "​油灯",
+        "spanish": "Lámparas de aceite",
+        "traditional_chinese": "​油燈"
+      },
+      "category": "consumer",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151701,
+      "names": {
+        "brazilian": "Sistros",
+        "english": "Sistrums",
+        "french": "Sistres",
+        "german": "Sistren",
+        "italian": "Sistrum",
+        "japanese": "​シ​スト​ラム",
+        "korean": "​시스트럼",
+        "polish": "Sistrum",
+        "russian": "Систры",
+        "simplified_chinese": "​叉​铃",
+        "spanish": "Sistros",
+        "traditional_chinese": "​叉​鈴"
+      },
+      "category": "consumer",
+      "regions": [
+        "Roman",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151702,
+      "names": {
+        "brazilian": "Conjuntos de escrita",
+        "english": "Scribing Sets",
+        "french": "Nécessaires de scribe",
+        "german": "Schreibgarnituren",
+        "italian": "Set da scrittura",
+        "japanese": "​書記​道具​一式",
+        "korean": "​필기구",
+        "polish": "Przybory skryby",
+        "russian": "Наборы для письма",
+        "simplified_chinese": "​抄写​用具",
+        "spanish": "Utillaje de escriba",
+        "traditional_chinese": "​抄寫​套​組"
+      },
+      "category": "consumer",
+      "regions": [
+        "Roman",
+        "Celtic",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151703,
+      "names": {
+        "brazilian": "Caixões de marfim",
+        "english": "Ivory Caskets",
+        "french": "Coffrets en ivoire",
+        "german": "Elfenbeinschatullen",
+        "italian": "Scrigni d'avorio",
+        "japanese": "​象牙​の​小箱",
+        "korean": "​상아 ​바구니",
+        "polish": "Kościane szkatułki",
+        "russian": "Ларцы из слоновой кости",
+        "simplified_chinese": "​象牙​匣",
+        "spanish": "Ataúdes de marfil",
+        "traditional_chinese": "​象牙​寶​匣"
+      },
+      "category": "consumer",
+      "regions": [
+        "Roman",
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151704,
+      "names": {
+        "brazilian": "Tijolos de barro",
+        "english": "Mud Bricks",
+        "french": "Briques de terre crue",
+        "german": "Lehmziegel",
+        "italian": "Mattoni di fango",
+        "japanese": "​泥​レンガ",
+        "korean": "​진흙벽돌",
+        "polish": "Cegły z mułu",
+        "russian": "Кирпичи из глинозема",
+        "simplified_chinese": "​泥砖",
+        "spanish": "Ladrillos de barro",
+        "traditional_chinese": "​泥磚"
+      },
+      "category": "construction",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151705,
+      "names": {
+        "brazilian": "Tijolos de calcário",
+        "english": "Limestone Bricks",
+        "french": "Briques de calcaire",
+        "german": "Kalksteinziegel",
+        "italian": "Mattoni di calcare",
+        "japanese": "​石灰岩​レンガ",
+        "korean": "​석회석 ​벽돌",
+        "polish": "Bloki wapienne",
+        "russian": "Известняк",
+        "simplified_chinese": "​石灰岩​砖",
+        "spanish": "Ladrillos de caliza",
+        "traditional_chinese": "​石灰岩​磚"
+      },
+      "category": "construction",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151706,
+      "names": {
+        "brazilian": "Contas",
+        "english": "Beads",
+        "french": "Perles",
+        "german": "Perlen",
+        "italian": "Perline",
+        "japanese": "​ビーズ",
+        "korean": "​구슬",
+        "polish": "Koraliki",
+        "russian": "Бусы",
+        "simplified_chinese": "​珠饰",
+        "spanish": "Cuentas",
+        "traditional_chinese": "​串​珠"
+      },
+      "category": "raw",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151712,
+      "names": {
+        "brazilian": "Gansos selvagens",
+        "english": "Wild Geese",
+        "french": "Oies sauvages",
+        "german": "Nilgänse",
+        "italian": "Oche selvatiche",
+        "japanese": "​雁",
+        "korean": "​야생 ​거위",
+        "polish": "Dzikie gęsi",
+        "russian": "Дикие гуси",
+        "simplified_chinese": "​野​鹅",
+        "spanish": "Ocas salvajes",
+        "traditional_chinese": "​野​鵝"
+      },
+      "category": "agricultural",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151713,
+      "names": {
+        "brazilian": "Lótus azul",
+        "english": "Blue Lotus",
+        "french": "Lotus bleu",
+        "german": "Blaue Lotusblüten",
+        "italian": "Loto blu",
+        "japanese": "​青​スイレン",
+        "korean": "​푸른 ​연꽃",
+        "polish": "Błękitny lotos",
+        "russian": "Голубой лотос",
+        "simplified_chinese": "​蓝​莲花",
+        "spanish": "Loto azul",
+        "traditional_chinese": "​藍​蓮花"
+      },
+      "category": "agricultural",
+      "regions": [
+        "Egyptian"
+      ],
+      "abstract": false
+    },
+    {
+      "guid": 151714,
+      "names": {
+        "brazilian": "Hipopótamos",
+        "english": "Hippopotami",
+        "french": "Hippopotames",
+        "german": "Flusspferde",
+        "italian": "Ippopotami",
+        "japanese": "​カバ",
+        "korean": "​하마",
+        "polish": "Hipopotamy",
+        "russian": "Гиппопотамы",
+        "simplified_chinese": "​河马",
+        "spanish": "Hipopótamo",
+        "traditional_chinese": "​河馬"
+      },
+      "category": "agricultural",
+      "regions": [
         "Egyptian"
       ],
       "abstract": false
@@ -3311,6 +4072,28 @@
       "category": "",
       "regions": [
         "Roman"
+      ],
+      "abstract": true
+    },
+    {
+      "guid": 155933,
+      "names": {
+        "brazilian": "Pirâmides reformadas",
+        "english": "Renovated Pyramids",
+        "french": "Pyramides rénovées",
+        "german": "Restaurierte Pyramiden",
+        "italian": "Piramidi restaurate",
+        "japanese": "​改修​さ​れ​た​ピラミッド",
+        "korean": "​보수된 ​피라미드",
+        "polish": "Odnowione piramidy",
+        "russian": "Восстановленные пирамиды",
+        "simplified_chinese": "​翻修​过的​金字塔",
+        "spanish": "Pirámides renovadas",
+        "traditional_chinese": "​修復​後​的​金字塔"
+      },
+      "category": "",
+      "regions": [
+        "Egyptian"
       ],
       "abstract": true
     },
@@ -4836,7 +5619,7 @@
         "german": "Sülzsieder",
         "italian": "Saponificatrice",
         "japanese": "​アスピック​職人",
-        "korean": "​렌더러",
+        "korean": "​지방 ​가공소",
         "polish": "Mieszacz",
         "russian": "Салотопня",
         "simplified_chinese": "​炼​制​厂",
@@ -4857,7 +5640,7 @@
         "german": "Zungenzieher",
         "italian": "Strappalingue",
         "japanese": "​舌​切り​職人",
-        "korean": "​혀 ​뽑기 ​도구",
+        "korean": "​혀 ​뽑기 ​작업장",
         "polish": "Wyrywacz języków",
         "russian": "Поставщик птичьих язычков",
         "simplified_chinese": "​拔​舌​工​坊",
@@ -5148,7 +5931,7 @@
         "brazilian": "Cata-juncos",
         "english": "Reed Gatherer",
         "french": "Cueilleur de roseaux",
-        "german": "Schilfsammler",
+        "german": "Schilfschneider",
         "italian": "Raccoglitore di canne",
         "japanese": "​葦​採集​者",
         "korean": "​갈대 ​채집장",
@@ -5172,7 +5955,7 @@
         "german": "Vogelfänger",
         "italian": "Ammaliatore di uccelli",
         "japanese": "​鳥​使い",
-        "korean": "​새 ​조련사",
+        "korean": "​새 ​조련장",
         "polish": "Treser ptaków",
         "russian": "Заклинатели птиц",
         "simplified_chinese": "​鸟类​诱​捕​场",
@@ -5403,7 +6186,7 @@
         "german": "Eselsmühle",
         "italian": "Mulino degli asini",
         "japanese": "​ロバ​の​製粉​所",
-        "korean": "​당나귀 ​맷돌",
+        "korean": "​당나귀 ​제분소",
         "polish": "Osioł młyński",
         "russian": "Мельница с ослом",
         "simplified_chinese": "​驴​磨坊",
@@ -5802,7 +6585,7 @@
         "german": "Kammmuschelzüchter",
         "italian": "Raccoglitore di conchiglie",
         "japanese": "​貝​拾​い",
-        "korean": "​조개 ​채집꾼",
+        "korean": "​조개 ​채집장",
         "polish": "Zbieracz muszli",
         "russian": "Собиратели ракушек",
         "simplified_chinese": "​贝壳​采集​点",
@@ -6117,7 +6900,7 @@
         "german": "Sülzsieder",
         "italian": "Saponificatrice",
         "japanese": "​アスピック​職人",
-        "korean": "​렌더러",
+        "korean": "​지방 ​가공소",
         "polish": "Mieszacz",
         "russian": "Салотопня",
         "simplified_chinese": "​炼​制​厂",
@@ -6594,6 +7377,2022 @@
         "Roman"
       ],
       "kind": "factory"
+    },
+    {
+      "guid": 149684,
+      "names": {
+        "brazilian": "Residência de debulhadora",
+        "english": "Thresher Residence",
+        "french": "Résidence de Batteuse",
+        "german": "Kornleser-Wohnhaus",
+        "italian": "Residenza dei trebbiatori",
+        "japanese": "​麦打ち​人​の​住居",
+        "korean": "​타작꾼 ​주거지",
+        "polish": "Domostwo rolniczki",
+        "russian": "Жилище молотильщицы",
+        "simplified_chinese": "​打​谷​工​住所",
+        "spanish": "Residencia trilladora",
+        "traditional_chinese": "​打穀​工​住所"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "residence"
+    },
+    {
+      "guid": 150584,
+      "names": {
+        "brazilian": "Residência de oleiro",
+        "english": "Potter Residence",
+        "french": "Résidence de Façonnier",
+        "german": "Töpfer-Wohnhaus",
+        "italian": "Residenza dei vasai",
+        "japanese": "​陶工​の​住居",
+        "korean": "​도공 ​주거지",
+        "polish": "Domostwo garncarza",
+        "russian": "Жилище гончара",
+        "simplified_chinese": "​陶匠​住所",
+        "spanish": "Residencia alfarera",
+        "traditional_chinese": "​陶工​住所"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "residence"
+    },
+    {
+      "guid": 150585,
+      "names": {
+        "brazilian": "Residência de corista",
+        "english": "Chanter Residence",
+        "french": "Résidence de Chantresse",
+        "german": "Wohnhaus der Priesterin",
+        "italian": "Residenza delle cantrici",
+        "japanese": "​奉唱​巫女​の​住居",
+        "korean": "​찬가사 ​주거지",
+        "polish": "Domostwo śpiewaczki",
+        "russian": "Жилище певчей",
+        "simplified_chinese": "​吟诵​者​住所",
+        "spanish": "Residencia cantora",
+        "traditional_chinese": "​吟誦​者​住所"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "residence"
+    },
+    {
+      "guid": 150586,
+      "names": {
+        "brazilian": "Residência de escriba",
+        "english": "Scribe Residence",
+        "french": "Résidence de Scribe",
+        "german": "Schreiber-Wohnhaus",
+        "italian": "Residenza degli scribi",
+        "japanese": "​書記​の​住居",
+        "korean": "​서기 ​주거지",
+        "polish": "Domostwo skryby",
+        "russian": "Жилище писца",
+        "simplified_chinese": "​抄写员​住所",
+        "spanish": "Residencia escriba",
+        "traditional_chinese": "​抄寫​員​住所"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "residence"
+    },
+    {
+      "guid": 150587,
+      "names": {
+        "brazilian": "Residência de gymnasiarca",
+        "english": "Gymnasiarch Residence",
+        "french": "Résidence de Gymnasiarque",
+        "german": "Gymnasiarch-Wohnhaus",
+        "italian": "Residenza dei ginnasiarchi",
+        "japanese": "​ギムナシアリコス​の​住居",
+        "korean": "​김나시아르코스 ​주거지",
+        "polish": "Domostwo gimnazjarchini",
+        "russian": "Жилище гимнасиарха",
+        "simplified_chinese": "​体育​官​住所",
+        "spanish": "Residencia gimnasiarca",
+        "traditional_chinese": "​體育​官​住所"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "residence"
+    },
+    {
+      "guid": 151993,
+      "names": {
+        "brazilian": "Fazenda de Cevada",
+        "english": "Barley Farm",
+        "french": "Ferme d'orge",
+        "german": "Gerstenhof",
+        "italian": "Fattoria d'orzo",
+        "japanese": "​大麦​農場",
+        "korean": "​보리 ​농장",
+        "polish": "Uprawa jęczmienia",
+        "russian": "Хозяйство (ячмень)",
+        "simplified_chinese": "​大麦​农场",
+        "spanish": "Granja de cebada",
+        "traditional_chinese": "​大麥​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 151994,
+      "names": {
+        "brazilian": "Fazenda de Gergelim",
+        "english": "Sesame Farm",
+        "french": "Exploitation de sésame",
+        "german": "Sesamfarm",
+        "italian": "Coltivazione di sesamo",
+        "japanese": "​ゴマ​農場",
+        "korean": "​참깨 ​농장",
+        "polish": "Uprawa sezamu",
+        "russian": "Хозяйство (кунжут)",
+        "simplified_chinese": "​芝麻​农场",
+        "spanish": "Granja de sésamo",
+        "traditional_chinese": "​芝麻​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 151997,
+      "names": {
+        "brazilian": "Cata-juncos",
+        "english": "Reed Gatherer",
+        "french": "Cueilleur de roseaux",
+        "german": "Schilfschneider",
+        "italian": "Raccoglitore di canne",
+        "japanese": "​葦​採集​者",
+        "korean": "​갈대 ​채집장",
+        "polish": "Zbieracz trzcin",
+        "russian": "Собиратели тростника",
+        "simplified_chinese": "​芦苇​采集​点",
+        "spanish": "Recolectoría de junco",
+        "traditional_chinese": "​蘆葦​採集​場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 151998,
+      "names": {
+        "brazilian": "Seca-lama",
+        "english": "Mud Drier",
+        "french": "Sécheur de boue",
+        "german": "Schlammtrockner",
+        "italian": "Essiccatore di fango",
+        "japanese": "​泥​干し​工房",
+        "korean": "​진흙 ​건조장",
+        "polish": "Osuszacz błota",
+        "russian": "Сушилка для глинозема",
+        "simplified_chinese": "​烂泥​干燥​场",
+        "spanish": "Secadero de barro",
+        "traditional_chinese": "​泥巴​乾燥​場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 151999,
+      "names": {
+        "brazilian": "Caçador de Gansos",
+        "english": "Wild Goose Chaser",
+        "french": "Chasseur d'oies sauvages",
+        "german": "Wildgansjäger",
+        "italian": "Cacciatore di oche selvatiche",
+        "japanese": "​雁​狩り​小屋",
+        "korean": "​야생 ​거위 ​사냥터",
+        "polish": "Łowca dzikich gęsi",
+        "russian": "Ловец диких гусей",
+        "simplified_chinese": "​野​鹅​猎​手​营",
+        "spanish": "Coto de ocas salvajes",
+        "traditional_chinese": "​野​鵝​獵場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152000,
+      "names": {
+        "brazilian": "Caçador de Animais Grandes",
+        "english": "Big Game Hunter",
+        "french": "Chasseur de gros gibier",
+        "german": "Großwildjäger",
+        "italian": "Cacciatore di selvaggina",
+        "japanese": "​大型​獣​の​狩猟​小屋",
+        "korean": "​대형 ​동물 ​사냥터",
+        "polish": "Łowca grubej zwierzyny",
+        "russian": "Охотник на крупную дичь",
+        "simplified_chinese": "​大型​猎物​猎​手​营",
+        "spanish": "Coto de caza",
+        "traditional_chinese": "​大型​獵物​獵場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152005,
+      "names": {
+        "brazilian": "Minério de Estanho",
+        "english": "Tin Mine",
+        "french": "Mine d'étain",
+        "german": "Zinnmine",
+        "italian": "Miniera di stagno",
+        "japanese": "​錫​鉱",
+        "korean": "​주석 ​광산",
+        "polish": "Kopalnia cyny",
+        "russian": "Оловянный рудник",
+        "simplified_chinese": "​锡矿​场",
+        "spanish": "Mina de estaño",
+        "traditional_chinese": "​錫礦"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152006,
+      "names": {
+        "brazilian": "Mina de Cobre",
+        "english": "Copper Mine",
+        "french": "Mine de cuivre",
+        "german": "Kupfermine",
+        "italian": "Miniera di rame",
+        "japanese": "​銅鉱",
+        "korean": "​구리 ​광산",
+        "polish": "Kopalnia miedzi",
+        "russian": "Медный рудник",
+        "simplified_chinese": "​铜​矿场",
+        "spanish": "Mina de cobre",
+        "traditional_chinese": "​銅礦"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152007,
+      "names": {
+        "brazilian": "Pedreira de Granito",
+        "english": "Granite Quarry",
+        "french": "Carrière de granite",
+        "german": "Granitsteinbruch",
+        "italian": "Cava di granito",
+        "japanese": "​花崗岩​の​採石場",
+        "korean": "​화강암 ​채석장",
+        "polish": "Kamieniołom granitu",
+        "russian": "Гранитный карьер",
+        "simplified_chinese": "​花岗岩​采石场",
+        "spanish": "Cantera de granito",
+        "traditional_chinese": "​花崗岩​採石場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152012,
+      "names": {
+        "brazilian": "Casa dos Camelos",
+        "english": "House Of Kamels",
+        "french": "Élevage de chameaux",
+        "german": "Haus der Kamele",
+        "italian": "Casa dei cammelli",
+        "japanese": "​ラクダ​牧場",
+        "korean": "​낙타 ​농가",
+        "polish": "Dom wielbłądów",
+        "russian": "Дом верблюдов",
+        "simplified_chinese": "​骆驼​棚",
+        "spanish": "Establo de camellos",
+        "traditional_chinese": "​駱駝​舍"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152064,
+      "names": {
+        "brazilian": "Fabricante de Contas",
+        "english": "Beadmaker",
+        "french": "Perlier",
+        "german": "Perlenmacher",
+        "italian": "Perlista",
+        "japanese": "​ビーズ​工房",
+        "korean": "​구슬 ​공방",
+        "polish": "Wytwórca koralików",
+        "russian": "Мастерская бус",
+        "simplified_chinese": "​珠饰​坊",
+        "spanish": "Taller de cuentas",
+        "traditional_chinese": "​串​珠​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152107,
+      "names": {
+        "brazilian": "Plantação de Lótus Azul",
+        "english": "Blue Lotus Plantation",
+        "french": "Plantation de lotus bleus",
+        "german": "Lotusfarm",
+        "italian": "Piantagione di loto blu",
+        "japanese": "​青​スイレン​農園",
+        "korean": "​푸른 ​연꽃 ​농장",
+        "polish": "Plantacja błękitnego lotosu",
+        "russian": "Плантация голубого лотоса",
+        "simplified_chinese": "​蓝​莲花​种植​园",
+        "spanish": "Plantación de loto azul",
+        "traditional_chinese": "​藍​蓮花​農園"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152141,
+      "names": {
+        "brazilian": "Vinhedo",
+        "english": "Vineyard",
+        "french": "Vignoble",
+        "german": "Weingut",
+        "italian": "Vigneto",
+        "japanese": "​ブドウ​園",
+        "korean": "​포도원",
+        "polish": "Winnica",
+        "russian": "Виноградник",
+        "simplified_chinese": "​葡萄​园",
+        "spanish": "Viñedo",
+        "traditional_chinese": "​葡萄園"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152142,
+      "names": {
+        "brazilian": "Fazenda de Linho",
+        "english": "Flax Farm",
+        "french": "Ferme de lin",
+        "german": "Flachshof",
+        "italian": "Fattoria di lino",
+        "japanese": "​亜麻​農場",
+        "korean": "​아마 ​농장",
+        "polish": "Uprawa lnu",
+        "russian": "Хозяйство (лен)",
+        "simplified_chinese": "​亚麻​农场",
+        "spanish": "Granja de lino",
+        "traditional_chinese": "​亞麻​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152143,
+      "names": {
+        "brazilian": "Fazenda de Trigo",
+        "english": "Wheat Farm",
+        "french": "Ferme de céréales",
+        "german": "Weizenhof",
+        "italian": "Fattoria di grano",
+        "japanese": "​小麦​農場",
+        "korean": "​밀 ​농장",
+        "polish": "Uprawa pszenicy",
+        "russian": "Хозяйство (пшеница)",
+        "simplified_chinese": "​小麦​农场",
+        "spanish": "Granja de trigo",
+        "traditional_chinese": "​小麥​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152144,
+      "names": {
+        "brazilian": "Fazenda de Cânhamo",
+        "english": "Hemp Farm",
+        "french": "Ferme de chanvre",
+        "german": "Hanfhof",
+        "italian": "Fattoria di canapa",
+        "japanese": "​大麻​農場",
+        "korean": "​삼 ​농장",
+        "polish": "Uprawa konopi",
+        "russian": "Хозяйство (конопля)",
+        "simplified_chinese": "​火​麻​农场",
+        "spanish": "Granja de cáñamo",
+        "traditional_chinese": "​火​麻​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152145,
+      "names": {
+        "brazilian": "Fazenda de Romãs",
+        "english": "Pomegranate Farm",
+        "french": "Exploitation de grenadiers",
+        "german": "Granatapfelplantage",
+        "italian": "Fattoria di melograni",
+        "japanese": "​ザクロ​農場",
+        "korean": "​석류 ​농장",
+        "polish": "Uprawa granatów",
+        "russian": "Хозяйство (гранат)",
+        "simplified_chinese": "​石榴​农场",
+        "spanish": "Granja de granadas",
+        "traditional_chinese": "​石榴​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152151,
+      "names": {
+        "brazilian": "Fazenda de Aveia",
+        "english": "Oat Farm",
+        "french": "Ferme d'avoine",
+        "german": "Haferhof",
+        "italian": "Fattoria d'avena",
+        "japanese": "​オーツ​麦​農場",
+        "korean": "​귀리 ​농장",
+        "polish": "Uprawa owsa",
+        "russian": "Хозяйство (овес)",
+        "simplified_chinese": "​燕麦​农场",
+        "spanish": "Granja de avena",
+        "traditional_chinese": "​燕麥​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152152,
+      "names": {
+        "brazilian": "Cultivador de Lavanda",
+        "english": "Lavender Grower",
+        "french": "Cultivateur de lavande",
+        "german": "Lavandulahof",
+        "italian": "Coltivatore di lavanda",
+        "japanese": "​ラベンダー​農家",
+        "korean": "​라벤더 ​재배지",
+        "polish": "Hodowca lawendy",
+        "russian": "Хозяйство (лаванда)",
+        "simplified_chinese": "​薰​衣​草​种植​园",
+        "spanish": "Vivero de lavanda",
+        "traditional_chinese": "​薰​衣​草​種植園"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152153,
+      "names": {
+        "brazilian": "Olivicultor",
+        "english": "Olive Grower",
+        "french": "Cultivateur d'olives",
+        "german": "Olivenzüchter",
+        "italian": "Olivicoltore",
+        "japanese": "​オリーブ​農家",
+        "korean": "​올리브 ​재배지",
+        "polish": "Hodowca oliwek",
+        "russian": "Хозяйство (оливки)",
+        "simplified_chinese": "​橄榄树​种植​园",
+        "spanish": "Vivero de aceitunas",
+        "traditional_chinese": "​橄欖​種植園"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152203,
+      "names": {
+        "brazilian": "Refinaria de Areia",
+        "english": "Sand Refinery",
+        "french": "Raffinerie de sable",
+        "german": "Sandraffinerie",
+        "italian": "Raffineria di sabbia",
+        "japanese": "​砂​精製​所",
+        "korean": "​모래 ​정제소",
+        "polish": "Przetwórnia piasku",
+        "russian": "Мастерская по очистке песка",
+        "simplified_chinese": "​精​砂​厂",
+        "spanish": "Refinería de arena",
+        "traditional_chinese": "​沙子​精煉​場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152204,
+      "names": {
+        "brazilian": "Garimpeiro",
+        "english": "Gold Washer",
+        "french": "Laveur d'or",
+        "german": "Goldwäscher",
+        "italian": "Lavatore d'oro",
+        "japanese": "​金​選鉱",
+        "korean": "​사금 ​채취장",
+        "polish": "Wypłukiwacz złota",
+        "russian": "Промывальщик золота",
+        "simplified_chinese": "​淘金​场",
+        "spanish": "Lavandería de oro",
+        "traditional_chinese": "​淘金​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152210,
+      "names": {
+        "brazilian": "Pedreira de Calcário",
+        "english": "Limestone Quarry",
+        "french": "Carrière de calcaire",
+        "german": "Kalksteinbruch",
+        "italian": "Cava di calcare",
+        "japanese": "​石灰岩​の​採石場",
+        "korean": "​석회석 ​채석장",
+        "polish": "Kamieniołom wapienia",
+        "russian": "Известняковый карьер",
+        "simplified_chinese": "​石灰岩​采石场",
+        "spanish": "Cantera de caliza",
+        "traditional_chinese": "​石灰岩​採石場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152243,
+      "names": {
+        "brazilian": "Mina de Ferro",
+        "english": "Iron Mine",
+        "french": "Mine de fer",
+        "german": "Eisenmine",
+        "italian": "Miniera di ferro",
+        "japanese": "​鉄​鉱山",
+        "korean": "​철 ​광산",
+        "polish": "Kopalnia żelaza",
+        "russian": "Железный рудник",
+        "simplified_chinese": "​铁​矿场",
+        "spanish": "Mina de hierro",
+        "traditional_chinese": "​鐵礦"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152245,
+      "names": {
+        "brazilian": "Mina de Carvão",
+        "english": "Coal Mine",
+        "french": "Mine de charbon",
+        "german": "Kohlemine",
+        "italian": "Miniera di carbone",
+        "japanese": "​炭鉱",
+        "korean": "​석탄 ​광산",
+        "polish": "Kopalnia węgla",
+        "russian": "Угольный рудник",
+        "simplified_chinese": "​煤矿​场",
+        "spanish": "Mina de carbón",
+        "traditional_chinese": "​煤礦"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152247,
+      "names": {
+        "brazilian": "Pedreira Mineral",
+        "english": "Mineral Quarry",
+        "french": "Carrière de minéraux",
+        "german": "Mineral­steinbruch",
+        "italian": "Cava di minerali",
+        "japanese": "​鉱物​の​採石場",
+        "korean": "​광물 ​채석장",
+        "polish": "Kamieniołom minerałów",
+        "russian": "Минеральный карьер",
+        "simplified_chinese": "​矿物​采石场",
+        "spanish": "Cantera de minerales",
+        "traditional_chinese": "​礦物​採石場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152249,
+      "names": {
+        "brazilian": "Mina de Ouro",
+        "english": "Gold Mine",
+        "french": "Mine d'or",
+        "german": "Goldmine",
+        "italian": "Miniera d'oro",
+        "japanese": "​金鉱",
+        "korean": "​금 ​광산",
+        "polish": "Kopalnia złota",
+        "russian": "Золотой рудник",
+        "simplified_chinese": "​金​矿场",
+        "spanish": "Mina de oro",
+        "traditional_chinese": "​金礦"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152256,
+      "names": {
+        "brazilian": "Fazenda de Ovelhas",
+        "english": "Sheep Farm",
+        "french": "Élevage ovin",
+        "german": "Schafshof",
+        "italian": "Allevamento di pecore",
+        "japanese": "​羊​牧場",
+        "korean": "​양 ​농장",
+        "polish": "Owczarnia",
+        "russian": "Хозяйство (овцы)",
+        "simplified_chinese": "​绵羊​农场",
+        "spanish": "Granja de ovejas",
+        "traditional_chinese": "​羊​隻​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152257,
+      "names": {
+        "brazilian": "Fazenda de Gado Sanga",
+        "english": "Sanga Cattle Farm",
+        "french": "Élevage de bétail sanga",
+        "german": "Sangahof",
+        "italian": "Allevamento di bovini di Sanga",
+        "japanese": "​サンガ​牛​牧場",
+        "korean": "​상가 ​소 ​농장",
+        "polish": "Hodowla bydła Sanga",
+        "russian": "Хозяйство (коровы санга)",
+        "simplified_chinese": "​桑​加​牛​农场",
+        "spanish": "Granja de ganado sanga",
+        "traditional_chinese": "​桑​加​牛​牧場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152259,
+      "names": {
+        "brazilian": "Criador de Cavalos",
+        "english": "Horse Breeder",
+        "french": "Éleveur de chevaux",
+        "german": "Pferdezüchter",
+        "italian": "Allevatore di cavalli",
+        "japanese": "​馬​ブリーダー",
+        "korean": "​말 ​사육장",
+        "polish": "Hodowca koni",
+        "russian": "Загон для лошадей",
+        "simplified_chinese": "​养​马​场",
+        "spanish": "Criadero de caballos",
+        "traditional_chinese": "​牧​馬場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152268,
+      "names": {
+        "brazilian": "Silo",
+        "english": "Silo",
+        "french": "Silo",
+        "german": "Silo",
+        "italian": "Silo",
+        "japanese": "​サイロ",
+        "korean": "​곡물 ​저장고",
+        "polish": "Spichlerz",
+        "russian": "Силосный амбар",
+        "simplified_chinese": "​筒​仓",
+        "spanish": "Silo",
+        "traditional_chinese": "​筒​倉"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "module"
+    },
+    {
+      "guid": 152270,
+      "names": {
+        "brazilian": "Lenhador",
+        "english": "Woodcutter",
+        "french": "Bûcheron",
+        "german": "Holzfäller",
+        "italian": "Taglialegna",
+        "japanese": "​木こり",
+        "korean": "​벌목장",
+        "polish": "Drwal",
+        "russian": "Лесорубы",
+        "simplified_chinese": "​伐木​场",
+        "spanish": "Talador",
+        "traditional_chinese": "​伐木​場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152271,
+      "names": {
+        "brazilian": "Carvoeiro",
+        "english": "Charcoal Burner",
+        "french": "Charbonnière",
+        "german": "Köhler",
+        "italian": "Carbonaio",
+        "japanese": "​炭焼き​師",
+        "korean": "​제탄소",
+        "polish": "Smolarz",
+        "russian": "Яма углежога",
+        "simplified_chinese": "​炭​窑",
+        "spanish": "Quemadero de carbón",
+        "traditional_chinese": "​木炭​焚燒​爐"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152272,
+      "names": {
+        "brazilian": "Fazenda de Tâmaras",
+        "english": "Date Farm",
+        "french": "Plantation de dattiers",
+        "german": "Dattelfarm",
+        "italian": "Coltivazione di datteri",
+        "japanese": "​ナツメヤシ​農場",
+        "korean": "​대추야자 ​농장",
+        "polish": "Uprawa daktyli",
+        "russian": "Хозяйство (финики)",
+        "simplified_chinese": "​椰​枣​农场",
+        "spanish": "Granja de dátiles",
+        "traditional_chinese": "​椰棗​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152279,
+      "names": {
+        "brazilian": "Apiário",
+        "english": "Apiary",
+        "french": "Rucher",
+        "german": "Bienenstock",
+        "italian": "Apiario",
+        "japanese": "​養蜂場",
+        "korean": "​양봉장",
+        "polish": "Pasieka",
+        "russian": "Пасека",
+        "simplified_chinese": "​养蜂场",
+        "spanish": "Apiario",
+        "traditional_chinese": "​養蜂場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152332,
+      "names": {
+        "brazilian": "Mãos Azuis",
+        "english": "Bluehands",
+        "french": "Mains bleues",
+        "german": "Blaumischer",
+        "italian": "Mani blu",
+        "japanese": "​青色​顔料​工房",
+        "korean": "​푸른 ​손 ​공방",
+        "polish": "Błękitnoręcy",
+        "russian": "Мастерская синильщиков",
+        "simplified_chinese": "​蓝​染​作坊",
+        "spanish": "Lavadero de tinte azul",
+        "traditional_chinese": "​埃及​藍​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152333,
+      "names": {
+        "brazilian": "Rendeiro",
+        "english": "Renderer",
+        "french": "Extracteur",
+        "german": "Sülzsieder",
+        "italian": "Saponificatrice",
+        "japanese": "​アスピック​職人",
+        "korean": "​지방 ​가공소",
+        "polish": "Mieszacz",
+        "russian": "Салотопня",
+        "simplified_chinese": "​炼​制​厂",
+        "spanish": "Aspiquería",
+        "traditional_chinese": "​美食​煉製​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152334,
+      "names": {
+        "brazilian": "Curtume",
+        "english": "Tannery",
+        "french": "Tannerie",
+        "german": "Gerberei",
+        "italian": "Conceria",
+        "japanese": "​なめし革​工房",
+        "korean": "​가죽 ​세공소",
+        "polish": "Garbarnia",
+        "russian": "Дубильня",
+        "simplified_chinese": "​鞣​革​工​坊",
+        "spanish": "Curtiduría",
+        "traditional_chinese": "​皮革​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152338,
+      "names": {
+        "brazilian": "Melikrator",
+        "english": "Melikrator",
+        "french": "Mélicrator",
+        "german": "Melikratonmischer",
+        "italian": "Melikrator",
+        "japanese": "​メリクラトール",
+        "korean": "​멜리크라토르",
+        "polish": "Melikrator",
+        "russian": "Мастерская меликратора",
+        "simplified_chinese": "​蜂蜜​奶​作坊",
+        "spanish": "Melicratario",
+        "traditional_chinese": "​蜂蜜​乳​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152351,
+      "names": {
+        "brazilian": "Moinho de Burros",
+        "english": "Donkey Mill",
+        "french": "Moulin à âne",
+        "german": "Eselsmühle",
+        "italian": "Mulino degli asini",
+        "japanese": "​ロバ​の​製粉​所",
+        "korean": "​당나귀 ​제분소",
+        "polish": "Osioł młyński",
+        "russian": "Мельница с ослом",
+        "simplified_chinese": "​驴​磨坊",
+        "spanish": "Molino de burros",
+        "traditional_chinese": "​驢子​磨坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152352,
+      "names": {
+        "brazilian": "Malteria",
+        "english": "Malthouse",
+        "french": "Malterie",
+        "german": "Mälzerei",
+        "italian": "Malteria",
+        "japanese": "​麦芽​製造​所",
+        "korean": "​맥아 ​저장고",
+        "polish": "Skład słodu",
+        "russian": "Солодовня",
+        "simplified_chinese": "​麦芽​加工​厂",
+        "spanish": "Maltería",
+        "traditional_chinese": "​麥芽​加工廠"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152353,
+      "names": {
+        "brazilian": "Fornalha",
+        "english": "Furnace",
+        "french": "Fourneau",
+        "german": "Ofen",
+        "italian": "Fornace",
+        "japanese": "​溶鉱炉",
+        "korean": "​용광로",
+        "polish": "Piec",
+        "russian": "Печь",
+        "simplified_chinese": "​熔炉",
+        "spanish": "Horno alto",
+        "traditional_chinese": "​熔爐"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152356,
+      "names": {
+        "brazilian": "Triturador",
+        "english": "Mineral Crusher",
+        "french": "Broyeur minéral",
+        "german": "Mineralienmalmer",
+        "italian": "Frantoio di minerali",
+        "japanese": "​鉱物​粉砕​所",
+        "korean": "​광물 ​분쇄소",
+        "polish": "Zgniatarka minerałów",
+        "russian": "Камнедробилка",
+        "simplified_chinese": "​矿物​粉碎​厂",
+        "spanish": "Trituradora de minerales",
+        "traditional_chinese": "​礦石​碾碎​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152358,
+      "names": {
+        "brazilian": "Ourives",
+        "english": "Goldsmith",
+        "french": "Orfèvre",
+        "german": "Goldschmied",
+        "italian": "Orafo",
+        "japanese": "​金​細工​工房",
+        "korean": "​금 ​세공소",
+        "polish": "Złotnik",
+        "russian": "Мастерская золотаря",
+        "simplified_chinese": "​冶金​厂",
+        "spanish": "Forjería de oro",
+        "traditional_chinese": "​黃金​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152359,
+      "names": {
+        "brazilian": "Fundição de bronze",
+        "english": "Bronze Smelter",
+        "french": "Fondeur de bronze",
+        "german": "Bronzeschmelzer",
+        "italian": "Fonderia di bronzo",
+        "japanese": "​青銅​の​製​錬​工",
+        "korean": "​청동 ​제련소",
+        "polish": "Wytapiacz brązu",
+        "russian": "Плавильня бронзы",
+        "simplified_chinese": "​青铜​冶炼​厂",
+        "spanish": "Fundición de bronce",
+        "traditional_chinese": "​青銅​冶煉​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152361,
+      "names": {
+        "brazilian": "Tecelão",
+        "english": "Weaver",
+        "french": "Tisserand",
+        "german": "Weber",
+        "italian": "Tessitore",
+        "japanese": "​織物​工房",
+        "korean": "​직조소",
+        "polish": "Tkacz",
+        "russian": "Ткацкая мастерская",
+        "simplified_chinese": "​编织​工​坊",
+        "spanish": "Hilandería",
+        "traditional_chinese": "​織布​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152370,
+      "names": {
+        "brazilian": "Prensa de Gergelim",
+        "english": "Sesame Press",
+        "french": "Presse à sésame",
+        "german": "Sesampresse",
+        "italian": "Pressa di sesamo",
+        "japanese": "​ゴマ​圧搾​所",
+        "korean": "​참깨 ​착유소",
+        "polish": "Prasa do sezamu",
+        "russian": "Кунжутный пресс",
+        "simplified_chinese": "​芝麻油​坊",
+        "spanish": "Prensa de sésamo",
+        "traditional_chinese": "​芝麻油​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152371,
+      "names": {
+        "brazilian": "Papiraria",
+        "english": "Papyrus Maker",
+        "french": "Fabricant de papyrus",
+        "german": "Papyrusmacher",
+        "italian": "Fabbricante di papiro",
+        "japanese": "​パピルス​職人",
+        "korean": "​파피루스 ​제작소",
+        "polish": "Wytwórca papirusu",
+        "russian": "Мастерская по изготовлению папируса",
+        "simplified_chinese": "​莎草​纸​作坊",
+        "spanish": "Taller de papiro",
+        "traditional_chinese": "​莎草​紙工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152375,
+      "names": {
+        "brazilian": "Barraca de Mingau",
+        "english": "Porridge Stand",
+        "french": "Étal de gruau",
+        "german": "Breistand",
+        "italian": "Bancarella di zuppa d'avena",
+        "japanese": "​お​粥​の​屋台",
+        "korean": "​죽 ​가게",
+        "polish": "Stoisko z owsianką",
+        "russian": "Лавка кашевара",
+        "simplified_chinese": "​粥​铺",
+        "spanish": "Puesto de gachas",
+        "traditional_chinese": "​清​粥​攤販"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152383,
+      "names": {
+        "brazilian": "Padaria",
+        "english": "Bakery",
+        "french": "Boulangerie",
+        "german": "Bäckerei",
+        "italian": "Panificio",
+        "japanese": "​パン​屋",
+        "korean": "​제과점",
+        "polish": "Piekarnia",
+        "russian": "Пекарня",
+        "simplified_chinese": "​面包​房",
+        "spanish": "Panadería",
+        "traditional_chinese": "​麵包​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152387,
+      "names": {
+        "brazilian": "Vinicultor",
+        "english": "Vintner",
+        "french": "Vigneron",
+        "german": "Winzer",
+        "italian": "Vinaio",
+        "japanese": "​ワイン​醸造​業者",
+        "korean": "​포도주 ​양조장",
+        "polish": "Winiarz",
+        "russian": "Винодельня",
+        "simplified_chinese": "​葡萄酒​酿酒厂",
+        "spanish": "Viticultoría",
+        "traditional_chinese": "​釀酒​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152388,
+      "names": {
+        "brazilian": "Laticínio",
+        "english": "Dairy",
+        "french": "Laiterie",
+        "german": "Käserei",
+        "italian": "Caseificio",
+        "japanese": "​乳​工房",
+        "korean": "​낙농장",
+        "polish": "Serowar",
+        "russian": "Сыроварня",
+        "simplified_chinese": "​乳品​工​坊",
+        "spanish": "Quesería",
+        "traditional_chinese": "​乳酪​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152389,
+      "names": {
+        "brazilian": "Cervejaria",
+        "english": "Brewery",
+        "french": "Brasserie",
+        "german": "Brauerei",
+        "italian": "Birrificio",
+        "japanese": "​醸造​所",
+        "korean": "​양조장",
+        "polish": "Browar",
+        "russian": "Пивоварня",
+        "simplified_chinese": "​酿​酒​工​坊",
+        "spanish": "Destilería",
+        "traditional_chinese": "​釀酒廠"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152390,
+      "names": {
+        "brazilian": "Recheador",
+        "english": "Farcer",
+        "french": "Charcutier",
+        "german": "Gänsebräter",
+        "italian": "Farcitore",
+        "japanese": "​詰め​物​肉​工房",
+        "korean": "​거위 ​요리점",
+        "polish": "Gęsiarz",
+        "russian": "Шпиговальня",
+        "simplified_chinese": "​填​鹅​坊",
+        "spanish": "Obrador de farsa",
+        "traditional_chinese": "​填​餡​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152391,
+      "names": {
+        "brazilian": "Epicure da Terra",
+        "english": "Epicure of Earth",
+        "french": "Épicurien de la terre",
+        "german": "Feinkostmetzger",
+        "italian": "Epicureo della terra",
+        "japanese": "​大地​の​美食​家",
+        "korean": "​대지의 ​미식당",
+        "polish": "Epikur Ziemi",
+        "russian": "Земные деликатесы",
+        "simplified_chinese": "​陆​产​珍​馐​作坊",
+        "spanish": "Epicurería de tierra",
+        "traditional_chinese": "​大地​美食​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152400,
+      "names": {
+        "brazilian": "Kaykeria",
+        "english": "Kaykery",
+        "french": "Kaykerie",
+        "german": "Kaykerei",
+        "italian": "Kaykery",
+        "japanese": "​カイ​ク​工房",
+        "korean": "​제과 ​공방",
+        "polish": "Ciastkarnia",
+        "russian": "Пекарня (каахк)",
+        "simplified_chinese": "​糕点​工​坊",
+        "spanish": "Obrador de kajta",
+        "traditional_chinese": "​凱​克​餅​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152437,
+      "names": {
+        "brazilian": "Casa de Infusão",
+        "english": "House of Infusion",
+        "french": "Maison des infusions",
+        "german": "Haus der Aufgüsse",
+        "italian": "Casa dell'infusione",
+        "japanese": "​煎​じ​茶​工房",
+        "korean": "​침출 ​공방",
+        "polish": "Dom naparów",
+        "russian": "Чаесушильня",
+        "simplified_chinese": "​煮​茶坊",
+        "spanish": "Infusionería",
+        "traditional_chinese": "​花草​茶坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152647,
+      "names": {
+        "brazilian": "Passador de Contas",
+        "english": "Bead-Threader",
+        "french": "Enfileur de perles",
+        "german": "Perlenfädler",
+        "italian": "Perlatrice",
+        "japanese": "​ビーズ​工房",
+        "korean": "​구슬 ​장신구 ​제작소",
+        "polish": "Nawlekacz koralików",
+        "russian": "Мастерская низальщиков бус",
+        "simplified_chinese": "​穿​珠​工​坊",
+        "spanish": "Taller de cuentas",
+        "traditional_chinese": "​寬​帶領​飾​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152648,
+      "names": {
+        "brazilian": "Plissê",
+        "english": "Pleater",
+        "french": "Plisseur",
+        "german": "Plissierer",
+        "italian": "Piegatrice",
+        "japanese": "​プリーツ​工房",
+        "korean": "​주름 ​가공소",
+        "polish": "Plisowacz",
+        "russian": "Мастерская схенти",
+        "simplified_chinese": "​长袍​工​坊",
+        "spanish": "Plisador",
+        "traditional_chinese": "​百​褶​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152649,
+      "names": {
+        "brazilian": "Kollyrista",
+        "english": "Kollyrist",
+        "french": "Kollyriste",
+        "german": "Kollyrist",
+        "italian": "Collirista",
+        "japanese": "​コリュラ​工房",
+        "korean": "​콜리리스트",
+        "polish": "Kolorysta",
+        "russian": "Мастерская коллуриста",
+        "simplified_chinese": "​眼影​墨​工​坊",
+        "spanish": "Kohladuría",
+        "traditional_chinese": "​眼​膏​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152650,
+      "names": {
+        "brazilian": "Costureira",
+        "english": "Seamstress",
+        "french": "Couturière",
+        "german": "Näherin",
+        "italian": "Cucitrice",
+        "japanese": "​裁縫​工房",
+        "korean": "​재봉소",
+        "polish": "Szwaczka",
+        "russian": "Швейная мастерская",
+        "simplified_chinese": "​裁缝​铺",
+        "spanish": "Costurería",
+        "traditional_chinese": "​裁縫​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152651,
+      "names": {
+        "brazilian": "Unguentarius",
+        "english": "Unguentarius",
+        "french": "Unguentarius",
+        "german": "Unguentarius",
+        "italian": "Unguentarius",
+        "japanese": "​香油​工房",
+        "korean": "​운구엔타리우스",
+        "polish": "Perfumiarz",
+        "russian": "Мастерская унгвентариев",
+        "simplified_chinese": "​精油​工​坊",
+        "spanish": "Ungüentario",
+        "traditional_chinese": "​香​膏​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152671,
+      "names": {
+        "brazilian": "Tecelão",
+        "english": "Spinner",
+        "french": "Atelier de filage",
+        "german": "Spinnerei",
+        "italian": "Filatore",
+        "japanese": "​糸​紡​ぎ​師",
+        "korean": "​방직 ​공장",
+        "polish": "Warsztat przędzarza",
+        "russian": "Мастерская по шитью туник",
+        "simplified_chinese": "​纺​纱​工​坊",
+        "spanish": "Tejeduría",
+        "traditional_chinese": "​紡織​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152683,
+      "names": {
+        "brazilian": "Saboeiro",
+        "english": "Soap Maker",
+        "french": "Fabricant de savon",
+        "german": "Seifensieder",
+        "italian": "Produttore di sapone",
+        "japanese": "​石鹸​工房",
+        "korean": "​비누 ​제작소",
+        "polish": "Mydlarz",
+        "russian": "Мыловарня",
+        "simplified_chinese": "​肥皂​作坊",
+        "spanish": "Jabonería",
+        "traditional_chinese": "​肥皂​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152685,
+      "names": {
+        "brazilian": "Sandalheiro",
+        "english": "Sandal Maker",
+        "french": "Fabricant de sandales",
+        "german": "Sandalenmacher",
+        "italian": "Calzolaio di sandali",
+        "japanese": "​サンダル​職人",
+        "korean": "​샌들 ​제작소",
+        "polish": "Wytwórca sandałów",
+        "russian": "Мастерская по изготовлению сандалий",
+        "simplified_chinese": "​凉鞋​作坊",
+        "spanish": "Sandalería",
+        "traditional_chinese": "​涼鞋​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152686,
+      "names": {
+        "brazilian": "Joalheiro",
+        "english": "Jeweller",
+        "french": "Joaillier",
+        "german": "Juwelier",
+        "italian": "Gioielliere",
+        "japanese": "​宝石商",
+        "korean": "​보석 ​세공소",
+        "polish": "Jubiler",
+        "russian": "Ювелирная мастерская",
+        "simplified_chinese": "​珠宝​作坊",
+        "spanish": "Joyería",
+        "traditional_chinese": "​珠寶​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152688,
+      "names": {
+        "brazilian": "Cosmetólogo",
+        "english": "Kosmetician",
+        "french": "Cosméticien",
+        "german": "Kosmetiker",
+        "italian": "Estetista",
+        "japanese": "​美容師",
+        "korean": "​화장품 ​제작소",
+        "polish": "Kosmetolog",
+        "russian": "Мастерская косметики",
+        "simplified_chinese": "​美容​坊",
+        "spanish": "Taller de cosméticos",
+        "traditional_chinese": "​美容師"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152729,
+      "names": {
+        "brazilian": "Prensa de Azeitonas",
+        "english": "Olive Press",
+        "french": "Pressoir à olives",
+        "german": "Olivenpresse",
+        "italian": "Frantoio",
+        "japanese": "​オリーブ​圧搾​所",
+        "korean": "​올리브 ​압착소",
+        "polish": "Prasa do wyciskania oliwy",
+        "russian": "Оливковый пресс",
+        "simplified_chinese": "​橄榄​压​榨​工​坊",
+        "spanish": "Prensa de aceitunas",
+        "traditional_chinese": "​橄欖​榨汁​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152730,
+      "names": {
+        "brazilian": "Vidraceiro Artesão",
+        "english": "Artisan Glazier",
+        "french": "Maître verrier",
+        "german": "Kunstglasierer",
+        "italian": "Vetraio artigiano",
+        "japanese": "​ガラス​細工​工房",
+        "korean": "​유리 ​세공소",
+        "polish": "Szklarz",
+        "russian": "Мастерская стеклодува",
+        "simplified_chinese": "​琉璃​工​坊",
+        "spanish": "Vidriería artesanal",
+        "traditional_chinese": "​彩釉​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152731,
+      "names": {
+        "brazilian": "Modelador de Lâmpadas",
+        "english": "Lamp Shaper",
+        "french": "Fabricant de lampes",
+        "german": "Lampenformer",
+        "italian": "Modellatore di lampade",
+        "japanese": "​ランプ​工房",
+        "korean": "​등잔 ​제작소",
+        "polish": "Wytwórca lamp",
+        "russian": "Мастерская литейщика ламп",
+        "simplified_chinese": "​塑​灯​坊",
+        "spanish": "Moldeadero de lámparas",
+        "traditional_chinese": "​油燈​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152732,
+      "names": {
+        "brazilian": "Timpanista",
+        "english": "Tympanist",
+        "french": "Tympaniste",
+        "german": "Tympanist",
+        "italian": "Timpanista",
+        "japanese": "​ティンパニ​工房",
+        "korean": "​타악기 ​제작소",
+        "polish": "Tympanista",
+        "russian": "Тимпанист",
+        "simplified_chinese": "​叉​铃​工​坊",
+        "spanish": "Timpanista",
+        "traditional_chinese": "​叉​鈴​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152733,
+      "names": {
+        "brazilian": "Scriptorium",
+        "english": "Scriptorium",
+        "french": "Scriptorium",
+        "german": "Scriptorium",
+        "italian": "Scriptorium",
+        "japanese": "​写本​室",
+        "korean": "​스크립토리움",
+        "polish": "Skryptorium",
+        "russian": "Скрипторий",
+        "simplified_chinese": "​文书​馆",
+        "spanish": "Escriptorio",
+        "traditional_chinese": "​抄寫​室"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152734,
+      "names": {
+        "brazilian": "Chaveiro",
+        "english": "Locksmith",
+        "french": "Serrurier",
+        "german": "Kästchenmacher",
+        "italian": "Fabbro",
+        "japanese": "​錠前​師",
+        "korean": "​자물쇠 ​제작소",
+        "polish": "Ślusarz",
+        "russian": "Замочная мастерская",
+        "simplified_chinese": "​锁匠​铺",
+        "spanish": "Cerrajería",
+        "traditional_chinese": "​鎖匠​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152788,
+      "names": {
+        "brazilian": "Empilhador de Lama",
+        "english": "Mud Stacker",
+        "french": "Fabricant de briques de terre",
+        "german": "Lehmziegelei",
+        "italian": "Impilatore di fango",
+        "japanese": "​泥​レンガ​集積​場",
+        "korean": "​진흙 ​적치장",
+        "polish": "Warsztat ceglarza",
+        "russian": "Мастерская кирпичника",
+        "simplified_chinese": "​泥砖​坊",
+        "spanish": "Amasadero de barro",
+        "traditional_chinese": "​泥​料​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152789,
+      "names": {
+        "brazilian": "Alveneiro de Calcário",
+        "english": "Limestone Mason",
+        "french": "Tailleur de pierre calcaire",
+        "german": "Kalksteinmetz",
+        "italian": "Marmista del calcare",
+        "japanese": "​石灰岩​の​石工​所",
+        "korean": "​석회석 ​석공",
+        "polish": "Kamieniarz wapienia",
+        "russian": "Мастерская по обработке известняка",
+        "simplified_chinese": "​石灰岩​石匠​坊",
+        "spanish": "Cantera de caliza",
+        "traditional_chinese": "​石灰岩​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152790,
+      "names": {
+        "brazilian": "Cortador de granito",
+        "english": "Granite Cutter",
+        "french": "Découpeur de granite",
+        "german": "Granitschneider",
+        "italian": "Tagliapietre",
+        "japanese": "​花崗岩​の​切断​工",
+        "korean": "​화강암 ​절단소",
+        "polish": "Kamieniarz (granit)",
+        "russian": "Мастерская по резке гранита",
+        "simplified_chinese": "​花岗岩​切割​工​坊",
+        "spanish": "Cortadero de granito",
+        "traditional_chinese": "​花崗岩​切割​場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152791,
+      "names": {
+        "brazilian": "Veleiro",
+        "english": "Sailmaker",
+        "french": "Fabricant de voiles",
+        "german": "Segelmacher",
+        "italian": "Velaio",
+        "japanese": "​帆布​工場",
+        "korean": "​돛 ​제작소",
+        "polish": "Żaglomistrz",
+        "russian": "Мастерская по изготовлению парусов",
+        "simplified_chinese": "​制​帆​厂",
+        "spanish": "Velería",
+        "traditional_chinese": "​製​帆​廠"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152792,
+      "names": {
+        "brazilian": "Cordoeiro",
+        "english": "Ropemaker",
+        "french": "Cordier",
+        "german": "Seilmacher",
+        "italian": "Cordaio",
+        "japanese": "​ロープ​職人",
+        "korean": "​밧줄 ​제작소",
+        "polish": "Powroźnik",
+        "russian": "Мастерская по изготовлению веревок",
+        "simplified_chinese": "​制​绳​工​坊",
+        "spanish": "Cordelería",
+        "traditional_chinese": "​製​繩​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152793,
+      "names": {
+        "brazilian": "Armaria",
+        "english": "Weaponsmith",
+        "french": "Forgeron d'armes",
+        "german": "Waffenschmied",
+        "italian": "Armaiolo",
+        "japanese": "​武器​工房",
+        "korean": "​무기 ​대장장이",
+        "polish": "Zbrojmistrz",
+        "russian": "Кузница оружейника",
+        "simplified_chinese": "​武器​作坊",
+        "spanish": "Forjería de armas",
+        "traditional_chinese": "​武器​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152794,
+      "names": {
+        "brazilian": "Armoraria",
+        "english": "Armourer",
+        "french": "Armurerie",
+        "german": "Rüstungsschmied",
+        "italian": "Armiere",
+        "japanese": "​防具​工房",
+        "korean": "​갑옷 ​제작소",
+        "polish": "Płatnerz",
+        "russian": "Мастерская по изготовлению доспехов",
+        "simplified_chinese": "​军​械​作坊",
+        "spanish": "Armaduría",
+        "traditional_chinese": "​盔甲​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152795,
+      "names": {
+        "brazilian": "Ladrilhador",
+        "english": "Tiler",
+        "french": "Carreleur",
+        "german": "Ziegelei",
+        "italian": "Piastrellificio",
+        "japanese": "​瓦​工房",
+        "korean": "​타일 ​제작소",
+        "polish": "Kafelkarz",
+        "russian": "Мастерская по изготовлению плитки",
+        "simplified_chinese": "​瓦片​厂",
+        "spanish": "Tejería",
+        "traditional_chinese": "​瓦片​廠"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152796,
+      "names": {
+        "brazilian": "Betoneira",
+        "english": "Concrete Mixer",
+        "french": "Malaxeur à béton",
+        "german": "Betonmischer",
+        "italian": "Miscelatore di cemento",
+        "japanese": "​コンクリート​工房",
+        "korean": "​콘크리트 ​혼합소",
+        "polish": "Mieszacz betonu",
+        "russian": "Бетономешальная",
+        "simplified_chinese": "​混凝土​调制​厂",
+        "spanish": "Mezclería de hormigón",
+        "traditional_chinese": "​混凝土​攪拌器"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152797,
+      "names": {
+        "brazilian": "Tésseraria",
+        "english": "Tessera Works",
+        "french": "Atelier de tesselles",
+        "german": "Mosaikmacher",
+        "italian": "Mosaici",
+        "japanese": "​モザイク​工房",
+        "korean": "​각석 ​공방",
+        "polish": "Warsztat mozaikowy",
+        "russian": "Мастерская по изготовлению тессер",
+        "simplified_chinese": "​马赛​克​地​砖​工​坊",
+        "spanish": "Fábrica de téseras",
+        "traditional_chinese": "​鑲嵌​工​坊"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 152803,
+      "names": {
+        "brazilian": "Serraria",
+        "english": "Sawmill",
+        "french": "Scierie",
+        "german": "Sägewerk",
+        "italian": "Segheria",
+        "japanese": "​製材​所",
+        "korean": "​제재소",
+        "polish": "Tartak",
+        "russian": "Лесопилка",
+        "simplified_chinese": "​锯木厂",
+        "spanish": "Aserradero",
+        "traditional_chinese": "​鋸木廠"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 153816,
+      "names": {
+        "brazilian": "Pombal",
+        "english": "Dovecote",
+        "french": "Colombier",
+        "german": "Taubenschlag",
+        "italian": "Colombaia",
+        "japanese": "​鳩​小屋",
+        "korean": "​비둘기장",
+        "polish": "Gołębnik",
+        "russian": "Голубятня",
+        "simplified_chinese": "​鸽​舍",
+        "spanish": "Palomar",
+        "traditional_chinese": "​鴿​舍"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "module"
+    },
+    {
+      "guid": 155404,
+      "names": {
+        "brazilian": "Fazenda de Cevada",
+        "english": "Barley Farm",
+        "french": "Ferme d'orge",
+        "german": "Gerstenhof",
+        "italian": "Fattoria d'orzo",
+        "japanese": "​大麦​農場",
+        "korean": "​보리 ​농장",
+        "polish": "Uprawa jęczmienia",
+        "russian": "Хозяйство (ячмень)",
+        "simplified_chinese": "​大麦​农场",
+        "spanish": "Granja de cebada",
+        "traditional_chinese": "​大麥​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 155405,
+      "names": {
+        "brazilian": "Fazenda de Linho",
+        "english": "Flax Farm",
+        "french": "Ferme de lin",
+        "german": "Flachshof",
+        "italian": "Fattoria di lino",
+        "japanese": "​亜麻​農場",
+        "korean": "​아마 ​농장",
+        "polish": "Uprawa lnu",
+        "russian": "Хозяйство (лен)",
+        "simplified_chinese": "​亚麻​农场",
+        "spanish": "Granja de lino",
+        "traditional_chinese": "​亞麻​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 155406,
+      "names": {
+        "brazilian": "Fazenda de Gergelim",
+        "english": "Sesame Farm",
+        "french": "Exploitation de sésame",
+        "german": "Sesamfarm",
+        "italian": "Coltivazione di sesamo",
+        "japanese": "​ゴマ​農場",
+        "korean": "​참깨 ​농장",
+        "polish": "Uprawa sezamu",
+        "russian": "Хозяйство (кунжут)",
+        "simplified_chinese": "​芝麻​农场",
+        "spanish": "Granja de sésamo",
+        "traditional_chinese": "​芝麻​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 155407,
+      "names": {
+        "brazilian": "Fazenda de Trigo",
+        "english": "Wheat Farm",
+        "french": "Ferme de céréales",
+        "german": "Weizenhof",
+        "italian": "Fattoria di grano",
+        "japanese": "​小麦​農場",
+        "korean": "​밀 ​농장",
+        "polish": "Uprawa pszenicy",
+        "russian": "Хозяйство (пшеница)",
+        "simplified_chinese": "​小麦​农场",
+        "spanish": "Granja de trigo",
+        "traditional_chinese": "​小麥​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 155408,
+      "names": {
+        "brazilian": "Fazenda de Cânhamo",
+        "english": "Hemp Farm",
+        "french": "Ferme de chanvre",
+        "german": "Hanfhof",
+        "italian": "Fattoria di canapa",
+        "japanese": "​大麻​農場",
+        "korean": "​삼 ​농장",
+        "polish": "Uprawa konopi",
+        "russian": "Хозяйство (конопля)",
+        "simplified_chinese": "​火​麻​农场",
+        "spanish": "Granja de cáñamo",
+        "traditional_chinese": "​火​麻​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
+    },
+    {
+      "guid": 155409,
+      "names": {
+        "brazilian": "Fazenda de Aveia",
+        "english": "Oat Farm",
+        "french": "Ferme d'avoine",
+        "german": "Haferhof",
+        "italian": "Fattoria d'avena",
+        "japanese": "​オーツ​麦​農場",
+        "korean": "​귀리 ​농장",
+        "polish": "Uprawa owsa",
+        "russian": "Хозяйство (овес)",
+        "simplified_chinese": "​燕麦​农场",
+        "spanish": "Granja de avena",
+        "traditional_chinese": "​燕麥​農場"
+      },
+      "regions": [
+        "Egyptian"
+      ],
+      "kind": "factory"
     }
   ],
   "workforce": [
@@ -6776,6 +9575,106 @@
       "regions": [
         "Celtic"
       ]
+    },
+    {
+      "guid": 149685,
+      "names": {
+        "brazilian": "Mão de obra de debulhadoras",
+        "english": "Thresher Workforce",
+        "french": "Main-d'œuvre (Batteuses)",
+        "german": "Kornleser-Arbeitskraft",
+        "italian": "Manodopera delle trebbiatrici",
+        "japanese": "​麦打ち​人​の​労働​力",
+        "korean": "​타작꾼 ​노동력",
+        "polish": "Siła robocza - rolniczki",
+        "russian": "Рабочая сила – молотильщицы",
+        "simplified_chinese": "​打​谷​工​劳动​力",
+        "spanish": "Mano de obra trilladora",
+        "traditional_chinese": "​打穀​工​勞動力"
+      },
+      "regions": [
+        "Egyptian"
+      ]
+    },
+    {
+      "guid": 150543,
+      "names": {
+        "brazilian": "Mão de obra de oleiros",
+        "english": "Potter Workforce",
+        "french": "Main-d'œuvre (Façonniers)",
+        "german": "Töpfer-Arbeitskraft",
+        "italian": "Manodopera dei vasai",
+        "japanese": "​陶工​の​労働​力",
+        "korean": "​도공 ​노동력",
+        "polish": "Siła robocza - garncarze",
+        "russian": "Рабочая сила – гончары",
+        "simplified_chinese": "​陶匠​劳动​力",
+        "spanish": "Mano de obra alfarera",
+        "traditional_chinese": "​陶工​勞動力"
+      },
+      "regions": [
+        "Egyptian"
+      ]
+    },
+    {
+      "guid": 150544,
+      "names": {
+        "brazilian": "Mão de obra de cantores",
+        "english": "Chanter Workforce",
+        "french": "Main-d'œuvre (Chantresses)",
+        "german": "Priester-Arbeitskraft",
+        "italian": "Manodopera dei cantori",
+        "japanese": "​奉唱​巫女​の​労働​力",
+        "korean": "​찬가사 ​노동력",
+        "polish": "Siła robocza - śpiewaczki",
+        "russian": "Рабочая сила - певчие",
+        "simplified_chinese": "​吟诵​者​劳动​力",
+        "spanish": "Mano de obra cantora",
+        "traditional_chinese": "​吟誦​者​勞動力"
+      },
+      "regions": [
+        "Egyptian"
+      ]
+    },
+    {
+      "guid": 150545,
+      "names": {
+        "brazilian": "Mão de obra de escribas",
+        "english": "Scribe Workforce",
+        "french": "Main-d'œuvre (Scribes)",
+        "german": "Schreiber-Arbeitskraft",
+        "italian": "Manodopera degli scribi",
+        "japanese": "​書記​の​労働​力",
+        "korean": "​서기 ​노동력",
+        "polish": "Siła robocza - skrybowie",
+        "russian": "Рабочая сила – писцы",
+        "simplified_chinese": "​抄写员​劳动​力",
+        "spanish": "Mano de obra escriba",
+        "traditional_chinese": "​抄寫​員​勞動力"
+      },
+      "regions": [
+        "Egyptian"
+      ]
+    },
+    {
+      "guid": 150546,
+      "names": {
+        "brazilian": "Mão de obra de gymnasiarcas",
+        "english": "Gymnasiarch Workforce",
+        "french": "Main-d'œuvre (Gymnasiarques)",
+        "german": "Gymnasiarch-Arbeitskraft",
+        "italian": "Manodopera dei ginnasiarchi",
+        "japanese": "​ギムナシアリコス​の​労働​力",
+        "korean": "​김나시아르코스 ​노동력",
+        "polish": "Siła robocza - gimnazjarchinie",
+        "russian": "Рабочая сила – гимнасиархи",
+        "simplified_chinese": "​体育​官​劳动​力",
+        "spanish": "Mano de obra gimnasiarca",
+        "traditional_chinese": "​體育​官​勞動力"
+      },
+      "regions": [
+        "Egyptian"
+      ]
     }
   ],
   "regions": [
@@ -6819,6 +9718,24 @@
       "guid": 37136,
       "id": "Meta",
       "names": null
+    },
+    {
+      "guid": 149678,
+      "id": "Egyptian",
+      "names": {
+        "brazilian": "Aegyptus",
+        "english": "Aegyptus",
+        "french": "Égypte",
+        "german": "Aegyptus",
+        "italian": "Aegyptus",
+        "japanese": "​アイギュプト",
+        "korean": "​아이깁투스",
+        "polish": "Egipt",
+        "russian": "Эгипт",
+        "simplified_chinese": "​埃​古​普​托​斯",
+        "spanish": "Egipto",
+        "traditional_chinese": "​埃及"
+      }
     }
   ],
   "sessions": [
@@ -6875,6 +9792,24 @@
         "traditional_chinese": "​全域"
       },
       "region": 37136
+    },
+    {
+      "guid": 149679,
+      "names": {
+        "brazilian": "Aegyptus",
+        "english": "Aegyptus",
+        "french": "Égypte",
+        "german": "Aegyptus",
+        "italian": "Aegyptus",
+        "japanese": "​アイギュプト",
+        "korean": "​아이깁투스",
+        "polish": "Egipt",
+        "russian": "Эгипт",
+        "simplified_chinese": "​埃​古​普​托​斯",
+        "spanish": "Egipto",
+        "traditional_chinese": "​埃及"
+      },
+      "region": 149678
     }
   ]
 }
