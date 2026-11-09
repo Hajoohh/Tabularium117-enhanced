@@ -42,8 +42,10 @@ SOFTWARE.
 The calculator's own `LICENSE` file additionally notes that all game assets
 (icons, images, building/product names, game balance values, including
 production recipes) are © Ubisoft and not covered by its MIT license.
-Tabularium 117 does not ship game icons or images; `goods-chains.json` stores
-only GUID relationships, without game names, quantities, or icon paths.
+Tabularium 117 includes selected good icons under `web/production_goods`;
+their redistribution is separately authorized and they remain © Ubisoft,
+outside this project's MIT license. `goods-chains.json` stores only GUID
+relationships, without game names, quantities, or icon paths.
 
 ## github.com/Microsoft/go-winio v0.6.2
 
@@ -193,5 +195,7 @@ THE SOFTWARE.
 ## Game content
 
 Anno 117: Pax Romana, its game content, names, icons, and other assets are
-© Ubisoft Entertainment. Tabularium 117 is an unofficial, community-made fan tool
-and is not affiliated with, endorsed by, or sponsored by Ubisoft.
+© Ubisoft Entertainment. Selected good icons in `web/production_goods` are
+included with separate redistribution authorization and are not covered by
+this project's MIT license. Tabularium 117 is an unofficial, community-made
+fan tool and is not affiliated with, endorsed by, or sponsored by Ubisoft.

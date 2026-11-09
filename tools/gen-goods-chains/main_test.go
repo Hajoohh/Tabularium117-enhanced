@@ -8,6 +8,10 @@ import (
 func TestGenerateBuildsCompleteChainsAndRetainsAlternatives(t *testing.T) {
 	input := &params{
 		Products: []product{{GUID: 1}, {GUID: 2}, {GUID: 3}, {GUID: 4}},
+		ProductFilters: []productFilter{{
+			LocaText: map[string]string{"english": "Consumer Goods"},
+			Products: []int32{3, 4},
+		}},
 		Regions: []region{{
 			ID:       "Roman",
 			LocaText: map[string]string{"english": "Latium"},
@@ -24,6 +28,9 @@ func TestGenerateBuildsCompleteChainsAndRetainsAlternatives(t *testing.T) {
 	got, err := generate(input)
 	if err != nil {
 		t.Fatal(err)
+	}
+	if len(got.EndProducts) != 2 || got.EndProducts[0] != 3 || got.EndProducts[1] != 4 {
+		t.Fatalf("end products = %v, want sorted consumer product GUIDs [3 4]", got.EndProducts)
 	}
 	chains := got.Regions["Latium"]
 	if len(chains) != 5 {
@@ -50,6 +57,10 @@ func TestGenerateBuildsCompleteChainsAndRetainsAlternatives(t *testing.T) {
 func TestGenerateRejectsUnknownProductsAndCycles(t *testing.T) {
 	base := &params{
 		Products: []product{{GUID: 1}, {GUID: 2}},
+		ProductFilters: []productFilter{{
+			LocaText: map[string]string{"english": "Consumer Goods"},
+			Products: []int32{1},
+		}},
 		Regions: []region{{
 			ID:       "Roman",
 			LocaText: map[string]string{"english": "Latium"},
@@ -75,7 +86,7 @@ func TestGenerateRejectsUnknownProductsAndCycles(t *testing.T) {
 }
 
 func TestReadParamsAcceptsCalculatorPrefix(t *testing.T) {
-	input := []byte(`if(window.params == null)window.params={"factories":[],"products":[],"regions":[]};`)
+	input := []byte(`if(window.params == null)window.params={"factories":[],"products":[],"productFilters":[],"regions":[]};`)
 	parsed, err := readParams(input)
 	if err != nil {
 		t.Fatal(err)

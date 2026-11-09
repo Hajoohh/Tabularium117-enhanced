@@ -26,13 +26,16 @@ known about the game's pipe.
 - **Dependencies:** standard library plus `go-winio`, `modernc.org/sqlite` and
   `go-qrcode`. Adding one is a discussion, not a commit.
 - **Game names and GUIDs** come from a pinned revision of
-  `anno-mods/anno-117-calculator`, recorded in `THIRD_PARTY_NOTICES.md`; no
-  Ubisoft icons are shipped.
+  `anno-mods/anno-117-calculator`, recorded in `THIRD_PARTY_NOTICES.md`.
+  Licensed Ubisoft good icons are shipped under `web/production_goods`; do not
+  add or refresh game assets without verifying redistribution rights and
+  documenting their provenance in `THIRD_PARTY_NOTICES.md`.
 - **Production chains** are generated from the local
   `dist\support_files\params.js`; refresh the checked-in browser data with
   `go run ./tools/gen-goods-chains --params dist\support_files\params.js`.
   The generator follows recipe inputs recursively and preserves alternative
-  production paths.
+  production paths. End-product classification comes from the source's
+  `Consumer Goods` product filter, including goods produced without inputs.
 - **Language:** code, comments and commit messages in English; user-facing
   documentation in German and English. `KONZEPT.md` is German.
 

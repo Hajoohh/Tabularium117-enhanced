@@ -32,7 +32,8 @@ comparison tables share these filters. The comparison view also supports a
 product-name search and region-wide island selection actions. `js/goods-icons.json`
 separately maps catalog GUIDs to local image files under `production_goods`;
 those assets are embedded and served by the application without contacting
-third-party image hosts. New top-level directories must be added to the
-`//go:embed` pattern in
+third-party image hosts. The bundled WebP icons are converted from the game's
+BC7-compressed DDS textures for browser support and compact distribution. New
+top-level directories must be added to the `//go:embed` pattern in
 `embed.go` to reach the executable. To look at the UI without the game:
 `go run ./cmd/tabularium117 --replay testdata/connector-reencoded.jsonl --serve-after-replay`.

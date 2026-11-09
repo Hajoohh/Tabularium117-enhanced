@@ -340,6 +340,7 @@ var staticContentTypes = map[string]string{
 	".json": "application/json",
 	".png":  "image/png",
 	".svg":  "image/svg+xml",
+	".webp": "image/webp",
 }
 
 func init() { pinContentTypes() }

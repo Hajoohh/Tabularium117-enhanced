@@ -156,8 +156,8 @@ test("the separate goods-icon map points to existing local files and catalog GUI
     await readFile(new URL(`../web${url}`, import.meta.url));
   }
   assert.ok(!Object.values(config.icons).some((url) => /^https?:/i.test(url)));
-  assert.match(config.icons["2086"], /icon_clay_0\.png$/);
-  assert.match(config.icons["2069"], /icon_3d_wheat_goods_0\.png$/);
+  assert.match(config.icons["2086"], /icon_3d_clay_goods_0\.webp$/);
+  assert.match(config.icons["2069"], /icon_3d_wheat_goods_0\.webp$/);
   assert.ok(!Object.values(config.icons).some((url) => /^https?:/i.test(url)));
 });
 
@@ -427,6 +427,14 @@ test("goods categories are global, exclusive, and unselected categories keep eve
   assert.deepEqual(filterGoodsByCategories(goods, new Set(), categories), goods);
   assert.deepEqual(filterGoodsByCategories(goods, new Set(["raw"]), categories), [goods[3]]);
   assert.deepEqual(filterGoodsByCategories(goods, new Set(["intermediate", "end"]), categories), [goods[0], goods[1], goods[2]]);
+});
+
+test("consumer goods from params are end products, including Eels and Cockles", async () => {
+  const config = JSON.parse(await readFile(new URL("../web/js/goods-chains.json", import.meta.url), "utf8"));
+  const categories = goodsCategories(config);
+
+  assert.equal(categories.get("2108"), "end", "Eels are classified as an end product");
+  assert.equal(categories.get("2097"), "end", "Cockles are classified as an end product");
 });
 
 test("goods-chain loader shares concurrent requests, validates config, and retries failures", async () => {

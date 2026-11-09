@@ -6,6 +6,10 @@ export function validateGoodsChains(config) {
       || Array.isArray(config.regions)) {
     throw invalid("regions");
   }
+  if (config.endProducts !== undefined
+      && (!Array.isArray(config.endProducts) || config.endProducts.some((guid) => !Number.isInteger(guid)))) {
+    throw invalid("endProducts");
+  }
   for (const [region, chains] of Object.entries(config.regions)) {
     if (!Array.isArray(chains)) throw invalid(`regions.${region}`);
     for (const [chainIndex, chain] of chains.entries()) {
@@ -131,7 +135,7 @@ export function activeGoodsChainsForIsland(config, region, products) {
 
 export function goodsCategories(config) {
   const produced = new Set();
-  const endProducts = new Set();
+  const endProducts = new Set((config?.endProducts || []).map(String));
   for (const { chain } of goodsChainsForRegions(config, Object.keys(config?.regions || {}))) {
     const finalGood = chain.product || chain.stages[chain.stages.length - 1].output;
     endProducts.add(String(finalGood.guid));
