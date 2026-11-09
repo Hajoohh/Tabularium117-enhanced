@@ -20,9 +20,10 @@ import (
 const jsPrefix = "if(window.params == null)window.params="
 
 type params struct {
-	Factories []factory `json:"factories"`
-	Products  []product `json:"products"`
-	Regions   []region  `json:"regions"`
+	Factories      []factory       `json:"factories"`
+	Products       []product       `json:"products"`
+	ProductFilters []productFilter `json:"productFilters"`
+	Regions        []region        `json:"regions"`
 }
 
 type factory struct {
@@ -38,6 +39,11 @@ type amount struct {
 
 type product struct {
 	GUID int32 `json:"guid"`
+}
+
+type productFilter struct {
+	LocaText map[string]string `json:"locaText"`
+	Products []int32           `json:"products"`
 }
 
 type region struct {
@@ -60,7 +66,8 @@ type chain struct {
 }
 
 type output struct {
-	Regions map[string][]chain `json:"regions"`
+	Regions     map[string][]chain `json:"regions"`
+	EndProducts []int32            `json:"endProducts"`
 }
 
 type recipe struct {
@@ -123,8 +130,8 @@ func readParams(data []byte) (*params, error) {
 	if err := json.Unmarshal([]byte(jsonText), &parsed); err != nil {
 		return nil, fmt.Errorf("decode JSON: %w", err)
 	}
-	if parsed.Factories == nil || parsed.Products == nil || parsed.Regions == nil {
-		return nil, errors.New("params.js is missing factories, products, or regions")
+	if parsed.Factories == nil || parsed.Products == nil || parsed.ProductFilters == nil || parsed.Regions == nil {
+		return nil, errors.New("params.js is missing factories, products, productFilters, or regions")
 	}
 	return &parsed, nil
 }
@@ -134,6 +141,29 @@ func generate(input *params) (output, error) {
 	for _, entry := range input.Products {
 		productGUIDs[entry.GUID] = true
 	}
+	endProducts := make(map[int32]bool)
+	foundConsumerFilter := false
+	for _, filter := range input.ProductFilters {
+		if filter.LocaText["english"] != "Consumer Goods" {
+			continue
+		}
+		foundConsumerFilter = true
+		for _, guid := range filter.Products {
+			if !productGUIDs[guid] {
+				return output{}, fmt.Errorf("Consumer Goods filter references unknown product %d", guid)
+			}
+			endProducts[guid] = true
+		}
+	}
+	if !foundConsumerFilter {
+		return output{}, errors.New("params.js has no Consumer Goods product filter")
+	}
+	endProductGUIDs := make([]int32, 0, len(endProducts))
+	for guid := range endProducts {
+		endProductGUIDs = append(endProductGUIDs, guid)
+	}
+	sort.Slice(endProductGUIDs, func(i, j int) bool { return endProductGUIDs[i] < endProductGUIDs[j] })
+
 	regionNames := make(map[string]string, len(input.Regions))
 	for _, entry := range input.Regions {
 		if name := entry.LocaText["english"]; entry.ID != "" && name != "" {
@@ -169,7 +199,10 @@ func generate(input *params) (output, error) {
 		}
 	}
 
-	result := output{Regions: make(map[string][]chain, len(recipesByRegion))}
+	result := output{
+		Regions:     make(map[string][]chain, len(recipesByRegion)),
+		EndProducts: endProductGUIDs,
+	}
 	regionNamesSorted := make([]string, 0, len(recipesByRegion))
 	for name := range recipesByRegion {
 		regionNamesSorted = append(regionNamesSorted, name)

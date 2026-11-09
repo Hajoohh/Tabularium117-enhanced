@@ -29,6 +29,7 @@ func TestStaticFilesServedWithContentType(t *testing.T) {
 		{"/js/goods-chains.json", "application/json"},
 		{"/js/goods-icons.json", "application/json"},
 		{"/production_goods/icon_clay_0.png", "image/png"},
+		{"/production_goods/icon_3d_clay_goods_0.webp", "image/webp"},
 		{"/js/live.js", "text/javascript"},
 		{"/js/i18n.js", "text/javascript"},
 		{"/js/views/islands.js", "text/javascript"},
@@ -77,6 +78,7 @@ func TestStaticContentTypesArePinned(t *testing.T) {
 		"/js/app.js":                 "text/javascript; charset=utf-8",
 		"/js/views/island-header.js": "text/javascript; charset=utf-8",
 		"/vendor/uplot/uPlot.esm.js": "text/javascript; charset=utf-8",
+		"/production_goods/icon_3d_clay_goods_0.webp": "image/webp",
 	} {
 		req := httptest.NewRequest(http.MethodGet, path, nil)
 		rec := httptest.NewRecorder()
