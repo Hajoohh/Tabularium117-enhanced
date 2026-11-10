@@ -66,8 +66,9 @@ type chain struct {
 }
 
 type output struct {
-	Regions     map[string][]chain `json:"regions"`
-	EndProducts []int32            `json:"endProducts"`
+	Regions       map[string][]chain `json:"regions"`
+	EndProducts   []int32            `json:"endProducts"`
+	ProducedGoods []int32            `json:"producedGoods"`
 }
 
 type recipe struct {
@@ -198,10 +199,22 @@ func generate(input *params) (output, error) {
 			}
 		}
 	}
+	producedGoods := make(map[int32]bool)
+	for _, recipes := range recipesByRegion {
+		for guid := range recipes {
+			producedGoods[guid] = true
+		}
+	}
+	producedGUIDs := make([]int32, 0, len(producedGoods))
+	for guid := range producedGoods {
+		producedGUIDs = append(producedGUIDs, guid)
+	}
+	sort.Slice(producedGUIDs, func(i, j int) bool { return producedGUIDs[i] < producedGUIDs[j] })
 
 	result := output{
-		Regions:     make(map[string][]chain, len(recipesByRegion)),
-		EndProducts: endProductGUIDs,
+		Regions:       make(map[string][]chain, len(recipesByRegion)),
+		EndProducts:   endProductGUIDs,
+		ProducedGoods: producedGUIDs,
 	}
 	regionNamesSorted := make([]string, 0, len(recipesByRegion))
 	for name := range recipesByRegion {
@@ -216,16 +229,10 @@ func generate(input *params) (output, error) {
 				return recipes[productGUID][i].Factory < recipes[productGUID][j].Factory
 			})
 		}
-		guidList := make([]int32, 0, len(recipes))
-		for guid := range recipes {
-			guidList = append(guidList, guid)
-		}
-		sort.Slice(guidList, func(i, j int) bool { return guidList[i] < guidList[j] })
-
 		expand := func(guid int32, stack map[int32]bool) ([][]stage, error) {
 			return expandProduct(guid, recipes, stack)
 		}
-		for _, productGUID := range guidList {
+		for _, productGUID := range endProductGUIDs {
 			for _, targetRecipe := range recipes[productGUID] {
 				if len(targetRecipe.Inputs) == 0 {
 					continue

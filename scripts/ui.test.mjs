@@ -147,18 +147,48 @@ test("the sidebar always links to warnings, even before islands load", async () 
 test("the separate goods-icon map points to existing local files and catalog GUIDs", async () => {
   const config = JSON.parse(await readFile(new URL("../web/js/goods-icons.json", import.meta.url), "utf8"));
   const catalog = JSON.parse(await readFile(new URL("../internal/catalog/catalog.json", import.meta.url), "utf8"));
-  const knownGuids = new Set(catalog.products.map((product) => String(product.guid)));
+  const goods = catalog.products.filter((product) => product.guid !== 0 && !product.abstract);
+  const knownGuids = new Set(goods.map((product) => String(product.guid)));
+  const csvText = await readFile(new URL("../docs/goods.csv", import.meta.url), "utf8");
+  const parseRow = (line) => [...line.matchAll(/(?:^|;)(?:"((?:[^"]|"")*)"|([^;]*))/g)]
+    .map(([, quoted, plain]) => (quoted === undefined ? plain : quoted.replaceAll('""', '"')));
+  const goodsByGuid = new Map(csvText.replace(/^\uFEFF/, "").trimEnd().split(/\r?\n/).slice(1)
+    .map(parseRow).map(([guid, english, german]) => [guid, { english, german }]));
+  const goodsWithoutArtwork = new Set(["91372", "93770", "93771", "108222", "108223", "108224"]);
   assert.ok(Object.keys(config.icons).length > 50);
-  for (const [guid, url] of Object.entries(config.icons)) {
+  assert.equal(Object.keys(config.icons).length, goods.length - goodsWithoutArtwork.size,
+    "every good with artwork has an icon mapping");
+  for (const guid of goodsWithoutArtwork) {
+    assert.ok(knownGuids.has(guid), `unmapped GUID ${guid} exists in catalog`);
+    assert.equal(config.icons[guid], undefined, `good without artwork ${guid} has no icon mapping`);
+  }
+  for (const [guid, entry] of Object.entries(config.icons)) {
     assert.match(guid, /^\d+$/);
     assert.ok(knownGuids.has(guid), `icon GUID ${guid} exists in catalog`);
-    assert.match(url, /^\/production_goods\/[\w().-]+\.(?:png|webp)$/i);
-    await readFile(new URL(`../web${url}`, import.meta.url));
+    assert.match(entry.icon, /^\/production_goods\/[\w().-]+\.webp$/i);
+    assert.deepEqual(entry.names, goodsByGuid.get(guid), `icon entry ${guid} includes both CSV names`);
+    await readFile(new URL(`../web${entry.icon}`, import.meta.url));
   }
-  assert.ok(!Object.values(config.icons).some((url) => /^https?:/i.test(url)));
-  assert.match(config.icons["2086"], /icon_3d_clay_goods_0\.webp$/);
-  assert.match(config.icons["2069"], /icon_3d_wheat_goods_0\.webp$/);
-  assert.ok(!Object.values(config.icons).some((url) => /^https?:/i.test(url)));
+  assert.ok(!Object.values(config.icons).some((entry) => /^https?:/i.test(entry.icon)));
+  assert.match(config.icons["2086"].icon, /icon_3d_clay_goods_0\.webp$/);
+  assert.match(config.icons["2069"].icon, /icon_3d_wheat_goods_0\.webp$/);
+});
+
+test("the spreadsheet goods list matches every real catalog product", async () => {
+  const text = await readFile(new URL("../docs/goods.csv", import.meta.url), "utf8");
+  const rows = text.replace(/^\uFEFF/, "").trimEnd().split(/\r?\n/);
+  const parseRow = (line) => [...line.matchAll(/(?:^|;)(?:"((?:[^"]|"")*)"|([^;]*))/g)]
+    .map(([, quoted, plain]) => (quoted === undefined ? plain : quoted.replaceAll('""', '"')));
+  const expected = JSON.parse(await readFile(
+    new URL("../internal/catalog/catalog.json", import.meta.url),
+    "utf8",
+  )).products
+    .filter((product) => product.guid !== 0 && !product.abstract)
+    .sort((a, b) => a.guid - b.guid)
+    .map((product) => [String(product.guid), product.names.english, product.names.german]);
+
+  assert.deepEqual(parseRow(rows[0]), ["GUID", "Name (English)", "Name (Deutsch)"]);
+  assert.deepEqual(rows.slice(1).map(parseRow), expected);
 });
 
 test("region island lists can be collapsed and expanded accessibly", () => {
@@ -299,7 +329,10 @@ test("the goods-chain toggle shows every matching multistage chain for this regi
   let iconLoads = 0;
   api.goodsIcons = async () => {
     iconLoads++;
-    return { icons: { "2086": "/production_goods/icon_clay_0.png" } };
+    return { icons: { "2086": {
+      icon: "/production_goods/icon_3d_clay_goods_0.webp",
+      names: { english: "Clay", german: "Lehm" },
+    } } };
   };
   const root = new Element();
   const cleanup = await renderIslandDetail(root, island.id, storeWith());
@@ -322,7 +355,7 @@ test("the goods-chain toggle shows every matching multistage chain for this regi
   assert.doesNotMatch(text, /Bread/, "chains for a different region are not shown");
   const icons = nodes(root, ".goods-chain-icon");
   assert.ok(icons.length >= 2, "an icon appears both beside the searched good and in the recipe");
-  assert.equal(icons[0].src, "/production_goods/icon_clay_0.png");
+  assert.equal(icons[0].src, "/production_goods/icon_3d_clay_goods_0.webp");
   nodes(root, ".goods-chain-good").find((good) => good.textContent.includes("Metal")).click();
   assert.match(nodes(root, ".goods-chain-overview")[0].textContent, /Goods chain for Tools/,
     "clicking a good opens the overview of chains that include it");
@@ -403,6 +436,7 @@ test("the local goods-chain toggle shows chains with end-product buildings on th
 
 test("goods categories are global, exclusive, and unselected categories keep every product", () => {
   const config = {
+    endProducts: [1, 3],
     regions: {
       Latium: [{
         product: { guid: 3 },
@@ -429,12 +463,22 @@ test("goods categories are global, exclusive, and unselected categories keep eve
   assert.deepEqual(filterGoodsByCategories(goods, new Set(["intermediate", "end"]), categories), [goods[0], goods[1], goods[2]]);
 });
 
-test("consumer goods from params are end products, including Eels and Cockles", async () => {
+test("consumer goods are end products and intermediate goods have no standalone chains", async () => {
   const config = JSON.parse(await readFile(new URL("../web/js/goods-chains.json", import.meta.url), "utf8"));
   const categories = goodsCategories(config);
 
-  assert.equal(categories.get("2108"), "end", "Eels are classified as an end product");
-  assert.equal(categories.get("2097"), "end", "Cockles are classified as an end product");
+  for (const guid of ["2119", "2131", "2115", "151687", "2132"]) {
+    assert.equal(categories.get(guid), "intermediate", `intermediate product ${guid} is classified correctly`);
+  }
+  for (const guid of ["151680", "2097", "2088", "2108"]) {
+    assert.equal(categories.get(guid), "end", `directly usable product ${guid} is an end product`);
+  }
+  for (const chains of Object.values(config.regions)) {
+    for (const chain of chains) {
+      assert.ok(!["2119", "2131", "2115", "151687", "2132"].includes(String(chain.product.guid)),
+        `intermediate product ${chain.product.guid} is not listed as its own chain`);
+    }
+  }
 });
 
 test("goods-chain loader shares concurrent requests, validates config, and retries failures", async () => {
@@ -500,6 +544,7 @@ test("island goods categories filter rows and leave all visible when unchecked",
     ],
   });
   api.goodsChains = async () => ({
+    endProducts: [3],
     regions: {
       Latium: [{
         product: { guid: 3, name: { de: "Mosaike", en: "Mosaics" } },
@@ -696,6 +741,7 @@ test("the efficiency table supports the same global goods categories", async () 
     })),
   });
   api.goodsChains = async () => ({
+    endProducts: [12],
     regions: {
       Latium: [{
         product: { guid: 12, name: { en: "Good 12", de: "Ware 12" } },
@@ -1169,6 +1215,7 @@ test("the comparison view loads goods for multiple selected islands", async () =
     };
   };
   api.goodsChains = async () => ({
+    endProducts: [1],
     regions: {
       Latium: [{
         product: { guid: 1, name: { en: "Bread", de: "Brot" } },
@@ -1273,7 +1320,10 @@ test("region and total views sum each good into one row", async () => {
     ]],
   ]);
   api.products = async (islandId) => ({ island: store.islands.find((entry) => entry.id === islandId), products: fixtures.get(islandId) });
-  api.goodsIcons = async () => ({ icons: { "1": "/production_goods/icon_3d_bread_goods_0.png" } });
+  api.goodsIcons = async () => ({ icons: { "1": {
+    icon: "/production_goods/icon_3d_bread_goods_0.webp",
+    names: { english: "Bread", german: "Brot" },
+  } } });
   api.goodsChains = async () => ({
     regions: {
       Latium: [{

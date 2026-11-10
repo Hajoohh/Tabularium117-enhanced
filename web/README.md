@@ -17,23 +17,30 @@ goods search. Each chain has ordered stages, each with one or more input goods
 and an output; goods are matched by catalog GUID and have German and English
 display names. The optional `product` identifies the intended end product
 independently of the listed stages, so incomplete recipe data can be entered
-without inventing missing steps. Chain options are available in island, region,
+without inventing missing steps. `endProducts` lists directly usable goods and
+is the only set used as standalone chain roots; `producedGoods` tracks every
+GUID with a production recipe so intermediate goods remain classified as
+intermediate even when their own chain is not listed. Chain options are available in island, region,
 and total goods views. On an island, one option shows chains for the searched
 good and another shows every chain whose end-product buildings are present on
-that island. Region views show the selected region's chains; the total view can
+that island. Only end products are listed as standalone chains; intermediate
+goods remain visible as stages within those chains. Region views show the selected region's chains; the total view can
 show chains from all regions. Clicking any good in a chain opens an overview of
 all chains containing that good. Goods tables can also be filtered to raw materials (goods without a
 configured production output), intermediate products (produced goods that are
-not a chain's end product), and end products. With no category selected, all
+not end products), and end products (goods listed for direct use). With no category selected, all
 goods remain visible; selecting multiple categories shows their combined
 results. Classification follows the chains for the table's region or regions.
 The island goods and efficiency tables, aggregate goods tables, and both
 comparison tables share these filters. The comparison view also supports a
 product-name search and region-wide island selection actions. `js/goods-icons.json`
-separately maps catalog GUIDs to local image files under `production_goods`;
+separately maps catalog GUIDs to local image files under `production_goods`
+and includes each good's English and German names next to its image path;
 those assets are embedded and served by the application without contacting
 third-party image hosts. The bundled WebP icons are converted from the game's
 BC7-compressed DDS textures for browser support and compact distribution. New
 top-level directories must be added to the `//go:embed` pattern in
 `embed.go` to reach the executable. To look at the UI without the game:
 `go run ./cmd/tabularium117 --replay testdata/connector-reencoded.jsonl --serve-after-replay`.
+The complete list of non-abstract goods with GUID and English/German names is
+in `../docs/goods.csv`; `tools/gen-catalog` regenerates it with the catalog.

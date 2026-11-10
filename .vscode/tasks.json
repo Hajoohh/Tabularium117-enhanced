@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Tests: Alle",
+      "dependsOn": [
+        "Tests: Go",
+        "Tests: UI"
+      ],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Tests: Go",
+      "type": "process",
+      "command": "go",
+      "args": [
+        "test",
+        "./..."
+      ],
+      "problemMatcher": [
+        "$go"
+      ],
+      "group": "test"
+    },
+    {
+      "label": "Tests: UI",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "--test",
+        "scripts/ui.test.mjs"
+      ],
+      "group": "test"
+    }
+  ]
+}

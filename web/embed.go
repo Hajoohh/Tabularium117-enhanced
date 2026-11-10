@@ -7,7 +7,8 @@ package web
 import "embed"
 
 // FS holds the UI files, with index.html at its root: the stylesheet, the ES
-// modules and the vendored uPlot next to it.
+// modules, the vendored uPlot, and icons from web/production_goods next to it.
+// The similarly named repository-root directory is not embedded.
 //
 //go:embed index.html css js vendor production_goods
 var FS embed.FS

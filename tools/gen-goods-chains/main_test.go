@@ -32,9 +32,25 @@ func TestGenerateBuildsCompleteChainsAndRetainsAlternatives(t *testing.T) {
 	if len(got.EndProducts) != 2 || got.EndProducts[0] != 3 || got.EndProducts[1] != 4 {
 		t.Fatalf("end products = %v, want sorted consumer product GUIDs [3 4]", got.EndProducts)
 	}
+	if len(got.ProducedGoods) != 4 || got.ProducedGoods[0] != 1 || got.ProducedGoods[1] != 2 ||
+		got.ProducedGoods[2] != 3 || got.ProducedGoods[3] != 4 {
+		t.Fatalf("produced goods = %v, want sorted product GUIDs [1 2 3 4]", got.ProducedGoods)
+	}
 	chains := got.Regions["Latium"]
-	if len(chains) != 5 {
-		t.Fatalf("got %d chains, want 5 (including both ways to make product 2)", len(chains))
+	if len(chains) != 3 {
+		t.Fatalf("got %d chains, want 3 (end products only, including both ways to make product 4)", len(chains))
+	}
+	var product4Chains int
+	for index := range chains {
+		switch chains[index].Product.GUID {
+		case 2:
+			t.Fatal("intermediate product 2 must not be a standalone chain")
+		case 4:
+			product4Chains++
+		}
+	}
+	if product4Chains != 2 {
+		t.Fatalf("product 4 has %d chains, want both production alternatives", product4Chains)
 	}
 	var final *chain
 	for index := range chains {
