@@ -154,30 +154,24 @@ test("the separate goods-icon map points to existing local files and catalog GUI
     .map(([, quoted, plain]) => (quoted === undefined ? plain : quoted.replaceAll('""', '"')));
   const goodsByGuid = new Map(csvText.replace(/^\uFEFF/, "").trimEnd().split(/\r?\n/).slice(1)
     .map(parseRow).map(([guid, english, german]) => [guid, { english, german }]));
+  const goodsWithoutArtwork = new Set(["91372", "93770", "93771", "108222", "108223", "108224"]);
   assert.ok(Object.keys(config.icons).length > 50);
-  assert.equal(Object.keys(config.icons).length, goods.length, "every real good has an icon mapping");
+  assert.equal(Object.keys(config.icons).length, goods.length - goodsWithoutArtwork.size,
+    "every good with artwork has an icon mapping");
+  for (const guid of goodsWithoutArtwork) {
+    assert.ok(knownGuids.has(guid), `unmapped GUID ${guid} exists in catalog`);
+    assert.equal(config.icons[guid], undefined, `good without artwork ${guid} has no icon mapping`);
+  }
   for (const [guid, entry] of Object.entries(config.icons)) {
     assert.match(guid, /^\d+$/);
     assert.ok(knownGuids.has(guid), `icon GUID ${guid} exists in catalog`);
-    assert.match(entry.icon, /^\/production_goods\/[\w().-]+\.(?:png|webp)$/i);
+    assert.match(entry.icon, /^\/production_goods\/[\w().-]+\.webp$/i);
     assert.deepEqual(entry.names, goodsByGuid.get(guid), `icon entry ${guid} includes both CSV names`);
     await readFile(new URL(`../web${entry.icon}`, import.meta.url));
   }
   assert.ok(!Object.values(config.icons).some((entry) => /^https?:/i.test(entry.icon)));
   assert.match(config.icons["2086"].icon, /icon_3d_clay_goods_0\.webp$/);
   assert.match(config.icons["2069"].icon, /icon_3d_wheat_goods_0\.webp$/);
-  for (const guid of [
-    "2101", "2169", "31709", "91372", "93770", "93771",
-    "108222", "108223", "108224", "145102", "145220", "145221", "151678",
-    "151679", "151680", "151683", "151684", "151685", "151686", "151687",
-    "151688", "151689", "151690", "151691", "151692", "151693", "151694",
-    "151695", "151696", "151697", "151698", "151699", "151700", "151701",
-    "151702", "151703", "151704", "151705", "151706", "151712", "151713",
-    "151714", "1010017",
-  ]) {
-    assert.equal(config.icons[guid].icon, "/production_goods/icon_3d_silica_goods_0.webp",
-      `unmapped good ${guid} uses the sand placeholder`);
-  }
 });
 
 test("the spreadsheet goods list matches every real catalog product", async () => {
@@ -336,7 +330,7 @@ test("the goods-chain toggle shows every matching multistage chain for this regi
   api.goodsIcons = async () => {
     iconLoads++;
     return { icons: { "2086": {
-      icon: "/production_goods/icon_clay_0.png",
+      icon: "/production_goods/icon_3d_clay_goods_0.webp",
       names: { english: "Clay", german: "Lehm" },
     } } };
   };
@@ -361,7 +355,7 @@ test("the goods-chain toggle shows every matching multistage chain for this regi
   assert.doesNotMatch(text, /Bread/, "chains for a different region are not shown");
   const icons = nodes(root, ".goods-chain-icon");
   assert.ok(icons.length >= 2, "an icon appears both beside the searched good and in the recipe");
-  assert.equal(icons[0].src, "/production_goods/icon_clay_0.png");
+  assert.equal(icons[0].src, "/production_goods/icon_3d_clay_goods_0.webp");
   nodes(root, ".goods-chain-good").find((good) => good.textContent.includes("Metal")).click();
   assert.match(nodes(root, ".goods-chain-overview")[0].textContent, /Goods chain for Tools/,
     "clicking a good opens the overview of chains that include it");
@@ -1327,7 +1321,7 @@ test("region and total views sum each good into one row", async () => {
   ]);
   api.products = async (islandId) => ({ island: store.islands.find((entry) => entry.id === islandId), products: fixtures.get(islandId) });
   api.goodsIcons = async () => ({ icons: { "1": {
-    icon: "/production_goods/icon_3d_bread_goods_0.png",
+    icon: "/production_goods/icon_3d_bread_goods_0.webp",
     names: { english: "Bread", german: "Brot" },
   } } });
   api.goodsChains = async () => ({

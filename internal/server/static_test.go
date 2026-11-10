@@ -28,7 +28,6 @@ func TestStaticFilesServedWithContentType(t *testing.T) {
 		{"/js/api.js", "text/javascript"},
 		{"/js/goods-chains.json", "application/json"},
 		{"/js/goods-icons.json", "application/json"},
-		{"/production_goods/icon_clay_0.png", "image/png"},
 		{"/production_goods/icon_3d_clay_goods_0.webp", "image/webp"},
 		{"/js/live.js", "text/javascript"},
 		{"/js/i18n.js", "text/javascript"},
@@ -101,11 +100,18 @@ func TestStaticContentTypesArePinned(t *testing.T) {
 func TestStaticFileNotFound(t *testing.T) {
 	srv := server.New(server.Options{State: state.New()})
 
-	req := httptest.NewRequest(http.MethodGet, "/does/not/exist.js", nil)
-	rec := httptest.NewRecorder()
-	srv.Handler().ServeHTTP(rec, req)
+	for _, path := range []string{
+		"/does/not/exist.js",
+		"/production_goods/icon_clay_0.png",
+	} {
+		t.Run(path, func(t *testing.T) {
+			req := httptest.NewRequest(http.MethodGet, path, nil)
+			rec := httptest.NewRecorder()
+			srv.Handler().ServeHTTP(rec, req)
 
-	if rec.Code != http.StatusNotFound {
-		t.Fatalf("status = %d, want 404", rec.Code)
+			if rec.Code != http.StatusNotFound {
+				t.Errorf("GET %s: status = %d, want 404", path, rec.Code)
+			}
+		})
 	}
 }

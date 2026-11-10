@@ -28,9 +28,10 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ### Added
 
-- **Local game icons:** bundled 104 mapped  goods icons under
-  `web/production_goods`;
-   icon GUID-to-file mappings remain in `web/js/goods-icons.json`.
+- **Local game icons:** bundle the mapped goods icons as WebP files under
+  `web/production_goods`, with GUID-to-file mappings in
+  `web/js/goods-icons.json`. Remove the obsolete root-level
+  `production_goods` directory; the application embeds only the web asset path.
 
 ## [Tabularium 117 - enhanced 0.2.0] - 2026-11-07
 

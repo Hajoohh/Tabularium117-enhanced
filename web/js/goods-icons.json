@@ -225,7 +225,7 @@
       }
     },
     "2108": {
-      "icon": "/production_goods/icon_3d_eels_goods_0.png",
+      "icon": "/production_goods/icon_3d_eels_goods_0.webp",
       "names": {
         "english": "Eels",
         "german": "Aale"
@@ -624,7 +624,7 @@
       }
     },
     "8420": {
-      "icon": "/production_goods/icon_3d_seashells_goods_0.png",
+      "icon": "/production_goods/icon_3d_seashells_goods_0.webp",
       "names": {
         "english": "Seashells",
         "german": "Kammmuschelschalen"
@@ -715,7 +715,7 @@
       }
     },
     "31703": {
-      "icon": "/production_goods/icon_3d_saltwash_goods_0.png",
+      "icon": "/production_goods/icon_3d_lye_goods_0.webp",
       "names": {
         "english": "Saltwash",
         "german": "Salzlake"
