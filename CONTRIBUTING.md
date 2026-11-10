@@ -30,12 +30,16 @@ known about the game's pipe.
   Licensed Ubisoft good icons are shipped under `web/production_goods`; do not
   add or refresh game assets without verifying redistribution rights and
   documenting their provenance in `THIRD_PARTY_NOTICES.md`.
+- **Goods reference list:** `docs/goods.csv` lists every non-abstract game
+  product (except the synthetic no-product GUID) by GUID and English/German
+  name. Refresh it together with the catalog using `tools/gen-catalog`.
 - **Production chains** are generated from the local
   `dist\support_files\params.js`; refresh the checked-in browser data with
   `go run ./tools/gen-goods-chains --params dist\support_files\params.js`.
   The generator follows recipe inputs recursively and preserves alternative
-  production paths. End-product classification comes from the source's
-  `Consumer Goods` product filter, including goods produced without inputs.
+  production paths while listing only `Consumer Goods` as standalone chains.
+  End-product classification also comes from that filter, including directly
+  usable goods that have no production chain.
 - **Language:** code, comments and commit messages in English; user-facing
   documentation in German and English. `KONZEPT.md` is German.
 

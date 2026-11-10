@@ -3,148 +3,6 @@
     "Aegyptus": [
       {
         "product": {
-          "guid": 2110
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 151683
-              },
-              {
-                "guid": 2077
-              }
-            ],
-            "output": {
-              "guid": 2110
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2115
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2119
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2069
-              }
-            ],
-            "output": {
-              "guid": 2119
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2121
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2063
-              }
-            ],
-            "output": {
-              "guid": 2121
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2124
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 8563
-              }
-            ],
-            "output": {
-              "guid": 2124
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2127
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2100
-              },
-              {
-                "guid": 2099
-              }
-            ],
-            "output": {
-              "guid": 2127
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2131
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2093
-              }
-            ],
-            "output": {
-              "guid": 2131
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2132
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 151712
-              }
-            ],
-            "output": {
-              "guid": 2132
-            }
-          }
-        ]
-      },
-      {
-        "product": {
           "guid": 2136
         },
         "stages": [
@@ -333,36 +191,6 @@
       },
       {
         "product": {
-          "guid": 2152
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 8563
-              }
-            ],
-            "output": {
-              "guid": 2124
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2102
-              },
-              {
-                "guid": 2124
-              }
-            ],
-            "output": {
-              "guid": 2152
-            }
-          }
-        ]
-      },
-      {
-        "product": {
           "guid": 2153
         },
         "stages": [
@@ -401,272 +229,6 @@
             ],
             "output": {
               "guid": 2154
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2171
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 31694
-              }
-            ],
-            "output": {
-              "guid": 2171
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2172
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2073
-              }
-            ],
-            "output": {
-              "guid": 2172
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2173
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2115
-              }
-            ],
-            "output": {
-              "guid": 2173
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2174
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2077
-              }
-            ],
-            "output": {
-              "guid": 2174
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2176
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2102
-              }
-            ],
-            "output": {
-              "guid": 2176
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2178
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2078
-              },
-              {
-                "guid": 2091
-              }
-            ],
-            "output": {
-              "guid": 2178
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 13810
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 151683
-              },
-              {
-                "guid": 2077
-              }
-            ],
-            "output": {
-              "guid": 2110
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2110
-              },
-              {
-                "guid": 2115
-              }
-            ],
-            "output": {
-              "guid": 13810
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 31698
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 31697
-              }
-            ],
-            "output": {
-              "guid": 31698
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 31709
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2101
-              }
-            ],
-            "output": {
-              "guid": 31709
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 151685
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2099
-              },
-              {
-                "guid": 2091
-              }
-            ],
-            "output": {
-              "guid": 151685
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 151686
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2076
-              },
-              {
-                "guid": 151683
-              }
-            ],
-            "output": {
-              "guid": 151686
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 151687
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 151678
-              }
-            ],
-            "output": {
-              "guid": 151687
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 151688
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2103
-              }
-            ],
-            "output": {
-              "guid": 151688
             }
           }
         ]
@@ -1106,228 +668,9 @@
             }
           }
         ]
-      },
-      {
-        "product": {
-          "guid": 151704
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2102
-              },
-              {
-                "guid": 2103
-              }
-            ],
-            "output": {
-              "guid": 151704
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 151705
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2078
-              }
-            ],
-            "output": {
-              "guid": 151705
-            }
-          }
-        ]
       }
     ],
     "Albion": [
-      {
-        "product": {
-          "guid": 2110
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2074
-              },
-              {
-                "guid": 2077
-              }
-            ],
-            "output": {
-              "guid": 2110
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2115
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2119
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2069
-              }
-            ],
-            "output": {
-              "guid": 2119
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2126
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2094
-              },
-              {
-                "guid": 2099
-              }
-            ],
-            "output": {
-              "guid": 2126
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2127
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2100
-              },
-              {
-                "guid": 2099
-              }
-            ],
-            "output": {
-              "guid": 2127
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2128
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2077
-              },
-              {
-                "guid": 2103
-              }
-            ],
-            "output": {
-              "guid": 2128
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2129
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2079
-              }
-            ],
-            "output": {
-              "guid": 2129
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2131
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2093
-              }
-            ],
-            "output": {
-              "guid": 2131
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2132
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2074
-              }
-            ],
-            "output": {
-              "guid": 2132
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2133
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2106
-              }
-            ],
-            "output": {
-              "guid": 2133
-            }
-          }
-        ]
-      },
       {
         "product": {
           "guid": 2137
@@ -1655,141 +998,6 @@
       },
       {
         "product": {
-          "guid": 2169
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2103
-              },
-              {
-                "guid": 2102
-              }
-            ],
-            "output": {
-              "guid": 2169
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2171
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 31694
-              }
-            ],
-            "output": {
-              "guid": 2171
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2172
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2073
-              }
-            ],
-            "output": {
-              "guid": 2172
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2173
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2115
-              }
-            ],
-            "output": {
-              "guid": 2173
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2174
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2077
-              }
-            ],
-            "output": {
-              "guid": 2174
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2176
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2102
-              }
-            ],
-            "output": {
-              "guid": 2176
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2178
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2078
-              },
-              {
-                "guid": 2091
-              }
-            ],
-            "output": {
-              "guid": 2178
-            }
-          }
-        ]
-      },
-      {
-        "product": {
           "guid": 8405
         },
         "stages": [
@@ -1810,49 +1018,6 @@
       },
       {
         "product": {
-          "guid": 13810
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2074
-              },
-              {
-                "guid": 2077
-              }
-            ],
-            "output": {
-              "guid": 2110
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2110
-              },
-              {
-                "guid": 2115
-              }
-            ],
-            "output": {
-              "guid": 13810
-            }
-          }
-        ]
-      },
-      {
-        "product": {
           "guid": 31700
         },
         "stages": [
@@ -1867,43 +1032,6 @@
             ],
             "output": {
               "guid": 31700
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 31703
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 7985
-              }
-            ],
-            "output": {
-              "guid": 31703
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 31704
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2063
-              },
-              {
-                "guid": 31695
-              }
-            ],
-            "output": {
-              "guid": 31704
             }
           }
         ]
@@ -2006,23 +1134,6 @@
       },
       {
         "product": {
-          "guid": 31709
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2101
-              }
-            ],
-            "output": {
-              "guid": 31709
-            }
-          }
-        ]
-      },
-      {
-        "product": {
           "guid": 31768
         },
         "stages": [
@@ -2063,175 +1174,6 @@
       }
     ],
     "Latium": [
-      {
-        "product": {
-          "guid": 2110
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2074
-              },
-              {
-                "guid": 2090
-              }
-            ],
-            "output": {
-              "guid": 2110
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2115
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2117
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2091
-              }
-            ],
-            "output": {
-              "guid": 2117
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2119
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2069
-              }
-            ],
-            "output": {
-              "guid": 2119
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2121
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2063
-              }
-            ],
-            "output": {
-              "guid": 2121
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2123
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 31697
-              }
-            ],
-            "output": {
-              "guid": 31698
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 8561
-              },
-              {
-                "guid": 31698
-              }
-            ],
-            "output": {
-              "guid": 2123
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2124
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 8563
-              }
-            ],
-            "output": {
-              "guid": 2124
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2132
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2074
-              }
-            ],
-            "output": {
-              "guid": 2132
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2135
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2073
-              }
-            ],
-            "output": {
-              "guid": 2135
-            }
-          }
-        ]
-      },
       {
         "product": {
           "guid": 2136
@@ -2632,36 +1574,6 @@
       },
       {
         "product": {
-          "guid": 2152
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 8563
-              }
-            ],
-            "output": {
-              "guid": 2124
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2086
-              },
-              {
-                "guid": 2124
-              }
-            ],
-            "output": {
-              "guid": 2152
-            }
-          }
-        ]
-      },
-      {
-        "product": {
           "guid": 2166
         },
         "stages": [
@@ -2709,262 +1621,6 @@
             ],
             "output": {
               "guid": 2166
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2171
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 31694
-              }
-            ],
-            "output": {
-              "guid": 2171
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2172
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2073
-              }
-            ],
-            "output": {
-              "guid": 2172
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2173
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2115
-              }
-            ],
-            "output": {
-              "guid": 2173
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2174
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2077
-              }
-            ],
-            "output": {
-              "guid": 2174
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2176
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2086
-              }
-            ],
-            "output": {
-              "guid": 2176
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2178
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2078
-              },
-              {
-                "guid": 2091
-              }
-            ],
-            "output": {
-              "guid": 2178
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2179
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2084
-              }
-            ],
-            "output": {
-              "guid": 2179
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 2180
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 3158
-              }
-            ],
-            "output": {
-              "guid": 2180
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 8558
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2087
-              }
-            ],
-            "output": {
-              "guid": 8558
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 8562
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 3158
-              }
-            ],
-            "output": {
-              "guid": 2180
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2063
-              },
-              {
-                "guid": 2180
-              }
-            ],
-            "output": {
-              "guid": 8562
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 13810
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 2074
-              },
-              {
-                "guid": 2090
-              }
-            ],
-            "output": {
-              "guid": 2110
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2080
-              }
-            ],
-            "output": {
-              "guid": 2115
-            }
-          },
-          {
-            "inputs": [
-              {
-                "guid": 2110
-              },
-              {
-                "guid": 2115
-              }
-            ],
-            "output": {
-              "guid": 13810
-            }
-          }
-        ]
-      },
-      {
-        "product": {
-          "guid": 31698
-        },
-        "stages": [
-          {
-            "inputs": [
-              {
-                "guid": 31697
-              }
-            ],
-            "output": {
-              "guid": 31698
             }
           }
         ]
@@ -3109,5 +1765,149 @@
     151701,
     151702,
     151703
+  ],
+  "producedGoods": [
+    2063,
+    2068,
+    2069,
+    2070,
+    2071,
+    2072,
+    2073,
+    2074,
+    2075,
+    2076,
+    2077,
+    2078,
+    2079,
+    2080,
+    2084,
+    2085,
+    2086,
+    2087,
+    2088,
+    2089,
+    2090,
+    2091,
+    2093,
+    2094,
+    2097,
+    2099,
+    2100,
+    2101,
+    2102,
+    2103,
+    2105,
+    2106,
+    2108,
+    2110,
+    2112,
+    2115,
+    2117,
+    2119,
+    2121,
+    2123,
+    2124,
+    2126,
+    2127,
+    2128,
+    2129,
+    2131,
+    2132,
+    2133,
+    2135,
+    2136,
+    2137,
+    2138,
+    2139,
+    2140,
+    2141,
+    2142,
+    2143,
+    2144,
+    2145,
+    2146,
+    2147,
+    2149,
+    2150,
+    2151,
+    2152,
+    2153,
+    2154,
+    2155,
+    2156,
+    2157,
+    2158,
+    2159,
+    2161,
+    2162,
+    2163,
+    2166,
+    2169,
+    2171,
+    2172,
+    2173,
+    2174,
+    2176,
+    2178,
+    2179,
+    2180,
+    3158,
+    7985,
+    8404,
+    8405,
+    8420,
+    8558,
+    8561,
+    8562,
+    8563,
+    13810,
+    31694,
+    31695,
+    31697,
+    31698,
+    31700,
+    31701,
+    31702,
+    31703,
+    31704,
+    31706,
+    31707,
+    31708,
+    31709,
+    31768,
+    55954,
+    145220,
+    145221,
+    151678,
+    151679,
+    151680,
+    151683,
+    151684,
+    151685,
+    151686,
+    151687,
+    151688,
+    151689,
+    151690,
+    151691,
+    151692,
+    151693,
+    151694,
+    151695,
+    151696,
+    151697,
+    151698,
+    151699,
+    151700,
+    151701,
+    151702,
+    151703,
+    151704,
+    151705,
+    151706,
+    151712,
+    151713,
+    151714
   ]
 }

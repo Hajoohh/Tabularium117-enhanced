@@ -10,6 +10,10 @@ export function validateGoodsChains(config) {
       && (!Array.isArray(config.endProducts) || config.endProducts.some((guid) => !Number.isInteger(guid)))) {
     throw invalid("endProducts");
   }
+  if (config.producedGoods !== undefined
+      && (!Array.isArray(config.producedGoods) || config.producedGoods.some((guid) => !Number.isInteger(guid)))) {
+    throw invalid("producedGoods");
+  }
   for (const [region, chains] of Object.entries(config.regions)) {
     if (!Array.isArray(chains)) throw invalid(`regions.${region}`);
     for (const [chainIndex, chain] of chains.entries()) {
@@ -98,13 +102,19 @@ export function validateGoodsIcons(config) {
       || Array.isArray(config.icons)) {
     throw new Error("Invalid goods-icon configuration at icons");
   }
-  for (const [guid, url] of Object.entries(config.icons)) {
-    if (!/^\d+$/.test(guid) || typeof url !== "string"
-        || !/^\/production_goods\/[A-Za-z0-9._()-]+\.(?:png|webp)$/i.test(url)) {
+  const iconURLs = {};
+  for (const [guid, entry] of Object.entries(config.icons)) {
+    if (!/^\d+$/.test(guid) || !entry || typeof entry !== "object" || Array.isArray(entry)
+        || typeof entry.icon !== "string"
+        || !/^\/production_goods\/[A-Za-z0-9._()-]+\.(?:png|webp)$/i.test(entry.icon)
+        || !entry.names || typeof entry.names !== "object" || Array.isArray(entry.names)
+        || typeof entry.names.english !== "string" || entry.names.english === ""
+        || typeof entry.names.german !== "string" || entry.names.german === "") {
       throw new Error(`Invalid goods-icon configuration for ${guid}`);
     }
+    iconURLs[guid] = entry.icon;
   }
-  return config.icons;
+  return iconURLs;
 }
 
 export function matchingGoodsChains(config, regions, guid) {
@@ -134,11 +144,10 @@ export function activeGoodsChainsForIsland(config, region, products) {
 }
 
 export function goodsCategories(config) {
-  const produced = new Set();
+  const produced = new Set((config?.producedGoods || []).map(String));
   const endProducts = new Set((config?.endProducts || []).map(String));
   for (const { chain } of goodsChainsForRegions(config, Object.keys(config?.regions || {}))) {
     const finalGood = chain.product || chain.stages[chain.stages.length - 1].output;
-    endProducts.add(String(finalGood.guid));
     produced.add(String(finalGood.guid));
     // Stage outputs are produced goods; chain inputs without any production
     // stage remain raw materials when categories are assigned below.

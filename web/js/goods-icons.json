@@ -1,109 +1,1012 @@
 {
   "icons": {
-    "2063": "/production_goods/icon_3d_flax_goods_0.webp",
-    "2068": "/production_goods/icon_3d_oats_goods_0.webp",
-    "2069": "/production_goods/icon_3d_wheat_goods_0.webp",
-    "2070": "/production_goods/icon_3d_grapes_goods_0.webp",
-    "2071": "/production_goods/icon_3d_lavender_goods_0.webp",
-    "2072": "/production_goods/icon_3d_olives_goods_0.webp",
-    "2073": "/production_goods/icon_3d_sheep_goods_0.webp",
-    "2074": "/production_goods/icon_3d_pigs_goods_0.webp",
-    "2075": "/production_goods/icon_3d_horses_goods_0.webp",
-    "2076": "/production_goods/icon_3d_honeycombs_goods_0.webp",
-    "2077": "/production_goods/icon_3d_wood_goods_0.webp",
-    "2078": "/production_goods/icon_3d_limestone_goods_0.webp",
-    "2079": "/production_goods/icon_3d_silver_ore_goods_0.webp",
-    "2080": "/production_goods/icon_3d_iron_ore_goods_0.webp",
-    "2084": "/production_goods/icon_3d_marble_blocks_goods_0.webp",
-    "2085": "/production_goods/icon_3d_charcoal_goods_0.webp",
-    "2086": "/production_goods/icon_3d_clay_goods_0.webp",
-    "2087": "/production_goods/icon_3d_sturgeons_goods_0.webp",
-    "2088": "/production_goods/icon_3d_sardines_goods_0.webp",
-    "2089": "/production_goods/icon_3d_mackerels_goods_0.webp",
-    "2090": "/production_goods/icon_3d_salt_goods_0.webp",
-    "2091": "/production_goods/icon_3d_silica_goods_0.webp",
-    "2093": "/production_goods/icon_3d_barley_goods_0.webp",
-    "2094": "/production_goods/icon_3d_dye_plants_goods_0.webp",
-    "2099": "/production_goods/icon_3d_copper_ore_goods_0.webp",
-    "2100": "/production_goods/icon_3d_tin_ore_goods_0.webp",
-    "2102": "/production_goods/icon_3d_mud_goods_0.webp",
-    "2103": "/production_goods/icon_3d_reed_goods_0.webp",
-    "2105": "/production_goods/icon_3d_auroch_goods_0.webp",
-    "2106": "/production_goods/icon_3d_marsh_birds_goods_0.webp",
-    "2110": "/production_goods/icon_3d_leather_goods_0.webp",
-    "2112": "/production_goods/icon_3d_oysters_goods_0.webp",
-    "2115": "/production_goods/icon_3d_iron_goods_0.webp",
-    "2117": "/production_goods/icon_3d_glass_goods_0.webp",
-    "2119": "/production_goods/icon_3d_flour_goods_0.webp",
-    "2121": "/production_goods/icon_3d_cloth_goods_0.webp",
-    "2123": "/production_goods/icon_3d_ornamented_wood_goods_0.webp",
-    "2124": "/production_goods/icon_3d_pigments_goods_0.webp",
-    "2126": "/production_goods/icon_3d_celtic_green_goods_0.webp",
-    "2127": "/production_goods/icon_3d_bronze_goods_0.webp",
-    "2128": "/production_goods/icon_3d_chassis_goods_0.webp",
-    "2129": "/production_goods/icon_3d_silver_goods_0.webp",
-    "2131": "/production_goods/icon_3d_malt_goods_0.webp",
-    "2132": "/production_goods/icon_3d_pig_lard_goods_0.webp",
-    "2133": "/production_goods/icon_3d_bird_tongue_goods_0.webp",
-    "2135": "/production_goods/icon_3d_strings_goods_0.webp",
-    "2136": "/production_goods/icon_3d_porridge_goods_0.webp",
-    "2137": "/production_goods/icon_3d_bread_goods_0.webp",
-    "2138": "/production_goods/icon_3d_wine_goods_0.webp",
-    "2139": "/production_goods/icon_3d_garum_goods_0.webp",
-    "2140": "/production_goods/icon_3d_oysters_and_caviar_goods_0.webp",
-    "2141": "/production_goods/icon_3d_tunics_goods_0.webp",
-    "2142": "/production_goods/icon_3d_pileus_goods_0.webp",
-    "2143": "/production_goods/icon_3d_lavender_soap_goods_0.webp",
-    "2144": "/production_goods/icon_3d_sandals_goods_0.webp",
-    "2145": "/production_goods/icon_3d_togas_goods_0.webp",
-    "2146": "/production_goods/icon_3d_necklaces_goods_0.webp",
-    "2147": "/production_goods/icon_3d_lounger_goods_0.webp",
-    "2149": "/production_goods/icon_3d_olive_oil_goods_0.webp",
-    "2150": "/production_goods/icon_3d_wax_tablets_goods_0.webp",
-    "2151": "/production_goods/icon_3d_fine_glass_goods_0.webp",
-    "2152": "/production_goods/icon_3d_mosaics_goods_0.webp",
-    "2153": "/production_goods/icon_3d_cheese_goods_0.webp",
-    "2154": "/production_goods/icon_3d_beer_goods_0.webp",
-    "2155": "/production_goods/icon_3d_tongue_in_aspic_goods_0.webp",
-    "2156": "/production_goods/icon_3d_brooch_goods_0.webp",
-    "2157": "/production_goods/icon_3d_torcs_goods_0.webp",
-    "2158": "/production_goods/icon_3d_trouser_goods_0.webp",
-    "2159": "/production_goods/icon_3d_reed_shoes_goods_0.webp",
-    "2161": "/production_goods/icon_3d_cloak_goods_0.webp",
-    "2162": "/production_goods/icon_3d_handmirros_goods_0.webp",
-    "2163": "/production_goods/icon_3d_chariot_goods_0.webp",
-    "2166": "/production_goods/icon_3d_string_instrument_goods_0.webp",
-    "2171": "/production_goods/icon_3d_ropes_goods_0.webp",
-    "2172": "/production_goods/icon_3d_sails_goods_0.webp",
-    "2173": "/production_goods/icon_3d_weapons_goods_0.webp",
-    "2174": "/production_goods/icon_3d_timber_goods_0.webp",
-    "2176": "/production_goods/icon_3d_tiles_goods_0.webp",
-    "2178": "/production_goods/icon_3d_concrete_goods_0.webp",
-    "2179": "/production_goods/icon_3d_marble_goods_0.webp",
-    "2180": "/production_goods/icon_3d_tyrian_purple_goods_0.webp",
-    "3158": "/production_goods/icon_3d_murex_snails_goods_0.webp",
-    "31694": "/production_goods/icon_3d_hemp_goods_0.webp",
-    "31695": "/production_goods/icon_3d_resin_goods_0.webp",
-    "31697": "/production_goods/icon_3d_gold_ore_goods_0.webp",
-    "31698": "/production_goods/icon_3d_gold_goods_0.webp",
-    "31700": "/production_goods/icon_3d_amphorae_goods_0.webp",
-    "31701": "/production_goods/icon_3d_herbs_goods_0.webp",
-    "31702": "/production_goods/icon_3d_beaver_goods_0.webp",
-    "31703": "/production_goods/icon_3d_saltwash_goods_0.png",
-    "31704": "/production_goods/icon_3d_wig_base_goods_0.webp",
-    "31706": "/production_goods/icon_3d_clan_shields_goods_0.webp",
-    "31707": "/production_goods/icon_3d_pelt_hat_goods_0.webp",
-    "31708": "/production_goods/icon_3d_wig_goods_0.webp",
-    "31768": "/production_goods/icon_3d_roast_goods_0.webp",
-    "8558": "/production_goods/icon_3d_caviar_goods_0.webp",
-    "8404": "/production_goods/icon_3d_ponies_goods_0.webp",
-    "8405": "/production_goods/icon_3d_sausages_goods_0.webp",
-    "8561": "/production_goods/icon_3d_cypress_wood_goods_0.webp",
-    "8562": "/production_goods/icon_3d_cushion_goods_0.webp",
-    "8563": "/production_goods/icon_3d_minerals_goods_0.webp",
-    "13810": "/production_goods/icon_3d_armory_goods_0.webp",
-    "55954": "/production_goods/icon_3d_drinkhorns_goods_0.webp",
-    "8420": "/production_goods/icon_3d_cockles_goods_0.webp",
-    "7985": "/production_goods/icon_3d_samphire_goods_0.webp"
+    "2063": {
+      "icon": "/production_goods/icon_3d_flax_goods_0.webp",
+      "names": {
+        "english": "Flax",
+        "german": "Flachs"
+      }
+    },
+    "2068": {
+      "icon": "/production_goods/icon_3d_oats_goods_0.webp",
+      "names": {
+        "english": "Oats",
+        "german": "Hafer"
+      }
+    },
+    "2069": {
+      "icon": "/production_goods/icon_3d_wheat_goods_0.webp",
+      "names": {
+        "english": "Wheat",
+        "german": "Weizen"
+      }
+    },
+    "2070": {
+      "icon": "/production_goods/icon_3d_grapes_goods_0.webp",
+      "names": {
+        "english": "Grapes",
+        "german": "Weintrauben"
+      }
+    },
+    "2071": {
+      "icon": "/production_goods/icon_3d_lavender_goods_0.webp",
+      "names": {
+        "english": "Lavender",
+        "german": "Lavandula"
+      }
+    },
+    "2072": {
+      "icon": "/production_goods/icon_3d_olives_goods_0.webp",
+      "names": {
+        "english": "Olives",
+        "german": "Oliven"
+      }
+    },
+    "2073": {
+      "icon": "/production_goods/icon_3d_sheep_goods_0.webp",
+      "names": {
+        "english": "Sheep",
+        "german": "Schafe"
+      }
+    },
+    "2074": {
+      "icon": "/production_goods/icon_3d_pigs_goods_0.webp",
+      "names": {
+        "english": "Pigs",
+        "german": "Schweine"
+      }
+    },
+    "2075": {
+      "icon": "/production_goods/icon_3d_horses_goods_0.webp",
+      "names": {
+        "english": "Horses",
+        "german": "Pferde"
+      }
+    },
+    "2076": {
+      "icon": "/production_goods/icon_3d_honeycombs_goods_0.webp",
+      "names": {
+        "english": "Honeycombs",
+        "german": "Honigwaben"
+      }
+    },
+    "2077": {
+      "icon": "/production_goods/icon_3d_wood_goods_0.webp",
+      "names": {
+        "english": "Wood",
+        "german": "Holz"
+      }
+    },
+    "2078": {
+      "icon": "/production_goods/icon_3d_limestone_goods_0.webp",
+      "names": {
+        "english": "Limestone",
+        "german": "Kalkstein"
+      }
+    },
+    "2079": {
+      "icon": "/production_goods/icon_3d_silver_ore_goods_0.webp",
+      "names": {
+        "english": "Silver Ore",
+        "german": "Silbererz"
+      }
+    },
+    "2080": {
+      "icon": "/production_goods/icon_3d_iron_ore_goods_0.webp",
+      "names": {
+        "english": "Iron Ore",
+        "german": "Eisenerz"
+      }
+    },
+    "2084": {
+      "icon": "/production_goods/icon_3d_marble_blocks_goods_0.webp",
+      "names": {
+        "english": "Uncut Marble",
+        "german": "Rohmarmor"
+      }
+    },
+    "2085": {
+      "icon": "/production_goods/icon_3d_charcoal_goods_0.webp",
+      "names": {
+        "english": "Coal",
+        "german": "Kohle"
+      }
+    },
+    "2086": {
+      "icon": "/production_goods/icon_3d_clay_goods_0.webp",
+      "names": {
+        "english": "Clay",
+        "german": "Lehm"
+      }
+    },
+    "2087": {
+      "icon": "/production_goods/icon_3d_sturgeons_goods_0.webp",
+      "names": {
+        "english": "Sturgeon",
+        "german": "Störe"
+      }
+    },
+    "2088": {
+      "icon": "/production_goods/icon_3d_sardines_goods_0.webp",
+      "names": {
+        "english": "Sardines",
+        "german": "Sardinen"
+      }
+    },
+    "2089": {
+      "icon": "/production_goods/icon_3d_mackerels_goods_0.webp",
+      "names": {
+        "english": "Mackerel",
+        "german": "Makrelen"
+      }
+    },
+    "2090": {
+      "icon": "/production_goods/icon_3d_salt_goods_0.webp",
+      "names": {
+        "english": "Salt",
+        "german": "Salz"
+      }
+    },
+    "2091": {
+      "icon": "/production_goods/icon_3d_silica_goods_0.webp",
+      "names": {
+        "english": "Silica",
+        "german": "Quarzsand"
+      }
+    },
+    "2093": {
+      "icon": "/production_goods/icon_3d_barley_goods_0.webp",
+      "names": {
+        "english": "Barley",
+        "german": "Gerste"
+      }
+    },
+    "2094": {
+      "icon": "/production_goods/icon_3d_dye_plants_goods_0.webp",
+      "names": {
+        "english": "Dye Plants",
+        "german": "Färberpflanzen"
+      }
+    },
+    "2097": {
+      "icon": "/production_goods/icon_3d_cockles_goods_0.webp",
+      "names": {
+        "english": "Cockles",
+        "german": "Herzmuscheln"
+      }
+    },
+    "2099": {
+      "icon": "/production_goods/icon_3d_copper_ore_goods_0.webp",
+      "names": {
+        "english": "Copper Ore",
+        "german": "Kupfererz"
+      }
+    },
+    "2100": {
+      "icon": "/production_goods/icon_3d_tin_ore_goods_0.webp",
+      "names": {
+        "english": "Tin Ore",
+        "german": "Zinnerz"
+      }
+    },
+    "2101": {
+      "icon": "/production_goods/icon_3d_granite_block_goods_0.webp",
+      "names": {
+        "english": "Granite Block",
+        "german": "Granitblöcke"
+      }
+    },
+    "2102": {
+      "icon": "/production_goods/icon_3d_mud_goods_0.webp",
+      "names": {
+        "english": "Mud",
+        "german": "Schlamm"
+      }
+    },
+    "2103": {
+      "icon": "/production_goods/icon_3d_reed_goods_0.webp",
+      "names": {
+        "english": "Reeds",
+        "german": "Schilf"
+      }
+    },
+    "2105": {
+      "icon": "/production_goods/icon_3d_auroch_goods_0.webp",
+      "names": {
+        "english": "Aurochs",
+        "german": "Auerochsen"
+      }
+    },
+    "2106": {
+      "icon": "/production_goods/icon_3d_marsh_birds_goods_0.webp",
+      "names": {
+        "english": "Small Birds",
+        "german": "Kleinvögel"
+      }
+    },
+    "2108": {
+      "icon": "/production_goods/icon_3d_eels_goods_0.png",
+      "names": {
+        "english": "Eels",
+        "german": "Aale"
+      }
+    },
+    "2110": {
+      "icon": "/production_goods/icon_3d_leather_goods_0.webp",
+      "names": {
+        "english": "Leather",
+        "german": "Leder"
+      }
+    },
+    "2112": {
+      "icon": "/production_goods/icon_3d_oysters_goods_0.webp",
+      "names": {
+        "english": "Oysters",
+        "german": "Austern"
+      }
+    },
+    "2115": {
+      "icon": "/production_goods/icon_3d_iron_goods_0.webp",
+      "names": {
+        "english": "Iron",
+        "german": "Eisen"
+      }
+    },
+    "2117": {
+      "icon": "/production_goods/icon_3d_glass_goods_0.webp",
+      "names": {
+        "english": "Glass",
+        "german": "Glas"
+      }
+    },
+    "2119": {
+      "icon": "/production_goods/icon_3d_flour_goods_0.webp",
+      "names": {
+        "english": "Flour",
+        "german": "Mehl"
+      }
+    },
+    "2121": {
+      "icon": "/production_goods/icon_3d_cloth_goods_0.webp",
+      "names": {
+        "english": "Cloth",
+        "german": "Stoffe"
+      }
+    },
+    "2123": {
+      "icon": "/production_goods/icon_3d_ornamented_wood_goods_0.webp",
+      "names": {
+        "english": "Ornate Wood",
+        "german": "Holzfurniere"
+      }
+    },
+    "2124": {
+      "icon": "/production_goods/icon_3d_pigments_goods_0.webp",
+      "names": {
+        "english": "Pigments",
+        "german": "Farbstoffe"
+      }
+    },
+    "2126": {
+      "icon": "/production_goods/icon_3d_celtic_green_goods_0.webp",
+      "names": {
+        "english": "Celtic Green",
+        "german": "Keltischgrün"
+      }
+    },
+    "2127": {
+      "icon": "/production_goods/icon_3d_bronze_goods_0.webp",
+      "names": {
+        "english": "Bronze",
+        "german": "Bronze"
+      }
+    },
+    "2128": {
+      "icon": "/production_goods/icon_3d_chassis_goods_0.webp",
+      "names": {
+        "english": "Chassis",
+        "german": "Unterbau"
+      }
+    },
+    "2129": {
+      "icon": "/production_goods/icon_3d_silver_goods_0.webp",
+      "names": {
+        "english": "Silver",
+        "german": "Silber"
+      }
+    },
+    "2131": {
+      "icon": "/production_goods/icon_3d_malt_goods_0.webp",
+      "names": {
+        "english": "Malt",
+        "german": "Malz"
+      }
+    },
+    "2132": {
+      "icon": "/production_goods/icon_3d_pig_lard_goods_0.webp",
+      "names": {
+        "english": "Lard",
+        "german": "Schmalz"
+      }
+    },
+    "2133": {
+      "icon": "/production_goods/icon_3d_bird_tongue_goods_0.webp",
+      "names": {
+        "english": "Bird Tongues",
+        "german": "Vogelzungen"
+      }
+    },
+    "2135": {
+      "icon": "/production_goods/icon_3d_strings_goods_0.webp",
+      "names": {
+        "english": "String",
+        "german": "Saiten"
+      }
+    },
+    "2136": {
+      "icon": "/production_goods/icon_3d_porridge_goods_0.webp",
+      "names": {
+        "english": "Porridge",
+        "german": "Haferbrei"
+      }
+    },
+    "2137": {
+      "icon": "/production_goods/icon_3d_bread_goods_0.webp",
+      "names": {
+        "english": "Bread",
+        "german": "Brot"
+      }
+    },
+    "2138": {
+      "icon": "/production_goods/icon_3d_wine_goods_0.webp",
+      "names": {
+        "english": "Wine",
+        "german": "Wein"
+      }
+    },
+    "2139": {
+      "icon": "/production_goods/icon_3d_garum_goods_0.webp",
+      "names": {
+        "english": "Garum",
+        "german": "Garum"
+      }
+    },
+    "2140": {
+      "icon": "/production_goods/icon_3d_oysters_and_caviar_goods_0.webp",
+      "names": {
+        "english": "Oysters with Caviar",
+        "german": "Austern mit Kaviar"
+      }
+    },
+    "2141": {
+      "icon": "/production_goods/icon_3d_tunics_goods_0.webp",
+      "names": {
+        "english": "Tunics",
+        "german": "Tuniken"
+      }
+    },
+    "2142": {
+      "icon": "/production_goods/icon_3d_pileus_goods_0.webp",
+      "names": {
+        "english": "Pileus",
+        "german": "Pilei"
+      }
+    },
+    "2143": {
+      "icon": "/production_goods/icon_3d_lavender_soap_goods_0.webp",
+      "names": {
+        "english": "Soap",
+        "german": "Seife"
+      }
+    },
+    "2144": {
+      "icon": "/production_goods/icon_3d_sandals_goods_0.webp",
+      "names": {
+        "english": "Sandals",
+        "german": "Sandalen"
+      }
+    },
+    "2145": {
+      "icon": "/production_goods/icon_3d_togas_goods_0.webp",
+      "names": {
+        "english": "Togas",
+        "german": "Togen"
+      }
+    },
+    "2146": {
+      "icon": "/production_goods/icon_3d_necklaces_goods_0.webp",
+      "names": {
+        "english": "Necklaces",
+        "german": "Halsketten"
+      }
+    },
+    "2147": {
+      "icon": "/production_goods/icon_3d_lounger_goods_0.webp",
+      "names": {
+        "english": "Loungers",
+        "german": "Liegen"
+      }
+    },
+    "2149": {
+      "icon": "/production_goods/icon_3d_olive_oil_goods_0.webp",
+      "names": {
+        "english": "Olive Oil",
+        "german": "Olivenöl"
+      }
+    },
+    "2150": {
+      "icon": "/production_goods/icon_3d_wax_tablets_goods_0.webp",
+      "names": {
+        "english": "Writing Tablets",
+        "german": "Schrifttafeln"
+      }
+    },
+    "2151": {
+      "icon": "/production_goods/icon_3d_fine_glass_goods_0.webp",
+      "names": {
+        "english": "Fine Glass",
+        "german": "Feines Glas"
+      }
+    },
+    "2152": {
+      "icon": "/production_goods/icon_3d_mosaics_goods_0.webp",
+      "names": {
+        "english": "Mosaics",
+        "german": "Mosaike"
+      }
+    },
+    "2153": {
+      "icon": "/production_goods/icon_3d_cheese_goods_0.webp",
+      "names": {
+        "english": "Cheese",
+        "german": "Käse"
+      }
+    },
+    "2154": {
+      "icon": "/production_goods/icon_3d_beer_goods_0.webp",
+      "names": {
+        "english": "Beer",
+        "german": "Bier"
+      }
+    },
+    "2155": {
+      "icon": "/production_goods/icon_3d_tongue_in_aspic_goods_0.webp",
+      "names": {
+        "english": "Bird Tongues in Aspic",
+        "german": "Vogelzungen in Aspik"
+      }
+    },
+    "2156": {
+      "icon": "/production_goods/icon_3d_brooch_goods_0.webp",
+      "names": {
+        "english": "Brooches",
+        "german": "Fibeln"
+      }
+    },
+    "2157": {
+      "icon": "/production_goods/icon_3d_torcs_goods_0.webp",
+      "names": {
+        "english": "Torcs",
+        "german": "Torques"
+      }
+    },
+    "2158": {
+      "icon": "/production_goods/icon_3d_trouser_goods_0.webp",
+      "names": {
+        "english": "Trousers",
+        "german": "Hosen"
+      }
+    },
+    "2159": {
+      "icon": "/production_goods/icon_3d_reed_shoes_goods_0.webp",
+      "names": {
+        "english": "Reed Shoes",
+        "german": "Schilfschuhe"
+      }
+    },
+    "2161": {
+      "icon": "/production_goods/icon_3d_cloak_goods_0.webp",
+      "names": {
+        "english": "Cloaks",
+        "german": "Umhänge"
+      }
+    },
+    "2162": {
+      "icon": "/production_goods/icon_3d_handmirros_goods_0.webp",
+      "names": {
+        "english": "Handmirrors",
+        "german": "Handspiegel"
+      }
+    },
+    "2163": {
+      "icon": "/production_goods/icon_3d_chariot_goods_0.webp",
+      "names": {
+        "english": "Chariots",
+        "german": "Streitwägen"
+      }
+    },
+    "2166": {
+      "icon": "/production_goods/icon_3d_string_instrument_goods_0.webp",
+      "names": {
+        "english": "Standing Lyres",
+        "german": "Lyren"
+      }
+    },
+    "2169": {
+      "icon": "/production_goods/icon_3d_wattle_daub_goods_0.webp",
+      "names": {
+        "english": "Wattle & Daub",
+        "german": "Flechtwerk"
+      }
+    },
+    "2171": {
+      "icon": "/production_goods/icon_3d_ropes_goods_0.webp",
+      "names": {
+        "english": "Rope",
+        "german": "Seile"
+      }
+    },
+    "2172": {
+      "icon": "/production_goods/icon_3d_sails_goods_0.webp",
+      "names": {
+        "english": "Sails",
+        "german": "Segel"
+      }
+    },
+    "2173": {
+      "icon": "/production_goods/icon_3d_weapons_goods_0.webp",
+      "names": {
+        "english": "Weapons",
+        "german": "Waffen"
+      }
+    },
+    "2174": {
+      "icon": "/production_goods/icon_3d_timber_goods_0.webp",
+      "names": {
+        "english": "Timber",
+        "german": "Bretter"
+      }
+    },
+    "2176": {
+      "icon": "/production_goods/icon_3d_tiles_goods_0.webp",
+      "names": {
+        "english": "Tiles",
+        "german": "Ziegel"
+      }
+    },
+    "2178": {
+      "icon": "/production_goods/icon_3d_concrete_goods_0.webp",
+      "names": {
+        "english": "Concrete",
+        "german": "Beton"
+      }
+    },
+    "2179": {
+      "icon": "/production_goods/icon_3d_marble_goods_0.webp",
+      "names": {
+        "english": "Marble",
+        "german": "Marmor"
+      }
+    },
+    "2180": {
+      "icon": "/production_goods/icon_3d_tyrian_purple_goods_0.webp",
+      "names": {
+        "english": "Tyrian Purple",
+        "german": "Tyrischer Purpur"
+      }
+    },
+    "3158": {
+      "icon": "/production_goods/icon_3d_murex_snails_goods_0.webp",
+      "names": {
+        "english": "Murex Snails",
+        "german": "Purpurschnecken"
+      }
+    },
+    "7985": {
+      "icon": "/production_goods/icon_3d_samphire_goods_0.webp",
+      "names": {
+        "english": "Saltwort",
+        "german": "Salzkraut"
+      }
+    },
+    "8404": {
+      "icon": "/production_goods/icon_3d_ponies_goods_0.webp",
+      "names": {
+        "english": "Ponies",
+        "german": "Ponys"
+      }
+    },
+    "8405": {
+      "icon": "/production_goods/icon_3d_sausages_goods_0.webp",
+      "names": {
+        "english": "Sausages",
+        "german": "Würste"
+      }
+    },
+    "8420": {
+      "icon": "/production_goods/icon_3d_seashells_goods_0.png",
+      "names": {
+        "english": "Seashells",
+        "german": "Kammmuschelschalen"
+      }
+    },
+    "8558": {
+      "icon": "/production_goods/icon_3d_caviar_goods_0.webp",
+      "names": {
+        "english": "Caviar",
+        "german": "Kaviar"
+      }
+    },
+    "8561": {
+      "icon": "/production_goods/icon_3d_cypress_wood_goods_0.webp",
+      "names": {
+        "english": "Sandarac Wood",
+        "german": "Sandarakholz"
+      }
+    },
+    "8562": {
+      "icon": "/production_goods/icon_3d_cushion_goods_0.webp",
+      "names": {
+        "english": "Cushions",
+        "german": "Polster"
+      }
+    },
+    "8563": {
+      "icon": "/production_goods/icon_3d_minerals_goods_0.webp",
+      "names": {
+        "english": "Minerals",
+        "german": "Mineralien"
+      }
+    },
+    "13810": {
+      "icon": "/production_goods/icon_3d_armory_goods_0.webp",
+      "names": {
+        "english": "Armour",
+        "german": "Rüstungen"
+      }
+    },
+    "31694": {
+      "icon": "/production_goods/icon_3d_hemp_goods_0.webp",
+      "names": {
+        "english": "Hemp",
+        "german": "Hanf"
+      }
+    },
+    "31695": {
+      "icon": "/production_goods/icon_3d_resin_goods_0.webp",
+      "names": {
+        "english": "Resin",
+        "german": "Harz"
+      }
+    },
+    "31697": {
+      "icon": "/production_goods/icon_3d_gold_ore_goods_0.webp",
+      "names": {
+        "english": "Gold Ore",
+        "german": "Golderz"
+      }
+    },
+    "31698": {
+      "icon": "/production_goods/icon_3d_gold_goods_0.webp",
+      "names": {
+        "english": "Gold",
+        "german": "Gold"
+      }
+    },
+    "31700": {
+      "icon": "/production_goods/icon_3d_amphorae_goods_0.webp",
+      "names": {
+        "english": "Amphorae",
+        "german": "Amphoren"
+      }
+    },
+    "31701": {
+      "icon": "/production_goods/icon_3d_herbs_goods_0.webp",
+      "names": {
+        "english": "Herbs",
+        "german": "Kräuter"
+      }
+    },
+    "31702": {
+      "icon": "/production_goods/icon_3d_beaver_goods_0.webp",
+      "names": {
+        "english": "Beavers",
+        "german": "Biber"
+      }
+    },
+    "31703": {
+      "icon": "/production_goods/icon_3d_saltwash_goods_0.png",
+      "names": {
+        "english": "Saltwash",
+        "german": "Salzlake"
+      }
+    },
+    "31704": {
+      "icon": "/production_goods/icon_3d_wig_base_goods_0.webp",
+      "names": {
+        "english": "Head Piece",
+        "german": "Haarnetze"
+      }
+    },
+    "31706": {
+      "icon": "/production_goods/icon_3d_clan_shields_goods_0.webp",
+      "names": {
+        "english": "Clan Shields",
+        "german": "Clanschilde"
+      }
+    },
+    "31707": {
+      "icon": "/production_goods/icon_3d_pelt_hat_goods_0.webp",
+      "names": {
+        "english": "Fur Hats",
+        "german": "Fellmützen"
+      }
+    },
+    "31708": {
+      "icon": "/production_goods/icon_3d_wig_goods_0.webp",
+      "names": {
+        "english": "Wigs",
+        "german": "Perücken"
+      }
+    },
+    "31709": {
+      "icon": "/production_goods/icon_3d_granite_block_goods_0.webp",
+      "names": {
+        "english": "Granite",
+        "german": "Granit"
+      }
+    },
+    "31768": {
+      "icon": "/production_goods/icon_3d_roast_goods_0.webp",
+      "names": {
+        "english": "Roast Beef",
+        "german": "Rinderbraten"
+      }
+    },
+    "55954": {
+      "icon": "/production_goods/icon_3d_drinkhorns_goods_0.webp",
+      "names": {
+        "english": "Drinking Horns",
+        "german": "Trinkhörner"
+      }
+    },
+    "145102": {
+      "icon": "/production_goods/icon_3d_obsidian_goods_0.webp",
+      "names": {
+        "english": "Obsidian",
+        "german": "Obsidian"
+      }
+    },
+    "145220": {
+      "icon": "/production_goods/icon_3d_idol_goods_0.webp",
+      "names": {
+        "english": "Statuettes",
+        "german": "Figuren"
+      }
+    },
+    "145221": {
+      "icon": "/production_goods/icon_3d_boardgame_goods_0.webp",
+      "names": {
+        "english": "Latrunculi Sets",
+        "german": "Latrunculispiele"
+      }
+    },
+    "151678": {
+      "icon": "/production_goods/icon_3d_sesame_goods_0.webp",
+      "names": {
+        "english": "Sesame Pods",
+        "german": "Sesamkapseln"
+      }
+    },
+    "151679": {
+      "icon": "/production_goods/icon_3d_pomegranates_goods_0.webp",
+      "names": {
+        "english": "Pomegranates",
+        "german": "Granatäpfel"
+      }
+    },
+    "151680": {
+      "icon": "/production_goods/icon_3d_dates_goods_0.webp",
+      "names": {
+        "english": "Dates",
+        "german": "Datteln"
+      }
+    },
+    "151683": {
+      "icon": "/production_goods/icon_3d_sanga_cows_goods_0.webp",
+      "names": {
+        "english": "Sanga Cattle",
+        "german": "Sangakühe"
+      }
+    },
+    "151684": {
+      "icon": "/production_goods/icon_3d_camels_goods_0.webp",
+      "names": {
+        "english": "Kamel",
+        "german": "Kamele"
+      }
+    },
+    "151685": {
+      "icon": "/production_goods/icon_3d_egyptian_blue_goods_0.webp",
+      "names": {
+        "english": "Aegyptian Blue",
+        "german": "Aegyptisch Blau"
+      }
+    },
+    "151686": {
+      "icon": "/production_goods/icon_3d_honey_milk_goods_0.webp",
+      "names": {
+        "english": "Honeyed Milk",
+        "german": "Honigmilch"
+      }
+    },
+    "151687": {
+      "icon": "/production_goods/icon_3d_sesame_oil_goods_0.webp",
+      "names": {
+        "english": "Sesame Oil",
+        "german": "Sesamöl"
+      }
+    },
+    "151688": {
+      "icon": "/production_goods/icon_3d_papyrus_goods_0.webp",
+      "names": {
+        "english": "Papyrus",
+        "german": "Papyrus"
+      }
+    },
+    "151689": {
+      "icon": "/production_goods/icon_3d_stuffed_goose_goods_0.webp",
+      "names": {
+        "english": "Stuffed Goose",
+        "german": "Gänsebraten"
+      }
+    },
+    "151690": {
+      "icon": "/production_goods/icon_3d_lotus_tea_goods_0.webp",
+      "names": {
+        "english": "Blue Lotus Tea",
+        "german": "Lotusblütentee"
+      }
+    },
+    "151691": {
+      "icon": "/production_goods/icon_3d_silica_goods_0.webp",
+      "names": {
+        "english": "Kayk",
+        "german": "Kayk"
+      }
+    },
+    "151692": {
+      "icon": "/production_goods/icon_3d_silica_goods_0.webp",
+      "names": {
+        "english": "Rare Meat Platters",
+        "german": "Exquisite Fleischplatten"
+      }
+    },
+    "151693": {
+      "icon": "/production_goods/icon_3d_usekh_collar_goods_0.webp",
+      "names": {
+        "english": "Wesekh Collars",
+        "german": "Zierkragen"
+      }
+    },
+    "151694": {
+      "icon": "/production_goods/icon_3d_kohl_goods_0.webp",
+      "names": {
+        "english": "Kollurion",
+        "german": "Kollurion"
+      }
+    },
+    "151695": {
+      "icon": "/production_goods/icon_3d_shenti_goods_0.webp",
+      "names": {
+        "english": "Shentis",
+        "german": "Schentis"
+      }
+    },
+    "151696": {
+      "icon": "/production_goods/icon_3d_kalasiris_goods_0.webp",
+      "names": {
+        "english": "Kalasirises",
+        "german": "Kalasiris"
+      }
+    },
+    "151697": {
+      "icon": "/production_goods/icon_3d_perfumed_oil_goods_0.webp",
+      "names": {
+        "english": "Perfumed Oils",
+        "german": "Duftöle"
+      }
+    },
+    "151698": {
+      "icon": "/production_goods/icon_3d_bathing_milk_goods_0.webp",
+      "names": {
+        "english": "Milk of Poppea",
+        "german": "Bademilch"
+      }
+    },
+    "151699": {
+      "icon": "/production_goods/icon_3d_talismans_goods_0.webp",
+      "names": {
+        "english": "Apotropaic Talismans",
+        "german": "Talismane"
+      }
+    },
+    "151700": {
+      "icon": "/production_goods/icon_3d_oil_lamps_goods_0.webp",
+      "names": {
+        "english": "Oil Lamps",
+        "german": "Öllampen"
+      }
+    },
+    "151701": {
+      "icon": "/production_goods/icon_3d_sistrum_rattle_goods_0.webp",
+      "names": {
+        "english": "Sistrums",
+        "german": "Sistren"
+      }
+    },
+    "151702": {
+      "icon": "/production_goods/icon_3d_scribes_sets_goods_0.webp",
+      "names": {
+        "english": "Scribing Sets",
+        "german": "Schreibgarnituren"
+      }
+    },
+    "151703": {
+      "icon": "/production_goods/icon_3d_ivory_casket_goods_0.webp",
+      "names": {
+        "english": "Ivory Caskets",
+        "german": "Elfenbeinschatullen"
+      }
+    },
+    "151704": {
+      "icon": "/production_goods/icon_3d_mud_bricks_goods_0.webp",
+      "names": {
+        "english": "Mud Bricks",
+        "german": "Lehmziegel"
+      }
+    },
+    "151705": {
+      "icon": "/production_goods/icon_3d_limestone_bricks_goods_0.webp",
+      "names": {
+        "english": "Limestone Bricks",
+        "german": "Kalksteinziegel"
+      }
+    },
+    "151706": {
+      "icon": "/production_goods/icon_3d_beads_goods_0.webp",
+      "names": {
+        "english": "Beads",
+        "german": "Perlen"
+      }
+    },
+    "151712": {
+      "icon": "/production_goods/icon_3d_wild_goose_goods_0.webp",
+      "names": {
+        "english": "Wild Geese",
+        "german": "Nilgänse"
+      }
+    },
+    "151713": {
+      "icon": "/production_goods/icon_3d_blue_lotus_goods_0.webp",
+      "names": {
+        "english": "Blue Lotus",
+        "german": "Blaue Lotusblüten"
+      }
+    },
+    "151714": {
+      "icon": "/production_goods/icon_3d_hippos_goods_0.webp",
+      "names": {
+        "english": "Hippopotami",
+        "german": "Flusspferde"
+      }
+    },
+    "1010017": {
+      "icon": "/production_goods/icon_3d_silica_goods_0.webp",
+      "names": {
+        "english": "Denarii",
+        "german": "Denare"
+      }
+    }
   }
 }

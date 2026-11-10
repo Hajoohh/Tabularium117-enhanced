@@ -48,8 +48,17 @@ gegenüber dem Spiel.
    der jeweiligen Region, in der Gesamtansicht die Ketten aller Regionen
    (`web/js/goods-chains.json`). Einzelne Waren in einer Kette sind anklickbar,
    um alle Ketten mit dieser Ware anzuzeigen. Die Waren-Icons liegen lokal
-   unter `web/production_goods` und werden in
-   `web/js/goods-icons.json` den Waren zugeordnet.
+   ausschließlich unter `web/production_goods` und werden in
+   `web/js/goods-icons.json` den Waren zugeordnet. Jeder GUID-Eintrag enthält
+   zusätzlich den englischen und deutschen Namen aus der Warenliste.
+   Ketten erscheinen eigenständig nur für direkt nutzbare Endprodukte;
+   Zwischenprodukte wie Mehl, Malz, Eisen, Sesamöl und Schmalz bleiben Schritte
+   der jeweiligen Kette. Die Warenfilter unterscheiden Rohstoffe, produzierte
+   Zwischenprodukte und Endprodukte; direkt nutzbare Waren wie Datteln,
+   Herzmuscheln, Sardinen und Aale zählen als Endprodukte. Eine vollständige,
+   nach GUID sortierte Referenz aller 150 tatsächlichen Waren (ohne abstrakte
+   Einträge oder den Platzhalter „kein Produkt“) mit englischem und deutschem
+   Namen steht in der [Warenliste (CSV)](./docs/goods.csv).
 2. **Verlauf pro Ware** – Diagramm der letzten 1 h, 4 h, 24 h, 7 Tage oder der
    ganzen Session für Produktion, Verbrauch und Delta.
 3. **Effizienz-Ansicht** – Ist-Produktion gegen die theoretisch perfekte
@@ -329,7 +338,17 @@ step, no Docker, no mod, strictly read-only towards the game.
    views can show configured multi-stage chains containing a searched good
    (`web/js/goods-chains.json`). In chain cards, clicking a good shows all
    chains containing it. Goods icons are stored locally under
-   `web/production_goods` and mapped to goods in `web/js/goods-icons.json`.
+   `web/production_goods` (the web assets folder, not a root-level
+   `production_goods` folder) and mapped to goods in `web/js/goods-icons.json`,
+   where each GUID entry also includes its English and German names.
+   Standalone chains are listed only for directly usable end products;
+   intermediate goods such as flour, malt, iron, sesame oil, and lard remain
+   stages of their parent chains. The goods filters distinguish raw materials,
+   produced intermediate goods, and end products; directly usable goods such
+   as dates, cockles, sardines, and eels are end products. The complete
+   list of all 150 actual goods (excluding abstract entries and the synthetic
+   “no product” placeholder) with GUID and English/German names is available as the
+   [goods list (CSV)](./docs/goods.csv).
 2. **History per good** – a chart of the last 1 h, 4 h, 24 h, 7 days, or the
    whole session for production, consumption, and delta.
 3. **Efficiency view** – actual production against the theoretical perfect
@@ -584,10 +603,10 @@ community-made fan tool.*
 
 ## Entwicklung / Development
 
-A Go command from 1.21 on works with `GOTOOLCHAIN=auto`; the project requires
-Go 1.26.0 and pins Go 1.26.9 for releases (`go.mod`). Code, comments, and
-commit messages are English; user-facing
-documentation is German and English.
+The project requires Go 1.27 (`go.mod`). Go 1.21 or newer can download and use
+that toolchain automatically with `GOTOOLCHAIN=auto`; the project does not pin
+a specific Go 1.27 patch release. Code, comments, and commit messages are
+English; user-facing documentation is German and English.
 
 ```sh
 ./scripts/check.sh   # gofmt, go vet, go test

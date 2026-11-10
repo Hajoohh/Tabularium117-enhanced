@@ -7,14 +7,16 @@
 //
 // Usage:
 //
-//	go run ./tools/gen-catalog --calculator-dir <path> [--out internal/catalog/catalog.json] [--revision <sha>]
+//	go run ./tools/gen-catalog --calculator-dir <path> [--out internal/catalog/catalog.json] [--goods-list docs/goods.csv] [--revision <sha>]
 //
-// The output is deterministic: entries are sorted by GUID, and
-// encoding/json already sorts map keys, so two runs against the same input
-// produce byte-identical files.
+// The outputs are deterministic: entries are sorted by GUID, and encoding/json
+// already sorts map keys, so two runs against the same input produce
+// byte-identical files.
 package main
 
 import (
+	"bytes"
+	"encoding/csv"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -157,6 +159,7 @@ func main() {
 func run() error {
 	calculatorDir := flag.String("calculator-dir", "", "path to the anno-117-calculator checkout")
 	out := flag.String("out", "internal/catalog/catalog.json", "output path for catalog.json")
+	goodsList := flag.String("goods-list", "docs/goods.csv", "output path for the spreadsheet-friendly goods reference")
 	revisionFlag := flag.String("revision", "", "override the source revision (required if it cannot be read from the checkout's .git directory)")
 	flag.Parse()
 
@@ -248,6 +251,10 @@ func run() error {
 		return fmt.Errorf("marshal catalog: %w", err)
 	}
 	data = append(data, '\n')
+	goodsListData, err := encodeGoodsList(result.Products)
+	if err != nil {
+		return fmt.Errorf("encode goods list: %w", err)
+	}
 
 	if err := os.MkdirAll(filepath.Dir(*out), 0o755); err != nil {
 		return fmt.Errorf("create output directory: %w", err)
@@ -255,7 +262,41 @@ func run() error {
 	if err := os.WriteFile(*out, data, 0o644); err != nil {
 		return fmt.Errorf("write %s: %w", *out, err)
 	}
+	if err := os.MkdirAll(filepath.Dir(*goodsList), 0o755); err != nil {
+		return fmt.Errorf("create goods-list output directory: %w", err)
+	}
+	if err := os.WriteFile(*goodsList, goodsListData, 0o644); err != nil {
+		return fmt.Errorf("write goods list %s: %w", *goodsList, err)
+	}
 	return nil
+}
+
+func encodeGoodsList(products []outProduct) ([]byte, error) {
+	var data bytes.Buffer
+	data.Write([]byte{0xef, 0xbb, 0xbf})
+	writer := csv.NewWriter(&data)
+	writer.Comma = ';'
+	if err := writer.Write([]string{"GUID", "Name (English)", "Name (Deutsch)"}); err != nil {
+		return nil, err
+	}
+	for _, product := range products {
+		if product.GUID == 0 || product.Abstract {
+			continue
+		}
+		english, hasEnglish := product.Names["english"]
+		german, hasGerman := product.Names["german"]
+		if !hasEnglish || !hasGerman || english == "" || german == "" {
+			return nil, fmt.Errorf("product %d is missing an English or German name", product.GUID)
+		}
+		if err := writer.Write([]string{fmt.Sprint(product.GUID), english, german}); err != nil {
+			return nil, err
+		}
+	}
+	writer.Flush()
+	if err := writer.Error(); err != nil {
+		return nil, err
+	}
+	return data.Bytes(), nil
 }
 
 // readParams reads and decodes js/params.js.

@@ -5,6 +5,35 @@ All notable changes to Tabularium 117 are documented here, in the
 
 ## [Unreleased]
 
+## [Tabularium 117 - enhanced 0.2.2] - 2026-11-10
+
+### Added
+
+- **Names in the goods-icon map:** include English and German names from
+  `docs/goods.csv` next to each GUID's image path, making icon assignments
+  easier to inspect without changing how the UI loads images.
+- **Goods reference list:** provide all 150 non-abstract game goods as an
+  Excel-friendly CSV with GUID and English/German names, linked from the
+  README. The catalog generator refreshes the list together with the catalog.
+
+### Changed
+
+- **End products and intermediate goods:** generate standalone production
+  chains only for directly usable consumer goods. Track every produced GUID
+  separately so flour, malt, iron, sesame oil and lard are classified as
+  intermediate goods, while directly usable goods such as dates, cockles,
+  sardines and eels remain end products.
+
+## [Tabularium 117 - enhanced 0.2.1] - 2026-11-09
+
+### Added
+
+- **Local game icons:** bundled 104 mapped  goods icons under
+  `web/production_goods`;
+   icon GUID-to-file mappings remain in `web/js/goods-icons.json`.
+
+## [Tabularium 117 - enhanced 0.2.0] - 2026-11-07
+
 ### Changed
 
 - **Goods categories across regions:** classify goods from all configured
@@ -16,7 +45,7 @@ All notable changes to Tabularium 117 are documented here, in the
   names throughout the configured production-chain UI instead of its duplicate
   German and English labels.
 
-## [Tabularium 117 - enhanced 0.1.3]
+## [Tabularium 117 - enhanced 0.1.3] - 2026-10-26
 
 ### Changed
 
